@@ -389,4 +389,19 @@ if (contestOverlay) contestOverlay.addEventListener('click', function(e) {
     }
 });
 
-// Cronología nav link handled by href anchor directly
+// ---- MOBILE NAV TOGGLE ----
+var navToggle = document.getElementById('nav-toggle');
+var navLinks = document.getElementById('nav-links');
+
+if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function() {
+        navLinks.classList.toggle('open');
+    });
+
+    // Close menu when clicking a link
+    navLinks.querySelectorAll('.nav-link').forEach(function(link) {
+        link.addEventListener('click', function() {
+            navLinks.classList.remove('open');
+        });
+    });
+}
