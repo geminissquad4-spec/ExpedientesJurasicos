@@ -1,0 +1,1713 @@
+=== PAGINA 1 ===
+ACROCANTHOSAURUS
+CÓDIGO: AC-41985 | FAMILIA: Carcharodontosauridae
+DIETA
+CARNÍVORO
+ALTURA
+4 m
+LONGITUD
+12 m
+PESO EST.
+6,000 kg
+LOCALIZACIÓN
+Isla Sorna (Desaparecido)
+CLAVE INGEN
+AC-41985
+DESCRIPCIÓN OFICIAL INGEN
+Antes del huracán Clarissa, su clonación se mantuvo en secreto como parte de un
+subproyecto experimental. Solo se logró clonar un ejemplar viable. Presentaba hipertrofia
+en las espinas neurales dorsales con posible función termorreguladora y de exhibición. Su
+metabolismo era elevado y mostró comportamiento altamente territorial. Su paradero
+posterior al huracán permanece clasificado.
+ANÁLISIS ADICIONAL
+El Acrocanthosaurus atokensis fue un carnívoro del Cretácico inferior norteamericano. Su
+característica más notable eran las largas espinas neurales vertebrales que formaban una
+cresta o joroba muscular a lo largo del dorso. InGen incorporó genes modernos de ave
+para estabilizar el ADN degenerado. Los registros de seguimiento de este espécimen
+fueron borrados del servidor central en 1995.
+⚠ NOTA INGEN: Clonado en secreto como parte de un subproyecto experimental. Solo un
+ejemplar viable fue producido.
+=== PAGINA 2 ===
+ALBERTOSAURUS
+CÓDIGO: AB-51239 | FAMILIA: Tyrannosauridae
+DIETA
+CARNÍVORO
+ALTURA
+3.5 m
+LONGITUD
+9 m
+PESO EST.
+2,000 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+AB-51239
+DESCRIPCIÓN OFICIAL INGEN
+Tres ejemplares fueron clonados en la Isla Matanceros. Se estudió su comportamiento
+social comparativo con el Tyrannosaurus rex. Mostraron mayor agilidad y resistencia, con
+posible caza cooperativa en etapas juveniles.
+ANÁLISIS ADICIONAL
+El Albertosaurus sarcophagus era un tiranosáurido del Cretácico tardío de Norteamérica. A
+diferencia de su primo T. rex, era más ágil y esbelto. Los tres ejemplares clonados por
+InGen demostraron comportamientos de caza cooperativos no documentados en el
+registro fósil, lo que sugiere que el ADN de relleno utilizado provino de aves de caza
+coordinada. Actualmente su paradero es desconocido.
+⚠ NOTA INGEN: Tres ejemplares clonados para estudio comparativo con Tyrannosaurus
+rex.
+=== PAGINA 3 ===
+ALLOSAURUS
+CÓDIGO: AL-98234 | FAMILIA: Allosauridae
+Allosaurus
+DIETA
+CARNÍVORO
+ALTURA
+3.8 m
+LONGITUD
+9.5 m
+PESO EST.
+2,500 kg
+LOCALIZACIÓN
+Isla Sorna
+CLAVE INGEN
+AL-98234
+DESCRIPCIÓN OFICIAL INGEN
+Dos ejemplares fueron clonados en Isla Sorna antes del huracán Clarissa. Posteriormente,
+los datos fueron eliminados por el Proyecto Agreus debido a inestabilidad genética en
+regeneración ósea. Mostraron gran agresividad y amplio rango mandibular.
+ANÁLISIS ADICIONAL
+El Allosaurus fragilis, apodado el león del Jurásico', tenía maxilares que podía abrir casi
+90°, utilizando la cabeza como hacha contra sus presas. Los ejemplares de InGen
+presentaron una rara condición de regeneración ósea acelerada que causó deformidades
+craneales progresivas, razón por la que el Proyecto Agreus ordenó la eliminación de todos
+los registros y, presuntamente, de los especímenes mismos.
+⚠ NOTA INGEN: Datos eliminados por el Proyecto Agreus debido a inestabilidad genética.
+=== PAGINA 4 ===
+AMARGASAURUS
+CÓDIGO: AM-30271 | FAMILIA: Dicraeosauridae
+DIETA
+HERBÍVORO
+ALTURA
+3 m
+LONGITUD
+10 m
+PESO EST.
+2,000 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+AM-30271
+DESCRIPCIÓN OFICIAL INGEN
+InGen logró clonar esta especie para el Proyecto Chaos en Isla Matanceros. Las espinas
+cervicales fueron reforzadas con tejido queratinizado inducido, posiblemente con función
+defensiva y de regulación térmica.
+ANÁLISIS ADICIONAL
+El Amargasaurus cazaui es un saurópodo del Cretácico inferior sudamericano, famoso por
+sus dos filas de espinas cervicales altas y paralelas. Los científicos debaten si estas espinas
+sostenían una vela de piel o eran estructuras libres. En los especímenes de InGen, la
+modificación genética con queratina adicional las convirtió en estructuras más resistentes,
+posiblemente para defensa activa.
+⚠ NOTA INGEN: Clonado para el Proyecto Chaos, con posible hibridación con un
+Suchomimus. Espinas cervicales reforzadas con tejido queratinizado inducido.
+=== PAGINA 5 ===
+ANKYLOSAURUS
+CÓDIGO: AK-66781 | FAMILIA: Ankylosauridae
+DIETA
+HERBÍVORO
+ALTURA
+2 m
+LONGITUD
+8 m
+PESO EST.
+6,000 kg
+LOCALIZACIÓN
+Isla Sorna / Matanceros
+CLAVE INGEN
+AK-66781
+DESCRIPCIÓN OFICIAL INGEN
+Clonado durante la operación Re-Genesis. Su armadura ósea presentó mayor densidad
+mineral que registros fósiles, producto de sobreexpresión genética de calcificación.
+Comportamiento principalmente defensivo y gregario.
+ANÁLISIS ADICIONAL
+El Ankylosaurus magniventris fue uno de los dinosaurios acorazados más grandes
+conocidos, con placas óseas (osteodermos) incrustadas en la piel y una maza caudal capaz
+de romper huesos. Los ejemplares InGen presentaron una densidad ósea
+aproximadamente un 34% superior al máximo registrado en fósiles, lo que los hacía
+prácticamente invulnerables a ataques frontales de otros especímenes.
+⚠ NOTA INGEN: Clonado durante Operación Re-Genesis. Armadura con mayor densidad
+mineral que el registro fósil.
+=== PAGINA 6 ===
+BARYONYX
+CÓDIGO: BY-56214 | FAMILIA: Spinosauridae
+DIETA
+PISCÍVORO
+ALTURA
+3 m
+LONGITUD
+10 m
+PESO EST.
+1,200 kg
+LOCALIZACIÓN
+Isla Nublar / Isla Sorna
+CLAVE INGEN
+BY-56214
+DESCRIPCIÓN OFICIAL INGEN
+Llevado a Isla Nublar para exhibición en la Fase 2 del parque. Algunos ejemplares
+permanecieron en Sorna. Adaptado con mejoras metabólicas para hábitos semiacuáticos.
+ANÁLISIS ADICIONAL
+El Baryonyx walkeri del Cretácico inferior de Europa era un espinosáurido especializado en
+pesca. Sus garras delanteras de 30 cm eran ideales para atrapar peces. InGen introdujo
+modificaciones metabólicas basadas en ADN de cocodrilo americano para mejorar la
+capacidad de apnea y la eficiencia digestiva con proteínas animales acuáticas. Un ejemplar
+fue confundido con Suchomimus por personal de campo.
+⚠ NOTA INGEN: Llevado a Isla Nublar para la Fase 2 del parque. Adaptado con mejoras
+metabólicas piscívoras.
+=== PAGINA 7 ===
+BRACHIOSAURUS
+CÓDIGO: JD-91173 | FAMILIA: Brachiosauridae
+DIETA
+HERBÍVORO
+ALTURA
+12.4 m
+LONGITUD
+21 m
+PESO EST.
+30,000 kg
+LOCALIZACIÓN
+Isla Nublar / Isla Sorna / Isla Matanceros
+CLAVE INGEN
+JD-91173
+DESCRIPCIÓN OFICIAL INGEN
+Parte fundamental de la fauna de Jurassic Park en Nublar. Algunos ejemplares
+permanecieron en Sorna y otros fueron trasladados a Isla Matanceros. Presentaron
+crecimiento acelerado inducido hormonalmente.
+ANÁLISIS ADICIONAL
+El Brachiosaurus altithorax del Jurásico tardío norteamericano es uno de los dinosaurios
+más icónicos por su cuello extremadamente largo. Los especímenes de InGen recibieron
+tratamiento hormonal de crecimiento IGF-1 modificado, lo que redujo el período hasta
+madurez de estimados 20-30 años naturales a aproximadamente 6-8 años. El ejemplar
+original de Nublar fue el primer dinosaurio avistado por los visitantes en 1993.
+⚠ NOTA INGEN: Parte fundamental de la fauna de Jurassic Park. Un ejemplar desarrolló un
+resfriado durante la visita guiada en el 93. Los especímenes machos son más robustos y de
+una coloración verduzca, el alfa tiene una coloración rojiza en la cresta.
+=== PAGINA 8 ===
+CARNOTAURUS
+CÓDIGO: CR-41062 | FAMILIA: Abelisauridae
+DIETA
+CARNÍVORO
+ALTURA
+3 m
+LONGITUD
+10.5 m
+PESO EST.
+1,500 kg
+LOCALIZACIÓN
+Isla Nublar / Isla Sorna / Isla Matanceros
+CLAVE INGEN
+CR-41062
+DESCRIPCIÓN OFICIAL INGEN
+Llevado a Nublar para Fase 2. Ejemplares en Sorna desarrollaron capacidad limitada de
+cambio de color dérmico mediante incorporación de cromatóforos derivados de ADN
+moderno. El ejemplar de Nublar fue trasladado a Matanceros.
+ANÁLISIS ADICIONAL
+El Carnotaurus sastrei del Cretácico tardío sudamericano es famoso por sus cuernos sobre
+los ojos y su piel con grandes protuberancias dérmicas. InGen incorporó genes de
+cromatóforos de Camaleón en el genoma de los ejemplares de Sorna, resultando en una
+capacidad de camuflaje parcial especialmente efectiva contra el movimiento: al
+permanecer estáticos, los especímenes eran prácticamente invisibles a distancias
+superiores a 15 metros.
+⚠ NOTA INGEN: Ejemplares en Sorna desarrollaron capacidad limitada de cambio de color
+dérmico.
+=== PAGINA 9 ===
+CEARADACTYLUS
+CÓDIGO: INGEN-CEA-010 | FAMILIA: Cearadactylidae
+DIETA
+PISCÍVORO
+ALTURA
+n/a
+LONGITUD
+4.5 m (env.)
+PESO EST.
+25 kg
+LOCALIZACIÓN
+Isla Nublar
+CLAVE INGEN
+INGEN-CEA-010
+DESCRIPCIÓN OFICIAL INGEN
+Llevado a Isla Nublar para Fase 2. Pterosaurio de tamaño medio con adaptaciones para
+vuelo sostenido en ambientes tropicales.
+ANÁLISIS ADICIONAL
+El Cearadactylus atrox era un pterosaurio del Cretácico inferior sudamericano con dientes
+entrelazados como una trampa para peces. InGen mejoró su capacidad pulmonar con ADN
+de fragata magnífica para sostener el vuelo en condiciones de calor y humedad tropical. Su
+comportamiento en cautiverio fue altamente territorial, siendo incompatible con otras
+especies de pterosaurios en el mismo espacio.
+⚠ NOTA INGEN: Llevado a Isla Nublar para Fase 2. Pterosaurio agresivo y territorial.
+=== PAGINA 10 ===
+CERATOSAURUS
+CÓDIGO: CR-77394 | FAMILIA: Ceratosauridae
+DIETA
+CARNÍVORO
+ALTURA
+2 m
+LONGITUD
+6 m
+PESO EST.
+1,000 kg
+LOCALIZACIÓN
+Isla Sorna
+CLAVE INGEN
+CR-77394
+DESCRIPCIÓN OFICIAL INGEN
+Clonado durante la operación Re-Genesis. Mostró adaptación a ambientes pantanosos y
+resistencia bacteriana elevada.
+ANÁLISIS ADICIONAL
+El Ceratosaurus nasicornis del Jurásico tardío es uno de los terópodos más primitivos
+conocidos, caracterizado por el cuerno nasal óseo. Los especímenes InGen desarrollaron
+una resistencia bacteriana 3 veces superior a la registrada en cualquier reptil vivo,
+posiblemente resultado de ADN de relleno de cocodrilo del Nilo. Tendieron a evitar a otros
+grandes depredadores, prefiriendo zonas pantanosas ricas en anfibios y peces.
+⚠ NOTA INGEN: Clonado durante Re-Genesis. Adaptación a ambientes pantanosos.
+=== PAGINA 11 ===
+CHASMOSAURUS
+CÓDIGO: CH-60329 | FAMILIA: Ceratopsidae
+DIETA
+HERBÍVORO
+ALTURA
+2 m
+LONGITUD
+5 m
+PESO EST.
+3,000 kg
+LOCALIZACIÓN
+Isla Sorna
+CLAVE INGEN
+CH-60329
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Sorna. Herbívoro con comportamiento gregario y uso de gola ósea para
+exhibición y defensa.
+ANÁLISIS ADICIONAL
+El Chasmosaurus belli del Cretácico tardío de Norteamérica tenía una de las golas más
+largas en proporción al cuerpo de todos los ceratópsidos. Esta estructura, cubierta de piel
+vascularizada, servía para termorregulación, exhibición sexual y señalización social. Los
+ejemplares InGen mostraron patrones de coloración en la gola más vibrantes que
+cualquier registro fósil podría sugerir, lo que indica modificación genética deliberada para
+fines estéticos.
+⚠ NOTA INGEN: Clonado en Sorna. Herbívoro con comportamiento gregario.
+=== PAGINA 12 ===
+COELUROSAURAVUS
+CÓDIGO: CS-28193 | FAMILIA: Weigeltisauridae
+DIETA
+INSECTÍVORO
+ALTURA
+15 cm
+LONGITUD
+40 cm
+PESO EST.
+200 g
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+CS-28193
+DESCRIPCIÓN OFICIAL INGEN
+Pequeño reptil planeador clonado en la Isla Matanceros. Habita principalmente en el dosel
+arbóreo, compartiendo el mismo nicho ecológico con los Microraptor. Su capacidad de
+planeo entre árboles le permite desplazarse con gran agilidad y escapar de depredadores
+terrestres.
+ANÁLISIS ADICIONAL
+Coelurosauravus elivensis es un reptil diápsido del Pérmico tardío de Madagascar. No se
+trata de un dinosaurio, sino de uno de los primeros vertebrados terrestres conocidos con
+adaptaciones especializadas para el planeo. Posee estructuras óseas alargadas (costillas
+patagiales) que sostenían amplias membranas a los lados del cuerpo, permitiéndole
+planear distancias considerables entre árboles. Era un animal arborícola e insectívoro, con
+dientes cónicos y afilados diseñados para perforar la cutícula de artrópodos.
+⚠ NOTA INGEN: Compatible con Microraptor. Ambas especies comparten hábitos
+arborícolas y de planeo, ocupando nichos similares sin aparente competencia agresiva.
+=== PAGINA 13 ===
+COMPSOGNATHUS
+CÓDIGO: JD-91173 | FAMILIA: Compsognathidae
+DIETA
+CARNÍVORO
+ALTURA
+30 cm
+LONGITUD
+1 m
+PESO EST.
+6 kg
+LOCALIZACIÓN
+Isla Sorna / Isla Nublar
+CLAVE INGEN
+JD-91173
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Sorna. Al menos diez ejemplares se infiltraron en Nublar. Presentan toxinas
+salivales leves que inducen parálisis temporal.
+ANÁLISIS ADICIONAL
+El Compsognathus longipes del Jurásico tardío de Europa era uno de los dinosaurios más
+pequeños conocidos. InGen incorporó glándulas salivales modificadas con secreciones
+peptídicas derivadas de ADN de musaraña de dientes rojos, resultando en una saliva que
+induce parálisis muscular temporal en mamíferos de hasta 40 kg. La mordedura de un solo
+ejemplar puede ser incapacitante; la mordedura de una manada resulta fatal. Se han
+registrado ataques mortales a humanos.
+⚠ NOTA INGEN: Al menos diez ejemplares se infiltraron en Nublar. Toxinas salivales leves.
+=== PAGINA 14 ===
+CONCAVENATOR
+CÓDIGO: CV-49210 | FAMILIA: Carcharodontosauridae
+DIETA
+CARNÍVORO
+ALTURA
+2.5 m
+LONGITUD
+6 m
+PESO EST.
+3,000 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+CV-49210
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. La joroba dorsal mostró irrigación vascular significativa,
+posiblemente para almacenamiento energético.
+ANÁLISIS ADICIONAL
+El Concavenator corcovatus del Cretácico inferior de España es notable por su joroba ósea
+previa a la cadera, cuya función es debatida. Los análisis de los especímenes InGen
+mediante termografía revelaron que la joroba actúa como radiador termal durante
+actividad intensa, disipando hasta el 40% del exceso de calor metabólico y permitiendo
+períodos de actividad prolongados en comparación con otros grandes terópodos.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Joroba dorsal con irrigación vascular
+significativa.
+=== PAGINA 15 ===
+CORYTHOSAURUS
+CÓDIGO: CY-58321 | FAMILIA: Hadrosauridae
+DIETA
+HERBÍVORO
+ALTURA
+3.5 m
+LONGITUD
+9 m
+PESO EST.
+4,000 kg
+LOCALIZACIÓN
+Isla Sorna / Isla Matanceros
+CLAVE INGEN
+CY-58321
+DESCRIPCIÓN OFICIAL INGEN
+Clonado durante Re-Genesis. Estudios acústicos sugieren comunicación por resonancia
+craneal.
+ANÁLISIS ADICIONAL
+El Corythosaurus casuarius del Cretácico tardío tenía una cresta cefálica hueca en forma de
+casco que actuaba como cámara de resonancia. Los ejemplares InGen fueron objeto de
+estudios acústicos que revelaron un repertorio de al menos 14 vocalizaciones distintas con
+frecuencias entre 20 Hz y 800 Hz, incluyendo infrasónicas que se propagan a través del
+suelo. Se documentó comunicación entre grupos separados por hasta 3 kilómetros.
+⚠ NOTA INGEN: Clonado durante Re-Genesis. Comunicación por resonancia craneal.
+=== PAGINA 16 ===
+CRYOLOPHOSAURUS
+CÓDIGO: CRY-76284 | FAMILIA: Dilophosauridae
+DIETA
+CARNÍVORO
+ALTURA
+3.7 m
+LONGITUD
+9 m
+PESO EST.
+2,200 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+CRY-76284
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Mostró agresividad elevada y adaptabilidad a climas
+templados.
+ANÁLISIS ADICIONAL
+El Cryolophosaurus ellioti del Jurásico temprano antártico es el dinosaurio terópodo más
+completo encontrado en la Antártida. Los especímenes InGen mostraron un metabolismo
+activo en rangos de temperatura de 5-35°C, significativamente más amplio que otros
+terópodos clonados, y niveles de agresividad intraespecífica que resultaron en la muerte
+de uno de los tres ejemplares originales. Presenta una mordida tóxica similar al de los
+dragones de Komodo.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Alta agresividad. Saliva tóxica.
+=== PAGINA 17 ===
+DEINOSUCHUS
+CÓDIGO: DN-87543 | FAMILIA: Alligatoridae
+DIETA
+CARNÍVORO
+ALTURA
+1.5 m (lomo)
+LONGITUD
+12 m
+PESO EST.
+4,500 kg
+LOCALIZACIÓN
+Isla Sorna
+CLAVE INGEN
+DN-87543
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Sorna. Reptil gigante con fuerza mandibular extrema y comportamiento
+territorial acuático.
+ANÁLISIS ADICIONAL
+El Deinosuchus rugosus del Cretácico tardío de Norteamérica era un crocodyliforme
+gigante capaz de cazar dinosaurios adultos. Con una longitud estimada de 10-12 m y una
+fuerza de mordida estimada en 18,000 N, era el superdepredador acuático de su
+ecosistema. El espécimen InGen fue ubicado en el lago principal de Sorna, donde eliminó
+múltiples especímenes de Gallimimus que se acercaban a beber. Considerado el organismo
+más peligroso de la isla por los equipos de campo.
+⚠ NOTA INGEN: Clonado en Sorna. Reptil gigante con comportamiento territorial acuático.
+=== PAGINA 18 ===
+DIABLOCERATOPS
+CÓDIGO: DC-68129 | FAMILIA: Ceratopsidae
+DIETA
+HERBÍVORO
+ALTURA
+1.8 m
+LONGITUD
+5 m
+PESO EST.
+1,300 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+DC-68129
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Cornamenta desarrollada para defensa y competencia
+intraespecífica.
+ANÁLISIS ADICIONAL
+El Diabloceratops eatoni del Cretácico tardío de Utah es una de las formas más primitivas
+de los ceratopsianos con gola. Sus cuernos parietales curvados hacia arriba son únicos
+entre los ceratópsidos. Los ejemplares InGen mostraron una fase de exhibición de gola
+cromática antes de los combates intraespecíficos, con vasos sanguíneos superficiales que
+enrojecen la membrana de la gola en señal de alerta o agresión territorial.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Cornamenta desarrollada para defensa.
+=== PAGINA 19 ===
+DILOPHOSAURUS
+CÓDIGO: RD-17307 | FAMILIA: Dilophosauridae
+DIETA
+CARNÍVORO
+ALTURA
+2 m
+LONGITUD
+6 m
+PESO EST.
+400 kg
+LOCALIZACIÓN
+Isla Nublar / Isla Sorna
+CLAVE INGEN
+RD-17307
+DESCRIPCIÓN OFICIAL INGEN
+Llevado a Nublar para exhibición. Algunos permanecieron en Sorna. Conservó glándulas
+productoras de veneno con proteínas modificadas.
+ANÁLISIS ADICIONAL
+El Dilophosaurus wetherilli del Jurásico temprano de Norteamérica no tiene evidencia fósil
+de producción de veneno, pero InGen introdujo glándulas venénicas modificadas a partir
+de ADN de cobra escupidora de Mozambique y lagarto monstruo de Gila. El veneno
+producido es una neurotoxina que causa ceguera temporal, espasmos musculares y
+posteriormente shock sistémico. El alcance de proyección documentado es de hasta 4
+metros. Varios operativos de InGen resultaron heridos en Sorna.
+⚠ NOTA INGEN: Conservó glándulas productoras de veneno con proteínas modificadas.
+=== PAGINA 20 ===
+DIMETRODON
+CÓDIGO: DM-48020 | FAMILIA: Sphenacodontidae
+DIETA
+CARNÍVORO
+ALTURA
+1.8 m
+LONGITUD
+4.5 m
+PESO EST.
+226 kg
+LOCALIZACIÓN
+Isla Nublar
+CLAVE INGEN
+INGEN-DIM-020
+DESCRIPCIÓN OFICIAL INGEN
+Llevado a Nublar para Fase 2. Sinápsido con vela dorsal altamente vascularizada.
+ANÁLISIS ADICIONAL
+El Dimetrodon limbatus del Pérmico temprano de Norteamérica es técnicamente un
+sinápsido, más emparentado con los mamíferos que con los dinosaurios. Su icónica vela
+dorsal sostenida por largas espinas neurales tenía función termorreguladora. InGen lo
+incluyó en la Fase 2 de Jurassic Park para aumentar la diversidad, siendo el único no-
+dinosaurio del catálogo original. Los registros post-1993 de este espécimen están
+clasificados.
+⚠ NOTA INGEN: Sinápsido con vela dorsal altamente vascularizada. Llevado a Nublar para
+Fase 2.
+=== PAGINA 21 ===
+DIPLODOCUS
+CÓDIGO: DP-88472 | FAMILIA: Diplodocidae
+DIETA
+HERBÍVORO
+ALTURA
+4 m (hombros)
+LONGITUD
+27 m
+PESO EST.
+15,000 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+DP-88472
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Gran herbívoro de metabolismo elevado y necesidad
+extensiva de territorio.
+ANÁLISIS ADICIONAL
+El Diplodocus hallorum del Jurásico tardío de Norteamérica fue uno de los dinosaurios más
+largos conocidos. Su cola delgada podía utilizarse como látigo sónico supersónico. Los
+estudios de los especímenes InGen confirmaron que el extremo de la cola puede romper
+la barrera del sonido localmente, generando un chasquido de aproximadamente 200 dB a
+1 metro. Este comportamiento defensivo fue documentado ante la aproximación de
+depredadores grandes.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Gran herbívoro de metabolismo elevado.
+=== PAGINA 22 ===
+DRACOREX
+CÓDIGO: DR-91584 | FAMILIA: Pachycephalosauridae
+DIETA
+HERBÍVORO
+ALTURA
+1.5 m
+LONGITUD
+4 m
+PESO EST.
+800 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+DR-91584
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Presentó cráneo reforzado para embestidas defensivas.
+ANÁLISIS ADICIONAL
+El Dracorex hogwartsia del Cretácico tardío de Norteamérica (cuyo nombre fue sugerido
+por niños fans de Harry Potter) tiene un cráneo plano con protuberancias y espinas que lo
+hacen único entre los paquicefalosáuridos. Algunos paleontólogos lo consideran una
+forma juvenil de Pachycephalosaurus. Los ejemplares InGen mostraron un
+comportamiento de embestida cefálica de hasta 24 km/h, capaz de dañar
+estructuralmente muros de 15 cm de concreto.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Cráneo reforzado para embestidas
+defensivas.
+=== PAGINA 23 ===
+DRYOSAURUS
+CÓDIGO: DR-33451 | FAMILIA: Dryosauridae
+DIETA
+HERBÍVORO
+ALTURA
+1.5 m
+LONGITUD
+3 m
+PESO EST.
+80 kg
+LOCALIZACIÓN
+Isla Sorna
+CLAVE INGEN
+DR-33451
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Sorna. Herbívoro pequeño con alta velocidad y comportamiento evasivo.
+ANÁLISIS ADICIONAL
+El Dryosaurus altus del Jurásico tardío era un ornitópodo bípedo de movimientos muy
+rápidos. Su construcción ligera y largas patas traseras le permitían alcanzar velocidades
+estimadas de 40-50 km/h. Los especímenes InGen formaron grupos de alerta coordinada
+con Gallimimus, respondiendo ante la misma señal de alarma y actuando como sistema de
+detección temprana mutualista ante depredadores. Esta coordinación interespecífica no
+había sido predicha por los etólogos.
+⚠ NOTA INGEN: Clonado en Sorna. Alta velocidad y comportamiento evasivo.
+=== PAGINA 24 ===
+EDMONTOSAURUS
+CÓDIGO: EM-83042 | FAMILIA: Hadrosauridae
+DIETA
+HERBÍVORO
+ALTURA
+3 m
+LONGITUD
+12 m
+PESO EST.
+4,000 kg
+LOCALIZACIÓN
+Isla Sorna
+CLAVE INGEN
+EM-83042
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Sorna. Mostró migraciones internas estacionales.
+ANÁLISIS ADICIONAL
+El Edmontosaurus annectens del Cretácico tardío de Norteamérica es uno de los
+hadrosáuridos más conocidos, con cresta craneal baja. Se han preservado momias
+naturales de esta especie que revelan su piel escamosa y musculatura. Los especímenes
+InGen de Sorna desarrollaron ciclos de migración interna siguiendo patterns de vegetación
+estacional de la isla, recorriendo hasta 200 km anuales en grupos de 20 individuos.
+⚠ NOTA INGEN: Clonado en Sorna. Migraciones internas estacionales.
+=== PAGINA 25 ===
+ELASMOSAURUS
+CÓDIGO: EL-33256 | FAMILIA: Elasmosauridae
+DIETA
+PISCÍVORO
+ALTURA
+2 m
+LONGITUD
+14 m
+PESO EST.
+3,000 kg
+LOCALIZACIÓN
+Isla Matanceros (marina)
+CLAVE INGEN
+EL-33256
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros para instalaciones marinas. Cuello largo altamente flexible.
+ANÁLISIS ADICIONAL
+El Elasmosaurus platyurus del Cretácico tardío de Norteamérica es un plesiosáurido cuyo
+cuello constituye la mitad de su longitud total, con 71 vértebras cervicales. InGen
+construyó instalaciones marinas en la costa norte de Isla Matanceros para albergar sus
+especímenes marinos. El ejemplar de Elasmosaurus fue documentado sumergiéndose a
+profundidades de hasta 180 m en pruebas de buceo monitoreado. Su destino tras el cierre
+de Re-Genesis es desconocido.
+⚠ NOTA INGEN: Clonado en Isla Matanceros para instalaciones marinas. Cuello largo
+altamente flexible.
+=== PAGINA 26 ===
+EUOPLOCEPHALUS
+CÓDIGO: INGEN-EUP-026 | FAMILIA: Ankylosauridae
+DIETA
+HERBÍVORO
+ALTURA
+1.8 m
+LONGITUD
+6 m
+PESO EST.
+2,500 kg
+LOCALIZACIÓN
+Isla Nublar
+CLAVE INGEN
+INGEN-EUP-026
+DESCRIPCIÓN OFICIAL INGEN
+Llevado a Nublar para Fase 2. Armadura ósea avanzada y comportamiento defensivo.
+ANÁLISIS ADICIONAL
+El Euoplocephalus tutus del Cretácico tardío de Norteamérica era un anquilosáurido
+completo: incluso sus párpados eran óseos. Su maza caudal podía generar fuerzas de
+impacto de hasta 6,000 N. Los especímenes InGen destinados a Nublar para la Fase 2
+nunca llegaron a ser exhibidos públicamente debido al incidente de 1993. Su rastro se
+pierde en los registros post-evacuación de la isla.
+⚠ NOTA INGEN: Llevado a Nublar para Fase 2. Armadura ósea avanzada.
+=== PAGINA 27 ===
+GALLIMIMUS
+CÓDIGO: GA-22779 | FAMILIA: Ornithomimidae
+DIETA
+OMNÍVORO
+ALTURA
+3 m
+LONGITUD
+4.7 m
+PESO EST.
+450 kg
+LOCALIZACIÓN
+Isla Nublar / Isla Sorna / Isla Matanceros
+CLAVE INGEN
+GA-22779
+DESCRIPCIÓN OFICIAL INGEN
+Presente en Nublar, Sorna y Matanceros. Velocidad estimada superior a 60 km/h.
+ANÁLISIS ADICIONAL
+El Gallimimus bullatus del Cretácico tardío asiático era uno de los dinosaurios más rápidos
+conocidos, con estimaciones de velocidad de 42-56 km/h en adultos. Los especímenes
+InGen alcanzaron velocidades máximas medidas de 64 km/h en sprint de 100 metros. Es la
+especie más numerosa documentada en todas las instalaciones InGen. En Sorna, las
+manadas alcanzaron tamaños de hasta 200 individuos, constituyendo la biomasa animal
+dominante de la isla.
+⚠ NOTA INGEN: Presente en múltiples islas. Velocidad estimada superior a 60 km/h.
+=== PAGINA 28 ===
+GEOSTERNBERGIA
+CÓDIGO: INGEN-GEO-028 | FAMILIA: Pteranodontidae
+DIETA
+PISCÍVORO
+ALTURA
+1.8 m (de pie)
+LONGITUD
+7.5 m (envergadura)
+PESO EST.
+22 kg
+LOCALIZACIÓN
+Isla Sorna
+CLAVE INGEN
+INGEN-GEO-028
+DESCRIPCIÓN OFICIAL INGEN
+Clonada en Sorna. Pterosaurio de gran envergadura y vuelo planeador.
+ANÁLISIS ADICIONAL
+Geosternbergia sternbergi del Cretácico tardío de Norteamérica es uno de los pterosaurios
+más grandes del género Pteranodon, con una cresta craneal inversa más pequeña que el
+macho típico (indicando hembra). Los especímenes de Sorna anidaron en los acantilados
+del norte de la isla. Su comportamiento con intrusos humanos fue documentado como
+altamente defensivo, con ataques coordinados en pareja para proteger nidos.
+⚠ NOTA INGEN: Clonada en Sorna. Pterosaurio de gran envergadura.
+=== PAGINA 29 ===
+Giganotosaurus
+CÓDIGO: GN-49723 | FAMILIA: Carcharodontosauridae
+DIETA
+CARNÍVORO
+ALTURA
+4.5 m
+LONGITUD
+13 m
+PESO EST.
+8,000 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+GN-49723
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Diseñado como depredador ápice alternativo al
+Tyrannosaurus.
+ANÁLISIS ADICIONAL
+El Giganotosaurus carolinii del Cretácico temprano de Argentina es uno de los terópodos
+más grandes conocidos, posiblemente superando al T. rex en longitud, aunque con una
+estructura craneal más delgada y un cerebro menor. InGen lo clonó como alternativa para
+el 'Proyecto Chaos' en Matanceros, donde el espacio y los recursos naturales eran más
+limitados. Los estudios de comportamiento revelaron estrategias de caza cooperativa
+entre dos o tres ejemplares juveniles.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Diseñado como depredador ápice alternativo
+al T. rex.
+=== PAGINA 30 ===
+Gorgonopsid
+CÓDIGO: GP-81267 | FAMILIA: Gorgonopsidae
+DIETA
+CARNÍVORO
+ALTURA
+1.2 m
+LONGITUD
+3 m
+PESO EST.
+500 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+GP-81267
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Terápsido carnívoro con colmillos prominentes.
+ANÁLISIS ADICIONAL
+Los gorgonópsidos fueron los depredadores dominantes del Pérmico tardío, emparentados
+lejanamente con los mamíferos. Su rasgo más notable son los enormes colmillos en
+dientes de sable que les daban aspecto de tigre de dientes de sable prehistórico. InGen los
+clonó para el 'Proyecto Primigenio', un subproyecto de Re-Genesis centrado en fauna del
+Pérmico. Son técnicamente no-dinosaurios pero fueron incluidos por su valor científico y
+exhibicional. Paradero actual desconocido.
+⚠ NOTA INGEN: Terápsido carnívoro con colmillos prominentes. Clonado en Isla
+Matanceros.
+=== PAGINA 31 ===
+HERRERASAURUS
+CÓDIGO: HR-75031 | FAMILIA: Herrerasauridae
+DIETA
+CARNÍVORO
+ALTURA
+1.2 m
+LONGITUD
+4 m
+PESO EST.
+210 kg
+LOCALIZACIÓN
+Isla Nublar
+CLAVE INGEN
+HR-75031
+DESCRIPCIÓN OFICIAL INGEN
+Llevado a Nublar para Fase 2. Depredador ágil y oportunista.
+ANÁLISIS ADICIONAL
+El Herrerasaurus ischigualastensis del Triásico tardío de Argentina es uno de los
+dinosaurios carnívoros más primitivos conocidos. Su posición filogenética exacta aún es
+debatida. Los especímenes InGen destinados a Nublar para la Fase 2 mostraron un
+comportamiento oportunista, capturando presas de hasta el doble de su peso. Eran activos
+en penumbra y amanecer, lo que dificultaba su monitoreo con los sistemas de vigilancia
+existentes en la isla.
+⚠ NOTA INGEN: Llevado a Nublar para Fase 2. Depredador ágil y oportunista. Presentan
+enanismo.
+=== PAGINA 32 ===
+HYPSILOPHODON
+CÓDIGO: HS-21567 | FAMILIA: Hypsilophodontidae
+DIETA
+HERBÍVORO
+ALTURA
+1 m
+LONGITUD
+2.3 m
+PESO EST.
+68 kg
+LOCALIZACIÓN
+Isla Sorna
+CLAVE INGEN
+HS-21567
+DESCRIPCIÓN OFICIAL INGEN
+El Hypsilophodon fue clonado en Isla Sorna como parte del programa de diversificación de
+herbívoros menores. Su ADN fue reconstruido con relativa estabilidad, con una de las tasas
+más bajas de fallos embrionarios entre las especies pequeñas.
+ANÁLISIS ADICIONAL
+El Hypsilophodon foxii del Cretácico temprano de Europa era un ornitópodo bípedo
+pequeño y ágil. Durante décadas los paleontólogos creyeron erróneamente que era
+arborícola. El éxito genético de InGen con esta especie fue notable: solo un 3% de los
+embriones no llegaron a término, en comparación con el 15-30% promedio del catálogo
+general. La especie se reprodujo naturalmente en Sorna, convirtiéndose en uno de los
+herbívoros menores más abundantes.
+⚠ NOTA INGEN: Clonado en Sorna. Baja tasa de fallos embrionarios.
+=== PAGINA 33 ===
+LIOPLEURODON
+CÓDIGO: LP-20487 | FAMILIA: Pliosauridae
+DIETA
+CARNÍVORO
+ALTURA
+3 m
+LONGITUD
+8 m
+PESO EST.
+7,000 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+LP-20487
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Depredador marino de gran tamaño y alta capacidad
+depredadora.
+ANÁLISIS ADICIONAL
+El Liopleurodon ferox del Jurásico tardío de Europa fue un pliosáurido de cuello corto con
+cuatro aletas poderosas y una mandíbula de hasta 3 metros. Aunque las estimaciones de
+tamaño fósil sugieren 5-7 m, los especímenes InGen alcanzaron longitudes de hasta 8 m
+gracias al tratamiento hormonal de crecimiento. Fue alojado en una instalación marina de
+aguas profundas en Matanceros. Es considerado el organismo más peligroso clonado por
+InGen. Paradero actual: desconocido.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Depredador marino de gran tamaño.
+=== PAGINA 34 ===
+MAIASAURA
+CÓDIGO: MI-14034 | FAMILIA: Hadrosauridae
+DIETA
+HERBÍVORO
+ALTURA
+2.4 m
+LONGITUD
+9 m
+PESO EST.
+3,000 kg
+LOCALIZACIÓN
+Isla Nublar
+CLAVE INGEN
+MI-14034
+DESCRIPCIÓN OFICIAL INGEN
+Llevada a Nublar para Fase 2. Evidenció fuerte comportamiento parental.
+ANÁLISIS ADICIONAL
+La Maiasaura peeblesorum del Cretácico tardío de Norteamérica es famosa por ser el
+primer dinosaurio del que se evidenció cuidado parental extenso: los adultos regurgitaban
+alimento para las crías en el nido. Los especímenes InGen de Nublar establecieron colonias
+de anidación comunales en la zona este de la isla. El comportamiento defensivo colectivo
+ante amenazas a las crías fue documentado como extremadamente agresivo, con adultos
+cargando contra depredadores de mayor tamaño.
+⚠ NOTA INGEN: Llevada a Nublar para Fase 2. Comportamiento parental pronunciado.
+=== PAGINA 35 ===
+MAMENCHISAURUS
+CÓDIGO: BA-47919 | FAMILIA: Mamenchisauridae
+DIETA
+HERBÍVORO
+ALTURA
+11 m
+LONGITUD
+24 m
+PESO EST.
+22,000 kg
+LOCALIZACIÓN
+Isla Sorna
+CLAVE INGEN
+BA-47919
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Sorna. Cancelado traslado a Nublar debido a limitaciones logísticas por su
+tamaño extremo.
+ANÁLISIS ADICIONAL
+El Mamenchisaurus sinocanadorum del Jurásico tardío asiático tenía el cuello más largo de
+todos los dinosaurios conocidos: entre 14 y 19 metros, representando hasta el 60% de su
+longitud total. InGen clonó tres ejemplares en Sorna, pero la logística de transporte
+(habría requerido barcos especiales con calados imposibles para el puerto de Nublar) hizo
+inviable el traslado. Los tres ejemplares fueron documentados consumiendo copas de
+árboles a alturas de hasta 11 metros.
+⚠ NOTA INGEN: Clonado en Sorna. Traslado a Nublar cancelado por tamaño extremo.
+=== PAGINA 36 ===
+METRIACANTHOSAURUS
+CÓDIGO: MT-58036 | FAMILIA: Metriacanthosauridae
+DIETA
+CARNÍVORO
+ALTURA
+3 m
+LONGITUD
+8 m
+PESO EST.
+Desconocido
+LOCALIZACIÓN
+Isla Nublar
+CLAVE INGEN
+MT-58036
+DESCRIPCIÓN OFICIAL INGEN
+Llevado a Nublar para exhibición. Terópodo de tamaño medio con comportamiento
+territorial.
+ANÁLISIS ADICIONAL
+El Metriacanthosaurus parkeri del Jurásico tardío de Europa es conocido por espinas
+neurales de altura media (de ahí su nombre: 'lagarto de espinas medias'). Era un
+depredador de tamaño medio situado entre los grandes (Allosaurus) y los pequeños
+(Dilophosaurus). Los ejemplares InGen de Nublar establecieron territorios claramente
+definidos y realizaban marcajes de bordes territoriales con arañazos en cortezas de
+árboles, comportamiento jamás predicho en los modelos conductuales.
+⚠ NOTA INGEN: Llevado a Nublar para exhibición. Terópodo territorial.
+=== PAGINA 37 ===
+MICROCERATUS
+CÓDIGO: MC-87402 | FAMILIA: Protoceratopsidae
+DIETA
+HERBÍVORO
+ALTURA
+0.6 m
+LONGITUD
+1 m
+PESO EST.
+15 kg
+LOCALIZACIÓN
+Isla Sorna
+CLAVE INGEN
+MC-87402
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Sorna. Población aumentó exponencialmente por reproducción acelerada.
+ANÁLISIS ADICIONAL
+El Microceratus gobiensis del Cretácico tardío de Asia era uno de los ceratopsios más
+primitivos y pequeños. Sus ciclos reproductivos cortos y su dieta muy variada hicieron de
+esta especie la de más rápido crecimiento poblacional en Sorna. Estimaciones de 2001
+indican que la población superaba los 2,000 individuos en la isla, convirtiéndola en la
+especie más numerosa per cápita después de Compsognathus. Funcionan como presas
+clave para múltiples depredadores.
+⚠ NOTA INGEN: Clonado en Sorna. Población aumentó exponencialmente.
+=== PAGINA 38 ===
+MICRORAPTOR
+CÓDIGO: MR-45892 | FAMILIA: Dromaeosauridae
+DIETA
+CARNÍVORO
+ALTURA
+0.6 m
+LONGITUD
+1 m
+PESO EST.
+5 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+MR-45892
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Presentó plumaje funcional para planeo.
+ANÁLISIS ADICIONAL
+El Microraptor gui del Cretácico temprano de China es uno de los dinosaurios no aviares
+más pequeños conocidos, con cuatro alas (plumas en brazos y patas). Podía planear
+eficientemente entre árboles. Los especímenes InGen exhibieron plumaje completo negro
+iridiscente, confirmando la hipótesis científica sobre coloración en microrraptores. Su
+capacidad de planeo documentada fue de hasta 40 metros horizontales desde alturas de
+10 m. Se alimentaban principalmente de insectos, lagartijas y frutos.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Plumaje funcional para planeo.
+=== PAGINA 39 ===
+ORNITHOCHEIRUS
+CÓDIGO: OR-75981 | FAMILIA: Ornithocheiridae
+DIETA
+PISCÍVORO
+ALTURA
+2.5 m (bípedo)
+LONGITUD
+12 m
+PESO EST.
+700 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+OR-75981
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Adaptado a vuelo de larga distancia.
+ANÁLISIS ADICIONAL
+El Ornithocheirus simus del Cretácico temprano de Europa era uno de los pterosaurios de
+mayor envergadura de su época, con estimaciones de hasta 12 metros. Tenía crestas en
+ambas mandíbulas que posiblemente servían para lectura hidrodinámica al pescar. Los
+especímenes InGen realizaron vuelos de hasta 800 km de distancia desde la isla
+(monitoreados por GPS subcutáneo), lo que confirma que la contención geográfica de las
+islas era completamente ineficiente para las especies voladoras.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Adaptado a vuelo de larga distancia. Escapó
+de las instalaciones.
+=== PAGINA 40 ===
+ORNITHOMIMUS
+CÓDIGO: OM-67934 | FAMILIA: Ornithomimidae
+DIETA
+OMNÍVORO
+ALTURA
+2 m
+LONGITUD
+3.5 m
+PESO EST.
+150 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+OM-67934
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Herbívoro/omnívoro veloz con comportamiento gregario.
+ANÁLISIS ADICIONAL
+El Ornithomimus edmontonicus del Cretácico tardío de Norteamérica era un
+ornitomimosáurido de pico sin dientes que consumía tanto plantas como pequeños
+animales. Estudios recientes de especímenes excepcionalmente preservados han revelado
+que los adultos tenían plumaje. Los especímenes InGen mostraron comportamiento de
+forrajeo altamente coordinado en grupos de 15-25 individuos, con individuos centinela
+que emitían llamadas de alarma mientras el grupo comía.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Velocidad y comportamiento gregario.
+=== PAGINA 41 ===
+Pachycephalosaurus
+CÓDIGO: SA-76321 | FAMILIA: Pachycephalosauridae
+DIETA
+HERBÍVORO
+ALTURA
+2 m
+LONGITUD
+4.5 m
+PESO EST.
+450 kg
+LOCALIZACIÓN
+Isla Nublar / Isla Sorna
+CLAVE INGEN
+SA-76321
+DESCRIPCIÓN OFICIAL INGEN
+Llevado a Nublar para Fase 2. En Sorna la población aumentó considerablemente.
+ANÁLISIS ADICIONAL
+El Pachycephalosaurus wyomingensis del Cretácico tardío de Norteamérica tenía una
+cúpula craneal de hueso sólido de hasta 25 cm de grosor. Los combates de cabezazos entre
+machos podían generar fuerzas de impacto equivalentes a un coche chocando a 30 km/h.
+Los especímenes InGen de Sorna desarrollaron jerarquías de dominancia estables en
+grupos de 8-12 individuos, con temporadas de celo claramente marcadas que generaban
+niveles de violencia intraespecífica significativos.
+⚠ NOTA INGEN: Llevado a Nublar para Fase 2. Población en Sorna aumentó
+considerablemente.
+=== PAGINA 42 ===
+Pachyrhinosaurus
+CÓDIGO: PC-50892 | FAMILIA: Ceratopsidae
+DIETA
+HERBÍVORO
+ALTURA
+2.5 m
+LONGITUD
+6 m
+PESO EST.
+4,000 kg
+LOCALIZACIÓN
+Isla Sorna
+CLAVE INGEN
+PC-50892
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en la última fase en Sorna. Registros oficiales fueron ocultos.
+ANÁLISIS ADICIONAL
+El Pachyrhinosaurus canadensis del Cretácico tardío de Norteamérica tenía una
+protuberancia ósea rugosa (boss) en lugar de cuernos nasales, con cuernos parietales
+variables. Fue uno de los últimos especímenes clonados antes del cierre de Re-Genesis,
+razón por la que InGen eliminó deliberadamente sus registros de los servidores principales
+para que no fueran confiscados por la Guardia Genética. Solo fragmentos de los datos de
+secuencia genética sobreviven en servidores de respaldo recuperados.
+⚠ NOTA INGEN: Clonado en la última fase en Sorna. Registros oficiales ocultos.
+=== PAGINA 43 ===
+Parasaurolophus
+CÓDIGO: CS-62085 | FAMILIA: Hadrosauridae
+DIETA
+HERBÍVORO
+ALTURA
+3 m
+LONGITUD
+7.5 m
+PESO EST.
+2,500 kg
+LOCALIZACIÓN
+Isla Nublar / Isla Sorna / Isla Matanceros
+CLAVE INGEN
+CS-62085
+DESCRIPCIÓN OFICIAL INGEN
+Presente en Nublar, Sorna y Matanceros. Comunicación acústica avanzada.
+ANÁLISIS ADICIONAL
+El Parasaurolophus walkeri del Cretácico tardío de Norteamérica tenía una cresta tubular
+hueca que funcionaba como instrumento de viento. Los estudios acústicos de los
+especímenes InGen revelaron que la cresta produce ondas de presión de baja frecuencia
+(30-80 Hz) que se propagan eficientemente a través de la densa vegetación tropical, con
+un alcance comunicacional efectivo de hasta 10 km. Poblaciones en diferentes islas
+desarrollaron dialectos acústicos distintos en menos de una generación.
+⚠ NOTA INGEN: Presente en múltiples islas. Comunicación acústica avanzada.
+=== PAGINA 44 ===
+PLATEOSAURUS
+CÓDIGO: PL-47291 | FAMILIA: Plateosauridae
+DIETA
+HERBÍVORO
+ALTURA
+2 m
+LONGITUD
+7.5 m
+PESO EST.
+3,500 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+PL-47291
+DESCRIPCIÓN OFICIAL INGEN
+Gran dinosaurio prosaurópodo herbívoro clonado exclusivamente en la Isla Matanceros.
+Se desplaza tanto de forma bípeda como cuadrúpeda y habita principalmente en zonas
+boscosas y llanuras con vegetación abundante. Su largo cuello le permite acceder a follaje
+alto, complementando el nicho ecológico de otros herbívoros más pequeños presentes en
+la isla.
+ANÁLISIS ADICIONAL
+Plateosaurus trossingensis es uno de los primeros grandes dinosaurios herbívoros,
+perteneciente al grupo de los sauropodomorfos basales. Se caracteriza por un cuello largo
+y flexible, una cabeza pequeña con dientes serrados en forma de hoja adaptados para
+triturar vegetación, y extremidades robustas que le permitían moverse en dos o cuatro
+patas. Mostraba una notable plasticidad de crecimiento: los individuos adultos variaban
+considerablemente en tamaño.
+⚠ NOTA INGEN: Los ejemplares adultos representan un riesgo moderado de daño
+estructural a instalaciones si se sienten amenazados.
+=== PAGINA 45 ===
+PLESIOSAURUS
+CÓDIGO: PL-54732 | FAMILIA: Plesiosauridae
+DIETA
+PISCÍVORO
+ALTURA
+1.5 m
+LONGITUD
+11 m
+PESO EST.
+3,500 kg
+LOCALIZACIÓN
+Isla Nublar
+CLAVE INGEN
+PL-54732
+DESCRIPCIÓN OFICIAL INGEN
+Llevado a Nublar para Fase 2. Adaptado a entorno marino controlado.
+ANÁLISIS ADICIONAL
+El Plesiosaurus dolichodeirus del Jurásico temprano fue un plesiosauroideo de cuello largo,
+cuatro aletas y mandíbulas llenas de dientes cónicos para cazar peces. InGen diseñó una
+laguna marina de agua controlada en la zona sur de Nublar para albergar sus especímenes
+acuáticos. El ejemplar de Plesiosaurus fue uno de los más difíciles de clonar por la escasez
+de ADN útil recuperado. Las modificaciones genéticas incluyeron ADN de tortuga laúd para
+la termorregulación.
+⚠ NOTA INGEN: Llevado a Nublar para Fase 2. Adaptado a entorno marino controlado.
+=== PAGINA 46 ===
+PROCERATOSAURUS
+CÓDIGO: PR-10045 | FAMILIA: Proceratosauridae
+DIETA
+CARNÍVORO
+ALTURA
+1.5 m
+LONGITUD
+3 m
+PESO EST.
+80 kg
+LOCALIZACIÓN
+Isla Nublar
+CLAVE INGEN
+INGEN-PRO-045
+DESCRIPCIÓN OFICIAL INGEN
+Llevado a Nublar. Base genética para estudios tiranosáuridos.
+ANÁLISIS ADICIONAL
+El Proceratosaurus bradleyi del Jurásico tardío de Gran Bretaña es considerado uno de los
+tiranosauroides más primitivos conocidos, lo que ayuda a trazar los orígenes evolutivos del
+T. rex. InGen lo incluyó en el catálogo no para exhibición pública sino como organismo de
+referencia para sus estudios de reconstrucción genética de tiranosáuridos. Los datos
+genéticos obtenidos de este espécimen se usaron como 'esqueleto' para rellenar lagunas
+en el genoma del Tyrannosaurus rex.
+⚠ NOTA INGEN: Llevado a Nublar. Base genética para estudios tiranosáuridos.
+=== PAGINA 47 ===
+QUETZALCOATLUS
+CÓDIGO: QT-92356 | FAMILIA: Azhdarchidae
+DIETA
+CARNÍVORO
+ALTURA
+3.5 m
+LONGITUD
+15 m (env.)
+PESO EST.
+800 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+QT-92356
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Envergadura superior a 10 metros.
+ANÁLISIS ADICIONAL
+El Quetzalcoatlus northropi del Cretácico tardío de Norteamérica fue el animal volador
+más grande conocido, con una envergadura estimada de 10-11 metros y una altura de
+jirafa cuando caminaba en cuatro patas. Se alimentaba principalmente de vertebrados
+terrestres que capturaría caminando y punteando el suelo como una garza gigante. Los
+especímenes InGen podían transportar presas de hasta 80 kg. InGen los consideró para
+uso militar en el Proyecto Thanatos, cuya documentación permanece clasificada.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Envergadura superior a 10 metros.
+=== PAGINA 48 ===
+SCUTOSAURUS
+CÓDIGO: SC-78134 | FAMILIA: Pareiasauridae
+DIETA
+HERBÍVORO
+ALTURA
+1.5 m
+LONGITUD
+3 m
+PESO EST.
+1,200 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+SC-78134
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Herbívoro acorazado del Pérmico.
+ANÁLISIS ADICIONAL
+El Scutosaurus karpinskii del Pérmico tardío de Rusia era un pareiasáurido: un reptil
+acorazado de cuatro patas, con la piel repleta de osteodermos. Pesaba entre 700-900 kg y
+era el equivalente del hipopótamo en su ecosistema pérmico. InGen lo clonó como parte
+del subproyecto de fauna paleozoica junto al Dimetrodon y el Gorgonopsid. La convivencia
+de estas tres especies en el mismo espacio recreó dinámicas predador-presa del Pérmico
+que no se habían observado en más de 250 millones de años.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Herbívoro acorazado del Pérmico.
+=== PAGINA 49 ===
+SEGISAURUS
+CÓDIGO: SG-93049 | FAMILIA: Coelophysidae
+DIETA
+CARNÍVORO
+ALTURA
+0.5 m
+LONGITUD
+1 m
+PESO EST.
+4 kg
+LOCALIZACIÓN
+Isla Nublar
+CLAVE INGEN
+SG-93049
+DESCRIPCIÓN OFICIAL INGEN
+Llevado a Nublar. Pequeño terópodo ágil.
+ANÁLISIS ADICIONAL
+El Segisaurus halli del Jurásico temprano de Arizona es uno de los coelofísidos más
+pequeños conocidos. Era ágil y rápido, con huesos huecos (como las aves modernas).
+InGen lo incluyó en el catálogo de Nublar principalmente por su valor científico: es uno de
+los dinosaurios más primitivos y completos del Jurásico temprano norteamericano. Los
+especímenes vivían en grietas y zonas arbustivas densas, haciéndolos difíciles de
+monitorear. Probablemente sobrevivió al incidente de 1993 por su pequeño tamaño y
+agilidad.
+⚠ NOTA INGEN: Llevado a Nublar. Pequeño terópodo ágil.
+=== PAGINA 50 ===
+SPINOSAURUS
+CÓDIGO: SP-61928 | FAMILIA: Spinosauridae
+DIETA
+PISCÍVORO
+ALTURA
+5.5 m
+LONGITUD
+15 m
+PESO EST.
+8,000 kg
+LOCALIZACIÓN
+Isla Sorna
+CLAVE INGEN
+SP-61928
+DESCRIPCIÓN OFICIAL INGEN
+Clonado ilegalmente en Re-Genesis. Híbrido con ADN de Suchomimus, Baryonyx y
+cocodrilo del Nilo. Capacidad pulmonar y fuerza mandibular superiores.
+ANÁLISIS ADICIONAL
+El Espécimen InGen de Spinosaurus fue el organismo más grande jamás clonado
+ilegalmente por la corporación. No es una clonación pura de Spinosaurus aegyptiacus: es
+un híbrido que incorpora secuencias de Spinosaurus, Suchomimus, Baryonyx, cocodrilo del
+Nilo y presuntamente material genético de avemano aún no identificado. Sus capacidades
+superan a cualquier registro fósil: cuatripedia opcional, natación activa a 15 nudos, apnea
+de hasta 8 minutos. Fue responsable de múltiples muertes en el incidente de 2001.
+Clasificado como Amenaza Nivel Omega.
+⚠ NOTA INGEN: CLONACIÓN ILEGAL — Híbrido con ADN de Suchomimus, Baryonyx y
+cocodrilo del Nilo.
+=== PAGINA 51 ===
+STEGOSAURUS
+CÓDIGO: SG-24492 | FAMILIA: Stegosauridae
+DIETA
+HERBÍVORO
+ALTURA
+4 m
+LONGITUD
+9 m
+PESO EST.
+2,500 kg
+LOCALIZACIÓN
+Isla Nublar / Isla Sorna / Isla Matanceros
+CLAVE INGEN
+SG-24492
+DESCRIPCIÓN OFICIAL INGEN
+Presente en Nublar, Sorna y Matanceros. Placas dorsales con alta vascularización.
+ANÁLISIS ADICIONAL
+El Stegosaurus ungulatus del Jurásico tardío de Norteamérica es uno de los dinosaurios
+más reconocibles por las placas dorsales alternadas y las cuatro púas de la cola
+(thagomizer). Las placas están altamente vascularizadas y cambian de coloración al
+enrojecerse con sangre durante estados de excitación o regulación térmica. Los
+especímenes InGen de Sorna son los individuos de mayor tamaño documentados,
+alcanzando 9.5 m de longitud. Se reprodujeron exitosamente, con al menos seis
+generaciones documentadas.
+⚠ NOTA INGEN: Presente en múltiples islas. Placas dorsales con alta vascularización.
+=== PAGINA 52 ===
+STYGIMOLOCH
+CÓDIGO: ST-29513 | FAMILIA: Pachycephalosauridae
+DIETA
+HERBÍVORO
+ALTURA
+2 m
+LONGITUD
+3 m
+PESO EST.
+450 kg
+LOCALIZACIÓN
+Isla Sorna
+CLAVE INGEN
+ST-29513
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Sorna de forma inesperada. Confirmado como especie distinta.
+ANÁLISIS ADICIONAL
+El Stygimoloch spinifer del Cretácico tardío de Norteamérica tiene una de las morfologías
+craneales más llamativas: un domo craneal rodeado de espinas tabulares y cuernos
+gruesos. Algunos paleontólogos lo consideran una forma juvenil de Pachycephalosaurus,
+pero los especímenes InGen demostraron ser una especie genéticamente distinta. Su
+aparición en Sorna fue inesperada, posiblemente resultado de una contaminación cruzada
+de muestras genéticas en el laboratorio principal. Comportamiento explícitamente
+agresivo con humanos.
+⚠ NOTA INGEN: Clonado en Sorna de forma inesperada. Confirmado como especie
+distinta.
+=== PAGINA 53 ===
+STYRACOSAURUS
+CÓDIGO: SR-94053 | FAMILIA: Ceratopsidae
+DIETA
+HERBÍVORO
+ALTURA
+1.8 m
+LONGITUD
+5.5 m
+PESO EST.
+3,000 kg
+LOCALIZACIÓN
+Isla Nublar
+CLAVE INGEN
+SR-94053
+DESCRIPCIÓN OFICIAL INGEN
+Llevado a Nublar para Fase 2. Cornamenta desarrollada para combate ritual.
+ANÁLISIS ADICIONAL
+El Styracosaurus albertensis del Cretácico tardío de Norteamérica tenía un espectacular
+collar óseo con seis largos cuernos parietales y un largo cuerno nasal central. Su función
+era principalmente exhibicional y para combate intraespecífico. Los especímenes InGen
+mostraron torneos de combate ritualizados entre machos durante períodos reproductivos,
+con enfrentamientos que podían durar hasta cuatro horas sin resultar en heridas fatales
+entre competidores, sugiriendo un sistema de resolución de dominancia evolutivamente
+refinado.
+⚠ NOTA INGEN: Llevado a Nublar para Fase 2. Cornamenta para combate ritual.
+=== PAGINA 54 ===
+SUCHOMIMUS
+CÓDIGO: SM-84752 | FAMILIA: Spinosauridae
+DIETA
+PISCÍVORO
+ALTURA
+4 m
+LONGITUD
+11 m
+PESO EST.
+3,000 kg
+LOCALIZACIÓN
+Isla Nublar / Isla Matanceros
+CLAVE INGEN
+SM-84752
+DESCRIPCIÓN OFICIAL INGEN
+Un ejemplar llevado a Nublar fue confundido con Baryonyx. Posteriormente trasladado a
+Matanceros.
+ANÁLISIS ADICIONAL
+El Suchomimus tenerensis del Cretácico temprano de África era un espinosáurido piscívoro
+con un largo morro crocodyliforme y garras curvadas en los pulgares. Su confusión con
+Baryonyx por el personal de campo de InGen fue un error significativo que evidenció los
+problemas de control de calidad en el programa de clonación. Cuando fue reclasificado
+correctamente, ya había convivido varios meses con el Baryonyx de Nublar, desarrollando
+una relación de tolerancia mutua que sorprendió a los etólogos.
+⚠ NOTA INGEN: Un ejemplar confundido con Baryonyx. Trasladado posteriormente a
+Matanceros.
+=== PAGINA 55 ===
+TANYSTROPHEUS
+CÓDIGO: TN-50734 | FAMILIA: Tanystropheidae
+DIETA
+PISCÍVORO
+ALTURA
+1 m
+LONGITUD
+6 m
+PESO EST.
+600 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+TN-50734
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Reptil de cuello extremadamente largo.
+ANÁLISIS ADICIONAL
+El Tanystropheus hydroides del Triásico medio de Europa es uno de los reptiles más
+extraños conocidos, con un cuello de hasta 3 metros de longitud soportado por solo 12
+vértebras extremadamente elongadas. Estudios recientes sugieren que era semiacuático y
+piscívoro. InGen tuvo dificultades extremas para clonar exitosamente esta especie: la
+estructura genética es muy divergente de cualquier reptil moderno. Solo dos especímenes
+viables fueron producidos, ambos en Matanceros, donde permanecieron en la zona
+costera de la instalación.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Reptil de cuello extremadamente largo.
+=== PAGINA 56 ===
+TAPEJARA
+CÓDIGO: TP-87421 | FAMILIA: Tapejaridae
+DIETA
+OMNÍVORO
+ALTURA
+1.5 m (bípedo)
+LONGITUD
+4 m (env.)
+PESO EST.
+200 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+TP-87421
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Crestado y adaptado a vuelo maniobrable.
+ANÁLISIS ADICIONAL
+El Tapejara wellnhoferi del Cretácico temprano de Brasil tiene una de las crestas más
+vistosas de todos los pterosaurios: una estructura triangular ósea cubierta de una
+membrana vascularizada brillante. Su dieta era probablemente omnívora (frutas, peces,
+invertebrados). InGen lo admiró tanto estéticamente que fue incluido en el catálogo de
+Fase 2 de Nublar, aunque el incidente de 1993 lo impidió. Los especímenes de Matanceros
+demostraron inteligencia superior a otros pterosaurios: aprendieron a abrir contenedores
+de alimento con cerrojo simple.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Crestado y adaptado a vuelo maniobrable.
+=== PAGINA 57 ===
+THERIZINOSAURUS
+CÓDIGO: TZ-56389 | FAMILIA: Therizinosauridae
+DIETA
+HERBÍVORO
+ALTURA
+5 m
+LONGITUD
+10 m
+PESO EST.
+6,000 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+TZ-56389
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Garras de gran longitud con comportamiento defensivo
+extremo.
+ANÁLISIS ADICIONAL
+El Therizinosaurus cheloniformis del Cretácico tardío de Asia tenía las garras más largas de
+cualquier animal conocido: hasta 1 metro de longitud cada una. Paradójicamente, era
+herbívoro, usando las garras para atraer ramas hacia su boca. Los especímenes InGen
+mostraron que en respuesta a amenazas percibidas, la reacción defensiva involucra barrer
+con las garras en arco, generando fuerzas suficientes para deformar estructuras de acero
+de 6 mm de grosor. Dos operativos resultaron gravemente heridos en Matanceros al
+infravalorar su radio de peligro.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Garras de gran longitud con comportamiento
+defensivo extremo.
+=== PAGINA 58 ===
+TOROSAURUS
+CÓDIGO: TR-39217 | FAMILIA: Ceratopsidae
+DIETA
+HERBÍVORO
+ALTURA
+3 m
+LONGITUD
+7.5 m
+PESO EST.
+5,000 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+TR-39217
+DESCRIPCIÓN OFICIAL INGEN
+Clonado en Isla Matanceros. Posible relación filogenética cercana a Triceratops.
+ANÁLISIS ADICIONAL
+El Torosaurus latus del Cretácico tardío de Norteamérica tenía el cráneo más grande de
+cualquier animal terrestre conocido, superando los 2.6 metros de longitud. Algunos
+paleontólogos consideran que es en realidad un Triceratops maduro. El análisis genético
+de los especímenes InGen reveló diferencias suficientes para justificar su clonación como
+especie separada. La convivencia en Matanceros con ejemplares de Triceratops resultó
+pacífica, con ambas especies formando grupos mixtos de alimentación y defensa mutua
+ante depredadores.
+⚠ NOTA INGEN: Clonado en Isla Matanceros. Posible relación filogenética cercana a
+Triceratops.
+=== PAGINA 59 ===
+TRICERATOPS
+CÓDIGO: TK-21268 | FAMILIA: Ceratopsidae
+DIETA
+HERBÍVORO
+ALTURA
+3.2 a 3.6 m
+LONGITUD
+9 m
+PESO EST.
+6,000 kg
+LOCALIZACIÓN
+Isla Nublar / Isla Sorna / Isla Matanceros
+CLAVE INGEN
+TK-21268
+DESCRIPCIÓN OFICIAL INGEN
+Múltiples ejemplares clonados. Tres trasladados a Nublar y al menos ocho permanecieron
+en Sorna. Algunos fueron llevados a Matanceros. Reproducción exitosa en cautiverio.
+ANÁLISIS ADICIONAL
+El Triceratops horridus del Cretácico tardío de Norteamérica es el ceratópsido más
+conocido. Sus tres cuernos y collar óseo eran usados tanto para defensa como para
+combate intraespecífico. Fue la primera especie en la que InGen documentó reproducción
+espontánea exitosa en semicautiverio (en Sorna). Las crías nacen sin cuernos desarrollados
+y permanecen bajo protección del grupo durante sus primeros 3 meses. Los adultos
+forman círculos defensivos ante amenazas, con crías en el centro, comportamiento
+idéntico al de bisontes modernos.
+⚠ NOTA INGEN: Múltiples ejemplares clonados. Reproducción exitosa en cautiverio.
+=== PAGINA 60 ===
+TROODON
+CÓDIGO: TR-11060 | FAMILIA: Troodontidae
+DIETA
+OMNÍVORO
+ALTURA
+1 m
+LONGITUD
+2.4 m
+PESO EST.
+50 kg
+LOCALIZACIÓN
+Isla Nublar
+CLAVE INGEN
+TR-11060
+DESCRIPCIÓN OFICIAL INGEN
+Varios ejemplares clonados y llevados a Nublar. John Hammond ordenó sacrificarlos por
+inestabilidad conductual e inteligencia avanzada.
+ANÁLISIS ADICIONAL
+El Troodon formosus del Cretácico tardío de Norteamérica tenía el coeficiente encéfalo-
+cuerpo más alto de todos los dinosaurios no aviares conocidos, sugiriendo inteligencia
+avanzada. Los especímenes InGen superaron todas las pruebas de resolución de
+problemas diseñadas para ellos, aprendieron a manipular pestillos y cerrojos en menos de
+6 horas de exposición, y mostraron comportamientos de engaño deliberado ante los
+supervisores humanos. Hammond ordenó su eliminación cuando uno de los especímenes
+demostró capacidad de imitación vocal básica. El proceso de sacrificio estuvo a punto de
+fracasar.
+⚠ NOTA INGEN: John Hammond ordenó sacrificarlos por inestabilidad conductual e
+inteligencia avanzada.
+=== PAGINA 61 ===
+TYLOSAURUS
+CÓDIGO: TY-79201 | FAMILIA: Mosasauridae
+DIETA
+CARNÍVORO
+ALTURA
+1.8 m (lomo)
+LONGITUD
+14 m
+PESO EST.
+10,000 kg
+LOCALIZACIÓN
+Isla Nublar
+CLAVE INGEN
+TY-79201
+DESCRIPCIÓN OFICIAL INGEN
+Un ejemplar clonado y llevado discretamente a Nublar para Fase 2.
+ANÁLISIS ADICIONAL
+El Tylosaurus proriger del Cretácico tardío de Norteamérica era uno de los mosasaurios
+más grandes conocidos, un reptil marino que dominaba los mares del interior de
+Norteamérica. Se alimentaba de peces, tiburones, aves marinas y otros mosasaurios.
+InGen alojó el único ejemplar clonado en la laguna marina de Nublar destinada a la Fase 2
+del parque. La instalación fue diseñada específicamente para espectáculos de
+alimentación. El ejemplar sobrevivió al incidente de 1993 y su estado actual es
+desconocido, aunque se han reportado avistamientos anómalos en aguas del Pacífico.
+⚠ NOTA INGEN: Un ejemplar clonado y llevado discretamente a Nublar para Fase 2.
+=== PAGINA 62 ===
+TYRANNOSAURUS REX
+CÓDIGO: RD-12376 | FAMILIA: Tyrannosauridae
+DIETA
+CARNÍVORO
+ALTURA
+5.2 m
+LONGITUD
+13.5 m
+PESO EST.
+3,000 kg
+LOCALIZACIÓN
+Isla Nublar / Isla Sorna / Isla Matanceros
+CLAVE INGEN
+RD-12376
+DESCRIPCIÓN OFICIAL INGEN
+Siete ejemplares clonados. Uno en Nublar, los demás en Sorna. Uno fue trasladado
+posteriormente a Matanceros.
+ANÁLISIS ADICIONAL
+El Tyrannosaurus Rex del Cretácico tardío de Norteamérica es el depredador terrestre más
+icónico. InGen invirtió más recursos en su clonación que en cualquier otra especie: el ADN
+fue el más difícil de recuperar y requirió 39% de relleno genético de aves modernas. Los
+siete ejemplares clonados presentaron variaciones de hasta 15% en tamaño, indicando
+inestabilidad de expresión genética. El ejemplar de Nublar es el más famoso: sobreviviente
+del incidente de 1993, fue trasladado a San Diego en 1997 y posteriormente a Matanceros.
+Los ejemplares de Sorna son más grandes y agresivos que el de Nublar.
+⚠ NOTA INGEN: Siete ejemplares clonados. El más icónico y peligroso del catálogo.
+=== PAGINA 63 ===
+ULTIMATE PREDATOR (HÍBRIDO)
+CÓDIGO: UP-00001 | FAMILIA: [CLASIFICADO]
+Ultimate Predator (Híbrido)
+DIETA
+[CLASIFICADO]
+ALTURA
+[CLASIFICADO]
+LONGITUD
+[CLASIFICADO]
+PESO EST.
+[CLASIFICADO]
+LOCALIZACIÓN
+[CLASIFICADO]
+CLAVE INGEN
+UP-00001
+DESCRIPCIÓN OFICIAL INGEN
+Entidad clasificada. Posible híbrido experimental de aplicaciones militares avanzadas.
+Información restringida.
+ANÁLISIS ADICIONAL
+La información sobre esta entidad está clasificada con nivel de acceso OMEGA. Lo que se
+sabe proviene exclusivamente de testimonios de sobrevivientes: el organismo presenta
+capacidades físicas que exceden a cualquier depredador natural o clonado previamente
+documentado. Evidencias circunstanciales sugieren incorporación de material genético de
+múltiples depredadores ápice, incluyendo posiblemente calamar gigante, orca y material
+no identificado. Cualquier personal que haya tenido contacto visual con el espécimen ha
+sido reubicado bajo acuerdos de confidencialidad de por vida. Esta ficha podría ser
+eliminada en cualquier momento.
+⚠ NOTA INGEN: INFORMACIÓN TOTALMENTE RESTRINGIDA — Amenaza Nivel Omega
+=== PAGINA 64 ===
+Utahraptor
+CÓDIGO: UR-21345 | FAMILIA: Dromaeosauridae
+DIETA
+CARNÍVORO
+ALTURA
+2.5 m
+LONGITUD
+7 m
+PESO EST.
+1,000 kg
+LOCALIZACIÓN
+Isla Matanceros
+CLAVE INGEN
+UR-21345
+DESCRIPCIÓN OFICIAL INGEN
+Cinco ejemplares clonados en Isla Matanceros para uso militar. Inteligencia avanzada y
+capacidad de imitación vocal humana.
+ANÁLISIS ADICIONAL
+El Utahraptor ostrommaysorum del Cretácico temprano de Utah era el dromeosáurido
+más grande conocido, con garras de hasta 24 cm. InGen lo clonó específicamente bajo
+solicitud de un cliente militar no identificado (designado en los archivos como “Proyecto
+New Era”). Los cinco ejemplares mostraron una capacidad de aprendizaje que superó
+incluso al Troodon en pruebas de resolución de problemas. La imitación vocal humana —
+capacidad no documentada en ningún dinosaurio— fue descubierta accidentalmente
+cuando uno de ellos reprodujo el nombre del supervisor de laboratorio. Los registros de
+audio fueron clasificados.
+⚠ NOTA INGEN: Cinco ejemplares clonados en Isla Matanceros para uso militar. Imitación
+vocal humana.
+=== PAGINA 65 ===
+Velociraptor
+CÓDIGO: DV-70189 | FAMILIA: Dromaeosauridae
+DIETA
+CARNÍVORO
+ALTURA
+1.8 m
+LONGITUD
+3.9 m
+PESO EST.
+226 kg
+LOCALIZACIÓN
+Isla Nublar / Isla Sorna / Isla Matanceros
+CLAVE INGEN
+DV-70189
+DESCRIPCIÓN OFICIAL INGEN
+Múltiples variantes clonadas. Primeros lotes llevados a Nublar. En Sorna la especie se
+reprodujo masivamente tras el incidente de 1993 y el huracán Clarissa. Nueva cepa creada
+en Re-Genesis con mayor agresividad y coordinación, trasladada a Matanceros para el
+Proyecto Chaos.
+ANÁLISIS ADICIONAL
+El Velociraptor mongoliensis del Cretácico tardío asiático era en realidad del tamaño de un
+pavo, con plumaje completo. Los especímenes InGen son morfológicamente más cercanos
+a Deinonychus, aunque InGen insistió en llamarlos Velociraptor. Presentan plumaje
+vestigial. Desarrollaron sistemas de comunicación táctica equivalentes a las estrategias de
+caza de lobos grises. La cepa de Matanceros (Re-Genesis) presenta un coeficiente de
+agresión 340% superior a la cepa original, con comportamientos de caza prolongada de
+hasta 72 horas continuas. Han demostrado capacidad de usar herramientas rudimentarias.
+Son considerados por múltiples consultores como el mayor riesgo de seguridad biótica del
+planeta.
+=== PAGINA 66 ===
+⚠ NOTA INGEN: La especie más peligrosa del catálogo. Múltiples variantes y cepas
+clonadas.
