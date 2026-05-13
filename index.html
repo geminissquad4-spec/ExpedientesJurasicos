@@ -1,430 +1,620 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="Expedientes Jurásicos — Exposición de las actividades ilegales de InGen Corporation en Isla Nublar e Isla Sorna. Documentación clasificada por JUR@55!_H@K3R_NBSNMCF." />
-  <title>EXPEDIENTES JURÁSICOS | Archivos Clasificados</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXPEDIENTES JURÁSICOS | Archivos Clasificados</title>
+<meta name="description" content="Archivos clasificados sobre las actividades ilegales de InGen Corporation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+/* INCIDENT ACCORDION — override cualquier conflicto */
+.incident-body{display:block!important;max-height:0!important;overflow:hidden!important;transition:max-height .5s ease!important;padding:0!important}
+.incident-body.open{max-height:3000px!important}
+/* INCIDENT CARD — overflow visible para que el body expandido no se corte */
+.incident-card{overflow:visible!important}
+/* INCIDENT CARD base */
+.incident-card{background:var(--card-bg,rgba(6,12,8,.92));border:1px solid rgba(90,180,90,.25);margin-bottom:.8rem}
+.incident-card--omega{border-color:rgba(255,48,48,.4)}
+.incident-header{display:flex;align-items:center;gap:1.2rem;padding:.9rem 1.4rem;cursor:pointer;user-select:none}
+.incident-header:hover{background:rgba(0,229,176,.04)}
+.incident-toggle{margin-left:auto;font-size:1rem;color:#00e5b0;flex-shrink:0;transition:transform .3s}
+.inc-date-block{min-width:150px;flex-shrink:0}
+.inc-day-month{font-family:'Orbitron',sans-serif;font-size:.82rem;font-weight:700;color:#00e5b0;letter-spacing:2px}
+.inc-location-line{font-family:'Share Tech Mono',monospace;font-size:.58rem;color:#607868;letter-spacing:2px;margin-top:.25rem}
+.incident-title{font-family:'Orbitron',sans-serif;font-size:.78rem;font-weight:700;color:#c8dac0;letter-spacing:1.5px;margin-bottom:.4rem}
+.inc-tags{display:flex;gap:.5rem;flex-wrap:wrap}
+.badge{font-family:'Share Tech Mono',monospace;font-size:.55rem;padding:.2rem .5rem;letter-spacing:1.5px;font-weight:700}
+.badge-red{background:rgba(255,48,48,.15);color:#ff3030;border:1px solid rgba(255,48,48,.3)}
+.badge-amber{background:rgba(212,160,23,.15);color:#d4a017;border:1px solid rgba(212,160,23,.3)}
+.badge-cyan{background:rgba(0,229,176,.1);color:#00e5b0;border:1px solid rgba(0,229,176,.25)}
+/* BODY INNER */
+.inc-body-inner{display:flex;gap:1.5rem;padding:1.2rem 1.4rem 1.5rem}
+.inc-photo-col{width:220px;flex-shrink:0}
+.inc-photo{width:100%;height:160px;object-fit:cover;border:1px solid rgba(90,180,90,.25);filter:sepia(25%) contrast(1.1)}
+.inc-photo-label{font-family:'Share Tech Mono',monospace;font-size:.5rem;color:#607868;margin-top:.3rem;letter-spacing:1px}
+.inc-content-col{flex:1}
+.inc-meta-bar{display:flex;justify-content:space-between;font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:2px;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid rgba(90,180,90,.25)}
+.inc-code{color:#00e5b0}
+.inc-clasif{color:#607868}
+.incident-body p{color:#b8ccc0;margin-bottom:.7rem;line-height:1.8;font-size:.86rem}
+.incident-note{background:rgba(255,48,48,.07);border-left:3px solid #ff3030;padding:.7rem 1rem;margin-top:.5rem;font-size:.82rem;color:#b8ccc0}
+.note-label{font-family:'Orbitron',sans-serif;font-size:.65rem;color:#ff3030;font-weight:700;display:block;margin-bottom:.3rem;letter-spacing:1px}
+.btn-evidence{display:inline-block;margin-top:.8rem;font-family:'Orbitron',sans-serif;font-size:.6rem;padding:.5rem 1rem;background:rgba(0,229,176,.08);color:#00e5b0;border:1px solid rgba(0,229,176,.3);letter-spacing:1.5px;text-decoration:none;transition:all .3s}
+.btn-evidence:hover{background:rgba(0,229,176,.18)}
+/* INCIDENTS GRID */
+.incidents-grid{display:flex;flex-direction:column;gap:.6rem}
+/* NEW INCIDENT DESIGN */
+.inc-meta{display:flex;align-items:center;gap:1rem;min-width:180px;flex-shrink:0}
+.inc-date{font-family:'Orbitron',sans-serif;font-size:.8rem;font-weight:700;color:#00e5b0;letter-spacing:2px}
+.inc-loc{font-family:'Share Tech Mono',monospace;font-size:.6rem;color:#607868;letter-spacing:1.5px}
+.inc-title-wrap{flex:1;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.inc-title{font-family:'Orbitron',sans-serif;font-size:.82rem;font-weight:700;color:#c8dac0;letter-spacing:1px;margin:0}
+.inc-status{font-family:'Share Tech Mono',monospace;font-size:.55rem;padding:.2rem .7rem;letter-spacing:2px;font-weight:700;flex-shrink:0}
+.status-critico{background:rgba(255,48,48,.15);color:#ff3030;border:1px solid rgba(255,48,48,.3)}
+.status-encubierta{background:rgba(212,160,23,.15);color:#d4a017;border:1px solid rgba(212,160,23,.3)}
+.status-expuesto{background:rgba(0,229,176,.1);color:#00e5b0;border:1px solid rgba(0,229,176,.25)}
+.inc-toggle-icon{margin-left:auto;font-size:.9rem;color:#00e5b0;flex-shrink:0;padding-left:.5rem}
+/* BODY INNER */
+.incident-content{display:flex;gap:1.5rem;padding:1.2rem 1.4rem 1.5rem}
+.inc-image-col{width:220px;flex-shrink:0}
+.inc-image-col .inc-photo{width:100%;height:160px;object-fit:cover;border:1px solid rgba(90,180,90,.25);filter:sepia(25%) contrast(1.1)}
+.inc-photo-placeholder{width:100%;height:160px;background:rgba(255,48,48,.05);border:1px solid rgba(255,48,48,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5rem}
+.placeholder-icon{font-size:2rem}
+.placeholder-text{font-family:'Share Tech Mono',monospace;font-size:.55rem;color:#ff3030;letter-spacing:1.5px;text-align:center}
+.photo-caption{font-family:'Share Tech Mono',monospace;font-size:.5rem;color:#607868;margin-top:.4rem;letter-spacing:1px}
+.inc-text-col{flex:1}
+.file-header{display:flex;justify-content:space-between;align-items:center;font-family:'Share Tech Mono',monospace;font-size:.58rem;letter-spacing:2px;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid rgba(90,180,90,.2)}
+.file-code{color:#00e5b0}
+.classification{color:#607868}
+.inc-subtitle{font-family:'Orbitron',sans-serif;font-size:.7rem;color:#00e5b0;letter-spacing:2px;margin-bottom:.6rem;font-weight:700}
+.incident-body p{color:#b8ccc0;margin-bottom:.7rem;line-height:1.8;font-size:.86rem}
+.evidence-box{background:rgba(212,160,23,.06);border-left:3px solid #d4a017;padding:.8rem 1rem;margin-top:.8rem}
+.ev-label{font-family:'Orbitron',sans-serif;font-size:.62rem;color:#d4a017;font-weight:700;display:block;margin-bottom:.4rem;letter-spacing:1.5px}
+.evidence-link{display:inline-block;margin-top:.6rem;font-family:'Orbitron',sans-serif;font-size:.58rem;padding:.5rem 1rem;background:rgba(0,229,176,.08);color:#00e5b0;border:1px solid rgba(0,229,176,.3);letter-spacing:1.5px;text-decoration:none;transition:all .3s}
+.evidence-link:hover{background:rgba(0,229,176,.18)}
+@media(max-width:700px){.incident-content{flex-direction:column}.inc-image-col{width:100%}.inc-meta{flex-direction:column;align-items:flex-start;gap:.3rem}.file-header{flex-direction:column;align-items:flex-start;gap:.3rem}}
+/* OVERLAYS — ocultos por defecto */
+.modal-overlay{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.85);backdrop-filter:blur(6px);align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.contest-overlay{display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);overflow-y:auto;padding:2rem}
+.contest-overlay.open{display:flex;align-items:flex-start;justify-content:center}
+.contest-box{max-width:800px;width:100%;background:rgba(6,12,8,.98);border:2px solid #ff3030;padding:2.5rem;margin:auto;position:relative}
+.contest-close{position:absolute;top:1rem;right:1rem;background:none;border:1px solid rgba(255,48,48,.4);color:#ff3030;width:32px;height:32px;cursor:pointer;font-size:1rem}
+.contest-badge{font-family:'Share Tech Mono',monospace;font-size:.65rem;color:#ff3030;letter-spacing:3px;margin-bottom:1rem}
+.contest-title{font-family:'Orbitron',sans-serif;font-size:1.4rem;color:#ff3030;margin-bottom:1.5rem}
+.contest-body p{color:#b8ccc0;margin-bottom:1rem;line-height:1.8;font-size:.9rem}
+.modal{background:rgba(6,12,8,.98);border:1px solid rgba(90,180,90,.4);max-width:900px;width:90%;max-height:90vh;overflow-y:auto;position:relative;padding:2rem}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:1px solid rgba(90,180,90,.3);color:#00e5b0;width:32px;height:32px;cursor:pointer;font-size:1rem}
+@media(max-width:700px){.inc-body-inner{flex-direction:column}.inc-photo-col{width:100%}}
+</style>
+<meta name="theme-color" content="#0a1a0a">
 </head>
-
 <body>
+<div class="scanlines"></div>
 
-  <!-- GLITCH OVERLAY -->
-  <div class="glitch-overlay" id="glitchOverlay"></div>
-  <div class="scanlines"></div>
+<div class="dna-widget" id="dna-widget">
+<svg class="dna-svg" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg">
+<defs><filter id="glow"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<path class="dna-strand s1" d="M10 5 Q50 20 10 35 Q50 50 10 65 Q50 80 10 95 Q50 110 10 115" fill="none" stroke="#00f5ff" stroke-width="2" filter="url(#glow)"/>
+<path class="dna-strand s2" d="M50 5 Q10 20 50 35 Q10 50 50 65 Q10 80 50 95 Q10 110 50 115" fill="none" stroke="#39ff14" stroke-width="2" filter="url(#glow)"/>
+<line x1="10" y1="20" x2="50" y2="20" stroke="#00f5ff" stroke-width="1.2" opacity="0.7"/>
+<line x1="10" y1="50" x2="50" y2="50" stroke="#00f5ff" stroke-width="1.2" opacity="0.7"/>
+<line x1="10" y1="65" x2="50" y2="65" stroke="#39ff14" stroke-width="1.2" opacity="0.7"/>
+<line x1="10" y1="80" x2="50" y2="80" stroke="#00f5ff" stroke-width="1.2" opacity="0.7"/>
+<line x1="10" y1="95" x2="50" y2="95" stroke="#39ff14" stroke-width="1.2" opacity="0.7"/>
+<line x1="10" y1="110" x2="50" y2="110" stroke="#00f5ff" stroke-width="1.2" opacity="0.7"/>
+<circle cx="10" cy="20" r="3" fill="#00f5ff" filter="url(#glow)"/>
+<circle cx="50" cy="20" r="3" fill="#39ff14" filter="url(#glow)"/>
+<circle cx="10" cy="50" r="3" fill="#00f5ff" filter="url(#glow)"/>
+<circle cx="50" cy="50" r="3" fill="#39ff14" filter="url(#glow)"/>
+<circle cx="10" cy="80" r="3" fill="#00f5ff" filter="url(#glow)"/>
+<circle cx="50" cy="110" r="3" fill="#39ff14" filter="url(#glow)"/>
+</svg>
+<div class="dna-label">ADN-INGEN</div>
+</div>
 
-  <!-- HEADER -->
-  <header id="site-header">
-    <div class="header-top-bar">
-      <span class="blink-text">⚠ NIVEL DE ACCESO: CLASIFICADO ⚠</span>
-      <span class="header-time" id="liveTime"></span>
-    </div>
-    <div class="header-main">
-      <div class="logo-area">
-        <div class="logo-dna">🧬</div>
-        <div class="logo-text">
-          <h1 class="site-title">EXPEDIENTES<br /><span class="title-accent">JURÁSICOS</span></h1>
-          <p class="site-sub">ARCHIVOS DESCLASIFICADOS — OPERACIÓN VERDAD</p>
-        </div>
+<div class="clock-widget" id="clock-widget">
+<div class="clock-time" id="clock-time">00:00:00</div>
+<div class="clock-date" id="clock-date">--- -- ----</div>
+</div>
+
+<nav class="navbar" id="navbar">
+<div class="nav-brand">
+<img src="InGen.png" alt="InGen" class="ingen-logo" onerror="this.style.display='none'">
+<span class="glitch" data-text="EXPEDIENTES JURÁSICOS">EXPEDIENTES JURÁSICOS</span>
+</div>
+<div class="nav-subtitle">ARCHIVOS DESCLASIFICADOS &mdash; OPERACIÓN VERDAD</div>
+<div class="nav-links">
+<a href="#incidentes" class="nav-link" id="nav-incidentes"><span class="nav-num">01</span> INCIDENTES</a>
+<a href="#cronologia" class="nav-link" id="nav-cronologia"><span class="nav-num">02</span> CRONOLOGÍA</a>
+<a href="#especies" class="nav-link" id="nav-especies"><span class="nav-num">03</span> ESPECIES</a>
+<a href="#expediente-literario" class="nav-link" id="nav-expediente"><span class="nav-num">04</span> EXP. LITERARIO</a>
+<a href="#acceso" class="nav-link" id="nav-acceso"><span class="nav-num">05</span> ACCESO</a>
+<a href="#acerca" class="nav-link" id="nav-acerca"><span class="nav-num">06</span> ACERCA</a>
+</div>
+<div class="nav-status"><span class="status-dot"></span><span class="status-text">TRANSMISIÓN ACTIVA</span></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+<div class="hero-bg"></div>
+<div class="hero-content">
+<div class="hero-eyebrow">⚠ DOCUMENTOS FILTRADOS — NIVEL OMEGA</div>
+<h1 class="hero-title"><span class="glitch" data-text="EXPEDIENTES">EXPEDIENTES</span><br><span class="hero-title-sub">JURÁSICOS</span></h1>
+<p class="hero-desc">Archivos clasificados sobre las actividades ilegales de InGen Corporation. Catálogo de especies clonadas, registro de incidentes y documentos filtrados.</p>
+<div class="hero-stats">
+<div class="hero-stat"><div class="stat-num" id="stat-species">65</div><div class="stat-label">ESPECIES CLONADAS</div></div>
+<div class="stat-divider"></div>
+<div class="hero-stat"><div class="stat-num">6</div><div class="stat-label">INCIDENTES REGISTRADOS</div></div>
+<div class="stat-divider"></div>
+<div class="hero-stat"><div class="stat-num">34</div><div class="stat-label">AÑOS DE ENCUBRIMIENTO</div></div>
+</div>
+<div class="hero-actions">
+<a href="#incidentes" class="btn-primary" id="btn-incidentes-hero">VER INCIDENTES</a>
+<a href="#especies" class="btn-secondary" id="btn-especies-hero">CATÁLOGO DE ESPECIES</a>
+</div>
+</div>
+</section>
+
+<!-- INCIDENTES -->
+<section id="incidentes" class="section section-incidentes">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <h2 class="section-title">REGISTRO DE INCIDENTES</h2>
+    <p class="section-subtitle">Haz clic en cada expediente para ver la información detallada</p>
+  </div>
+
+  <!-- 1993 -->
+  <div class="incident-card" id="inc-1993">
+    <div class="incident-header" onclick="toggleIncident('inc-1993')">
+      <div class="inc-meta">
+        <span class="inc-date">11 · JUN · 1993</span>
+        <span class="inc-loc">🌴 ISLA NUBLAR</span>
       </div>
-      <div class="header-user">
-        <div class="user-badge">
-          <span class="user-label">FILTRADOR:</span>
-          <span class="user-name">JUR@55!_H@K3R_NBSNMCF</span>
-        </div>
-        <div class="target-badge">
-          <span class="target-label">OBJETIVO:</span>
-          <span class="target-name">InGen Corporation</span>
-        </div>
+      <div class="inc-title-wrap">
+        <h3 class="inc-title">El Incidente de 1993 (Isla Nublar)</h3>
+        <span class="inc-status status-critico">CRÍTICO</span>
       </div>
+      <div class="inc-toggle-icon">▼</div>
     </div>
-    <nav class="main-nav">
-      <a href="#incidentes" class="nav-link">INCIDENTES</a>
-      <a href="#especies" class="nav-link">ESPECIES</a>
-      <a href="#acerca" class="nav-link">ACERCA</a>
-    </nav>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero-section">
-    <div class="hero-image-wrap">
-      <img src="images/img_hero.jpg" alt="Isla Nublar — Archivos clasificados" class="hero-img" />
-      <div class="hero-overlay">
-        <div class="hero-content">
-          <div class="classified-stamp">DESCLASIFICADO</div>
-          <h2 class="hero-title">LA VERDAD SOBRE<br /><span class="highlight-red">INGEN</span> NO PUEDE<br />SER
-            SILENCIADA</h2>
-          <p class="hero-desc">Durante más de una década, InGen Corporation operó instalaciones ilegales de clonación
-            genética en las Islas del Pacífico. Los siguientes archivos representan evidencia irrefutable de sus
-            crímenes contra la naturaleza y la humanidad.</p>
+    <div class="incident-body">
+      <div class="incident-content">
+        <div class="inc-image-col">
+          <img src="img_1993.jpg" alt="Incidente Jurassic Park 1993" class="inc-photo" onerror="this.style.display='none'"/>
+          <div class="photo-caption">📁 Archivo fotográfico — Isla Nublar, 1993</div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- INCIDENTES -->
-  <section id="incidentes" class="section-incidentes">
-    <div class="section-header">
-      <h2 class="section-title"><span class="sec-num">01</span> REGISTRO DE INCIDENTES</h2>
-      <p class="section-desc">Haz clic en cada expediente para ver la información detallada</p>
-    </div>
-
-    <!-- 1993 -->
-    <div class="incident-card" id="inc-1993">
-      <div class="incident-header" onclick="toggleIncident('inc-1993')">
-        <div class="inc-meta">
-          <span class="inc-date">11 · JUN · 1993</span>
-          <span class="inc-loc">🌴 ISLA NUBLAR</span>
-        </div>
-        <div class="inc-title-wrap">
-          <h3 class="inc-title">El Incidente de 1993 (Isla Nublar)</h3>
-          <span class="inc-status status-critico">CRÍTICO</span>
-        </div>
-        <div class="inc-toggle-icon">▼</div>
-      </div>
-      <div class="incident-body">
-        <div class="incident-content">
-          <div class="inc-image-col">
-            <img src="images/img_1993.jpg" alt="Incidente Jurassic Park 1993" class="inc-photo" />
-            <div class="photo-caption">📁 Archivo fotográfico — Isla Nublar, 1993</div>
+        <div class="inc-text-col">
+          <div class="file-header">
+            <span class="file-code">EXP-NUB-93-001</span>
+            <span class="classification">CLASIFICACIÓN: MÁXIMA</span>
           </div>
-          <div class="inc-text-col">
-            <div class="file-header">
-              <span class="file-code">EXP-NUB-93-001</span>
-              <span class="classification">CLASIFICACIÓN: MÁXIMA</span>
-            </div>
-            <h4 class="inc-subtitle">Resumen del Expediente</h4>
-            <p>El 11 de junio de 1993, el parque temático Jurassic Park en Isla Nublar sufrió un fallo catastrófico de
-              seguridad provocado por el sabotaje del programador Dennis Nedry. Nedry deshabilitó las redes de seguridad
-              para robar embriones a cambio de dinero, lo que permitió que los dinosaurios, incluyendo al Tyrannosaurus
-              rex y a los Velocirraptores, escaparan de sus recintos.</p>
-            <p>Esto resultó en múltiples muertes y la pérdida total de la isla. InGen silenció a los sobrevivientes con
-              compensaciones económicas y amenazas legales, y el gobierno de Costa Rica tuvo que intervenir para evitar
-              que Estados Unidos bombardeara la isla.</p>
-            <div class="evidence-box">
-              <span class="ev-label">⚠ NOTA DEL FILTRADOR:</span>
-              <p>InGen falsificó los informes de incidente. Los registros originales fueron destruidos en la sede de San
-                José, Costa Rica. Esta información proviene de fuentes internas con riesgo vital para las mismas.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 1994 -->
-    <div class="incident-card" id="inc-1994">
-      <div class="incident-header" onclick="toggleIncident('inc-1994')">
-        <div class="inc-meta">
-          <span class="inc-date">12 · MAY · 1994</span>
-          <span class="inc-loc">🌴 ISLA NUBLAR</span>
-        </div>
-        <div class="inc-title-wrap">
-          <h3 class="inc-title">Operación Limpieza (1994)</h3>
-          <span class="inc-status status-encubierta">ENCUBIERTA</span>
-        </div>
-        <div class="inc-toggle-icon">▼</div>
-      </div>
-      <div class="incident-body">
-        <div class="incident-content">
-          <div class="inc-image-col">
-            <img src="images/img_1994.jpg" alt="Operación Limpieza Nublar 1994" class="inc-photo" />
-            <div class="photo-caption">📁 Operación clasificada — Isla Nublar, 1994</div>
-          </div>
-          <div class="inc-text-col">
-            <div class="file-header">
-              <span class="file-code">EXP-NUB-94-LIMP</span>
-              <span class="classification">CLASIFICACIÓN: ULTRA SECRETA</span>
-            </div>
-            <h4 class="inc-subtitle">Informe de Campo</h4>
-            <p>Para mitigar las enormes pérdidas financieras y asegurar sus activos tras el desastre del 93, la junta
-              directiva de InGen aprobó la primera Operación Limpieza. Sus objetivos fueron recuperar muestras de ADN de
-              la mayoría de las especies de Isla Nublar, realizar un conteo de los sobrevivientes y trasladar a un
-              número considerable de estos dinosaurios hacia la Isla Sorna (el sitio de cría B).</p>
-            <p>Sin embargo, durante el traslado, varios contenedores fueron desviados en secreto hacia paraderos
-              desconocidos.</p>
-            <div class="evidence-box">
-              <span class="ev-label">⚠ NOTA DEL FILTRADOR:</span>
-              <p>Se recuperaron fragmentos de los registros operativos. Se incluyen en el siguiente archivo de evidencia
-                clasificada:</p>
-              <a href="https://drive.google.com/drive/folders/1VKAGRjdBw7IzmTLjpVl_cBPJjutDB6pu" target="_blank"
-                rel="noopener" class="evidence-link">
-                📂 ACCEDER A EVIDENCIAS — OPERACIÓN LIMPIEZA 1994
-              </a>
-            </div>
+          <h4 class="inc-subtitle">Resumen del Expediente</h4>
+          <p>El 11 de junio de 1993, el parque temático Jurassic Park en Isla Nublar sufrió un fallo catastrófico de seguridad provocado por el sabotaje del programador Dennis Nedry. Nedry deshabilitó las redes de seguridad para robar embriones a cambio de dinero, lo que permitió que los dinosaurios, incluyendo al Tyrannosaurus rex y a los Velocirraptores, escaparan de sus recintos.</p>
+          <p>Esto resultó en múltiples muertes y la pérdida total de la isla. InGen silenció a los sobrevivientes con compensaciones económicas y amenazas legales, y el gobierno de Costa Rica tuvo que intervenir para evitar que Estados Unidos bombardeara la isla.</p>
+          <div class="evidence-box">
+            <span class="ev-label">⚠ NOTA DEL FILTRADOR:</span>
+            <p>InGen falsificó los informes de incidente. Los registros originales fueron destruidos en la sede de San José, Costa Rica. Esta información proviene de fuentes internas con riesgo vital para las mismas.</p>
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- 1996 -->
-    <div class="incident-card" id="inc-1996">
-      <div class="incident-header" onclick="toggleIncident('inc-1996')">
-        <div class="inc-meta">
-          <span class="inc-date">08 · JUN · 1996</span>
-          <span class="inc-loc">🌿 ISLA SORNA</span>
-        </div>
-        <div class="inc-title-wrap">
-          <h3 class="inc-title">Operación Limpieza (1996)</h3>
-          <span class="inc-status status-encubierta">ENCUBIERTA</span>
-        </div>
-        <div class="inc-toggle-icon">▼</div>
-      </div>
-      <div class="incident-body">
-        <div class="incident-content">
-          <div class="inc-image-col">
-            <img src="images/img_1996.jpg" alt="Operación Limpieza Sorna 1996" class="inc-photo" />
-            <div class="photo-caption">📁 Operación clasificada — Isla Sorna, 1996</div>
-          </div>
-          <div class="inc-text-col">
-            <div class="file-header">
-              <span class="file-code">EXP-SOR-96-LIMP</span>
-              <span class="classification">CLASIFICACIÓN: ULTRA SECRETA</span>
-            </div>
-            <h4 class="inc-subtitle">Informe de Campo</h4>
-            <p>Bajo la dirección del ejecutivo Scrap Davis, InGen lanzó una segunda Operación Limpieza, esta vez en la
-              Isla Sorna, que había sido devastada por el Huracán Clarisa en 1994. El objetivo era recuperar documentos
-              técnicos, reportes de comportamiento y reactivar la energía para obtener datos satelitales que permitieran
-              extraer dinosaurios para el nuevo proyecto "Jurassic Park San Diego".</p>
-            <p>El equipo enviado (que incluía a los doctores Albert Levine, Kate Vanegas y Boris Dai Wong) sufrió un
-              ataque por parte de los dinosaurios sueltos y no pudo ser rescatado, pero lograron reactivar los sistemas
-              para que InGen obtuviera la información semanas después.</p>
-            <div class="evidence-box">
-              <span class="ev-label">⚠ NOTA DEL FILTRADOR:</span>
-              <p>Archivos de la Operación Limpieza en Sorna recuperados de servidores de respaldo:</p>
-              <a href="https://drive.google.com/drive/folders/1sncGtJs8DTf3jGo4eO5HggCb_ejnuIrQ" target="_blank"
-                rel="noopener" class="evidence-link">
-                📂 ACCEDER A EVIDENCIAS — OPERACIÓN LIMPIEZA 1996
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2000 -->
-    <div class="incident-card" id="inc-2000">
-      <div class="incident-header" onclick="toggleIncident('inc-2000')">
-        <div class="inc-meta">
-          <span class="inc-date">18 · JUN · 2000</span>
-          <span class="inc-loc">🔬 INSTALACIONES INGEN</span>
-        </div>
-        <div class="inc-title-wrap">
-          <h3 class="inc-title">Proyecto Re-Génesis</h3>
-          <span class="inc-status status-expuesto">EXPUESTO</span>
-        </div>
-        <div class="inc-toggle-icon">▼</div>
-      </div>
-      <div class="incident-body">
-        <div class="incident-content">
-          <div class="inc-image-col">
-            <img src="images/img_2000.jpg" alt="Cierre Operación Re-Genesis 2000" class="inc-photo" />
-            <div class="photo-caption">📁 Intervención legal — InGen, 2000</div>
-          </div>
-          <div class="inc-text-col">
-            <div class="file-header">
-              <span class="file-code">EXP-REG-00-CIERRE</span>
-              <span class="classification">CLASIFICACIÓN: RESTRINGIDA</span>
-            </div>
-            <h4 class="inc-subtitle">Análisis del Programa</h4>
-            <p>Iniciado originalmente en 1994 como una iniciativa secundaria, el Proyecto Re-Génesis buscaba ir más allá
-              de la clonación, utilizando manipulación genética avanzada para crear híbridos y mejorar las
-              características (tamaño, fuerza, inteligencia) de las especies con posibles aplicaciones armamentísticas o
-              militares.</p>
-            <p>Tras la compra de InGen por Masrani Global en 1998, el Dr. Michael King aprovechó un vacío legal para
-              reactivar el proyecto en las sombras, creando variantes letales. En 1999, el gobierno de Estados Unidos
-              descubrió que el proyecto violaba la Ley de Guardia Genética y ordenó su clausura inmediata y la
-              destrucción de los especímenes alterados.</p>
-            <div class="evidence-box">
-              <span class="ev-label">⚠ NOTA DEL FILTRADOR:</span>
-              <p>A pesar del cierre oficial, la operación continuó en las sombras. Los registros legales públicos son
-                solo la punta del iceberg. InGen nunca fue realmente detenida.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2001 -->
-    <div class="incident-card" id="inc-2001">
-      <div class="incident-header" onclick="toggleIncident('inc-2001')">
-        <div class="inc-meta">
-          <span class="inc-date">23 · MAY · 2001</span>
-          <span class="inc-loc">🌿 ISLA SORNA</span>
-        </div>
-        <div class="inc-title-wrap">
-          <h3 class="inc-title">Incidente de 2001 (Isla Sorna)</h3>
-          <span class="inc-status status-critico">CRÍTICO</span>
-        </div>
-        <div class="inc-toggle-icon">▼</div>
-      </div>
-      <div class="incident-body">
-        <div class="incident-content">
-          <div class="inc-image-col">
-            <img src="images/img_2001.jpg" alt="Incidente Isla Sorna 2001" class="inc-photo" />
-            <div class="photo-caption">📁 Evidencia del incidente — Isla Sorna, 2001</div>
-          </div>
-          <div class="inc-text-col">
-            <div class="file-header">
-              <span class="file-code">EXP-SOR-01-INC</span>
-              <span class="classification">CLASIFICACIÓN: ALTA</span>
-            </div>
-            <h4 class="inc-subtitle">Resumen del Expediente</h4>
-            <p>En el año 2001, un grupo de personas realizó una incursión ilegal en Isla Sorna para rescatar a un joven
-              extraviado, secuestrando bajo engaños al Dr. Alan Grant para que les sirviera de guía. Las alteraciones
-              que provocaron en el ecosistema causaron la liberación accidental de Pteranodones, los cuales escaparon de
-              la isla y llegaron hasta Oklahoma.</p>
-            <p>InGen envió a Vic Hoskins, su jefe de operaciones militares, para cazar y contener a las aves. Tras este
-              escándalo, Masrani Global firmó un nuevo contrato clasificado con Costa Rica para gestionar las islas
-              Nublar, Sorna y Matanceros.</p>
-            <div class="evidence-box">
-              <span class="ev-label">⚠ NOTA DEL FILTRADOR:</span>
-              <p>Los supervivientes describieron un ecosistema activo y plenamente funcional, incluyendo crías de al
-                menos cuatro especies. Esto es imposible si las operaciones de InGen hubieran cesado realmente en 2000.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2002 -->
-    <div class="incident-card" id="inc-2002">
-      <div class="incident-header" onclick="toggleIncident('inc-2002')">
-        <div class="inc-meta">
-          <span class="inc-date">14 · JUN · 2002</span>
-          <span class="inc-loc">🎯 MÚLTIPLES LOCALIZACIONES</span>
-        </div>
-        <div class="inc-title-wrap">
-          <h3 class="inc-title">Lo que pasó en la Isla Matanceros (2002)</h3>
-          <span class="inc-status status-critico">CLASIFICADA</span>
-        </div>
-        <div class="inc-toggle-icon">▼</div>
-      </div>
-      <div class="incident-body">
-        <div class="incident-content">
-          <div class="inc-image-col">
-            <div class="inc-photo-placeholder">
-              <div class="placeholder-icon">🔒</div>
-              <div class="placeholder-text">IMAGEN CLASIFICADA<br />ACCESO DENEGADO</div>
-            </div>
-            <div class="photo-caption">📁 Operación final — 2002 [IMAGEN RESTRINGIDA]</div>
-          </div>
-          <div class="inc-text-col">
-            <div class="file-header">
-              <span class="file-code">EXP-ULT-02-OP</span>
-              <span class="classification">CLASIFICACIÓN: OMEGA</span>
-            </div>
-            <h4 class="inc-subtitle">Proyecto Nueva Era</h4>
-            <p>Aunque públicamente Matanceros fue designada como una isla de soporte logístico, en secreto albergaba el
-              "Proyecto Nueva Era", dirigido por el Dr. Michael King y financiado por el ejército estadounidense
-              (General Rogers). En esta isla, se continuó la creación de dinosaurios híbridos militarizados, como
-              Utahraptors adiestrados para obedecer órdenes y abominaciones multigenómicas imparables como el Ultimate
-              Predator X.</p>
-            <p>La situación en Matanceros culminó en una catástrofe total (narrada en el libro Caos en la Isla) cuando
-              un grupo de sobrevivientes y mercenarios se infiltraron para exponer los crímenes de InGen. El sistema de
-              seguridad colapsó, los dinosaurios híbridos escaparon de sus recintos, masacrando a los soldados de InGen
-              (incluyendo al propio Dr. King) y desatando el caos absoluto en las instalaciones antes de que los
-              sobrevivientes lograran huir en helicóptero.</p>
-            <div class="evidence-box">
-              <span class="ev-label">⚠ EVIDENCIA CLASIFICADA:</span>
-              <p>Los archivos recuperados de la Operación Última se encuentran en el siguiente repositorio de evidencia:
-              </p>
-              <a href="https://drive.google.com/drive/folders/1TBH00dJWQ5ked9HWgGeeGEEmO5m0oGKv" target="_blank"
-                rel="noopener" class="evidence-link">
-                📂 ACCEDER A EVIDENCIAS — OPERACIÓN ÚLTIMA 2002
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ESPECIES -->
-  <section id="especies" class="section-especies">
-    <div class="section-header">
-      <h2 class="section-title"><span class="sec-num">02</span> CATÁLOGO DE ESPECIES CLONADAS</h2>
-      <p class="section-desc">Fichas técnicas de los organismos creados ilegalmente por InGen Corporation — Haz clic en
-        cada especie para ver su ficha completa</p>
-    </div>
-
-    <div class="species-search-bar">
-      <input type="text" id="speciesSearch" placeholder="🔍 Buscar especie..." oninput="filterSpecies()"
-        class="search-input" />
-      <div class="filter-pills">
-        <button class="pill active" onclick="filterDiet('all', this)">TODAS</button>
-        <button class="pill" onclick="filterDiet('carnivoro', this)">CARNÍVORO</button>
-        <button class="pill" onclick="filterDiet('herbivoro', this)">HERBÍVORO</button>
-        <button class="pill" onclick="filterDiet('omnivoro', this)">OMNÍVORO</button>
-        <button class="pill" onclick="filterDiet('piscivoro', this)">PISCÍVORO</button>
-      </div>
-    </div>
-
-    <div class="species-grid" id="speciesGrid">
-      <!-- Species cards generated by JS -->
-    </div>
-  </section>
-
-  <!-- SPECIES MODAL -->
-  <div class="species-modal" id="speciesModal" onclick="closeModalOutside(event)">
-    <div class="modal-box">
-      <button class="modal-close" onclick="closeModal()">✕</button>
-      <div class="modal-content" id="modalContent"></div>
     </div>
   </div>
 
-  <!-- ACERCA -->
-  <section id="acerca" class="section-acerca">
-    <div class="section-header">
-      <h2 class="section-title"><span class="sec-num">03</span> ACERCA DE ESTE ARCHIVO</h2>
+  <!-- 1994 -->
+  <div class="incident-card" id="inc-1994">
+    <div class="incident-header" onclick="toggleIncident('inc-1994')">
+      <div class="inc-meta">
+        <span class="inc-date">12 · MAY · 1994</span>
+        <span class="inc-loc">🌴 ISLA NUBLAR</span>
+      </div>
+      <div class="inc-title-wrap">
+        <h3 class="inc-title">Operación Limpieza (1994)</h3>
+        <span class="inc-status status-encubierta">ENCUBIERTA</span>
+      </div>
+      <div class="inc-toggle-icon">▼</div>
     </div>
-    <div class="acerca-content">
-      <div class="acerca-card">
-        <div class="acerca-icon">👤</div>
-        <h3>Identidad del Filtrador</h3>
-        <p>Este archivo ha sido compilado y publicado por <strong>JUR@55!_H@K3R_NBSNMCF</strong>, operativo
-          independiente con acceso a fuentes internas de InGen Corporation. La identidad real del filtrador permanecerá
-          protegida.</p>
-      </div>
-      <div class="acerca-card">
-        <div class="acerca-icon">⚖️</div>
-        <h3>Propósito Legal</h3>
-        <p>La información contenida en este portal tiene como único propósito <strong>informar al público</strong> sobre
-          las actividades ilegales de InGen Corporation. Toda la información proviene de fuentes verificables y
-          documentos internos filtrados.</p>
-      </div>
-      <div class="acerca-card">
-        <div class="acerca-icon">🔒</div>
-        <h3>Seguridad del Archivo</h3>
-        <p>Este archivo es de <strong>acceso público</strong>. Cualquier intento de supresión o censura por parte de
-          InGen o sus afiliados será interpretado como confirmación adicional de los hechos aquí documentados.</p>
+    <div class="incident-body">
+      <div class="incident-content">
+        <div class="inc-image-col">
+          <img src="img_1994.jpg" alt="Operación Limpieza Nublar 1994" class="inc-photo" onerror="this.style.display='none'"/>
+          <div class="photo-caption">📁 Operación clasificada — Isla Nublar, 1994</div>
+        </div>
+        <div class="inc-text-col">
+          <div class="file-header">
+            <span class="file-code">EXP-NUB-94-LIMP</span>
+            <span class="classification">CLASIFICACIÓN: ULTRA SECRETA</span>
+          </div>
+          <h4 class="inc-subtitle">Informe de Campo</h4>
+          <p>Para mitigar las enormes pérdidas financieras y asegurar sus activos tras el desastre del 93, la junta directiva de InGen aprobó la primera Operación Limpieza. Sus objetivos fueron recuperar muestras de ADN de la mayoría de las especies de Isla Nublar, realizar un conteo de los sobrevivientes y trasladar a un número considerable de estos dinosaurios hacia la Isla Sorna (el sitio de cría B).</p>
+          <p>Sin embargo, durante el traslado, varios contenedores fueron desviados en secreto hacia paraderos desconocidos.</p>
+          <div class="evidence-box">
+            <span class="ev-label">⚠ NOTA DEL FILTRADOR:</span>
+            <p>Se recuperaron fragmentos de los registros operativos. Se incluyen en el siguiente archivo de evidencia clasificada:</p>
+            <button class="evidence-link" onclick="document.getElementById('modal-misterios').classList.add('open')">📚 LEER EXPEDIENTE — MISTERIOS EN LA ISLA (1994)</button>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="footer-content">
-      <div class="footer-logo">🧬 EXPEDIENTES JURÁSICOS</div>
-      <p class="footer-text">Archivos publicados por <strong>JUR@55!_H@K3R_NBSNMCF</strong> | La verdad no puede ser
-        contenida</p>
-      <p class="footer-warning">⚠ InGen Corporation es responsable de crímenes contra la biodiversidad y la humanidad ⚠
-      </p>
-      <div class="footer-sig">[ ARCHIVO DESCLASIFICADO — DOMINIO PÚBLICO ]</div>
+  <!-- 1996 -->
+  <div class="incident-card" id="inc-1996">
+    <div class="incident-header" onclick="toggleIncident('inc-1996')">
+      <div class="inc-meta">
+        <span class="inc-date">08 · JUN · 1996</span>
+        <span class="inc-loc">🌿 ISLA SORNA</span>
+      </div>
+      <div class="inc-title-wrap">
+        <h3 class="inc-title">Operación Limpieza (1996)</h3>
+        <span class="inc-status status-encubierta">ENCUBIERTA</span>
+      </div>
+      <div class="inc-toggle-icon">▼</div>
     </div>
-  </footer>
+    <div class="incident-body">
+      <div class="incident-content">
+        <div class="inc-image-col">
+          <img src="img_1996.jpg" alt="Operación Limpieza Sorna 1996" class="inc-photo" onerror="this.style.display='none'"/>
+          <div class="photo-caption">📁 Operación clasificada — Isla Sorna, 1996</div>
+        </div>
+        <div class="inc-text-col">
+          <div class="file-header">
+            <span class="file-code">EXP-SOR-96-LIMP</span>
+            <span class="classification">CLASIFICACIÓN: ULTRA SECRETA</span>
+          </div>
+          <h4 class="inc-subtitle">Informe de Campo</h4>
+          <p>Bajo la dirección del ejecutivo Scrap Davis, InGen lanzó una segunda Operación Limpieza en la Isla Sorna. El objetivo era recuperar documentos técnicos y reactivar la energía para extraer dinosaurios para el nuevo proyecto "Jurassic Park San Diego".</p>
+          <p>El equipo enviado sufrió un ataque por parte de los dinosaurios sueltos, pero logró reactivar los sistemas para que InGen obtuviera la información semanas después.</p>
+          <div class="evidence-box">
+            <span class="ev-label">⚠ NOTA DEL FILTRADOR:</span>
+            <p>Archivos de la Operación Limpieza en Sorna recuperados de servidores de respaldo:</p>
+            <button class="evidence-link" onclick="document.getElementById('modal-sobrevivir').classList.add('open')">📚 LEER EXPEDIENTE — SOBREVIVIR EN LA ISLA (1996)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <script src="species-data-1.js"></script>
-  <script src="species-data-2.js"></script>
-  <script src="species-data-3.js"></script>
-  <script src="script.js"></script>
+  <!-- 2000 -->
+  <div class="incident-card" id="inc-2000">
+    <div class="incident-header" onclick="toggleIncident('inc-2000')">
+      <div class="inc-meta">
+        <span class="inc-date">18 · JUN · 2000</span>
+        <span class="inc-loc">🔬 INSTALACIONES INGEN</span>
+      </div>
+      <div class="inc-title-wrap">
+        <h3 class="inc-title">Proyecto Re-Génesis</h3>
+        <span class="inc-status status-expuesto">EXPUESTO</span>
+      </div>
+      <div class="inc-toggle-icon">▼</div>
+    </div>
+    <div class="incident-body">
+      <div class="incident-content">
+        <div class="inc-image-col">
+          <img src="img_2000.jpg" alt="Cierre Re-Genesis 2000" class="inc-photo" onerror="this.style.display='none'"/>
+          <div class="photo-caption">📁 Intervención legal — InGen, 2000</div>
+        </div>
+        <div class="inc-text-col">
+          <div class="file-header">
+            <span class="file-code">EXP-REG-00-CIERRE</span>
+            <span class="classification">CLASIFICACIÓN: RESTRINGIDA</span>
+          </div>
+          <h4 class="inc-subtitle">Análisis del Programa</h4>
+          <p>Iniciado en 1994, el Proyecto Re-Génesis buscaba ir más allá de la clonación, utilizando manipulación genética avanzada para crear híbridos con posibles aplicaciones militares. Tras la compra de InGen por Masrani Global en 1998, el Dr. Michael King reactivó el proyecto clandestinamente.</p>
+          <p>En 1999, el gobierno de EE.UU. descubrió que el proyecto violaba la Ley de Guardia Genética y ordenó su clausura inmediata y la destrucción de los especímenes alterados.</p>
+          <div class="evidence-box">
+            <span class="ev-label">⚠ NOTA DEL FILTRADOR:</span>
+            <p>A pesar del cierre oficial, la operación continuó en las sombras. Los registros legales públicos son solo la punta del iceberg.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2001 -->
+  <div class="incident-card" id="inc-2001">
+    <div class="incident-header" onclick="toggleIncident('inc-2001')">
+      <div class="inc-meta">
+        <span class="inc-date">23 · MAY · 2001</span>
+        <span class="inc-loc">🌿 ISLA SORNA</span>
+      </div>
+      <div class="inc-title-wrap">
+        <h3 class="inc-title">Incidente de 2001 (Isla Sorna)</h3>
+        <span class="inc-status status-critico">CRÍTICO</span>
+      </div>
+      <div class="inc-toggle-icon">▼</div>
+    </div>
+    <div class="incident-body">
+      <div class="incident-content">
+        <div class="inc-image-col">
+          <img src="img_2001.jpg" alt="Incidente Isla Sorna 2001" class="inc-photo" onerror="this.style.display='none'"/>
+          <div class="photo-caption">📁 Evidencia del incidente — Isla Sorna, 2001</div>
+        </div>
+        <div class="inc-text-col">
+          <div class="file-header">
+            <span class="file-code">EXP-SOR-01-INC</span>
+            <span class="classification">CLASIFICACIÓN: ALTA</span>
+          </div>
+          <h4 class="inc-subtitle">Resumen del Expediente</h4>
+          <p>Un grupo realizó una incursión ilegal en Isla Sorna para rescatar a un joven extraviado, secuestrando bajo engaños al Dr. Alan Grant como guía. Las alteraciones en el ecosistema causaron la liberación accidental de Pteranodones, que escaparon hasta Oklahoma.</p>
+          <p>InGen envió a Vic Hoskins para contenerlos. Masrani Global firmó un nuevo contrato con Costa Rica para gestionar las islas Nublar, Sorna y Matanceros.</p>
+          <div class="evidence-box">
+            <span class="ev-label">⚠ NOTA DEL FILTRADOR:</span>
+            <p>Los supervivientes describieron un ecosistema activo con crías de al menos cuatro especies — imposible si las operaciones de InGen hubieran cesado realmente en 2000.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2002 -->
+  <div class="incident-card incident-card--omega" id="inc-2002">
+    <div class="incident-header" onclick="toggleIncident('inc-2002')">
+      <div class="inc-meta">
+        <span class="inc-date">14 · JUN · 2002</span>
+        <span class="inc-loc">🎯 MÚLTIPLES LOCALIZACIONES</span>
+      </div>
+      <div class="inc-title-wrap">
+        <h3 class="inc-title">Lo que pasó en la Isla Matanceros (2002)</h3>
+        <span class="inc-status status-critico">CLASIFICADA</span>
+      </div>
+      <div class="inc-toggle-icon">▼</div>
+    </div>
+    <div class="incident-body">
+      <div class="incident-content">
+        <div class="inc-image-col">
+          <div class="inc-photo-placeholder">
+            <div class="placeholder-icon">🔒</div>
+            <div class="placeholder-text">IMAGEN CLASIFICADA<br/>ACCESO DENEGADO</div>
+          </div>
+          <div class="photo-caption">📁 Operación final — 2002 [IMAGEN RESTRINGIDA]</div>
+        </div>
+        <div class="inc-text-col">
+          <div class="file-header">
+            <span class="file-code">EXP-ULT-02-OP</span>
+            <span class="classification">CLASIFICACIÓN: OMEGA</span>
+          </div>
+          <h4 class="inc-subtitle">Proyecto Nueva Era</h4>
+          <p>En Matanceros, el "Proyecto Nueva Era" bajo el Dr. Michael King y financiado por el ejército estadounidense creó dinosaurios híbridos militarizados: Utahraptors adiestrados y el Ultimate Predator X.</p>
+          <p>La situación culminó en catástrofe total cuando los dinosaurios híbridos escaparon, masacrando al personal. Los sobrevivientes lograron huir en helicóptero.</p>
+          <div class="evidence-box">
+            <span class="ev-label">⚠ EVIDENCIA CLASIFICADA:</span>
+            <button class="evidence-link" onclick="document.getElementById('modal-caos').classList.add('open')">📚 LEER EXPEDIENTE — CAOS EN LA ISLA (2002)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- CRONOLOGÍA -->
+<section class="section" id="cronologia">
+<div class="section-header">
+<div class="section-num">02</div>
+<h2 class="section-title">CRONOLOGÍA INGEN</h2>
+<p class="section-subtitle">Registro histórico de operaciones &mdash; Haz clic en cada año para desplegar el expediente</p>
+</div>
+<div class="timeline" id="timeline-container">
+<!-- Rendered by JS from cronologia-data.js -->
+</div>
+</section>
+
+<!-- ESPECIES -->
+<section class="section" id="especies">
+<div class="section-header">
+<div class="section-num">03</div>
+<h2 class="section-title">CATÁLOGO DE ESPECIES CLONADAS</h2>
+<p class="section-subtitle">Fichas técnicas de los organismos creados ilegalmente por InGen Corporation &mdash; Haz clic en cada especie para ver su ficha completa</p>
+</div>
+<div class="filter-bar" id="filter-bar">
+<button class="filter-btn active" data-filter="all" id="filter-all">TODAS</button>
+<button class="filter-btn" data-filter="carnivoro" id="filter-carnivoro">CARNÍVORAS</button>
+<button class="filter-btn" data-filter="herbivoro" id="filter-herbivoro">HERBÍVORAS</button>
+<button class="filter-btn" data-filter="piscivoro" id="filter-piscivoro">PISCÍVORAS</button>
+<button class="filter-btn" data-filter="omnivoro" id="filter-omnivoro">OMNÍVORAS</button>
+<button class="filter-btn" data-filter="insectivoro" id="filter-insectivoro">INSECTÍVORAS</button>
+</div>
+<div class="search-bar">
+<input type="text" id="species-search" class="species-search" placeholder="BUSCAR ESPECIE..." autocomplete="off" spellcheck="false">
+<div class="species-count" id="species-count">-- DE -- ESPECÍMENES</div>
+</div>
+<div class="species-grid" id="species-grid">
+<!-- Cards generated by JS -->
+</div>
+</section>
+
+<!-- EXPEDIENTE LITERARIO -->
+<section class="section" id="expediente-literario">
+<div class="section-header">
+<div class="section-num">04</div>
+<h2 class="section-title">EXPEDIENTE LITERARIO</h2>
+<p class="section-subtitle">Documentos narrativos clasificados &mdash; Registros de campo y testimonios de sobrevivientes</p>
+</div>
+<div class="book-promo" id="book-huellas">
+<img src="Huellas por el Mundo.jpeg" alt="Huellas por el Mundo" class="book-cover" onerror="this.style.background='#0a1a0a'">
+<div class="book-info">
+<div class="book-tag">EXPEDIENTE LITERARIO &middot; CLASIFICADO</div>
+<h3 class="book-title">A Jurassic World Story:<br>Huellas por el Mundo</h3>
+<p class="book-desc">Expediente narrativo clasificado. Contiene relatos de campo, testimonios de sobrevivientes y datos de seguimiento de dinosaurios en territorio continental. Acceso restringido a operativos con nivel de autorización mínimo BETA.</p>
+<button class="btn-book" id="btn-huellas-open" onclick="document.getElementById('modal-huellas').classList.add('open')">&#128214; ABRIR EXPEDIENTE</button>
+</div>
+</div>
+</section>
+
+<!-- ACCESO -->
+<section class="section" id="acceso">
+<div class="section-header">
+<div class="section-num">05</div>
+<h2 class="section-title">PANEL DE ACCESO CLASIFICADO</h2>
+<p class="section-subtitle">Introduce tus credenciales de operativo para acceder a información restringida</p>
+</div>
+<div class="access-panel">
+<div class="access-terminal">
+<div class="terminal-header">
+<span class="terminal-dot td-red"></span>
+<span class="terminal-dot td-amber"></span>
+<span class="terminal-dot td-green"></span>
+<span class="terminal-title">TERMINAL INGEN &mdash; AUTENTICACIÓN OPERATIVO</span>
+</div>
+<div class="terminal-body">
+<div class="terminal-line">$ <span class="t-cyan">SISTEMA</span> :: Ingrese nombre de operativo para verificar acceso</div>
+<div class="terminal-line">$ <span class="t-green">CLASIFICACIÓN</span> :: Nivel OMEGA requerido</div>
+<div class="terminal-line">$ <span class="t-amber">ADVERTENCIA</span> :: Todo acceso no autorizado será registrado</div>
+<div class="terminal-line terminal-input-line">
+<span class="t-cyan">operativo@ingen:~$</span>
+<input type="text" id="access-input" class="terminal-input" placeholder="NOMBRE DE OPERATIVO..." autocomplete="off" spellcheck="false">
+<button class="terminal-btn" id="access-btn">AUTENTICAR</button>
+</div>
+<div class="terminal-feedback" id="terminal-feedback"></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ACERCA -->
+<section class="section" id="acerca">
+<div class="section-header">
+<div class="section-num">06</div>
+<h2 class="section-title">ACERCA DE ESTE ARCHIVO</h2>
+</div>
+<div class="about-grid">
+<div class="about-card" id="about-identity">
+<div class="about-icon">&#128100;</div>
+<h3 class="about-card-title">Identidad del Filtrador</h3>
+<p>Este archivo ha sido compilado y publicado por un operativo independiente con acceso a fuentes internas de InGen Corporation. La identidad real del filtrador permanecerá <span class="highlight-red">PROTEGIDA Y CLASIFICADA</span>.</p>
+</div>
+<div class="about-card" id="about-purpose">
+<div class="about-icon">&#9878;&#65039;</div>
+<h3 class="about-card-title">Propósito Legal</h3>
+<p>La información contenida en este portal tiene como único propósito informar al público sobre las actividades ilegales de InGen Corporation. Toda la información proviene de fuentes verificables y documentos internos filtrados.</p>
+</div>
+<div class="about-card" id="about-security">
+<div class="about-icon">&#128274;</div>
+<h3 class="about-card-title">Seguridad del Archivo</h3>
+<p>Este archivo es de acceso público. Cualquier intento de supresión o censura por parte de InGen o sus afiliados será interpretado como <span class="highlight-red">confirmación adicional</span> de los hechos aquí documentados.</p>
+</div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" id="footer">
+<div class="footer-content">
+<img src="InGen.png" alt="InGen" class="footer-logo" onerror="this.style.display='none'">
+<div class="footer-brand">EXPEDIENTES JURÁSICOS</div>
+<p class="footer-text">Archivos publicados por [IDENTIDAD PROTEGIDA] | La verdad no puede ser contenida</p>
+<div class="footer-warning">&#9888; InGen Corporation es responsable de crímenes contra la biodiversidad y la humanidad &#9888;</div>
+</div>
+</footer>
+
+<!-- MISTERIOS EN LA ISLA PDF MODAL -->
+<div class="modal-overlay" id="modal-misterios">
+<div class="modal" style="max-width:95vw;width:1100px;height:90vh;display:flex;flex-direction:column;padding:0">
+<button class="modal-close" onclick="document.getElementById('modal-misterios').classList.remove('open')">&#10005;</button>
+<div style="padding:1rem 1.5rem;border-bottom:1px solid var(--mil-border,rgba(90,180,90,.3));font-family:'Orbitron',sans-serif;color:#00e5b0;font-size:.9rem;letter-spacing:2px">&#128218; A JURASSIC PARK STORY &mdash; MISTERIOS EN LA ISLA</div>
+<iframe src="A Jurassic Park Story Misterios En La Isla..pdf" style="flex:1;border:none;background:#111"></iframe>
+</div>
+</div>
+
+<!-- SOBREVIVIR EN LA ISLA PDF MODAL -->
+<div class="modal-overlay" id="modal-sobrevivir">
+<div class="modal" style="max-width:95vw;width:1100px;height:90vh;display:flex;flex-direction:column;padding:0">
+<button class="modal-close" onclick="document.getElementById('modal-sobrevivir').classList.remove('open')">&#10005;</button>
+<div style="padding:1rem 1.5rem;border-bottom:1px solid var(--mil-border,rgba(90,180,90,.3));font-family:'Orbitron',sans-serif;color:#00e5b0;font-size:.9rem;letter-spacing:2px">&#128218; A JURASSIC PARK STORY &mdash; SOBREVIVIR EN LA ISLA</div>
+<iframe src="A Jurassic Park Story Sobrevivir En La Isla..pdf" style="flex:1;border:none;background:#111"></iframe>
+</div>
+</div>
+
+<!-- CAOS EN LA ISLA PDF MODAL -->
+<div class="modal-overlay" id="modal-caos">
+<div class="modal" style="max-width:95vw;width:1100px;height:90vh;display:flex;flex-direction:column;padding:0">
+<button class="modal-close" onclick="document.getElementById('modal-caos').classList.remove('open')">&#10005;</button>
+<div style="padding:1rem 1.5rem;border-bottom:1px solid var(--mil-border,rgba(90,180,90,.3));font-family:'Orbitron',sans-serif;color:#ff3030;font-size:.9rem;letter-spacing:2px">&#128218; A JURASSIC PARK STORY &mdash; CAOS EN LA ISLA</div>
+<iframe src="A Jurassic Park Story Caos En La Isla..pdf" style="flex:1;border:none;background:#111"></iframe>
+</div>
+</div>
+
+<!-- HUELLAS PDF MODAL -->
+<div class="modal-overlay" id="modal-huellas">
+<div class="modal" style="max-width:95vw;width:1100px;height:90vh;display:flex;flex-direction:column">
+<button class="modal-close" onclick="document.getElementById('modal-huellas').classList.remove('open')">&#10005;</button>
+<div style="padding:1rem 1.5rem;border-bottom:1px solid var(--mil-border);font-family:var(--font-orb);color:var(--cyan);font-size:.9rem;letter-spacing:2px">&#128214; A JURASSIC WORLD STORY &mdash; HUELLAS POR EL MUNDO</div>
+<iframe src="A Jurassic World Story Huellas Por El Mundo..pdf" style="flex:1;border:none;background:#111"></iframe>
+</div>
+</div>
+
+<!-- SPECIES MODAL -->
+<div class="modal-overlay" id="modal-overlay">
+<div class="modal" id="species-modal">
+<button class="modal-close" id="modal-close">&#10005;</button>
+<div id="modal-inner"></div>
+</div>
+</div>
+
+<!-- CONTEST OVERLAY (OMEGA ACCESS) -->
+<div class="contest-overlay" id="contest-overlay">
+<div class="contest-box">
+<button class="contest-close" id="contest-close">&#10005;</button>
+<div class="contest-header">
+<div class="contest-badge">&#9888; ACCESO NIVEL OMEGA CONCEDIDO &#9888;</div>
+<h2 class="contest-title">EXPEDIENTE OMEGA CLASIFICADO</h2>
+</div>
+<div class="contest-body">
+<p>🦤 <strong>&#161;Felicidades!</strong><br>Tu código de acceso es correcto.</p>
+<p>Has logrado ingresar a los archivos más clasificados de InGen Corporation y desbloquear información reservada únicamente para personal autorizado.</p>
+<p>Tu participación ha sido registrada oficialmente y ahora formas parte de los candidatos por el gran premio.</p>
+<p>Mántente alerta… en Jurassic Park, cada descubrimiento puede cambiar la historia.</p>
+</div>
+</div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="cronologia-data.js"></script>
+<script src="species-data-1.js"></script>
+<script src="species-data-2.js"></script>
+<script src="species-data-3.js"></script>
+<script src="script.js"></script>
+<script>
+// Definiciones autónomas — funcionan aunque script.js falle
+// Sobreescribe toggleIncident con la version nueva (usa IDs de tarjeta, no body-IDs)
+window.toggleIncident = function(cardId) {
+    var card = document.getElementById(cardId);
+    if (!card) return;
+    var body = card.querySelector('.incident-body');
+    var toggle = card.querySelector('.inc-toggle-icon');
+    if (!body) return;
+    var wasOpen = body.classList.contains('open');
+    document.querySelectorAll('.incident-body.open').forEach(function(b) {
+        b.classList.remove('open');
+        var t = b.closest('.incident-card');
+        if (t) { var ti = t.querySelector('.inc-toggle-icon'); if (ti) ti.textContent = '\u25bc'; }
+    });
+    if (!wasOpen) {
+        body.classList.add('open');
+        if (toggle) toggle.textContent = '\u25b2';
+    }
+};
+if (typeof window.toggleTimeline !== 'function') {
+    window.toggleTimeline = function(idx) {
+        var body = document.getElementById('tl-body-' + idx);
+        var tog = document.getElementById('tltoggle-' + idx);
+        if (!body) return;
+        var wasOpen = body.classList.contains('open');
+        document.querySelectorAll('.tl-card-body').forEach(function(b) {
+            b.classList.remove('open');
+        });
+        document.querySelectorAll('.tl-card-toggle').forEach(function(t) {
+            t.textContent = '\u25bc';
+        });
+        if (!wasOpen) {
+            body.classList.add('open');
+            if (tog) tog.textContent = '\u25b2';
+        }
+    };
+}
+</script>
 </body>
-
 </html>

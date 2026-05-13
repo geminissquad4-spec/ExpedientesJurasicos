@@ -17,7 +17,7 @@ var SPECIES_PART3 = [
     },
     {
         name: "Segisaurus",
-        key: "INGEN-SEG-049",
+        key: "SG-93049",
         family: "Coelophysidae",
         diet: "carnivoro",
         dietLabel: "CARNÍVORO",
@@ -77,7 +77,7 @@ var SPECIES_PART3 = [
     },
     {
         name: "Styracosaurus",
-        key: "INGEN-STR-053",
+        key: "SR-94053",
         family: "Ceratopsidae",
         diet: "herbivoro",
         dietLabel: "HERBÍVORO",
@@ -152,7 +152,7 @@ var SPECIES_PART3 = [
     },
     {
         name: "Torosaurus",
-        key: "TRS-39217",
+        key: "TR-39217",
         family: "Ceratopsidae",
         diet: "herbivoro",
         dietLabel: "HERBÍVORO",
@@ -182,7 +182,7 @@ var SPECIES_PART3 = [
     },
     {
         name: "Troodon",
-        key: "INGEN-TRO-060",
+        key: "TR-11060",
         family: "Troodontidae",
         diet: "omnivoro",
         dietLabel: "OMNÍVORO",
@@ -231,9 +231,9 @@ var SPECIES_PART3 = [
         family: "[CLASIFICADO]",
         diet: "clasificado",
         dietLabel: "CLASIFICADO",
-        height: "7 m (est.)",
-        length: "15 m (est.)",
-        weight: "12,000 kg (est.)",
+        height: "[CLASIFICADO]",
+        length: "[CLASIFICADO]",
+        weight: "[CLASIFICADO]",
         location: "[CLASIFICADO]",
         emoji: "☠️",
         ingen: "INFORMACIÓN TOTALMENTE RESTRINGIDA — Amenaza Nivel Omega",
@@ -251,9 +251,9 @@ var SPECIES_PART3 = [
         weight: "1,000 kg",
         location: "Isla Matanceros",
         emoji: "⚔️",
-        ingen: "Tres ejemplares clonados en Isla Matanceros para uso militar. Imitación vocal humana.",
-        desc: "Tres ejemplares clonados en Isla Matanceros para uso militar. Inteligencia avanzada y capacidad de imitación vocal humana.",
-        extra: "El Utahraptor ostrommaysorum del Cretácico temprano de Utah era el dromeosáurido más grande conocido, con garras de hasta 24 cm. InGen lo clonó específicamente bajo solicitud de un cliente militar no identificado (designado en los archivos como 'Proyecto Thanatos — Contratista Azul'). Los tres ejemplares mostraron una capacidad de aprendizaje que superó incluso al Troodon en pruebas de resolución de problemas. La imitación vocal humana —capacidad no documentada en ningún dinosaurio— fue descubierta accidentalmente cuando uno de ellos reprodujo el nombre del supervisor de laboratorio. Los registros de audio fueron clasificados."
+        ingen: "Cinco ejemplares clonados en Isla Matanceros para uso militar. Imitación vocal humana.",
+        desc: "Cinco ejemplares clonados en Isla Matanceros para uso militar. Inteligencia avanzada y capacidad de imitación vocal humana.",
+        extra: "El Utahraptor ostrommaysorum del Cretácico temprano de Utah era el dromeosáurido más grande conocido, con garras de hasta 24 cm. InGen lo clonó específicamente bajo solicitud de un cliente militar no identificado (designado en los archivos como 'Proyecto New Era'). Los cinco ejemplares mostraron una capacidad de aprendizaje que superó incluso al Troodon en pruebas de resolución de problemas. La imitación vocal humana —capacidad no documentada en ningún dinosaurio— fue descubierta accidentalmente cuando uno de ellos reprodujo el nombre del supervisor de laboratorio. Los registros de audio fueron clasificados."
     },
     {
         name: "Velociraptor",

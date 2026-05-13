@@ -17,7 +17,7 @@ var SPECIES_PART2 = [
     },
     {
         name: "Herrerasaurus",
-        key: "INGEN-HER-031",
+        key: "HR-75031",
         family: "Herrerasauridae",
         diet: "carnivoro",
         dietLabel: "CARNÍVORO",
@@ -26,7 +26,7 @@ var SPECIES_PART2 = [
         weight: "210 kg",
         location: "Isla Nublar",
         emoji: "🦖",
-        ingen: "Llevado a Nublar para Fase 2. Depredador ágil y oportunista.",
+        ingen: "Llevado a Nublar para Fase 2. Depredador ágil y oportunista. Presentan enanismo.",
         desc: "Llevado a Nublar para Fase 2. Depredador ágil y oportunista.",
         extra: "El Herrerasaurus ischigualastensis del Triásico tardío de Argentina es uno de los dinosaurios carnívoros más primitivos conocidos. Su posición filogenética exacta aún es debatida. Los especímenes InGen destinados a Nublar para la Fase 2 mostraron un comportamiento oportunista, capturando presas de hasta el doble de su peso. Eran activos en penumbra y amanecer, lo que dificultaba su monitoreo con los sistemas de vigilancia existentes en la isla."
     },
@@ -52,17 +52,17 @@ var SPECIES_PART2 = [
         diet: "carnivoro",
         dietLabel: "CARNÍVORO",
         height: "3 m",
-        length: "7 m",
+        length: "8 m",
         weight: "7,000 kg",
         location: "Isla Matanceros (marina)",
         emoji: "🐋",
         ingen: "Clonado en Isla Matanceros. Depredador marino de gran tamaño.",
         desc: "Clonado en Isla Matanceros. Depredador marino de gran tamaño y alta capacidad depredadora.",
-        extra: "El Liopleurodon ferox del Jurásico tardío de Europa fue un pliosáurido de cuello corto con cuatro aletas poderosas y una mandíbula de hasta 3 metros. Aunque las estimaciones de tamaño fósil sugieren 5-7 m, los especímenes InGen alcanzaron longitudes de hasta 18 m gracias al tratamiento hormonal de crecimiento. Fue alojado en una instalación marina de aguas profundas en Matanceros. Es considerado el organismo más peligroso jamás clonado por InGen. Paradero actual: clasificado."
+        extra: "El Liopleurodon ferox del Jurásico tardío de Europa fue un pliosáurido de cuello corto con cuatro aletas poderosas y una mandíbula de hasta 3 metros. Aunque las estimaciones de tamaño fósil sugieren 5-7 m, los especímenes InGen alcanzaron longitudes de hasta 8 m gracias al tratamiento hormonal de crecimiento. Fue alojado en una instalación marina de aguas profundas en Matanceros. Es considerado el organismo más peligroso jamás clonado por InGen. Paradero actual: clasificado."
     },
     {
         name: "Maiasaura",
-        key: "INGEN-MAI-034",
+        key: "MI-14034",
         family: "Hadrosauridae",
         diet: "herbivoro",
         dietLabel: "HERBÍVORO",
@@ -92,7 +92,7 @@ var SPECIES_PART2 = [
     },
     {
         name: "Metriacanthosaurus",
-        key: "INGEN-MET-036",
+        key: "MT-58036",
         family: "Metriacanthosauridae",
         diet: "carnivoro",
         dietLabel: "CARNÍVORO",
@@ -148,7 +148,7 @@ var SPECIES_PART2 = [
         emoji: "🦅",
         ingen: "Clonado en Isla Matanceros. Adaptado a vuelo de larga distancia.",
         desc: "Clonado en Isla Matanceros. Adaptado a vuelo de larga distancia.",
-        extra: "El Ornithocheirus simus del Cretácico temprano de Europa era uno de los pterosaurios de mayor envergadura de su época, con estimaciones de hasta 12 metros. Tenía crestas en ambas mandíbulas que posiblemente servían para lectura hidrodinámica al pescar. Los especímenes InGen realizaron vuelos de hasta 800 km de distancia desde la isla (monitoreados por GPS subcutáneo), lo que confirma que la contención geográfica de las islas era completamente ineficiente para las especies voladoras."
+        extra: "El Ornithocheirus simus del Cretácico temprano de Europa era uno de los pterosaurios de mayor envergadura de su época, con estimaciones de hasta 12 metros. Tenía crestas en ambas mandíbulas que posiblemente servían para lectura hidrodinámica al pescar. Los especímenes InGen realizaron vuelos de hasta 800 km de distancia desde la isla (monitoreados por GPS subcutáneo), lo que confirma que la contención geográfica de las islas era completamente ineficiente para las especies voladoras. Escapó de las instalaciones."
     },
     {
         name: "Ornithomimus",
@@ -211,6 +211,21 @@ var SPECIES_PART2 = [
         extra: "El Parasaurolophus walkeri del Cretácico tardío de Norteamérica tenía una cresta tubular hueca que funcionaba como instrumento de viento. Los estudios acústicos de los especímenes InGen revelaron que la cresta produce ondas de presión de baja frecuencia (30-80 Hz) que se propagan eficientemente a través de la densa vegetación tropical, con un alcance comunicacional efectivo de hasta 10 km. Poblaciones en diferentes islas desarrollaron dialectos acústicos distintos en menos de una generación."
     },
     {
+        name: "Plateosaurus",
+        key: "PL-47291",
+        family: "Plateosauridae",
+        diet: "herbivoro",
+        dietLabel: "HERBÍVORO",
+        height: "2 m",
+        length: "7.5 m",
+        weight: "3,500 kg",
+        location: "Isla Matanceros",
+        emoji: "🦕",
+        ingen: "Gran dinosaurio prosarópodo clonado exclusivamente en Isla Matanceros. Los ejemplares adultos representan un riesgo moderado de daño estructural si se sienten amenazados.",
+        desc: "Gran dinosaurio prosarópodo herbívoro clonado exclusivamente en la Isla Matanceros. Se desplaza tanto de forma bípeda como cuadrúpeda y habita principalmente en zonas boscosas y llanuras con vegetación abundante. Su largo cuello le permite acceder a follaje alto, complementando el nicho ecológico de otros herbívoros más pequeños presentes en la isla.",
+        extra: "Plateosaurus trossingensis es uno de los primeros grandes dinosaurios herbívoros, perteneciente al grupo de los sauropodomorfos basales. Se caracteriza por un cuello largo y flexible, una cabeza pequeña con dientes serrados en forma de hoja adaptados para triturar vegetación, y extremidades robustas que le permitian moverse en dos o cuatro patas. Mostraba una notable plasticidad de crecimiento: los individuos adultos variaban considerablemente en tamaño."
+    },
+    {
         name: "Plesiosaurus",
         key: "PL-54732",
         family: "Plesiosauridae",
@@ -227,7 +242,7 @@ var SPECIES_PART2 = [
     },
     {
         name: "Proceratosaurus",
-        key: "INGEN-PRO-045",
+        key: "PR-10045",
         family: "Proceratosauridae",
         diet: "carnivoro",
         dietLabel: "CARNÍVORO",

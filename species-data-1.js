@@ -9,7 +9,7 @@ var SPECIES_PART1 = [
         height: "4 m",
         length: "12 m",
         weight: "6,000 kg",
-        location: "Isla Nublar (secreto)",
+        location: "Isla Sorna (Desaparecido)",
         emoji: "🦖",
         ingen: "Clonado en secreto como parte de un subproyecto experimental. Solo un ejemplar viable fue producido.",
         desc: "Antes del huracán Clarissa, su clonación se mantuvo en secreto como parte de un subproyecto experimental. Solo se logró clonar un ejemplar viable. Presentaba hipertrofia en las espinas neurales dorsales con posible función termorreguladora y de exhibición. Su metabolismo era elevado y mostró comportamiento altamente territorial. Su paradero posterior al huracán permanece clasificado.",
@@ -28,7 +28,7 @@ var SPECIES_PART1 = [
         emoji: "🦖",
         ingen: "Tres ejemplares clonados para estudio comparativo con Tyrannosaurus rex.",
         desc: "Tres ejemplares fueron clonados en la Isla Matanceros. Se estudió su comportamiento social comparativo con Tyrannosaurus rex. Mostraron mayor agilidad y resistencia, con posible caza cooperativa en etapas juveniles.",
-        extra: "El Albertosaurus sarcophagus era un tiranosáurido del Cretácico tardío de Norteamérica. A diferencia de su primo T. rex, era más ágil y esbelto. Los tres ejemplares clonados por InGen demostraron comportamientos de caza en dúo no documentados en el registro fósil, lo que sugiere que el ADN de relleno utilizado provino de aves de caza coordinada. Actualmente en paradero desconocido."
+        extra: "El Albertosaurus sarcophagus era un tiranosáurido del Cretácico tardío de Norteamérica. A diferencia de su primo T. rex, era más ágil y esbelto. Los tres ejemplares clonados por InGen demostraron comportamientos de caza cooperativos no documentados en el registro fósil, lo que sugiere que el ADN de relleno utilizado provino de aves de caza coordinada. Actualmente su paradero es desconocido."
     },
     {
         name: "Allosaurus",
@@ -43,7 +43,7 @@ var SPECIES_PART1 = [
         emoji: "🦖",
         ingen: "Datos eliminados por el Proyecto Agreus debido a inestabilidad genética.",
         desc: "Dos ejemplares fueron clonados en Isla Sorna antes del huracán Clarissa. Posteriormente, los datos fueron eliminados por el Proyecto Agreus debido a inestabilidad genética en regeneración ósea. Mostraron gran agresividad y amplio rango mandibular.",
-        extra: "El Allosaurus fragilis, apodado el 'depredador del Jurásico', tenía maxilares que podía abrir casi 90°, utilizando la cabeza como hacha contra sus presas. Los ejemplares InGen presentaron una rara condición de regeneración ósea acelerada que causó deformidades craneales progresivas, razón por la que el Proyecto Agreus ordenó la eliminación de todos los registros y, presuntamente, de los especímenes mismos."
+        extra: "El Allosaurus fragilis, apodado el 'león del Jurásico', tenía maxilares que podía abrir casi 90°, utilizando la cabeza como hacha contra sus presas. Los ejemplares InGen presentaron una rara condición de regeneración ósea acelerada que causó deformidades craneales progresivas, razón por la que el Proyecto Agreus ordenó la eliminación de todos los registros y, presuntamente, de los especímenes mismos."
     },
     {
         name: "Amargasaurus",
@@ -56,7 +56,7 @@ var SPECIES_PART1 = [
         weight: "2,000 kg",
         location: "Isla Matanceros",
         emoji: "🌿",
-        ingen: "Clonado para el Proyecto Chaos. Espinas cervicales reforzadas con tejido queratinizado inducido.",
+        ingen: "Clonado para el Proyecto Chaos, con posible hibridación con un Suchomimus. Espinas cervicales reforzadas con tejido queratinizado inducido.",
         desc: "InGen logró clonar esta especie para el Proyecto Chaos en Isla Matanceros. Las espinas cervicales fueron reforzadas con tejido queratinizado inducido, posiblemente con función defensiva y de regulación térmica.",
         extra: "El Amargasaurus cazaui es un saurópodo del Cretácico inferior sudamericano, famoso por sus dos filas de espinas cervicales altas y paralelas. Los científicos debaten si estas espinas sostenían una vela de piel o eran estructuras libres. En los especímenes de InGen, la modificación genética con queratina adicional las convirtió en estructuras más resistentes, posiblemente para defensa activa."
     },
@@ -103,7 +103,7 @@ var SPECIES_PART1 = [
         emoji: "🦕",
         ingen: "Parte fundamental de la fauna de Jurassic Park. Crecimiento acelerado hormonalmente.",
         desc: "Parte fundamental de la fauna de Jurassic Park en Nublar. Algunos ejemplares permanecieron en Sorna y otros fueron trasladados a Isla Matanceros. Presentaron crecimiento acelerado inducido hormonalmente.",
-        extra: "El Brachiosaurus altithorax del Jurásico tardío norteamericano es uno de los dinosaurios más icónicos por su cuello extremadamente largo. Los especímenes de InGen recibieron tratamiento hormonal de crecimiento IGF-1 modificado, lo que redujo el período hasta madurez de estimados 20-30 años naturales a aproximadamente 6-8 años. El ejemplar original de Nublar fue el primer dinosaurio avistado por los visitantes en 1993."
+        extra: "El Brachiosaurus altithorax del Jurásico tardío norteamericano es uno de los dinosaurios más icónicos por su cuello extremadamente largo. Los especímenes de InGen recibieron tratamiento hormonal de crecimiento IGF-1 modificado, lo que redujo el período hasta madurez de estimados 20-30 años naturales a aproximadamente 6-8 años. El ejemplar original de Nublar fue el primer dinosaurio avistado por los visitantes en 1993. Un ejemplar desarrolló un resfriado durante la visita guiada en el 93. Los especímenes machos son más robustos y de una coloración verduzca, el alfa tiene una coloración rojiza en la cresta."
     },
     {
         name: "Carnotaurus",
@@ -122,7 +122,7 @@ var SPECIES_PART1 = [
     },
     {
         name: "Cearadactylus",
-        key: "INGEN-CEA-010",
+        key: "CA-10010",
         family: "Cearadactylidae",
         diet: "piscivoro",
         dietLabel: "PISCÍVORO",
@@ -164,6 +164,21 @@ var SPECIES_PART1 = [
         ingen: "Clonado en Sorna. Herbívoro con comportamiento gregario.",
         desc: "Clonado en Sorna. Herbívoro con comportamiento gregario y uso de gola ósea para exhibición y defensa.",
         extra: "El Chasmosaurus belli del Cretácico tardío de Norteamérica tenía una de las golas más largas en proporción al cuerpo de todos los ceratopsianos. Esta estructura, cubierta de piel vascularizada, servía para termorregulación, exhibición sexual y señalización social. Los ejemplares InGen mostraron patrones de coloración en la gola más vibrantes que cualquier registro fósil podría sugerir, lo que indica modificación genética deliberada para fines estéticos."
+    },
+    {
+        name: "Coelurosauravus",
+        key: "CS-28193",
+        family: "Weigeltisauridae",
+        diet: "insectivoro",
+        dietLabel: "INSECTÍVORO",
+        height: "15 cm",
+        length: "40 cm",
+        weight: "200 g",
+        location: "Isla Matanceros",
+        emoji: "🦎",
+        ingen: "Compatible con Microraptor. Ambas especies comparten hábitos arborícolas y de planeo, ocupando nichos similares sin aparente competencia agresiva.",
+        desc: "Pequeño reptil planeador clonado en la Isla Matanceros. Habita principalmente en el dosel arbóreo, compartiendo el mismo nicho ecológico con los Microraptor. Su capacidad de planeo entre árboles le permite desplazarse con gran agilidad y escapar de depredadores terrestres.",
+        extra: "Coelurosauravus elivensis es un reptil diápsido del Pérmico tardío de Madagascar. No se trata de un dinosaurio, sino de uno de los primeros vertebrados terrestres conocidos con adaptaciones especializadas para el planeo. Posee estructuras óseas alargadas (costillas patagiales) que sostenían amplias membranas a los lados del cuerpo, permitiéndole planear distancias considerables entre árboles. Era un animal arborícola e insectívoro, con dientes cónicos y afilados diseñados para perforar la cutícula de artrópodos."
     },
     {
         name: "Compsognathus",
@@ -212,7 +227,7 @@ var SPECIES_PART1 = [
     },
     {
         name: "Cryolophosaurus",
-        key: "CRY-76284",
+        key: "CY-76284",
         family: "Dilophosauridae",
         diet: "carnivoro",
         dietLabel: "CARNÍVORO",
@@ -221,9 +236,9 @@ var SPECIES_PART1 = [
         weight: "2,200 kg",
         location: "Isla Matanceros",
         emoji: "🦖",
-        ingen: "Clonado en Isla Matanceros. Alta agresividad.",
+        ingen: "Clonado en Isla Matanceros. Alta agresividad. Saliva tóxica.",
         desc: "Clonado en Isla Matanceros. Mostró agresividad elevada y adaptabilidad a climas templados.",
-        extra: "El Cryolophosaurus ellioti del Jurásico temprano antártico es el dinosaurio terópodo más completo encontrado en la Antártida. Su cresta frontal perpendicular al cráneo le valió el apodo de 'Elvisaurus'. Los especímenes InGen mostraron un metabolismo activo en rangos de temperatura de 5-35°C, significativamente más amplio que otros terópodos clonados, y niveles de agresividad intraespecífica que resultaron en la muerte de uno de los tres ejemplares originales."
+        extra: "El Cryolophosaurus ellioti del Jurásico temprano antártico es el dinosaurio terópodo más completo encontrado en la Antártida. Su cresta frontal perpendicular al cráneo le valió el apodo de 'Elvisaurus'. Los especímenes InGen mostraron un metabolismo activo en rangos de temperatura de 5-35°C, significativamente más amplio que otros terópodos clonados, y niveles de agresividad intraespecífica que resultaron en la muerte de uno de los tres ejemplares originales. Presenta una mordida tóxica similar al de los dragones de Komodo."
     },
     {
         name: "Deinosuchus",
@@ -272,7 +287,7 @@ var SPECIES_PART1 = [
     },
     {
         name: "Dimetrodon",
-        key: "INGEN-DIM-020",
+        key: "DM-57020",
         family: "Sphenacodontidae",
         diet: "carnivoro",
         dietLabel: "CARNÍVORO",
@@ -343,7 +358,7 @@ var SPECIES_PART1 = [
         emoji: "🐄",
         ingen: "Clonado en Sorna. Migraciones internas estacionales.",
         desc: "Clonado en Sorna. Mostró migraciones internas estacionales.",
-        extra: "El Edmontosaurus annectens del Cretácico tardío de Norteamérica es uno de los hadrosáuridos más conocidos, con cresta craneal baja. Se han preservado momias naturales de esta especie que revelan su piel escamosa y musculatura. Los especímenes InGen de Sorna desarrollaron ciclos de migración interna siguiendo patterns de vegetación estacional de la isla, recorriendo hasta 200 km anuales en grupos de 40-70 individuos."
+        extra: "El Edmontosaurus annectens del Cretácico tardío de Norteamérica es uno de los hadrosáuridos más conocidos, con cresta craneal baja. Se han preservado momias naturales de esta especie que revelan su piel escamosa y musculatura. Los especímenes InGen de Sorna desarrollaron ciclos de migración interna siguiendo patterns de vegetación estacional de la isla, recorriendo hasta 200 km anuales en grupos de 20 individuos."
     },
     {
         name: "Elasmosaurus",
@@ -361,8 +376,8 @@ var SPECIES_PART1 = [
         extra: "El Elasmosaurus platyurus del Cretácico tardío de Norteamérica es un plesiosáurido cuyo cuello constituye la mitad de su longitud total, con 71 vértebras cervicales. InGen construyó instalaciones marinas en la costa norte de Isla Matanceros para albergar sus especímenes marinos. El ejemplar de Elasmosaurus fue documentado sumergiéndose a profundidades de hasta 180 m en pruebas de buceo monitoreado. Su destino tras el cierre de Re-Genesis es desconocido."
     },
     {
-        name: "Euplocephalus",
-        key: "INGEN-EUP-026",
+        name: "Euoplocephalus",
+        key: "EP-58026",
         family: "Ankylosauridae",
         diet: "herbivoro",
         dietLabel: "HERBÍVORO",
@@ -392,7 +407,7 @@ var SPECIES_PART1 = [
     },
     {
         name: "Geosternbergia",
-        key: "INGEN-GEO-028",
+        key: "MK-77028",
         family: "Pteranodontidae",
         diet: "piscivoro",
         dietLabel: "PISCÍVORO",
