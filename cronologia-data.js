@@ -150,9 +150,17 @@ const CRONOLOGIA = [
     year: "2001",
     title: "Rescate en Sorna",
     severity: "critical",
-    content: `<p>Paul y Amanda Kirby organizan una excursión ilegal a <span class="chrono-island">Sorna</span> buscando a su hijo Eric Kirby, desaparecido tras un accidente aéreo. Engañan al Dr. Alan Grant con una oferta falsa de financiamiento.</p>
-<p>El <span class="chrono-carnivore">Spinosaurus</span> modificado mata a varios miembros del equipo. Se descubren los nuevos Velociraptores con estructuras óseas inéditas. El <span class="chrono-carnivore">Spinosaurus</span> caza ferozmente a la población de <span class="chrono-carnivore">Tyrannosaurus</span>.</p>
-<p>Logran escapar gracias a la intervención del ejército alertado por la Dra. Ellie Sattler. Un grupo de Pteranodones escapa hasta Oklahoma. Masrani contrata a Vic Hoskins para reformar la división de seguridad de InGen.</p>`
+    content: `<p>• Pese a las restricciones legales, el tráfico de información genética y la curiosidad pública nunca cesaron. Ese año, ocurrió un incidente que volvió a poner a <span class="chrono-island">Isla Sorna</span> en el ojo de la tormenta.</p>
+<p>• Paul y Amanda Kirby, una pareja divorciada, organizaron una excursión ilegal a <span class="chrono-island">Sorna</span> bajo el pretexto de una expedición turística. En realidad, buscaban a su hijo Eric Kirby, quien había desaparecido semanas antes tras un accidente aéreo sobre la isla.</p>
+<p>• Para ello, contrataron al Dr. Alan Grant, paleontólogo de renombre, engañándolo con una oferta falsa de financiamiento para sus investigaciones.</p>
+<p>• Grant accede, acompañado por su joven asistente Billy Brennan, sin saber que volvían al epicentro de la pesadilla.</p>
+<p>• El grupo se estrella en la isla y descubre que los ecosistemas han cambiado drásticamente.</p>
+<p>• Son atacados por el <span class="chrono-carnivore">Spinosaurus</span> modificado, que mat4 a varios miembros del equipo.</p>
+<p>• Descubren a los nuevos <span class="chrono-carnivore">Velocirraptores</span>, más inteligentes y organizados, con estructuras óseas inéditas.</p>
+<p>• Se descubre que el ecosistema de la isla se ve amenazado por las nuevas especies, principalmente por el <span class="chrono-carnivore">Spinosaurus</span>, ya que caza ferozmente a la población de <span class="chrono-carnivore">Tyrannosaurus</span>.</p>
+<p>• Tras varios enfrentamientos y muert3s, el grupo logra escapar con vida gracias a la intervención del ejército estadounidense, quien había sido alertado mediante una llamada de auxilio enviada por la Doctora Ellie Sattler.</p>
+<p>• Un grupo de Pteranodones escapa de <span class="chrono-island">Isla Sorna</span>, llegando hasta Oklahoma, donde son vistos por las zonas rurales, Vic Hoskins se encarga de capturar a estos animales.</p>
+<p>• Simon Masrani, preocupado por la seguridad de futuras operaciones, contrata a Vic Hoskins para reformar completamente la división de seguridad de InGen, dotándola de entrenamiento táctico y visión paramilitar.</p>`
   },
   {
     year: "2002",
