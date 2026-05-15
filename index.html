@@ -82,7 +82,8 @@
 .modal-overlay.open{display:flex}
 .contest-overlay{display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);overflow-y:auto;padding:2rem}
 .contest-overlay.open{display:flex;align-items:flex-start;justify-content:center}
-.contest-box{max-width:800px;width:100%;background:rgba(6,12,8,.98);border:2px solid #ff3030;padding:2.5rem;margin:auto;position:relative}
+.contest-box{max-width:800px;width:100%;background:rgba(6,12,8,.98);border:2px solid #ff3030;padding:2.5rem;margin:auto;position:relative;animation:box-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)}
+@keyframes box-pop{0%{transform:scale(0.8);opacity:0}100%{transform:scale(1);opacity:1}}
 .contest-close{position:absolute;top:1rem;right:1rem;background:none;border:1px solid rgba(255,48,48,.4);color:#ff3030;width:32px;height:32px;cursor:pointer;font-size:1rem}
 .contest-badge{font-family:'Share Tech Mono',monospace;font-size:.65rem;color:#ff3030;letter-spacing:3px;margin-bottom:1rem}
 .contest-title{font-family:'Orbitron',sans-serif;font-size:1.4rem;color:#ff3030;margin-bottom:1.5rem}
@@ -95,6 +96,7 @@
 </head>
 <body>
 <div class="scanlines"></div>
+<div class="glitch-flash" id="glitch-overlay"></div>
 
 <div class="dna-widget" id="dna-widget">
 <svg class="dna-svg" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg">

@@ -353,13 +353,30 @@ var indominusVideo = document.getElementById('indominus-video');
 var closeVideoBtn = document.getElementById('close-video');
 
 function showCongratulations() {
-    if (videoOverlay) videoOverlay.classList.remove('open');
-    if (indominusVideo) {
-        indominusVideo.pause();
-        indominusVideo.currentTime = 0;
+    var glitchOverlay = document.getElementById('glitch-overlay');
+    
+    // Play a "closing" glitch effect on the video/overlay before switching
+    if (videoOverlay) {
+        videoOverlay.classList.add('final-glitch');
     }
-    if (contestOverlay) contestOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
+
+    if (glitchOverlay) glitchOverlay.classList.add('active');
+
+    setTimeout(function() {
+        if (videoOverlay) {
+            videoOverlay.classList.remove('open');
+            videoOverlay.classList.remove('final-glitch');
+        }
+        if (indominusVideo) {
+            indominusVideo.pause();
+            indominusVideo.currentTime = 0;
+        }
+        if (glitchOverlay) glitchOverlay.classList.remove('active');
+        
+        if (contestOverlay) contestOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        document.body.classList.remove('screen-flicker');
+    }, 800);
 }
 
 function tryAccess() {
@@ -370,18 +387,27 @@ function tryAccess() {
             feedback.className = 'terminal-feedback feedback-ok';
         }
         setTimeout(function() {
-            if (videoOverlay) {
-                videoOverlay.classList.add('open');
-                document.body.style.overflow = 'hidden';
-                if (indominusVideo) {
-                    indominusVideo.play().catch(function(err) {
-                        console.error("Error playing video:", err);
-                        showCongratulations(); // Fallback if video fails
-                    });
+            // Start flicker and glitch effects
+            document.body.classList.add('screen-flicker');
+            var glitchOverlay = document.getElementById('glitch-overlay');
+            if (glitchOverlay) glitchOverlay.classList.add('active');
+
+            setTimeout(function() {
+                if (videoOverlay) {
+                    videoOverlay.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                    if (indominusVideo) {
+                        indominusVideo.play().catch(function(err) {
+                            console.error("Error playing video:", err);
+                            showCongratulations(); // Fallback if video fails
+                        });
+                    }
+                } else {
+                    showCongratulations();
                 }
-            } else {
-                showCongratulations();
-            }
+                // Stop the intense background glitch once video is on
+                if (glitchOverlay) glitchOverlay.classList.remove('active');
+            }, 1500); // 1.5s of flickering/glitching
         }, 800);
     } else if (val === '') {
         if (feedback) {
