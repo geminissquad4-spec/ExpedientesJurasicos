@@ -155,10 +155,10 @@ const CRONOLOGIA = [
 <p>• Para ello, contrataron al Dr. Alan Grant, paleontólogo de renombre, engañándolo con una oferta falsa de financiamiento para sus investigaciones.</p>
 <p>• Grant accede, acompañado por su joven asistente Billy Brennan, sin saber que volvían al epicentro de la pesadilla.</p>
 <p>• El grupo se estrella en la isla y descubre que los ecosistemas han cambiado drásticamente.</p>
-<p>• Son atacados por el <span class="chrono-carnivore">Spinosaurus</span> modificado, que mat4 a varios miembros del equipo.</p>
+<p>• Son atacados por el <span class="chrono-carnivore">Spinosaurus</span> modificado, que mató a varios miembros del equipo.</p>
 <p>• Descubren a los nuevos <span class="chrono-carnivore">Velocirraptores</span>, más inteligentes y organizados, con estructuras óseas inéditas.</p>
 <p>• Se descubre que el ecosistema de la isla se ve amenazado por las nuevas especies, principalmente por el <span class="chrono-carnivore">Spinosaurus</span>, ya que caza ferozmente a la población de <span class="chrono-carnivore">Tyrannosaurus</span>.</p>
-<p>• Tras varios enfrentamientos y muert3s, el grupo logra escapar con vida gracias a la intervención del ejército estadounidense, quien había sido alertado mediante una llamada de auxilio enviada por la Doctora Ellie Sattler.</p>
+<p>• Tras varios enfrentamientos y muertes, el grupo logra escapar con vida gracias a la intervención del ejército estadounidense, quien había sido alertado mediante una llamada de auxilio enviada por la Doctora Ellie Sattler.</p>
 <p>• Un grupo de Pteranodones escapa de <span class="chrono-island">Isla Sorna</span>, llegando hasta Oklahoma, donde son vistos por las zonas rurales, Vic Hoskins se encarga de capturar a estos animales.</p>
 <p>• Simon Masrani, preocupado por la seguridad de futuras operaciones, contrata a Vic Hoskins para reformar completamente la división de seguridad de InGen, dotándola de entrenamiento táctico y visión paramilitar.</p>`
   },
