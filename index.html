@@ -577,6 +577,18 @@
 </div>
 </div>
 
+<!-- VIDEO OVERLAY -->
+<div class="modal-overlay" id="video-overlay" style="background: #000;">
+    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative;">
+        <video id="indominus-video" style="max-width: 100%; max-height: 100%; box-shadow: 0 0 50px rgba(0,229,176,0.3);">
+            <source src="Indominus Born.mp4" type="video/mp4">
+            Tu navegador no soporta el elemento de video.
+        </video>
+        <button id="close-video" class="modal-close" style="top: 2rem; right: 2rem; background: rgba(255,45,45,0.4);">&#10005;</button>
+        <div id="video-skip-hint" style="position: absolute; bottom: 2rem; font-family: 'Share Tech Mono', monospace; color: rgba(255,255,255,0.3); font-size: 0.7rem; letter-spacing: 2px; pointer-events: none;">EL VIDEO SE CERRARÁ AUTOMÁTICAMENTE AL FINALIZAR</div>
+    </div>
+</div>
+
 <!-- SCRIPTS -->
 <script src="cronologia-data.js"></script>
 <script src="species-data-1.js"></script>

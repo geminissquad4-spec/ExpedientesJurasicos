@@ -348,17 +348,40 @@ var accessBtn = document.getElementById('access-btn');
 var feedback = document.getElementById('terminal-feedback');
 var contestOverlay = document.getElementById('contest-overlay');
 var contestClose = document.getElementById('contest-close');
+var videoOverlay = document.getElementById('video-overlay');
+var indominusVideo = document.getElementById('indominus-video');
+var closeVideoBtn = document.getElementById('close-video');
+
+function showCongratulations() {
+    if (videoOverlay) videoOverlay.classList.remove('open');
+    if (indominusVideo) {
+        indominusVideo.pause();
+        indominusVideo.currentTime = 0;
+    }
+    if (contestOverlay) contestOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
 
 function tryAccess() {
     var val = accessInput ? accessInput.value.trim() : '';
     if (val === SECRET) {
         if (feedback) {
-            feedback.textContent = '> ACCESO CONCEDIDO — Verificando identidad...';
+            feedback.textContent = '> ACCESO CONCEDIDO — Iniciando transmisión clasificada...';
             feedback.className = 'terminal-feedback feedback-ok';
         }
         setTimeout(function() {
-            if (contestOverlay) contestOverlay.classList.add('open');
-            document.body.style.overflow = 'hidden';
+            if (videoOverlay) {
+                videoOverlay.classList.add('open');
+                document.body.style.overflow = 'hidden';
+                if (indominusVideo) {
+                    indominusVideo.play().catch(function(err) {
+                        console.error("Error playing video:", err);
+                        showCongratulations(); // Fallback if video fails
+                    });
+                }
+            } else {
+                showCongratulations();
+            }
         }, 800);
     } else if (val === '') {
         if (feedback) {
@@ -378,6 +401,15 @@ if (accessBtn) accessBtn.addEventListener('click', tryAccess);
 if (accessInput) accessInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') tryAccess();
 });
+
+if (indominusVideo) {
+    indominusVideo.addEventListener('ended', showCongratulations);
+}
+
+if (closeVideoBtn) {
+    closeVideoBtn.addEventListener('click', showCongratulations);
+}
+
 if (contestClose) contestClose.addEventListener('click', function() {
     if (contestOverlay) contestOverlay.classList.remove('open');
     document.body.style.overflow = '';
