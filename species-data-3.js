@@ -41,9 +41,9 @@ var SPECIES_PART3 = [
         weight: "8,000 kg",
         location: "Isla Sorna",
         emoji: "⚠️",
-        ingen: "CLONACIÓN ILEGAL — Híbrido con ADN de Suchomimus, Baryonyx y cocodrilo del Nilo.",
-        desc: "Clonado ilegalmente en Re-Genesis. Híbrido con ADN de Suchomimus, Baryonyx y cocodrilo del Nilo. Capacidad pulmonar y fuerza mandibular superiores.",
-        extra: "El Espécimen InGen de Spinosaurus fue el organismo más grande jamás clonado ilegalmente por la corporación. No es una clonación pura de Spinosaurus aegyptiacus: es un híbrido que incorpora secuencias de Spinosaurus, Suchomimus, Baryonyx, cocodrilo del Nilo y presuntamente material genético de avemano aún no identificado. Sus capacidades superan a cualquier registro fósil: cuatripedia opcional, natación activa a 15 nudos, apnea de hasta 8 minutos. Fue responsable de múltiples muertes en el incidente de 2001. Clasificado como Amenaza Nivel Omega."
+        ingen: "CLONACIÓN ILEGAL — Amalgama con ADN de Suchomimus, Baryonyx y cocodrilo del Nilo.",
+        desc: "Clonado ilegalmente en Re-Genesis. Amalgama con ADN de Suchomimus, Baryonyx y cocodrilo del Nilo. Capacidad pulmonar y fuerza mandibular superiores.",
+        extra: "El Espécimen InGen de Spinosaurus fue el organismo más grande jamás clonado ilegalmente por la corporación. No es una clonación pura de Spinosaurus aegyptiacus: es una amalgama que incorpora secuencias de Spinosaurus, Suchomimus, Baryonyx, cocodrilo del Nilo y presuntamente material genético de avemano aún no identificado. Sus capacidades superan a cualquier registro fósil: cuatripedia opcional, natación activa a 15 nudos, apnea de hasta 8 minutos. Fue responsable de múltiples muertes en el incidente de 2001. Clasificado como Amenaza Nivel Omega."
     },
     {
         name: "Stegosaurus",

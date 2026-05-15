@@ -132,7 +132,7 @@ const CRONOLOGIA = [
     title: "El experimento SP01",
     severity: "warning",
     content: `<p>• A mediados de 1999, se encontró material genético incompleto correspondiente a un <span class="chrono-carnivore">Spinosaurus</span> aegyptiacus. Debido a la gran fragmentación de su genoma, los científicos de InGen decidieron usar ADN complementario de <span class="chrono-carnivore">Suchomimus</span>, <span class="chrono-carnivore">Baryonyx</span> y Cocodrilo del Nilo.</p>
-<p>• Esto dio como resultado un espécimen de <span class="chrono-carnivore">Spinosaurus</span> altamente inestable y genéticamente modificado, con un temperamento agresivo, territorial y niveles anormales de inteligencia para un terópodo. El animal era trasladado constantemente entre distintos recintos, lo que lo sometió a un alto grado de estrés y descontrol, convirtiéndolo en un riesgo potencial para todo el ecosistema.</p>
+<p>• Esto dio como resultado un espécimen de <span class="chrono-carnivore">Spinosaurus</span> altamente inestable y concebido como una amalgama genética, con un temperamento agresivo, territorial y niveles anormales de inteligencia para un terópodo. El animal era trasladado constantemente entre distintos recintos, lo que lo sometió a un alto grado de estrés y descontrol, convirtiéndolo en un riesgo potencial para todo el ecosistema.</p>
 <p>• Se clonó una nueva variante de <span class="chrono-carnivore">Velociraptor</span>, que mostraba rasgos neurológicos avanzados, mayor inteligencia social, y nuevas estructuras craneales (protoplumas en la cabeza). Esta cepa fue considerada peligrosa incluso por los propios científicos.</p>
 <p>• Durante una inspección sorpresa, Simon Masrani visitó las instalaciones en <span class="chrono-island">Sorna</span>. Al sostener en brazos a una cría de <span class="chrono-herbivore">Parasaurolophus</span>, Masrani quedó profundamente conmovido por el potencial de una convivencia armónica entre humanos y dinosaurios.</p>
 <p>• A partir de esa experiencia personal, nació su intención de construir un nuevo parque temático. Ese mismo año, Masrani obtuvo finalmente el control legal completo sobre <span class="chrono-island">Isla Nublar</span>, <span class="chrono-island">Isla Sorna</span> e <span class="chrono-island">Isla Saint Hubert</span>, hasta entonces usada como centro de pruebas no oficiales.</p>`
@@ -155,7 +155,7 @@ const CRONOLOGIA = [
 <p>• Para ello, contrataron al Dr. Alan Grant, paleontólogo de renombre, engañándolo con una oferta falsa de financiamiento para sus investigaciones.</p>
 <p>• Grant accede, acompañado por su joven asistente Billy Brennan, sin saber que volvían al epicentro de la pesadilla.</p>
 <p>• El grupo se estrella en la isla y descubre que los ecosistemas han cambiado drásticamente.</p>
-<p>• Son atacados por el <span class="chrono-carnivore">Spinosaurus</span> modificado, que mató a varios miembros del equipo.</p>
+<p>• Son atacados por el <span class="chrono-carnivore">Spinosaurus</span> amalgama, que mató a varios miembros del equipo.</p>
 <p>• Descubren a los nuevos <span class="chrono-carnivore">Velocirraptores</span>, más inteligentes y organizados, con estructuras óseas inéditas.</p>
 <p>• Se descubre que el ecosistema de la isla se ve amenazado por las nuevas especies, principalmente por el <span class="chrono-carnivore">Spinosaurus</span>, ya que caza ferozmente a la población de <span class="chrono-carnivore">Tyrannosaurus</span>.</p>
 <p>• Tras varios enfrentamientos y muertes, el grupo logra escapar con vida gracias a la intervención del ejército estadounidense, quien había sido alertado mediante una llamada de auxilio enviada por la Doctora Ellie Sattler.</p>
@@ -167,7 +167,7 @@ const CRONOLOGIA = [
     title: "Construcción de Jurassic World",
     severity: "normal",
     content: `<p>Comienza oficialmente la construcción de Jurassic World en <span class="chrono-island">Isla Nublar</span>. Los animales de <span class="chrono-island">Sorna</span> y <span class="chrono-island">Nublar</span> son capturados y transportados. Se encuentra al <span class="chrono-carnivore">Tyrannosaurus</span> de <span class="chrono-project">Jurassic Park</span> en estado de desnutrición.</p>
-<p>Durante los traslados se pierden múltiples especímenes, incluido el <span class="chrono-carnivore">Spinosaurus</span> modificado, cuyo paradero se vuelve un misterio.</p>`
+<p>• Durante los traslados se pierden múltiples especímenes, incluido el <span class="chrono-carnivore">Spinosaurus</span> amalgama, cuyo paradero se vuelve un misterio.</p>`
   },
   {
     year: "2003",
