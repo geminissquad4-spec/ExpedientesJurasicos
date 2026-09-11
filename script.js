@@ -500,7 +500,7 @@ if (navToggle && navLinks) {
             wrapper.setAttribute('data-cat', f.categoria);
             wrapper.setAttribute('data-num', f.id);
 
-            var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\'">';
+            var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}">';
 
             wrapper.innerHTML =
                 '<div class="ficha-inner">' +
@@ -547,7 +547,12 @@ if (navToggle && navLinks) {
         }
 
         var imgSrc = isShowingBack ? f.reversoImg : f.frenteImg;
+        var fallbackSrc = (isShowingBack ? 'reverso_' : 'frente_') + f.num + '.jpg';
         if (fichaModalImg) {
+            fichaModalImg.onerror = function() {
+                this.onerror = null;
+                this.src = fallbackSrc;
+            };
             fichaModalImg.src = imgSrc;
             fichaModalImg.alt = 'Ficha #' + f.num + (isShowingBack ? ' reverso' : ' frente');
         }
