@@ -463,3 +463,172 @@ if (navToggle && navLinks) {
         });
     });
 }
+
+// =============================================
+// ---- FICHAS DE HISTORIA ----
+// =============================================
+(function() {
+    'use strict';
+
+    var fichasGrid = document.getElementById('fichas-grid');
+    if (!fichasGrid) return;
+    if (typeof FICHAS === 'undefined') return;
+
+    var currentCat = 'all';
+
+    // Modal Elements
+    var fichaModal = document.getElementById('ficha-modal');
+    var fichaModalClose = document.getElementById('ficha-modal-close');
+    var fichaModalTitle = document.getElementById('ficha-modal-title');
+    var fichaModalBadge = document.getElementById('ficha-modal-badge');
+    var fichaModalImg = document.getElementById('ficha-modal-img');
+    var fichaModalImgWrap = document.getElementById('ficha-modal-img-wrap');
+    var fichaToggleSide = document.getElementById('ficha-toggle-side');
+    var fichaToggleText = document.getElementById('ficha-toggle-text');
+    var fichaPrev = document.getElementById('ficha-prev');
+    var fichaNext = document.getElementById('ficha-next');
+
+    var currentFichaIndex = 0;
+    var isShowingBack = false;
+
+    // Construir las tarjetas
+    function buildFichas() {
+        fichasGrid.innerHTML = '';
+        FICHAS.forEach(function(f, idx) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'ficha-wrapper ' + f.clase;
+            wrapper.setAttribute('data-cat', f.categoria);
+            wrapper.setAttribute('data-num', f.id);
+
+            var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\'">';
+
+            wrapper.innerHTML =
+                '<div class="ficha-inner">' +
+                    '<div class="ficha-front">' +
+                        frenteContent +
+                        '<span class="ficha-badge">' + f.categoria + '</span>' +
+                        '<span class="ficha-num-tag">#' + f.num + '</span>' +
+                        '<span class="ficha-flip-hint">🔍 AMPLIAR FICHA</span>' +
+                    '</div>' +
+                '</div>';
+
+            // Al hacer clic, abre la vista en grande (modal)
+            wrapper.addEventListener('click', function() {
+                openFichaModal(idx, false);
+            });
+
+            fichasGrid.appendChild(wrapper);
+        });
+
+        updateFichaCount();
+    }
+
+    function openFichaModal(index, showBack) {
+        currentFichaIndex = index;
+        isShowingBack = !!showBack;
+        updateFichaModalContent();
+        if (fichaModal) fichaModal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeFichaModal() {
+        if (fichaModal) fichaModal.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    function updateFichaModalContent() {
+        var f = FICHAS[currentFichaIndex];
+        if (!f) return;
+
+        if (fichaModalTitle) fichaModalTitle.textContent = 'FICHA DE HISTORIA #' + f.num;
+        if (fichaModalBadge) {
+            fichaModalBadge.textContent = f.categoria;
+            fichaModalBadge.className = 'ficha-badge ' + f.clase;
+        }
+
+        var imgSrc = isShowingBack ? f.reversoImg : f.frenteImg;
+        if (fichaModalImg) {
+            fichaModalImg.src = imgSrc;
+            fichaModalImg.alt = 'Ficha #' + f.num + (isShowingBack ? ' reverso' : ' frente');
+        }
+
+        if (fichaToggleText) {
+            fichaToggleText.textContent = isShowingBack ? 'VER FRENTE DE LA FICHA' : 'VER REVERSO DE LA FICHA';
+        }
+    }
+
+    function toggleModalSide() {
+        isShowingBack = !isShowingBack;
+        if (fichaModalImgWrap) {
+            fichaModalImgWrap.classList.add('flipping');
+            setTimeout(function() {
+                updateFichaModalContent();
+                fichaModalImgWrap.classList.remove('flipping');
+            }, 150);
+        } else {
+            updateFichaModalContent();
+        }
+    }
+
+    function prevFicha() {
+        currentFichaIndex = (currentFichaIndex - 1 + FICHAS.length) % FICHAS.length;
+        isShowingBack = false;
+        updateFichaModalContent();
+    }
+
+    function nextFicha() {
+        currentFichaIndex = (currentFichaIndex + 1) % FICHAS.length;
+        isShowingBack = false;
+        updateFichaModalContent();
+    }
+
+    if (fichaToggleSide) fichaToggleSide.addEventListener('click', toggleModalSide);
+    if (fichaPrev) fichaPrev.addEventListener('click', prevFicha);
+    if (fichaNext) fichaNext.addEventListener('click', nextFicha);
+    if (fichaModalClose) fichaModalClose.addEventListener('click', closeFichaModal);
+    if (fichaModal) fichaModal.addEventListener('click', function(e) {
+        if (e.target === this) closeFichaModal();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (!fichaModal || !fichaModal.classList.contains('open')) return;
+        if (e.key === 'Escape') closeFichaModal();
+        if (e.key === 'ArrowLeft') prevFicha();
+        if (e.key === 'ArrowRight') nextFicha();
+        if (e.key === ' ') { e.preventDefault(); toggleModalSide(); }
+    });
+
+    // Aplicar filtro de categoría
+    function applyFichaFilter(cat) {
+        currentCat = cat;
+        var wrappers = fichasGrid.querySelectorAll('.ficha-wrapper');
+        wrappers.forEach(function(w) {
+            if (cat === 'all' || w.getAttribute('data-cat') === cat) {
+                w.classList.remove('hidden');
+            } else {
+                w.classList.add('hidden');
+            }
+        });
+        updateFichaCount();
+    }
+
+    function updateFichaCount() {
+        var visible = fichasGrid.querySelectorAll('.ficha-wrapper:not(.hidden)').length;
+        var countEl = document.getElementById('fcount-all');
+        if (countEl) countEl.textContent = '(' + visible + ')';
+    }
+
+    // Conectar botones de filtro
+    var filterBtns = document.querySelectorAll('.ficha-filter-btn');
+    filterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(function(b) { b.classList.remove('active'); });
+            this.classList.add('active');
+            applyFichaFilter(this.getAttribute('data-cat'));
+        });
+    });
+
+    // Construir al cargar
+    buildFichas();
+
+})();

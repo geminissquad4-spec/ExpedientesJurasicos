@@ -139,9 +139,10 @@
 <a href="#incidentes" class="nav-link" id="nav-incidentes"><span class="nav-num">01</span> INCIDENTES</a>
 <a href="#cronologia" class="nav-link" id="nav-cronologia"><span class="nav-num">02</span> CRONOLOGÍA</a>
 <a href="#especies" class="nav-link" id="nav-especies"><span class="nav-num">03</span> ESPECIES</a>
-<a href="#expediente-literario" class="nav-link" id="nav-expediente"><span class="nav-num">04</span> EXP. LITERARIO</a>
-<a href="#acceso" class="nav-link" id="nav-acceso"><span class="nav-num">05</span> ACCESO</a>
-<a href="#acerca" class="nav-link" id="nav-acerca"><span class="nav-num">06</span> ACERCA</a>
+<a href="#fichas" class="nav-link" id="nav-fichas"><span class="nav-num">04</span> FICHAS</a>
+<a href="#expediente-literario" class="nav-link" id="nav-expediente"><span class="nav-num">05</span> EXP. LITERARIO</a>
+<a href="#acceso" class="nav-link" id="nav-acceso"><span class="nav-num">06</span> ACCESO</a>
+<a href="#acerca" class="nav-link" id="nav-acerca"><span class="nav-num">07</span> ACERCA</a>
 </div>
 <div class="nav-status"><span class="status-dot"></span><span class="status-text">TRANSMISIÓN ACTIVA</span></div>
 </nav>
@@ -435,6 +436,54 @@
 </div>
 </section>
 
+<!-- FICHAS DE HISTORIA -->
+<section class="section" id="fichas">
+<div class="section-header">
+  <div class="section-num">04</div>
+  <h2 class="section-title">FICHAS DE HISTORIA</h2>
+  <p class="section-subtitle">Colección de 245 fichas clasificadas — Haz clic en cada tarjeta para revelar la información del reverso</p>
+</div>
+
+<!-- Filtros de categoría -->
+<div class="fichas-filter-bar" id="fichas-filter-bar">
+  <button class="ficha-filter-btn active" data-cat="all">TODAS <span class="ficha-filter-count" id="fcount-all"></span></button>
+  <button class="ficha-filter-btn" data-cat="ESPECIE">
+    <span class="ficha-cat-dot" style="background:#00e5b0"></span> ESPECIE
+    <span class="ficha-filter-count">#001–103</span>
+  </button>
+  <button class="ficha-filter-btn" data-cat="EMPRESA">
+    <span class="ficha-cat-dot" style="background:#ff6b00"></span> EMPRESA
+    <span class="ficha-filter-count">#104–108</span>
+  </button>
+  <button class="ficha-filter-btn" data-cat="PERSONAJE">
+    <span class="ficha-cat-dot" style="background:#d4a017"></span> PERSONAJE
+    <span class="ficha-filter-count">#109–117</span>
+  </button>
+  <button class="ficha-filter-btn" data-cat="PELÍCULA">
+    <span class="ficha-cat-dot" style="background:#ff3030"></span> PELÍCULA
+    <span class="ficha-filter-count">#118–198</span>
+  </button>
+  <button class="ficha-filter-btn" data-cat="NOVELA">
+    <span class="ficha-cat-dot" style="background:#b080ff"></span> NOVELA
+    <span class="ficha-filter-count">#199–244</span>
+  </button>
+  <button class="ficha-filter-btn" data-cat="TRIBUTO">
+    <span class="ficha-cat-dot" style="background:#ffd700"></span> TRIBUTO
+    <span class="ficha-filter-count">#245</span>
+  </button>
+</div>
+
+<!-- Grid de fichas -->
+<div class="fichas-grid" id="fichas-grid">
+  <!-- Generado por JS desde fichas-data.js -->
+</div>
+
+<!-- Hint -->
+<div class="fichas-hint" id="fichas-hint">
+  <span>◈ HAZ CLIC EN UNA TARJETA PARA VER EL REVERSO — VUELVE A HACER CLIC PARA RESTAURAR</span>
+</div>
+</section>
+
 <!-- EXPEDIENTE LITERARIO -->
 <section class="section" id="expediente-literario">
 <div class="section-header">
@@ -591,11 +640,35 @@
     </div>
 </div>
 
+<!-- FICHA VIEWER MODAL (VISTA AMPLIADA) -->
+<div class="modal-overlay" id="ficha-modal">
+  <div class="ficha-modal-box">
+    <button class="modal-close" id="ficha-modal-close">&#10005;</button>
+    <div class="ficha-modal-header">
+      <div class="ficha-modal-title" id="ficha-modal-title">FICHA DE HISTORIA #001</div>
+      <span class="ficha-badge" id="ficha-modal-badge">ESPECIE</span>
+    </div>
+    <div class="ficha-modal-body">
+      <button class="ficha-nav-btn ficha-nav-prev" id="ficha-prev" title="Ficha anterior">&#10094;</button>
+      <div class="ficha-modal-img-wrap" id="ficha-modal-img-wrap">
+        <img id="ficha-modal-img" src="" alt="Ficha ampliada">
+      </div>
+      <button class="ficha-nav-btn ficha-nav-next" id="ficha-next" title="Ficha siguiente">&#10095;</button>
+    </div>
+    <div class="ficha-modal-footer">
+      <button class="btn-primary ficha-flip-btn" id="ficha-toggle-side">
+        <span class="flip-icon">&#8635;</span> <span id="ficha-toggle-text">VER REVERSO</span>
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- SCRIPTS -->
 <script src="cronologia-data.js"></script>
 <script src="species-data-1.js"></script>
 <script src="species-data-2.js"></script>
 <script src="species-data-3.js"></script>
+<script src="fichas-data.js"></script>
 <script src="script.js"></script>
 <script>
 // Definiciones autónomas — funcionan aunque script.js falle
