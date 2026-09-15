@@ -218,7 +218,7 @@ var SPECIES_PART3 = [
         dietLabel: "CARNÍVORO",
         height: "5.2 m",
         length: "13.5 m",
-        weight: "3,000 kg",
+        weight: "7,000 kg",
         location: "Isla Nublar / Isla Sorna / Isla Matanceros",
         emoji: "👑",
         ingen: "Siete ejemplares clonados. El más icónico y peligroso del catálogo.",
