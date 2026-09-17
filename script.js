@@ -488,8 +488,120 @@ if (navToggle && navLinks) {
     var fichaPrev = document.getElementById('ficha-prev');
     var fichaNext = document.getElementById('ficha-next');
 
+    var fichaSoundBtn = document.getElementById('ficha-sound-btn');
+    var fichaSoundText = document.getElementById('ficha-sound-text');
+    var fichaAudioPlayer = document.getElementById('ficha-audio-player');
+    var fichaVideoPlayer = document.getElementById('ficha-video-audio-player');
+    var activeSoundFichaId = null;
+    var isSoundPlaying = false;
+
     var currentFichaIndex = 0;
     var isShowingBack = false;
+
+    function stopFichaSound() {
+        if (fichaAudioPlayer) {
+            try {
+                fichaAudioPlayer.pause();
+                fichaAudioPlayer.currentTime = 0;
+            } catch(e) {}
+        }
+        if (fichaVideoPlayer) {
+            try {
+                fichaVideoPlayer.pause();
+                fichaVideoPlayer.currentTime = 0;
+            } catch(e) {}
+        }
+        isSoundPlaying = false;
+        activeSoundFichaId = null;
+        updateSoundButtonState(false);
+        document.querySelectorAll('.ficha-sound-chip.playing').forEach(function(el) {
+            el.classList.remove('playing');
+            var icon = el.querySelector('.sound-chip-icon');
+            if (icon) icon.textContent = '🔊';
+        });
+    }
+
+    function updateSoundButtonState(playing) {
+        if (!fichaSoundBtn) return;
+        if (playing) {
+            fichaSoundBtn.classList.add('playing');
+            if (fichaSoundText) fichaSoundText.textContent = 'DETENER SONIDO';
+            var icon = fichaSoundBtn.querySelector('.sound-icon');
+            if (icon) icon.textContent = '⏹';
+        } else {
+            fichaSoundBtn.classList.remove('playing');
+            if (fichaSoundText) fichaSoundText.textContent = 'REPRODUCIR SONIDO';
+            var icon = fichaSoundBtn.querySelector('.sound-icon');
+            if (icon) icon.textContent = '🔊';
+        }
+    }
+
+    function playFichaSound(soundSrc, fichaId) {
+        if (isSoundPlaying && activeSoundFichaId === fichaId) {
+            stopFichaSound();
+            return;
+        }
+
+        stopFichaSound();
+        if (!soundSrc) return;
+
+        activeSoundFichaId = fichaId;
+        isSoundPlaying = true;
+        updateSoundButtonState(true);
+
+        var gridChip = document.querySelector('.ficha-sound-chip[data-num="' + fichaId + '"]');
+        if (gridChip) {
+            gridChip.classList.add('playing');
+            var chipIcon = gridChip.querySelector('.sound-chip-icon');
+            if (chipIcon) chipIcon.textContent = '⏹';
+        }
+
+        // Primero reproducir con audio tag, con fallback a video oculto y ruta alternativa
+        var tryPlay = function(srcToTry) {
+            if (fichaAudioPlayer) {
+                fichaAudioPlayer.src = srcToTry;
+                var p = fichaAudioPlayer.play();
+                if (p !== undefined) {
+                    p.catch(function() {
+                        if (fichaVideoPlayer) {
+                            fichaVideoPlayer.src = srcToTry;
+                            fichaVideoPlayer.play().catch(function(e) {
+                                if (!srcToTry.startsWith('sonidos/')) {
+                                    tryPlay('sonidos/' + srcToTry);
+                                } else {
+                                    console.warn('Error al reproducir audio:', e);
+                                    stopFichaSound();
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        };
+        tryPlay(soundSrc);
+    }
+
+
+    if (fichaAudioPlayer) {
+        fichaAudioPlayer.addEventListener('ended', function() {
+            stopFichaSound();
+        });
+    }
+    if (fichaVideoPlayer) {
+        fichaVideoPlayer.addEventListener('ended', function() {
+            stopFichaSound();
+        });
+    }
+
+    if (fichaSoundBtn) {
+        fichaSoundBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var f = FICHAS[currentFichaIndex];
+            if (f && f.sonido) {
+                playFichaSound(f.sonido, f.id);
+            }
+        });
+    }
 
     // Construir las tarjetas
     function buildFichas() {
@@ -500,17 +612,29 @@ if (navToggle && navLinks) {
             wrapper.setAttribute('data-cat', f.categoria);
             wrapper.setAttribute('data-num', f.id);
 
+            var soundChip = f.sonido ? '<button class="ficha-sound-chip" data-num="' + f.id + '" title="Reproducir sonido de la ficha #' + f.num + '"><span class="sound-chip-icon">🔊</span> SONIDO</button>' : '';
             var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}">';
 
             wrapper.innerHTML =
                 '<div class="ficha-inner">' +
                     '<div class="ficha-front">' +
+                        soundChip +
                         frenteContent +
                         '<span class="ficha-badge">' + f.categoria + '</span>' +
                         '<span class="ficha-num-tag">#' + f.num + '</span>' +
                         '<span class="ficha-flip-hint">🔍 AMPLIAR FICHA</span>' +
                     '</div>' +
                 '</div>';
+
+            if (f.sonido) {
+                var chip = wrapper.querySelector('.ficha-sound-chip');
+                if (chip) {
+                    chip.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        playFichaSound(f.sonido, f.id);
+                    });
+                }
+            }
 
             // Al hacer clic, abre la vista en grande (modal)
             wrapper.addEventListener('click', function() {
@@ -532,6 +656,7 @@ if (navToggle && navLinks) {
     }
 
     function closeFichaModal() {
+        stopFichaSound();
         if (fichaModal) fichaModal.classList.remove('open');
         document.body.style.overflow = '';
     }
@@ -560,6 +685,16 @@ if (navToggle && navLinks) {
         if (fichaToggleText) {
             fichaToggleText.textContent = isShowingBack ? 'VER FRENTE DE LA FICHA' : 'VER REVERSO DE LA FICHA';
         }
+
+        // Configurar botón de sonido en el modal
+        if (fichaSoundBtn) {
+            if (f.sonido) {
+                fichaSoundBtn.style.display = 'inline-flex';
+                updateSoundButtonState(isSoundPlaying && activeSoundFichaId === f.id);
+            } else {
+                fichaSoundBtn.style.display = 'none';
+            }
+        }
     }
 
     function toggleModalSide() {
@@ -576,16 +711,19 @@ if (navToggle && navLinks) {
     }
 
     function prevFicha() {
+        stopFichaSound();
         currentFichaIndex = (currentFichaIndex - 1 + FICHAS.length) % FICHAS.length;
         isShowingBack = false;
         updateFichaModalContent();
     }
 
     function nextFicha() {
+        stopFichaSound();
         currentFichaIndex = (currentFichaIndex + 1) % FICHAS.length;
         isShowingBack = false;
         updateFichaModalContent();
     }
+
 
     if (fichaToggleSide) fichaToggleSide.addEventListener('click', toggleModalSide);
     if (fichaPrev) fichaPrev.addEventListener('click', prevFicha);

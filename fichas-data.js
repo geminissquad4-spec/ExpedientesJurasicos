@@ -21,6 +21,14 @@ function getFichaCategoria(num) {
     return { label: '???', clase: 'cat-unknown', color: '#607868' };
 }
 
+// Sonidos para fichas de 001 a 082 (ubicados por fuera en la raíz: 001.mp4, 002.mp4, etc.)
+function getFichaSonido(numInt, numStr) {
+    if (numInt >= 1 && numInt <= 82) {
+        return numStr + '.mp4';
+    }
+    return null;
+}
+
 // Genera el array de 245 fichas
 // Las imágenes: fichas/frente_XXX.jpg y fichas/reverso_XXX.jpg
 var FICHAS = (function() {
@@ -35,7 +43,8 @@ var FICHAS = (function() {
             clase: cat.clase,
             color: cat.color,
             frenteImg: 'fichas/frente_' + num + '.jpg',
-            reversoImg: 'fichas/reverso_' + num + '.jpg'
+            reversoImg: 'fichas/reverso_' + num + '.jpg',
+            sonido: getFichaSonido(i, num)
         });
     }
     return arr;
