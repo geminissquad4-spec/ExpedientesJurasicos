@@ -548,6 +548,7 @@ a{color:var(--cyan);text-decoration:none}
 .cat-pelicula  .ficha-badge{background:rgba(255,48,48,.85);  color:#fff}
 .cat-novela    .ficha-badge{background:rgba(176,128,255,.85);color:#000}
 .cat-tributo   .ficha-badge{background:rgba(255,215,0,.92);  color:#000}
+.cat-juguetes  .ficha-badge{background:rgba(0,207,255,.90);  color:#000}
 
 /* Numerito de la ficha */
 .ficha-num-tag{

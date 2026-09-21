@@ -1,6 +1,6 @@
 // =============================================
 //  EXPEDIENTES JURÁSICOS — fichas-data.js
-//  Datos de las 245 Fichas de Historia
+//  Datos de las 315 Fichas de Historia
 // =============================================
 
 // Categorías según numeración:
@@ -10,6 +10,7 @@
 // 118–198:  De película
 // 199–244:  De novela
 // 245:      Tributo
+// 246–315:  Juguetes
 
 function getFichaCategoria(num) {
     if (num >= 1   && num <= 103) return { label: 'ESPECIE',    clase: 'cat-especie',    color: '#00e5b0' };
@@ -18,6 +19,7 @@ function getFichaCategoria(num) {
     if (num >= 118 && num <= 198) return { label: 'PELÍCULA',   clase: 'cat-pelicula',   color: '#ff3030' };
     if (num >= 199 && num <= 244) return { label: 'NOVELA',     clase: 'cat-novela',     color: '#b080ff' };
     if (num === 245)              return { label: 'TRIBUTO',    clase: 'cat-tributo',    color: '#ffd700' };
+    if (num >= 246 && num <= 315) return { label: 'JUGUETES',   clase: 'cat-juguetes',   color: '#00cfff' };
     return { label: '???', clase: 'cat-unknown', color: '#607868' };
 }
 
@@ -29,11 +31,11 @@ function getFichaSonido(numInt, numStr) {
     return null;
 }
 
-// Genera el array de 245 fichas
+// Genera el array de 315 fichas
 // Las imágenes: fichas/frente_XXX.jpg y fichas/reverso_XXX.jpg
 var FICHAS = (function() {
     var arr = [];
-    for (var i = 1; i <= 245; i++) {
+    for (var i = 1; i <= 315; i++) {
         var cat = getFichaCategoria(i);
         var num = String(i).padStart(3, '0');
         arr.push({
