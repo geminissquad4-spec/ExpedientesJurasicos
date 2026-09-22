@@ -79,74 +79,74 @@ function getImg(name) {
     return IMG_MAP[name] || null;
 }
 
-// Mapa de rugidos: nombre de especie -> archivo en carpeta Rugidos
+// Mapa de rugidos: nombre de especie -> archivo en raíz (o carpeta Rugidos)
 var RUGIDOS_MAP = {
-    "Acrocanthosaurus":            "Rugidos/Acrocanthosaurus.mp4",
-    "Albertosaurus":               "Rugidos/Albertosaurus.mp4",
-    "Allosaurus":                  "Rugidos/Allosaurus.mp4",
-    "Amargasaurus":                "Rugidos/Amargasaurus.mp4",
-    "Ankylosaurus":                "Rugidos/Ankylosaurus.mp4",
-    "Baryonyx":                    "Rugidos/Baryonyx.mp4",
-    "Brachiosaurus":               "Rugidos/Brachiosaurus.mp4",
-    "Carnotaurus":                 "Rugidos/Carnotaurus.mp4",
-    "Cearadactylus":               "Rugidos/Cearadactylus.mp4",
-    "Ceratosaurus":                "Rugidos/Ceratosaurus.mp4",
-    "Chasmosaurus":                "Rugidos/Chasmosaurus.mp4",
-    "Coelurosauravus":             "Rugidos/Coelurosauravus.mp4",
-    "Compsognathus":               "Rugidos/Compsognathus.mp4",
-    "Concavenator":                "Rugidos/Concavenator.mp4",
-    "Corythosaurus":               "Rugidos/Corythosaurus.mp4",
-    "Cryolophosaurus":             "Rugidos/Cryolophosaurus.mp4",
-    "Deinosuchus":                 "Rugidos/Deinosuchus.mp4",
-    "Diabloceratops":              "Rugidos/Diabloceratops.mp4",
-    "Dilophosaurus":               "Rugidos/Dilophosaurus.mp4",
-    "Dimetrodon":                  "Rugidos/Dimetrodon.mp4",
-    "Diplodocus":                  "Rugidos/Diplodocus.mp4",
-    "Dracorex":                    "Rugidos/Dracorex.mp4",
-    "Dryosaurus":                  "Rugidos/Dryosaurus.mp4",
-    "Edmontosaurus":               "Rugidos/Edmontosaurus.mp4",
-    "Elasmosaurus":                "Rugidos/Elasmosaurus.mp4",
-    "Euoplocephalus":              "Rugidos/Euoplocephalus.mp4",
-    "Gallimimus":                  "Rugidos/Gallimimus.mp4",
-    "Geosternbergia":              "Rugidos/Geosternbergia.mp4",
-    "Giganotosaurus":              "Rugidos/Giganotosaurus.mp4",
-    "Gorgonopsid":                 "Rugidos/Gorgonopsid.mp4",
-    "Herrerasaurus":               "Rugidos/Herrerasaurus.mp4",
-    "Hypsilophodon":               "Rugidos/Hypsilophodon.mp4",
-    "Liopleurodon":                "Rugidos/Liopleurodon.mp4",
-    "Maiasaura":                   "Rugidos/Maiasaura.mp4",
-    "Mamenchisaurus":              "Rugidos/Mamenchisaurus.mp4",
-    "Metriacanthosaurus":          "Rugidos/Metriacanthosaurus.mp4",
-    "Microceratus":                "Rugidos/Microceratus.mp4",
-    "Microraptor":                 "Rugidos/Microraptor.mp4",
-    "Ornithocheirus":              "Rugidos/Ornithocheirus.mp4",
-    "Ornithomimus":                "Rugidos/Ornithomimus.mp4",
-    "Pachycephalosaurus":          "Rugidos/Pachycephalosaurus.mp4",
-    "Pachyrhinosaurus":            "Rugidos/Pachyrhinosaurus.mp4",
-    "Parasaurolophus":             "Rugidos/Parasaurolophus.mp4",
-    "Plateosaurus":                "Rugidos/Plateosaurus.mp4",
-    "Plesiosaurus":                "Rugidos/Plesiosaurus.mp4",
-    "Proceratosaurus":             "Rugidos/Proceratosaurus.mp4",
-    "Pteranodon":                  "Rugidos/Pteranodon.mp4",
-    "Quetzalcoatlus":              "Rugidos/Quetzalcoatlus.mp4",
-    "Scutosaurus":                 "Rugidos/Scutosaurus.mp4",
-    "Segisaurus":                  "Rugidos/Segisaurus.mp4",
-    "Spinosaurus":                 "Rugidos/Spinosaurus.mp4",
-    "Stegosaurus":                 "Rugidos/Stegosaurus.mp4",
-    "Stygimoloch":                 "Rugidos/Stygimoloch.mp4",
-    "Styracosaurus":               "Rugidos/Styracosaurus.mp4",
-    "Suchomimus":                  "Rugidos/Suchomimus.mp4",
-    "Tanystropheus":               "Rugidos/Tanystropheus.mp4",
-    "Tapejara":                    "Rugidos/Tapejara.mp4",
-    "Therizinosaurus":             "Rugidos/Therizinosaurus.mp4",
-    "Torosaurus":                  "Rugidos/Torosaurus.mp4",
-    "Triceratops":                 "Rugidos/Triceratops.mp4",
-    "Troodon":                     "Rugidos/Troodon.mp4",
-    "Tylosaurus":                  "Rugidos/Tylosaurus.mp4",
-    "Tyrannosaurus Rex":           "Rugidos/Tyrannosaurus Rex.mp4",
-    "Ultimate Predator (Híbrido)": "Rugidos/Ultimate Predator.mp4",
-    "Utahraptor":                  "Rugidos/Utahraptor.mp4",
-    "Velociraptor":                "Rugidos/Velociraptor.mp4"
+    "Acrocanthosaurus":            "Acrocanthosaurus.mp4",
+    "Albertosaurus":               "Albertosaurus.mp4",
+    "Allosaurus":                  "Allosaurus.mp4",
+    "Amargasaurus":                "Amargasaurus.mp4",
+    "Ankylosaurus":                "Ankylosaurus.mp4",
+    "Baryonyx":                    "Baryonyx.mp4",
+    "Brachiosaurus":               "Brachiosaurus.mp4",
+    "Carnotaurus":                 "Carnotaurus.mp4",
+    "Cearadactylus":               "Cearadactylus.mp4",
+    "Ceratosaurus":                "Ceratosaurus.mp4",
+    "Chasmosaurus":                "Chasmosaurus.mp4",
+    "Coelurosauravus":             "Coelurosauravus.mp4",
+    "Compsognathus":               "Compsognathus.mp4",
+    "Concavenator":                "Concavenator.mp4",
+    "Corythosaurus":               "Corythosaurus.mp4",
+    "Cryolophosaurus":             "Cryolophosaurus.mp4",
+    "Deinosuchus":                 "Deinosuchus.mp4",
+    "Diabloceratops":              "Diabloceratops.mp4",
+    "Dilophosaurus":               "Dilophosaurus.mp4",
+    "Dimetrodon":                  "Dimetrodon.mp4",
+    "Diplodocus":                  "Diplodocus.mp4",
+    "Dracorex":                    "Dracorex.mp4",
+    "Dryosaurus":                  "Dryosaurus.mp4",
+    "Edmontosaurus":               "Edmontosaurus.mp4",
+    "Elasmosaurus":                "Elasmosaurus.mp4",
+    "Euoplocephalus":              "Euoplocephalus.mp4",
+    "Gallimimus":                  "Gallimimus.mp4",
+    "Geosternbergia":              "Geosternbergia.mp4",
+    "Giganotosaurus":              "Giganotosaurus.mp4",
+    "Gorgonopsid":                 "Gorgonopsid.mp4",
+    "Herrerasaurus":               "Herrerasaurus.mp4",
+    "Hypsilophodon":               "Hypsilophodon.mp4",
+    "Liopleurodon":                "Liopleurodon.mp4",
+    "Maiasaura":                   "Maiasaura.mp4",
+    "Mamenchisaurus":              "Mamenchisaurus.mp4",
+    "Metriacanthosaurus":          "Metriacanthosaurus.mp4",
+    "Microceratus":                "Microceratus.mp4",
+    "Microraptor":                 "Microraptor.mp4",
+    "Ornithocheirus":              "Ornithocheirus.mp4",
+    "Ornithomimus":                "Ornithomimus.mp4",
+    "Pachycephalosaurus":          "Pachycephalosaurus.mp4",
+    "Pachyrhinosaurus":            "Pachyrhinosaurus.mp4",
+    "Parasaurolophus":             "Parasaurolophus.mp4",
+    "Plateosaurus":                "Plateosaurus.mp4",
+    "Plesiosaurus":                "Plesiosaurus.mp4",
+    "Proceratosaurus":             "Proceratosaurus.mp4",
+    "Pteranodon":                  "Pteranodon.mp4",
+    "Quetzalcoatlus":              "Quetzalcoatlus.mp4",
+    "Scutosaurus":                 "Scutosaurus.mp4",
+    "Segisaurus":                  "Segisaurus.mp4",
+    "Spinosaurus":                 "Spinosaurus.mp4",
+    "Stegosaurus":                 "Stegosaurus.mp4",
+    "Stygimoloch":                 "Stygimoloch.mp4",
+    "Styracosaurus":               "Styracosaurus.mp4",
+    "Suchomimus":                  "Suchomimus.mp4",
+    "Tanystropheus":               "Tanystropheus.mp4",
+    "Tapejara":                    "Tapejara.mp4",
+    "Therizinosaurus":             "Therizinosaurus.mp4",
+    "Torosaurus":                  "Torosaurus.mp4",
+    "Triceratops":                 "Triceratops.mp4",
+    "Troodon":                     "Troodon.mp4",
+    "Tylosaurus":                  "Tylosaurus.mp4",
+    "Tyrannosaurus Rex":           "Tyrannosaurus Rex.mp4",
+    "Ultimate Predator (Híbrido)": "Ultimate Predator.mp4",
+    "Utahraptor":                  "Utahraptor.mp4",
+    "Velociraptor":                "Velociraptor.mp4"
 };
 
 function getRugido(name) {
@@ -237,24 +237,69 @@ function playSpeciesRoar(src, name) {
     isSpeciesRoarPlaying = true;
     updateSpeciesRoarButtonState(name, true);
     
-    var tryPlay = function(urlToTry) {
+    var fileName = src.split('/').pop();
+    var candidates = [
+        src,
+        encodeURI(src),
+        'Rugidos/' + fileName,
+        'Rugidos/' + encodeURIComponent(fileName),
+        'rugidos/' + fileName,
+        'rugidos/' + encodeURIComponent(fileName),
+        fileName,
+        encodeURIComponent(fileName)
+    ];
+    
+    // Eliminar duplicados
+    candidates = candidates.filter(function(item, pos) {
+        return candidates.indexOf(item) === pos;
+    });
+
+    var cIdx = 0;
+    function tryNext() {
+        if (!isSpeciesRoarPlaying || activeSpeciesRoarName !== name) return;
+        if (cIdx >= candidates.length) {
+            console.warn('No se pudo reproducir el rugido para:', name, 'Rutas intentadas:', candidates);
+            stopSpeciesRoar();
+            return;
+        }
+        var currentUrl = candidates[cIdx++];
+        
         if (speciesRoarAudio) {
-            speciesRoarAudio.src = urlToTry;
+            speciesRoarAudio.src = currentUrl;
             var p = speciesRoarAudio.play();
             if (p !== undefined) {
-                p.catch(function() {
+                p.then(function() {
+                    // Reproduciendo con éxito
+                }).catch(function() {
                     if (speciesRoarVideo) {
-                        speciesRoarVideo.src = urlToTry;
-                        speciesRoarVideo.play().catch(function(err) {
-                            console.warn('Error al reproducir rugido:', err);
-                            stopSpeciesRoar();
+                        speciesRoarVideo.src = currentUrl;
+                        speciesRoarVideo.play().catch(function() {
+                            tryNext();
                         });
+                    } else {
+                        tryNext();
                     }
                 });
+            } else {
+                speciesRoarAudio.onerror = function() {
+                    speciesRoarAudio.onerror = null;
+                    tryNext();
+                };
             }
+        } else if (speciesRoarVideo) {
+            speciesRoarVideo.src = currentUrl;
+            speciesRoarVideo.play().catch(function() {
+                tryNext();
+            });
+        } else {
+            // Fallback creación dinámica de objeto Audio
+            var a = new Audio(currentUrl);
+            a.play().catch(function() {
+                tryNext();
+            });
         }
-    };
-    tryPlay(src);
+    }
+    tryNext();
 }
 
 if (speciesRoarAudio) {
