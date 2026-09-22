@@ -23,9 +23,9 @@ function getFichaCategoria(num) {
     return { label: '???', clase: 'cat-unknown', color: '#607868' };
 }
 
-// Sonidos para fichas de 001 a 103 (ubicados por fuera en la raíz: 001.mp4, 002.mp4, etc.)
+// Sonidos para fichas de 001 a 103 y 109 a 117 (ubicados por fuera en la raíz: 001.mp4, 109.mp4, etc.)
 function getFichaSonido(numInt, numStr) {
-    if (numInt >= 1 && numInt <= 103) {
+    if ((numInt >= 1 && numInt <= 103) || (numInt >= 109 && numInt <= 117)) {
         return numStr + '.mp4';
     }
     return null;
