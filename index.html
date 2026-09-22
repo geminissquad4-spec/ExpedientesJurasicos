@@ -666,11 +666,15 @@
       <button class="btn-primary ficha-sound-btn" id="ficha-sound-btn" style="display: none;" title="Reproducir sonido del espécimen">
         <span class="sound-icon">🔊</span> <span id="ficha-sound-text">REPRODUCIR SONIDO</span>
       </button>
+      <button class="btn-primary ficha-narrate-btn" id="ficha-narrate-btn" style="display: none;" title="Escuchar narración con voz de IA">
+        <span class="narrate-icon">🎙️</span> <span id="ficha-narrate-text">NARRAR EXPEDIENTE</span>
+      </button>
     </div>
   </div>
 </div>
-<!-- REPRODUCTOR DE AUDIO OCULTO PARA FICHAS -->
+<!-- REPRODUCTOR DE AUDIO Y NARRACIÓN OCULTO PARA FICHAS -->
 <audio id="ficha-audio-player" preload="none" style="display:none;"></audio>
+<audio id="ficha-narrate-player" preload="none" style="display:none;"></audio>
 <video id="ficha-video-audio-player" preload="none" style="display:none;" playsinline></video>
 
 <!-- SCRIPTS -->

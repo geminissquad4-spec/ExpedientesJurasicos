@@ -756,6 +756,40 @@ a{color:var(--cyan);text-decoration:none}
     display: inline-block;
 }
 
+/* Botón de Narración de IA en el Modal */
+.ficha-narrate-btn {
+    font-size: .8rem!important;
+    padding: .8rem 1.8rem!important;
+    display: inline-flex!important;
+    align-items: center!important;
+    gap: .6rem!important;
+    background: rgba(176, 128, 255, 0.15)!important;
+    border: 1px solid #b080ff!important;
+    color: #b080ff!important;
+    cursor: pointer;
+    font-family: var(--font-orb);
+    letter-spacing: 1.5px;
+    border-radius: 4px;
+    transition: all .3s ease;
+}
+.ficha-narrate-btn:hover {
+    background: #b080ff!important;
+    color: #000!important;
+    box-shadow: 0 0 20px rgba(176, 128, 255, 0.6);
+}
+.ficha-narrate-btn.playing {
+    background: rgba(255, 48, 48, 0.25)!important;
+    border-color: #ff3030!important;
+    color: #ff5555!important;
+    box-shadow: 0 0 18px rgba(255, 48, 48, 0.7);
+    animation: audioPulse 1s infinite alternate;
+}
+.ficha-narrate-btn .narrate-icon {
+    font-size: 1.1rem;
+    display: inline-block;
+}
+
+
 /* Chip de sonido en la tarjeta del grid */
 .ficha-sound-chip {
     position: absolute;

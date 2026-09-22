@@ -495,6 +495,13 @@ if (navToggle && navLinks) {
     var activeSoundFichaId = null;
     var isSoundPlaying = false;
 
+    // Elementos de Narración de IA
+    var fichaNarrateBtn = document.getElementById('ficha-narrate-btn');
+    var fichaNarrateText = document.getElementById('ficha-narrate-text');
+    var fichaNarratePlayer = document.getElementById('ficha-narrate-player');
+    var activeNarrateFichaId = null;
+    var isNarratePlaying = false;
+
     var currentFichaIndex = 0;
     var isShowingBack = false;
 
@@ -521,6 +528,18 @@ if (navToggle && navLinks) {
         });
     }
 
+    function stopFichaNarrate() {
+        if (fichaNarratePlayer) {
+            try {
+                fichaNarratePlayer.pause();
+                fichaNarratePlayer.currentTime = 0;
+            } catch(e) {}
+        }
+        isNarratePlaying = false;
+        activeNarrateFichaId = null;
+        updateNarrateButtonState(false);
+    }
+
     function updateSoundButtonState(playing) {
         if (!fichaSoundBtn) return;
         if (playing) {
@@ -536,6 +555,47 @@ if (navToggle && navLinks) {
         }
     }
 
+    function updateNarrateButtonState(playing) {
+        if (!fichaNarrateBtn) return;
+        if (playing) {
+            fichaNarrateBtn.classList.add('playing');
+            if (fichaNarrateText) fichaNarrateText.textContent = 'DETENER NARRACIÓN';
+            var icon = fichaNarrateBtn.querySelector('.narrate-icon');
+            if (icon) icon.textContent = '⏹';
+        } else {
+            fichaNarrateBtn.classList.remove('playing');
+            if (fichaNarrateText) fichaNarrateText.textContent = 'NARRAR EXPEDIENTE';
+            var icon = fichaNarrateBtn.querySelector('.narrate-icon');
+            if (icon) icon.textContent = '🎙️';
+        }
+    }
+
+    function playFichaNarrate(narrateSrc, fichaId) {
+        if (isNarratePlaying && activeNarrateFichaId === fichaId) {
+            stopFichaNarrate();
+            return;
+        }
+
+        stopFichaSound();
+        stopFichaNarrate();
+        if (!narrateSrc) return;
+
+        activeNarrateFichaId = fichaId;
+        isNarratePlaying = true;
+        updateNarrateButtonState(true);
+
+        if (fichaNarratePlayer) {
+            fichaNarratePlayer.src = narrateSrc;
+            var p = fichaNarratePlayer.play();
+            if (p !== undefined) {
+                p.catch(function(err) {
+                    console.warn('Error al reproducir narración:', err);
+                    stopFichaNarrate();
+                });
+            }
+        }
+    }
+
     function playFichaSound(soundSrc, fichaId) {
         if (isSoundPlaying && activeSoundFichaId === fichaId) {
             stopFichaSound();
@@ -543,6 +603,7 @@ if (navToggle && navLinks) {
         }
 
         stopFichaSound();
+        stopFichaNarrate();
         if (!soundSrc) return;
 
         activeSoundFichaId = fichaId;
@@ -581,7 +642,6 @@ if (navToggle && navLinks) {
         tryPlay(soundSrc);
     }
 
-
     if (fichaAudioPlayer) {
         fichaAudioPlayer.addEventListener('ended', function() {
             stopFichaSound();
@@ -592,6 +652,11 @@ if (navToggle && navLinks) {
             stopFichaSound();
         });
     }
+    if (fichaNarratePlayer) {
+        fichaNarratePlayer.addEventListener('ended', function() {
+            stopFichaNarrate();
+        });
+    }
 
     if (fichaSoundBtn) {
         fichaSoundBtn.addEventListener('click', function(e) {
@@ -599,6 +664,16 @@ if (navToggle && navLinks) {
             var f = FICHAS[currentFichaIndex];
             if (f && f.sonido) {
                 playFichaSound(f.sonido, f.id);
+            }
+        });
+    }
+
+    if (fichaNarrateBtn) {
+        fichaNarrateBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var f = FICHAS[currentFichaIndex];
+            if (f && f.narracion) {
+                playFichaNarrate(f.narracion, f.id);
             }
         });
     }
@@ -657,6 +732,7 @@ if (navToggle && navLinks) {
 
     function closeFichaModal() {
         stopFichaSound();
+        stopFichaNarrate();
         if (fichaModal) fichaModal.classList.remove('open');
         document.body.style.overflow = '';
     }
@@ -695,6 +771,16 @@ if (navToggle && navLinks) {
                 fichaSoundBtn.style.display = 'none';
             }
         }
+
+        // Configurar botón de narración de IA en el modal
+        if (fichaNarrateBtn) {
+            if (f.narracion) {
+                fichaNarrateBtn.style.display = 'inline-flex';
+                updateNarrateButtonState(isNarratePlaying && activeNarrateFichaId === f.id);
+            } else {
+                fichaNarrateBtn.style.display = 'none';
+            }
+        }
     }
 
     function toggleModalSide() {
@@ -712,6 +798,7 @@ if (navToggle && navLinks) {
 
     function prevFicha() {
         stopFichaSound();
+        stopFichaNarrate();
         currentFichaIndex = (currentFichaIndex - 1 + FICHAS.length) % FICHAS.length;
         isShowingBack = false;
         updateFichaModalContent();
@@ -719,6 +806,7 @@ if (navToggle && navLinks) {
 
     function nextFicha() {
         stopFichaSound();
+        stopFichaNarrate();
         currentFichaIndex = (currentFichaIndex + 1) % FICHAS.length;
         isShowingBack = false;
         updateFichaModalContent();
