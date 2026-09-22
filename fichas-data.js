@@ -31,10 +31,13 @@ function getFichaSonido(numInt, numStr) {
     return null;
 }
 
-// Mapa de narraciones de IA disponibles (narracion_XXX.mp3 en la raíz)
-var FICHAS_NARRACIONES = {
-    1: 'narracion_001.mp3'
-};
+// Narraciones de IA disponibles para todas las fichas (narracion_001.mp3 a narracion_315.mp3 en la raíz)
+function getFichaNarracion(numInt, numStr) {
+    if (numInt >= 1 && numInt <= 315) {
+        return 'narracion_' + numStr + '.mp3';
+    }
+    return null;
+}
 
 // Genera el array de 315 fichas
 // Las imágenes: fichas/frente_XXX.jpg y fichas/reverso_XXX.jpg
@@ -52,9 +55,10 @@ var FICHAS = (function() {
             frenteImg: 'fichas/frente_' + num + '.jpg',
             reversoImg: 'fichas/reverso_' + num + '.jpg',
             sonido: getFichaSonido(i, num),
-            narracion: FICHAS_NARRACIONES[i] || null
+            narracion: getFichaNarracion(i, num)
         });
     }
     return arr;
 })();
+
 
