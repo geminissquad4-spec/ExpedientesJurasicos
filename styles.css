@@ -835,3 +835,68 @@ a{color:var(--cyan);text-decoration:none}
     }
 }
 
+/* === BOTONES Y CHIPS DE RUGIDOS (SECCIÓN ESPECIES) === */
+.species-roar-chip {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 5;
+    background: rgba(6, 15, 10, 0.88);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    font-family: var(--font-orb);
+    font-size: 0.58rem;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: all .25s ease;
+    backdrop-filter: blur(4px);
+}
+.species-roar-chip:hover {
+    background: var(--cyan);
+    color: #000;
+    box-shadow: 0 0 12px var(--cyan);
+    transform: scale(1.08);
+}
+.species-roar-chip.playing {
+    background: rgba(255, 48, 48, 0.9);
+    color: #fff;
+    border-color: #ff3030;
+    box-shadow: 0 0 15px rgba(255, 48, 48, 0.8);
+    animation: audioPulse 0.9s infinite alternate;
+}
+
+.species-modal-roar-btn {
+    font-family: var(--font-orb);
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    padding: 0.55rem 1.2rem;
+    background: rgba(0, 229, 176, 0.12);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    cursor: pointer;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all .3s ease;
+    margin-top: 0.8rem;
+}
+.species-modal-roar-btn:hover {
+    background: var(--cyan);
+    color: #000;
+    box-shadow: 0 0 18px rgba(0, 229, 176, 0.6);
+}
+.species-modal-roar-btn.playing {
+    background: rgba(255, 48, 48, 0.25);
+    border-color: #ff3030;
+    color: #ff5555;
+    box-shadow: 0 0 18px rgba(255, 48, 48, 0.7);
+    animation: audioPulse 1s infinite alternate;
+}
+
+

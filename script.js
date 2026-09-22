@@ -79,6 +79,174 @@ function getImg(name) {
     return IMG_MAP[name] || null;
 }
 
+// Mapa de rugidos: nombre de especie -> archivo en carpeta Rugidos
+var RUGIDOS_MAP = {
+    "Acrocanthosaurus":    "Rugidos/Acrocanthosaurus.mp4",
+    "Albertosaurus":       "Rugidos/Albertosaurus.mp4",
+    "Allosaurus":          "Rugidos/Allosaurus.mp4",
+    "Amargasaurus":        "Rugidos/Amargasaurus.mp4",
+    "Ankylosaurus":        "Rugidos/Ankylosaurus.mp4",
+    "Baryonyx":            "Rugidos/Baryonyx.mp4",
+    "Brachiosaurus":       "Rugidos/Brachiosaurus.mp4",
+    "Carnotaurus":         "Rugidos/Carnotaurus.mp4",
+    "Cearadactylus":       "Rugidos/Cearadactylus.mp4",
+    "Ceratosaurus":        "Rugidos/Ceratosaurus.mp4",
+    "Chasmosaurus":        "Rugidos/Chasmosaurus.mp4",
+    "Coelurosauravus":     "Rugidos/Coelurosauravus.mp4",
+    "Compsognathus":       "Rugidos/Compsognathus.mp4",
+    "Concavenator":        "Rugidos/Concavenator.mp4",
+    "Corythosaurus":       "Rugidos/Corythosaurus.mp4",
+    "Cryolophosaurus":     "Rugidos/Cryolophosaurus.mp4",
+    "Deinosuchus":         "Rugidos/Deinosuchus.mp4",
+    "Diabloceratops":      "Rugidos/Diabloceratops.mp4",
+    "Dilophosaurus":       "Rugidos/Dilophosaurus.mp4",
+    "Dimetrodon":          "Rugidos/Dimetrodon.mp4",
+    "Diplodocus":          "Rugidos/Diplodocus.mp4",
+    "Dracorex":            "Rugidos/Dracorex.mp4",
+    "Dryosaurus":          "Rugidos/Dryosaurus.mp4",
+    "Edmontosaurus":       "Rugidos/Edmontosaurus.mp4",
+    "Elasmosaurus":        "Rugidos/Elasmosaurus.mp4",
+    "Euoplocephalus":      "Rugidos/Euoplocephalus.mp4",
+    "Gallimimus":          "Rugidos/Gallimimus.mp4",
+    "Geosternbergia":      "Rugidos/Geosternbergia.mp4",
+    "Giganotosaurus":      "Rugidos/Giganotosaurus.mp4",
+    "Gorgonopsid":         "Rugidos/Gorgonopsid.mp4",
+    "Mamenchisaurus":      "Rugidos/Mamenchisaurus.mp4",
+    "Microceratus":        "Rugidos/Microceratus.mp4",
+    "Ornithocheirus":      "Rugidos/Ornithocheirus.mp4",
+    "Ornithomimus":        "Rugidos/Ornithomimus.mp4",
+    "Pachycephalosaurus":  "Rugidos/Pachycephalosaurus.mp4",
+    "Pachyrhinosaurus":    "Rugidos/Pachyrhinosaurus.mp4",
+    "Parasaurolophus":     "Rugidos/Parasaurolophus.mp4",
+    "Plesiosaurus":        "Rugidos/Plesiosaurus.mp4",
+    "Pteranodon":          "Rugidos/Pteranodon.mp4",
+    "Quetzalcoatlus":      "Rugidos/Quetzalcoatlus.mp4",
+    "Spinosaurus":         "Rugidos/Spinosaurus.mp4",
+    "Stegosaurus":         "Rugidos/Stegosaurus.mp4",
+    "Stygimoloch":         "Rugidos/Stygimoloch.mp4",
+    "Styracosaurus":       "Rugidos/Styracosaurus.mp4",
+    "Suchomimus":          "Rugidos/Suchomimus.mp4",
+    "Triceratops":         "Rugidos/Triceratops.mp4",
+    "Tyrannosaurus Rex":   "Rugidos/Tyrannosaurus Rex.mp4",
+    "Utahraptor":          "Rugidos/Utahraptor.mp4",
+    "Velociraptor":        "Rugidos/Velociraptor.mp4"
+};
+
+function getRugido(name) {
+    return RUGIDOS_MAP[name] || null;
+}
+
+// ---- REPRODUCTOR DE RUGIDOS (SECCIÓN ESPECIES) ----
+var speciesRoarAudio = document.getElementById('species-roar-player');
+var speciesRoarVideo = document.getElementById('species-video-roar-player');
+var activeSpeciesRoarName = null;
+var isSpeciesRoarPlaying = false;
+
+function stopSpeciesRoar() {
+    if (speciesRoarAudio) {
+        try { speciesRoarAudio.pause(); speciesRoarAudio.currentTime = 0; } catch(e){}
+    }
+    if (speciesRoarVideo) {
+        try { speciesRoarVideo.pause(); speciesRoarVideo.currentTime = 0; } catch(e){}
+    }
+    isSpeciesRoarPlaying = false;
+    activeSpeciesRoarName = null;
+    
+    document.querySelectorAll('.species-roar-chip.playing').forEach(function(el) {
+        el.classList.remove('playing');
+        var icon = el.querySelector('.roar-chip-icon');
+        if (icon) icon.textContent = '🔊';
+    });
+    var modalRoarBtn = document.getElementById('species-modal-roar-btn');
+    if (modalRoarBtn) {
+        modalRoarBtn.classList.remove('playing');
+        var textSpan = document.getElementById('species-modal-roar-text');
+        if (textSpan) textSpan.textContent = 'REPRODUCIR RUGIDO';
+        var icon = modalRoarBtn.querySelector('.roar-icon');
+        if (icon) icon.textContent = '🔊';
+    }
+}
+
+function updateSpeciesRoarButtonState(name, playing) {
+    var modalRoarBtn = document.getElementById('species-modal-roar-btn');
+    if (modalRoarBtn) {
+        if (playing) {
+            modalRoarBtn.classList.add('playing');
+            var textSpan = document.getElementById('species-modal-roar-text');
+            if (textSpan) textSpan.textContent = 'DETENER RUGIDO';
+            var icon = modalRoarBtn.querySelector('.roar-icon');
+            if (icon) icon.textContent = '⏹';
+        } else {
+            modalRoarBtn.classList.remove('playing');
+            var textSpan = document.getElementById('species-modal-roar-text');
+            if (textSpan) textSpan.textContent = 'REPRODUCIR RUGIDO';
+            var icon = modalRoarBtn.querySelector('.roar-icon');
+            if (icon) icon.textContent = '🔊';
+        }
+    }
+    
+    document.querySelectorAll('.species-roar-chip').forEach(function(el) {
+        if (el.getAttribute('data-name') === name) {
+            if (playing) {
+                el.classList.add('playing');
+                var icon = el.querySelector('.roar-chip-icon');
+                if (icon) icon.textContent = '⏹';
+            } else {
+                el.classList.remove('playing');
+                var icon = el.querySelector('.roar-chip-icon');
+                if (icon) icon.textContent = '🔊';
+            }
+        } else {
+            el.classList.remove('playing');
+            var icon = el.querySelector('.roar-chip-icon');
+            if (icon) icon.textContent = '🔊';
+        }
+    });
+}
+
+function playSpeciesRoar(src, name) {
+    if (isSpeciesRoarPlaying && activeSpeciesRoarName === name) {
+        stopSpeciesRoar();
+        return;
+    }
+    
+    if (typeof stopFichaSound === 'function') stopFichaSound();
+    if (typeof stopFichaNarrate === 'function') stopFichaNarrate();
+    stopSpeciesRoar();
+    
+    if (!src) return;
+    
+    activeSpeciesRoarName = name;
+    isSpeciesRoarPlaying = true;
+    updateSpeciesRoarButtonState(name, true);
+    
+    var tryPlay = function(urlToTry) {
+        if (speciesRoarAudio) {
+            speciesRoarAudio.src = urlToTry;
+            var p = speciesRoarAudio.play();
+            if (p !== undefined) {
+                p.catch(function() {
+                    if (speciesRoarVideo) {
+                        speciesRoarVideo.src = urlToTry;
+                        speciesRoarVideo.play().catch(function(err) {
+                            console.warn('Error al reproducir rugido:', err);
+                            stopSpeciesRoar();
+                        });
+                    }
+                });
+            }
+        }
+    };
+    tryPlay(src);
+}
+
+if (speciesRoarAudio) {
+    speciesRoarAudio.addEventListener('ended', stopSpeciesRoar);
+}
+if (speciesRoarVideo) {
+    speciesRoarVideo.addEventListener('ended', stopSpeciesRoar);
+}
+
 function dietClass(diet) {
     return 'diet-' + diet;
 }
@@ -157,6 +325,11 @@ function buildCards(list) {
             ? '<img class="species-img" src="' + img + '" alt="' + sp.name + '" loading="lazy" onerror="this.style.display=\'none\'">'
             : '<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:3rem;color:rgba(255,255,255,0.1);">' + (sp.emoji || '🦖') + '</div>';
 
+        var rugidoSrc = getRugido(sp.name);
+        var roarChip = rugidoSrc
+            ? '<button class="species-roar-chip" data-name="' + sp.name + '" title="Reproducir rugido de ' + sp.name + '"><span class="roar-chip-icon">🔊</span> RUGIDO</button>'
+            : '';
+
         var card = document.createElement('div');
         card.className = 'species-card';
         card.setAttribute('data-diet', sp.diet);
@@ -164,6 +337,7 @@ function buildCards(list) {
         card.setAttribute('data-key', sp.key);
         card.innerHTML =
             '<div class="species-img-wrap">' +
+                roarChip +
                 imgHTML +
                 '<span class="species-diet-badge ' + dietClass(sp.diet) + '">' + sp.dietLabel + '</span>' +
             '</div>' +
@@ -174,6 +348,16 @@ function buildCards(list) {
                 '<div class="species-ingen">' + sp.ingen + '</div>' +
             '</div>' +
             '<div class="species-card-footer">VER FICHA COMPLETA →</div>';
+
+        if (rugidoSrc) {
+            var chip = card.querySelector('.species-roar-chip');
+            if (chip) {
+                chip.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    playSpeciesRoar(rugidoSrc, sp.name);
+                });
+            }
+        }
 
         card.addEventListener('click', function() { openModal(sp); });
         grid.appendChild(card);
@@ -224,17 +408,25 @@ function openModal(sp) {
         ? '<img class="modal-img" src="' + img + '" alt="' + sp.name + '" onerror="this.style.display=\'none\'">'
         : '<div class="modal-img" style="display:flex;align-items:center;justify-content:center;font-size:5rem;background:#0a1220;">' + (sp.emoji || '🦖') + '</div>';
 
+    var rugidoSrc = getRugido(sp.name);
+    var roarBtnHTML = rugidoSrc
+        ? '<button class="btn-primary species-modal-roar-btn" id="species-modal-roar-btn" data-name="' + sp.name + '"><span class="roar-icon">🔊</span> <span id="species-modal-roar-text">REPRODUCIR RUGIDO</span></button>'
+        : '';
+
     var inner = document.getElementById('modal-inner');
     // ---- Title row ----
     var titleHTML =
         '<div class="modal-title-row">' +
-            '<div>' +
-                '<div class="modal-name">' + sp.emoji + ' ' + sp.name + '</div>' +
-                '<div class="modal-meta-row">' +
-                    '<span class="modal-key">CÓDIGO: ' + sp.key + '</span>' +
-                    '<span class="modal-meta-sep">|</span>' +
-                    '<span class="modal-key">FAMILIA: ' + sp.family + '</span>' +
+            '<div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;width:100%">' +
+                '<div>' +
+                    '<div class="modal-name">' + sp.emoji + ' ' + sp.name + '</div>' +
+                    '<div class="modal-meta-row">' +
+                        '<span class="modal-key">CÓDIGO: ' + sp.key + '</span>' +
+                        '<span class="modal-meta-sep">|</span>' +
+                        '<span class="modal-key">FAMILIA: ' + sp.family + '</span>' +
+                    '</div>' +
                 '</div>' +
+                (roarBtnHTML ? '<div>' + roarBtnHTML + '</div>' : '') +
             '</div>' +
         '</div>';
     // ---- Full-width image ----
@@ -260,6 +452,19 @@ function openModal(sp) {
 
     inner.innerHTML = titleHTML + imgHTML2 + statsHTML + textHTML;
 
+    if (rugidoSrc) {
+        var mBtn = inner.querySelector('#species-modal-roar-btn');
+        if (mBtn) {
+            mBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                playSpeciesRoar(rugidoSrc, sp.name);
+            });
+            if (isSpeciesRoarPlaying && activeSpeciesRoarName === sp.name) {
+                updateSpeciesRoarButtonState(sp.name, true);
+            }
+        }
+    }
+
     document.getElementById('modal-overlay').classList.add('open');
     document.body.style.overflow = 'hidden';
 }
@@ -272,9 +477,11 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') closeModal();
 });
 function closeModal() {
+    stopSpeciesRoar();
     document.getElementById('modal-overlay').classList.remove('open');
     document.body.style.overflow = '';
 }
+
 
 // ---- INCIDENT ACCORDIONS ----
 ['1993','1994','1996','2000','2001','2002'].forEach(function(yr) {
