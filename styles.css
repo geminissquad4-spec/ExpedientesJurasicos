@@ -384,7 +384,7 @@ a{color:var(--cyan);text-decoration:none}
     
     .hero-title{font-size:clamp(1.2rem, 10vw, 2.5rem)!important;line-height:1.2!important;margin-bottom:1.5rem!important;word-break:break-word!important}
     .hero-ctas{display:flex!important;flex-direction:column!important;gap:2rem!important;align-items:center!important;width:100%!important;margin:2rem auto!important;padding:0 1.5rem!important}
-    .btn-primary, .btn-secondary{display:block!important;width:100%!important;max-width:280px!important;text-align:center!important;padding:1rem 0.5rem!important;margin:0 auto!important;position:relative!important;float:none!important}
+    .hero-ctas .btn-primary, .hero-ctas .btn-secondary{display:block!important;width:100%!important;max-width:280px!important;text-align:center!important;padding:1rem 0.5rem!important;margin:0 auto!important;position:relative!important;float:none!important}
     
     .section{padding:4rem 1.2rem!important}
     .hero-stats{gap:1rem!important}
@@ -727,7 +727,7 @@ a{color:var(--cyan);text-decoration:none}
 .ficha-sound-btn {
     font-size: .8rem!important;
     padding: .8rem 1.8rem!important;
-    display: inline-flex!important;
+    display: inline-flex;
     align-items: center!important;
     gap: .6rem!important;
     background: rgba(0, 229, 176, 0.12)!important;
@@ -760,7 +760,7 @@ a{color:var(--cyan);text-decoration:none}
 .ficha-narrate-btn {
     font-size: .8rem!important;
     padding: .8rem 1.8rem!important;
-    display: inline-flex!important;
+    display: inline-flex;
     align-items: center!important;
     gap: .6rem!important;
     background: rgba(176, 128, 255, 0.15)!important;
@@ -771,6 +771,16 @@ a{color:var(--cyan);text-decoration:none}
     letter-spacing: 1.5px;
     border-radius: 4px;
     transition: all .3s ease;
+}
+
+/* Reglas estrictas para ocultar botones no permitidos */
+.ficha-sound-btn.hidden,
+.ficha-narrate-btn.hidden,
+.ficha-video-btn.hidden,
+.ficha-sound-btn[style*="display: none"],
+.ficha-narrate-btn[style*="display: none"],
+.ficha-video-btn[style*="display: none"] {
+    display: none !important;
 }
 .ficha-narrate-btn:hover {
     background: #b080ff!important;

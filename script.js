@@ -1042,7 +1042,9 @@ if (navToggle && navLinks) {
         fichaVideoBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             var f = FICHAS[currentFichaIndex];
-            var isVideoFicha = f && (f.video || (f.id >= 118 && f.id <= 174));
+            if (!f) return;
+            var fNum = parseInt(f.num || f.id, 10);
+            var isVideoFicha = (fNum >= 118 && fNum <= 174);
             if (isVideoFicha) {
                 openCrtTV(f.video || (f.num + '.mp4'), f.num);
             }
@@ -1063,7 +1065,7 @@ if (navToggle && navLinks) {
             var isSoundAllowed = ((fNum >= 1 && fNum <= 103) || (fNum >= 109 && fNum <= 117));
 
             var soundChip = (isSoundAllowed && f.sonido) ? '<button class="ficha-sound-chip" data-num="' + f.id + '" title="Reproducir sonido de la ficha #' + f.num + '"><span class="sound-chip-icon">🔊</span> SONIDO</button>' : '';
-            var hasVideo = f.video || (f.id >= 118 && f.id <= 174);
+            var hasVideo = (fNum >= 118 && fNum <= 174);
             var videoChip = hasVideo ? '<button class="ficha-video-chip" data-num="' + f.id + '" title="Ver video de la escena en televisor CRT"><span class="video-chip-icon">🎬</span> VIDEO</button>' : '';
             var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}">';
 
@@ -1162,30 +1164,36 @@ if (navToggle && navLinks) {
             var isSoundAllowed = ((fNum >= 1 && fNum <= 103) || (fNum >= 109 && fNum <= 117));
             if (isSoundAllowed && f.sonido) {
                 fichaSoundBtn.style.display = 'inline-flex';
+                fichaSoundBtn.classList.remove('hidden');
                 updateSoundButtonState(isSoundPlaying && activeSoundFichaId === f.id);
             } else {
                 fichaSoundBtn.style.display = 'none';
+                fichaSoundBtn.classList.add('hidden');
             }
         }
-
-
 
         // Configurar botón de narración de IA en el modal
         if (fichaNarrateBtn) {
             if (f.narracion) {
                 fichaNarrateBtn.style.display = 'inline-flex';
+                fichaNarrateBtn.classList.remove('hidden');
                 updateNarrateButtonState(isNarratePlaying && activeNarrateFichaId === f.id);
             } else {
                 fichaNarrateBtn.style.display = 'none';
+                fichaNarrateBtn.classList.add('hidden');
             }
         }
 
-        // Configurar botón de video en el modal
+        // Configurar botón de video en el modal (SÓLO Película 118-174)
         if (fichaVideoBtn) {
-            if (f.video || (f.id >= 118 && f.id <= 174)) {
+            var fNumVideo = parseInt(f.num || f.id, 10);
+            var hasVideo = (fNumVideo >= 118 && fNumVideo <= 174);
+            if (hasVideo) {
                 fichaVideoBtn.style.display = 'inline-flex';
+                fichaVideoBtn.classList.remove('hidden');
             } else {
                 fichaVideoBtn.style.display = 'none';
+                fichaVideoBtn.classList.add('hidden');
             }
         }
 
