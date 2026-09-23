@@ -961,7 +961,22 @@ if (navToggle && navLinks) {
         });
     }
 
-    // Funciones del Reproductor CRT TV (Fichas 118-126)
+    function getCrtVideoYear(numStr) {
+        var n = parseInt(numStr, 10);
+        if (n >= 118 && n <= 126) return '1993';
+        if (n >= 127 && n <= 135) return '1997';
+        if (n >= 136 && n <= 144) return '2001';
+        if (n >= 145 && n <= 153) return '2015';
+        if (n >= 154 && n <= 162) return '2018';
+        if (n === 163)            return '2019';
+        if (n >= 164 && n <= 167) return '2015';
+        if (n >= 168 && n <= 171) return '2016';
+        if (n >= 172 && n <= 189) return '2022';
+        if (n >= 190 && n <= 198) return '2017';
+        return '1993';
+    }
+
+    // Funciones del Reproductor CRT TV (Fichas 118-198)
     function openCrtTV(videoSrc, numStr) {
         stopFichaSound();
         stopFichaNarrate();
@@ -974,6 +989,17 @@ if (navToggle && navLinks) {
         var crtChannel = crtWrapper.querySelector('.crt-channel');
         if (crtChannel && numStr) {
             crtChannel.innerHTML = 'CH 03 &bull; EXPEDIENTE #' + numStr + ' &bull; INGEN ARCHIVE';
+        }
+
+        var crtYear = getCrtVideoYear(numStr);
+        var crtRecText = document.getElementById('crt-rec-text');
+        if (crtRecText) {
+            crtRecText.textContent = 'PLAY ' + crtYear;
+        } else {
+            var crtRec = crtWrapper.querySelector('.crt-rec');
+            if (crtRec) {
+                crtRec.innerHTML = '<span class="crt-rec-dot"></span> PLAY ' + crtYear;
+            }
         }
 
         // Priorizar archivo en la raíz (ej. 118.mp4), con fallback a videosjp/118.mp4
