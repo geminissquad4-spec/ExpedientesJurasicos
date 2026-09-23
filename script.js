@@ -771,6 +771,15 @@ if (navToggle && navLinks) {
     var activeNarrateFichaId = null;
     var isNarratePlaying = false;
 
+    // Elementos de CRT TV Video (fichas 118-126)
+    var fichaVideoBtn = document.getElementById('ficha-video-btn');
+    var fichaVideoText = document.getElementById('ficha-video-text');
+    var crtOverlay = document.getElementById('crt-tv-overlay');
+    var crtWrapper = document.getElementById('crt-tv-wrapper');
+    var crtVideo = document.getElementById('crt-tv-video');
+    var crtCloseBtn = document.getElementById('crt-tv-close');
+    var isCrtClosing = false;
+
     var currentFichaIndex = 0;
     var isShowingBack = false;
 
@@ -947,6 +956,91 @@ if (navToggle && navLinks) {
         });
     }
 
+    // Funciones del Reproductor CRT TV (Fichas 118-126)
+    function openCrtTV(videoSrc, numStr) {
+        stopFichaSound();
+        stopFichaNarrate();
+        if (typeof stopSpeciesRoar === 'function') {
+            try { stopSpeciesRoar(); } catch(e) {}
+        }
+
+        if (!crtOverlay || !crtVideo || !crtWrapper) return;
+
+        crtVideo.pause();
+        crtVideo.currentTime = 0;
+
+        var crtChannel = crtWrapper.querySelector('.crt-channel');
+        if (crtChannel && numStr) {
+            crtChannel.innerHTML = 'CH 03 &bull; EXPEDIENTE #' + numStr + ' &bull; INGEN ARCHIVE';
+        }
+
+        var triedFallback = false;
+        crtVideo.onerror = function() {
+            if (!triedFallback && numStr) {
+                triedFallback = true;
+                if (videoSrc.indexOf('videosjp/') !== -1) {
+                    crtVideo.src = numStr + '.mp4';
+                } else {
+                    crtVideo.src = 'videosjp/' + numStr + '.mp4';
+                }
+                crtVideo.play().catch(function(){});
+            }
+        };
+
+        crtVideo.src = videoSrc;
+        crtWrapper.style.animation = 'crtTurnOn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards';
+        crtOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+
+        var p = crtVideo.play();
+        if (p !== undefined) {
+            p.catch(function(err) {
+                console.log('Video autoplay aviso:', err);
+            });
+        }
+    }
+
+    function closeCrtTV() {
+        if (!crtOverlay || !crtOverlay.classList.contains('open') || isCrtClosing) return;
+        isCrtClosing = true;
+        if (crtWrapper) {
+            crtWrapper.style.animation = 'crtTurnOff 0.4s ease forwards';
+        }
+        setTimeout(function() {
+            if (crtVideo) {
+                try {
+                    crtVideo.pause();
+                    crtVideo.currentTime = 0;
+                    crtVideo.src = '';
+                } catch(e) {}
+            }
+            if (crtOverlay) crtOverlay.classList.remove('open');
+            if (crtWrapper) crtWrapper.style.animation = '';
+            if (!fichaModal || !fichaModal.classList.contains('open')) {
+                document.body.style.overflow = '';
+            }
+            isCrtClosing = false;
+        }, 380);
+    }
+
+    if (crtCloseBtn) crtCloseBtn.addEventListener('click', closeCrtTV);
+    if (crtVideo) crtVideo.addEventListener('ended', closeCrtTV);
+    if (crtOverlay) {
+        crtOverlay.addEventListener('click', function(e) {
+            if (e.target === crtOverlay) closeCrtTV();
+        });
+    }
+
+    if (fichaVideoBtn) {
+        fichaVideoBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var f = FICHAS[currentFichaIndex];
+            if (f && f.video) {
+                openCrtTV(f.video, f.num);
+            }
+        });
+    }
+
     // Construir las tarjetas
     function buildFichas() {
         fichasGrid.innerHTML = '';
@@ -957,12 +1051,14 @@ if (navToggle && navLinks) {
             wrapper.setAttribute('data-num', f.id);
 
             var soundChip = f.sonido ? '<button class="ficha-sound-chip" data-num="' + f.id + '" title="Reproducir sonido de la ficha #' + f.num + '"><span class="sound-chip-icon">🔊</span> SONIDO</button>' : '';
+            var videoChip = f.video ? '<button class="ficha-video-chip" data-num="' + f.id + '" title="Ver video de la escena en televisor CRT"><span class="video-chip-icon">🎬</span> VIDEO</button>' : '';
             var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}">';
 
             wrapper.innerHTML =
                 '<div class="ficha-inner">' +
                     '<div class="ficha-front">' +
                         soundChip +
+                        videoChip +
                         frenteContent +
                         '<span class="ficha-badge">' + f.categoria + '</span>' +
                         '<span class="ficha-num-tag">#' + f.num + '</span>' +
@@ -980,6 +1076,16 @@ if (navToggle && navLinks) {
                 }
             }
 
+            if (f.video) {
+                var vChip = wrapper.querySelector('.ficha-video-chip');
+                if (vChip) {
+                    vChip.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        openCrtTV(f.video, f.num);
+                    });
+                }
+            }
+
             // Al hacer clic, abre la vista en grande (modal)
             wrapper.addEventListener('click', function() {
                 openFichaModal(idx, false);
@@ -990,6 +1096,7 @@ if (navToggle && navLinks) {
 
         updateFichaCount();
     }
+
 
     function openFichaModal(index, showBack) {
         currentFichaIndex = index;
@@ -1002,6 +1109,7 @@ if (navToggle && navLinks) {
     function closeFichaModal() {
         stopFichaSound();
         stopFichaNarrate();
+        closeCrtTV();
         if (fichaModal) fichaModal.classList.remove('open');
         document.body.style.overflow = '';
     }
@@ -1050,6 +1158,15 @@ if (navToggle && navLinks) {
                 fichaNarrateBtn.style.display = 'none';
             }
         }
+
+        // Configurar botón de video en el modal
+        if (fichaVideoBtn) {
+            if (f.video) {
+                fichaVideoBtn.style.display = 'inline-flex';
+            } else {
+                fichaVideoBtn.style.display = 'none';
+            }
+        }
     }
 
     function toggleModalSide() {
@@ -1068,6 +1185,7 @@ if (navToggle && navLinks) {
     function prevFicha() {
         stopFichaSound();
         stopFichaNarrate();
+        closeCrtTV();
         currentFichaIndex = (currentFichaIndex - 1 + FICHAS.length) % FICHAS.length;
         isShowingBack = false;
         updateFichaModalContent();
@@ -1076,6 +1194,7 @@ if (navToggle && navLinks) {
     function nextFicha() {
         stopFichaSound();
         stopFichaNarrate();
+        closeCrtTV();
         currentFichaIndex = (currentFichaIndex + 1) % FICHAS.length;
         isShowingBack = false;
         updateFichaModalContent();
@@ -1091,12 +1210,22 @@ if (navToggle && navLinks) {
     });
 
     document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            if (crtOverlay && crtOverlay.classList.contains('open')) {
+                closeCrtTV();
+                return;
+            }
+            if (fichaModal && fichaModal.classList.contains('open')) {
+                closeFichaModal();
+            }
+            return;
+        }
         if (!fichaModal || !fichaModal.classList.contains('open')) return;
-        if (e.key === 'Escape') closeFichaModal();
         if (e.key === 'ArrowLeft') prevFicha();
         if (e.key === 'ArrowRight') nextFicha();
         if (e.key === ' ') { e.preventDefault(); toggleModalSide(); }
     });
+
 
     // Aplicar filtro de categoría
     function applyFichaFilter(cat) {

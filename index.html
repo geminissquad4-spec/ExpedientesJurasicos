@@ -669,6 +669,9 @@
       <button class="btn-primary ficha-narrate-btn" id="ficha-narrate-btn" style="display: none;" title="Escuchar narración con voz de IA">
         <span class="narrate-icon">🎙️</span> <span id="ficha-narrate-text">NARRAR EXPEDIENTE</span>
       </button>
+      <button class="btn-primary ficha-video-btn" id="ficha-video-btn" style="display: none;" title="Ver video de la escena en televisor CRT de los 90">
+        <span class="video-btn-icon">🎬</span> <span id="ficha-video-text">VER VIDEO</span>
+      </button>
     </div>
   </div>
 </div>
@@ -680,6 +683,24 @@
 <!-- REPRODUCTOR DE RUGIDOS PARA CATÁLOGO DE ESPECIES -->
 <audio id="species-roar-player" preload="none" style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0.01;pointer-events:none;"></audio>
 <video id="species-video-roar-player" preload="none" playsinline style="position:fixed;top:-9999px;left:-9999px;width:1px;height:1px;opacity:0.01;pointer-events:none;"></video>
+
+<!-- REPRODUCTOR DE VIDEO TELEVISOR CRT AÑOS 90 (FICHAS 118-126) -->
+<div class="crt-tv-overlay" id="crt-tv-overlay">
+  <div class="crt-tv-wrapper" id="crt-tv-wrapper">
+    <button class="crt-tv-close" id="crt-tv-close" title="Apagar televisor">&#10005;</button>
+    <div class="crt-tv-frame">
+      <div class="crt-tv-screen">
+        <div class="crt-scanlines"></div>
+        <div class="crt-vignette"></div>
+        <div class="crt-tv-header">
+          <span class="crt-channel">CH 03 &bull; INGEN VIDEO ARCHIVE</span>
+          <span class="crt-rec"><span class="crt-rec-dot"></span> PLAY 1993</span>
+        </div>
+        <video id="crt-tv-video" controls playsinline controlsList="nodownload" preload="auto"></video>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- SCRIPTS -->
 <script src="cronologia-data.js"></script>

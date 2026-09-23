@@ -39,6 +39,14 @@ function getFichaNarracion(numInt, numStr) {
     return null;
 }
 
+// Videos para fichas de 118 a 126 (en carpeta videosjp/ o raíz)
+function getFichaVideo(numInt, numStr) {
+    if (numInt >= 118 && numInt <= 126) {
+        return 'videosjp/' + numStr + '.mp4';
+    }
+    return null;
+}
+
 // Genera el array de 315 fichas
 // Las imágenes: fichas/frente_XXX.jpg y fichas/reverso_XXX.jpg
 var FICHAS = (function() {
@@ -55,7 +63,8 @@ var FICHAS = (function() {
             frenteImg: 'fichas/frente_' + num + '.jpg',
             reversoImg: 'fichas/reverso_' + num + '.jpg',
             sonido: getFichaSonido(i, num),
-            narracion: getFichaNarracion(i, num)
+            narracion: getFichaNarracion(i, num),
+            video: getFichaVideo(i, num)
         });
     }
     return arr;
