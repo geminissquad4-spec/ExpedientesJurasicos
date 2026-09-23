@@ -940,13 +940,15 @@ if (navToggle && navLinks) {
         fichaSoundBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             var f = FICHAS[currentFichaIndex];
-            var cat = (f && f.categoria ? f.categoria : '').toUpperCase();
-            var isSoundBlocked = (cat === 'PELÍCULA' || cat === 'PELICULA' || cat === 'NOVELA' || cat === 'TRIBUTO' || cat === 'EMPRESA' || cat === 'JUGUETES');
-            if (f && f.sonido && !isSoundBlocked) {
+            if (!f) return;
+            var fNum = parseInt(f.num || f.id, 10);
+            var isSoundAllowed = ((fNum >= 1 && fNum <= 103) || (fNum >= 109 && fNum <= 117));
+            if (isSoundAllowed && f.sonido) {
                 playFichaSound(f.sonido, f.id);
             }
         });
     }
+
 
 
     if (fichaNarrateBtn) {
@@ -1057,9 +1059,10 @@ if (navToggle && navLinks) {
             wrapper.setAttribute('data-cat', f.categoria);
             wrapper.setAttribute('data-num', f.id);
 
-            var catUpper = (f.categoria || '').toUpperCase();
-            var isSoundBlocked = (catUpper === 'PELÍCULA' || catUpper === 'PELICULA' || catUpper === 'NOVELA' || catUpper === 'TRIBUTO' || catUpper === 'EMPRESA' || catUpper === 'JUGUETES');
+            var fNum = parseInt(f.num || f.id, 10);
+            var isSoundAllowed = ((fNum >= 1 && fNum <= 103) || (fNum >= 109 && fNum <= 117));
 
+            var soundChip = (isSoundAllowed && f.sonido) ? '<button class="ficha-sound-chip" data-num="' + f.id + '" title="Reproducir sonido de la ficha #' + f.num + '"><span class="sound-chip-icon">🔊</span> SONIDO</button>' : '';
             var hasVideo = f.video || (f.id >= 118 && f.id <= 126);
             var videoChip = hasVideo ? '<button class="ficha-video-chip" data-num="' + f.id + '" title="Ver video de la escena en televisor CRT"><span class="video-chip-icon">🎬</span> VIDEO</button>' : '';
             var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}">';
@@ -1076,7 +1079,7 @@ if (navToggle && navLinks) {
                     '</div>' +
                 '</div>';
 
-            if (f.sonido && !isSoundBlocked) {
+            if (isSoundAllowed && f.sonido) {
                 var chip = wrapper.querySelector('.ficha-sound-chip');
                 if (chip) {
                     chip.addEventListener('click', function(e) {
@@ -1085,6 +1088,7 @@ if (navToggle && navLinks) {
                     });
                 }
             }
+
 
 
             if (hasVideo) {
@@ -1151,17 +1155,19 @@ if (navToggle && navLinks) {
             fichaToggleText.textContent = isShowingBack ? 'VER FRENTE DE LA FICHA' : 'VER REVERSO DE LA FICHA';
         }
 
-        // Configurar botón de sonido en el modal (excluyendo película, novela, tributo, empresa y juguetes)
+        // Configurar botón de sonido en el modal (SÓLO Especies 1-103 y Personajes 109-117)
+        // Empresa (104-108), Película (118-198), Novela (199-244), Tributo (245) y Juguetes (246-315) NUNCA muestran sonido
         if (fichaSoundBtn) {
-            var catUpperModal = (f.categoria || '').toUpperCase();
-            var isModalSoundBlocked = (catUpperModal === 'PELÍCULA' || catUpperModal === 'PELICULA' || catUpperModal === 'NOVELA' || catUpperModal === 'TRIBUTO' || catUpperModal === 'EMPRESA' || catUpperModal === 'JUGUETES');
-            if (f.sonido && !isModalSoundBlocked) {
+            var fNum = parseInt(f.num || f.id, 10);
+            var isSoundAllowed = ((fNum >= 1 && fNum <= 103) || (fNum >= 109 && fNum <= 117));
+            if (isSoundAllowed && f.sonido) {
                 fichaSoundBtn.style.display = 'inline-flex';
                 updateSoundButtonState(isSoundPlaying && activeSoundFichaId === f.id);
             } else {
                 fichaSoundBtn.style.display = 'none';
             }
         }
+
 
 
         // Configurar botón de narración de IA en el modal
