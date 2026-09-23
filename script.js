@@ -1044,7 +1044,7 @@ if (navToggle && navLinks) {
             var f = FICHAS[currentFichaIndex];
             if (!f) return;
             var fNum = parseInt(f.num || f.id, 10);
-            var isVideoFicha = (fNum >= 118 && fNum <= 174);
+            var isVideoFicha = (fNum >= 118 && fNum <= 198);
             if (isVideoFicha) {
                 openCrtTV(f.video || (f.num + '.mp4'), f.num);
             }
@@ -1065,7 +1065,7 @@ if (navToggle && navLinks) {
             var isSoundAllowed = ((fNum >= 1 && fNum <= 103) || (fNum >= 109 && fNum <= 117));
 
             var soundChip = (isSoundAllowed && f.sonido) ? '<button class="ficha-sound-chip" data-num="' + f.id + '" title="Reproducir sonido de la ficha #' + f.num + '"><span class="sound-chip-icon">🔊</span> SONIDO</button>' : '';
-            var hasVideo = (fNum >= 118 && fNum <= 174);
+            var hasVideo = (fNum >= 118 && fNum <= 198);
             var videoChip = hasVideo ? '<button class="ficha-video-chip" data-num="' + f.id + '" title="Ver video de la escena en televisor CRT"><span class="video-chip-icon">🎬</span> VIDEO</button>' : '';
             var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}">';
 
@@ -1184,10 +1184,10 @@ if (navToggle && navLinks) {
             }
         }
 
-        // Configurar botón de video en el modal (SÓLO Película 118-174)
+        // Configurar botón de video en el modal (SÓLO Película 118-198)
         if (fichaVideoBtn) {
             var fNumVideo = parseInt(f.num || f.id, 10);
-            var hasVideo = (fNumVideo >= 118 && fNumVideo <= 174);
+            var hasVideo = (fNumVideo >= 118 && fNumVideo <= 198);
             if (hasVideo) {
                 fichaVideoBtn.style.display = 'inline-flex';
                 fichaVideoBtn.classList.remove('hidden');
