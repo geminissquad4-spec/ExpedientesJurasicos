@@ -969,28 +969,30 @@ if (navToggle && navLinks) {
 
         if (!crtOverlay || !crtVideo || !crtWrapper) return;
 
-        crtVideo.pause();
-        crtVideo.currentTime = 0;
-
         var crtChannel = crtWrapper.querySelector('.crt-channel');
         if (crtChannel && numStr) {
             crtChannel.innerHTML = 'CH 03 &bull; EXPEDIENTE #' + numStr + ' &bull; INGEN ARCHIVE';
         }
 
+        // Priorizar archivo en la raíz (ej. 118.mp4), con fallback a videosjp/118.mp4
+        var primarySrc = numStr ? (numStr + '.mp4') : videoSrc;
+        var secondarySrc = numStr ? ('videosjp/' + numStr + '.mp4') : null;
+
         var triedFallback = false;
         crtVideo.onerror = function() {
-            if (!triedFallback && numStr) {
+            if (!triedFallback && secondarySrc && (!crtVideo.currentSrc || crtVideo.currentSrc.indexOf('videosjp/') === -1)) {
                 triedFallback = true;
-                if (videoSrc.indexOf('videosjp/') !== -1) {
-                    crtVideo.src = numStr + '.mp4';
-                } else {
-                    crtVideo.src = 'videosjp/' + numStr + '.mp4';
-                }
+                console.log('Intentando fallback para video:', secondarySrc);
+                crtVideo.src = secondarySrc;
+                crtVideo.load();
                 crtVideo.play().catch(function(){});
             }
         };
 
-        crtVideo.src = videoSrc;
+        crtVideo.pause();
+        crtVideo.src = primarySrc;
+        crtVideo.load();
+
         crtWrapper.style.animation = 'crtTurnOn 0.5s cubic-bezier(0.23, 1, 0.32, 1) forwards';
         crtOverlay.classList.add('open');
         document.body.style.overflow = 'hidden';
@@ -1013,8 +1015,8 @@ if (navToggle && navLinks) {
             if (crtVideo) {
                 try {
                     crtVideo.pause();
-                    crtVideo.currentTime = 0;
-                    crtVideo.src = '';
+                    crtVideo.removeAttribute('src');
+                    crtVideo.load();
                 } catch(e) {}
             }
             if (crtOverlay) crtOverlay.classList.remove('open');
@@ -1038,11 +1040,13 @@ if (navToggle && navLinks) {
         fichaVideoBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             var f = FICHAS[currentFichaIndex];
-            if (f && f.video) {
-                openCrtTV(f.video, f.num);
+            var isVideoFicha = f && (f.video || (f.id >= 118 && f.id <= 126));
+            if (isVideoFicha) {
+                openCrtTV(f.video || (f.num + '.mp4'), f.num);
             }
         });
     }
+
 
     // Construir las tarjetas
     function buildFichas() {
@@ -1056,8 +1060,8 @@ if (navToggle && navLinks) {
             var catUpper = (f.categoria || '').toUpperCase();
             var isSoundBlocked = (catUpper === 'PELÍCULA' || catUpper === 'PELICULA' || catUpper === 'NOVELA' || catUpper === 'TRIBUTO' || catUpper === 'EMPRESA' || catUpper === 'JUGUETES');
 
-            var soundChip = (f.sonido && !isSoundBlocked) ? '<button class="ficha-sound-chip" data-num="' + f.id + '" title="Reproducir sonido de la ficha #' + f.num + '"><span class="sound-chip-icon">🔊</span> SONIDO</button>' : '';
-            var videoChip = f.video ? '<button class="ficha-video-chip" data-num="' + f.id + '" title="Ver video de la escena en televisor CRT"><span class="video-chip-icon">🎬</span> VIDEO</button>' : '';
+            var hasVideo = f.video || (f.id >= 118 && f.id <= 126);
+            var videoChip = hasVideo ? '<button class="ficha-video-chip" data-num="' + f.id + '" title="Ver video de la escena en televisor CRT"><span class="video-chip-icon">🎬</span> VIDEO</button>' : '';
             var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}">';
 
             wrapper.innerHTML =
@@ -1083,15 +1087,16 @@ if (navToggle && navLinks) {
             }
 
 
-            if (f.video) {
+            if (hasVideo) {
                 var vChip = wrapper.querySelector('.ficha-video-chip');
                 if (vChip) {
                     vChip.addEventListener('click', function(e) {
                         e.stopPropagation();
-                        openCrtTV(f.video, f.num);
+                        openCrtTV(f.video || (f.num + '.mp4'), f.num);
                     });
                 }
             }
+
 
             // Al hacer clic, abre la vista en grande (modal)
             wrapper.addEventListener('click', function() {
@@ -1171,12 +1176,13 @@ if (navToggle && navLinks) {
 
         // Configurar botón de video en el modal
         if (fichaVideoBtn) {
-            if (f.video) {
+            if (f.video || (f.id >= 118 && f.id <= 126)) {
                 fichaVideoBtn.style.display = 'inline-flex';
             } else {
                 fichaVideoBtn.style.display = 'none';
             }
         }
+
     }
 
     function toggleModalSide() {
