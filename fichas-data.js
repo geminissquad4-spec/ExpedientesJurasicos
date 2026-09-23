@@ -23,13 +23,15 @@ function getFichaCategoria(num) {
     return { label: '???', clase: 'cat-unknown', color: '#607868' };
 }
 
-// Sonidos para fichas de 001 a 103 y 109 a 117 (ubicados por fuera en la raíz: 001.mp4, 109.mp4, etc.)
+// Sonidos SOLO para fichas de Especie (001 a 103) y Personaje (109 a 117)
+// Excluidas expresamente: Empresa (104-108), Película (118-198), Novela (199-244), Tributo (245) y Juguetes (246-315)
 function getFichaSonido(numInt, numStr) {
     if ((numInt >= 1 && numInt <= 103) || (numInt >= 109 && numInt <= 117)) {
         return numStr + '.mp4';
     }
     return null;
 }
+
 
 // Narraciones de IA disponibles para todas las fichas (narracion_001.mp3 a narracion_315.mp3 en la raíz)
 function getFichaNarracion(numInt, numStr) {

@@ -940,11 +940,14 @@ if (navToggle && navLinks) {
         fichaSoundBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             var f = FICHAS[currentFichaIndex];
-            if (f && f.sonido) {
+            var cat = (f && f.categoria ? f.categoria : '').toUpperCase();
+            var isSoundBlocked = (cat === 'PELÍCULA' || cat === 'PELICULA' || cat === 'NOVELA' || cat === 'TRIBUTO' || cat === 'EMPRESA' || cat === 'JUGUETES');
+            if (f && f.sonido && !isSoundBlocked) {
                 playFichaSound(f.sonido, f.id);
             }
         });
     }
+
 
     if (fichaNarrateBtn) {
         fichaNarrateBtn.addEventListener('click', function(e) {
@@ -1050,7 +1053,10 @@ if (navToggle && navLinks) {
             wrapper.setAttribute('data-cat', f.categoria);
             wrapper.setAttribute('data-num', f.id);
 
-            var soundChip = f.sonido ? '<button class="ficha-sound-chip" data-num="' + f.id + '" title="Reproducir sonido de la ficha #' + f.num + '"><span class="sound-chip-icon">🔊</span> SONIDO</button>' : '';
+            var catUpper = (f.categoria || '').toUpperCase();
+            var isSoundBlocked = (catUpper === 'PELÍCULA' || catUpper === 'PELICULA' || catUpper === 'NOVELA' || catUpper === 'TRIBUTO' || catUpper === 'EMPRESA' || catUpper === 'JUGUETES');
+
+            var soundChip = (f.sonido && !isSoundBlocked) ? '<button class="ficha-sound-chip" data-num="' + f.id + '" title="Reproducir sonido de la ficha #' + f.num + '"><span class="sound-chip-icon">🔊</span> SONIDO</button>' : '';
             var videoChip = f.video ? '<button class="ficha-video-chip" data-num="' + f.id + '" title="Ver video de la escena en televisor CRT"><span class="video-chip-icon">🎬</span> VIDEO</button>' : '';
             var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}">';
 
@@ -1066,7 +1072,7 @@ if (navToggle && navLinks) {
                     '</div>' +
                 '</div>';
 
-            if (f.sonido) {
+            if (f.sonido && !isSoundBlocked) {
                 var chip = wrapper.querySelector('.ficha-sound-chip');
                 if (chip) {
                     chip.addEventListener('click', function(e) {
@@ -1075,6 +1081,7 @@ if (navToggle && navLinks) {
                     });
                 }
             }
+
 
             if (f.video) {
                 var vChip = wrapper.querySelector('.ficha-video-chip');
@@ -1139,15 +1146,18 @@ if (navToggle && navLinks) {
             fichaToggleText.textContent = isShowingBack ? 'VER FRENTE DE LA FICHA' : 'VER REVERSO DE LA FICHA';
         }
 
-        // Configurar botón de sonido en el modal
+        // Configurar botón de sonido en el modal (excluyendo película, novela, tributo, empresa y juguetes)
         if (fichaSoundBtn) {
-            if (f.sonido) {
+            var catUpperModal = (f.categoria || '').toUpperCase();
+            var isModalSoundBlocked = (catUpperModal === 'PELÍCULA' || catUpperModal === 'PELICULA' || catUpperModal === 'NOVELA' || catUpperModal === 'TRIBUTO' || catUpperModal === 'EMPRESA' || catUpperModal === 'JUGUETES');
+            if (f.sonido && !isModalSoundBlocked) {
                 fichaSoundBtn.style.display = 'inline-flex';
                 updateSoundButtonState(isSoundPlaying && activeSoundFichaId === f.id);
             } else {
                 fichaSoundBtn.style.display = 'none';
             }
         }
+
 
         // Configurar botón de narración de IA en el modal
         if (fichaNarrateBtn) {
