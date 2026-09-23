@@ -41,13 +41,14 @@ function getFichaNarracion(numInt, numStr) {
     return null;
 }
 
-// Videos para fichas de 118 a 135 (en la raíz: 118.mp4 a 135.mp4)
+// Videos para fichas de 118 a 153 (en la raíz: 118.mp4 a 153.mp4)
 function getFichaVideo(numInt, numStr) {
-    if (numInt >= 118 && numInt <= 135) {
+    if (numInt >= 118 && numInt <= 153) {
         return numStr + '.mp4';
     }
     return null;
 }
+
 
 
 

@@ -1042,7 +1042,7 @@ if (navToggle && navLinks) {
         fichaVideoBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             var f = FICHAS[currentFichaIndex];
-            var isVideoFicha = f && (f.video || (f.id >= 118 && f.id <= 135));
+            var isVideoFicha = f && (f.video || (f.id >= 118 && f.id <= 153));
             if (isVideoFicha) {
                 openCrtTV(f.video || (f.num + '.mp4'), f.num);
             }
@@ -1063,7 +1063,7 @@ if (navToggle && navLinks) {
             var isSoundAllowed = ((fNum >= 1 && fNum <= 103) || (fNum >= 109 && fNum <= 117));
 
             var soundChip = (isSoundAllowed && f.sonido) ? '<button class="ficha-sound-chip" data-num="' + f.id + '" title="Reproducir sonido de la ficha #' + f.num + '"><span class="sound-chip-icon">🔊</span> SONIDO</button>' : '';
-            var hasVideo = f.video || (f.id >= 118 && f.id <= 135);
+            var hasVideo = f.video || (f.id >= 118 && f.id <= 153);
             var videoChip = hasVideo ? '<button class="ficha-video-chip" data-num="' + f.id + '" title="Ver video de la escena en televisor CRT"><span class="video-chip-icon">🎬</span> VIDEO</button>' : '';
             var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}">';
 
@@ -1182,12 +1182,13 @@ if (navToggle && navLinks) {
 
         // Configurar botón de video en el modal
         if (fichaVideoBtn) {
-            if (f.video || (f.id >= 118 && f.id <= 135)) {
+            if (f.video || (f.id >= 118 && f.id <= 153)) {
                 fichaVideoBtn.style.display = 'inline-flex';
             } else {
                 fichaVideoBtn.style.display = 'none';
             }
         }
+
 
 
     }
