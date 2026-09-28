@@ -813,6 +813,9 @@ if (navToggle && navLinks) {
                 fichaNarratePlayer.currentTime = 0;
             } catch(e) {}
         }
+        if ('speechSynthesis' in window) {
+            try { window.speechSynthesis.cancel(); } catch(e) {}
+        }
         isNarratePlaying = false;
         activeNarrateFichaId = null;
         updateNarrateButtonState(false);
@@ -848,6 +851,30 @@ if (navToggle && navLinks) {
         }
     }
 
+    function speakFichaText(text, fichaId) {
+        if (!('speechSynthesis' in window) || !text) {
+            stopFichaNarrate();
+            return;
+        }
+        try { window.speechSynthesis.cancel(); } catch(e) {}
+        
+        var utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'es-ES';
+        utterance.rate = 0.95;
+        
+        utterance.onend = function() {
+            stopFichaNarrate();
+        };
+        utterance.onerror = function() {
+            stopFichaNarrate();
+        };
+        
+        activeNarrateFichaId = fichaId;
+        isNarratePlaying = true;
+        updateNarrateButtonState(true);
+        window.speechSynthesis.speak(utterance);
+    }
+
     function playFichaNarrate(narrateSrc, fichaId) {
         if (isNarratePlaying && activeNarrateFichaId === fichaId) {
             stopFichaNarrate();
@@ -856,21 +883,30 @@ if (navToggle && navLinks) {
 
         stopFichaSound();
         stopFichaNarrate();
-        if (!narrateSrc) return;
+
+        var f = (typeof FICHAS !== 'undefined') ? FICHAS.find(function(item) { return item.id === fichaId; }) : null;
 
         activeNarrateFichaId = fichaId;
         isNarratePlaying = true;
         updateNarrateButtonState(true);
 
-        if (fichaNarratePlayer) {
+        if (fichaNarratePlayer && narrateSrc) {
             fichaNarratePlayer.src = narrateSrc;
             var p = fichaNarratePlayer.play();
             if (p !== undefined) {
                 p.catch(function(err) {
-                    console.warn('Error al reproducir narración:', err);
-                    stopFichaNarrate();
+                    console.warn('Error al reproducir audio mp3 de narración, usando voz de síntesis IA:', err);
+                    if (f && f.textoNarracion) {
+                        speakFichaText(f.textoNarracion, fichaId);
+                    } else {
+                        stopFichaNarrate();
+                    }
                 });
             }
+        } else if (f && f.textoNarracion) {
+            speakFichaText(f.textoNarracion, fichaId);
+        } else {
+            stopFichaNarrate();
         }
     }
 
@@ -1200,7 +1236,7 @@ if (navToggle && navLinks) {
 
         // Configurar botón de narración de IA en el modal
         if (fichaNarrateBtn) {
-            if (f.narracion) {
+            if (f.narracion || f.textoNarracion) {
                 fichaNarrateBtn.style.display = 'inline-flex';
                 fichaNarrateBtn.classList.remove('hidden');
                 updateNarrateButtonState(isNarratePlaying && activeNarrateFichaId === f.id);
