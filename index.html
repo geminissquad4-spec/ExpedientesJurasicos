@@ -18,7 +18,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="styles.css?v=23">
+<link rel="stylesheet" href="styles.css?v=24">
 
 <link rel="icon" type="image/jpeg" href="Expedientes%20Jurásicos%20logo.jpg">
 
@@ -245,6 +245,11 @@
 <div class="clock-time" id="clock-time">00:00:00</div>
 
 <div class="clock-date" id="clock-date">--- -- ----</div>
+
+<button class="bg-music-btn" id="bg-music-toggle" title="Activar / Silenciar música de fondo">
+  <span class="bg-music-icon" id="bg-music-icon">🔊</span>
+  <span class="bg-music-text" id="bg-music-text">MÚSICA BGM</span>
+</button>
 
 </div>
 
@@ -1428,9 +1433,9 @@
 
 <script src="species-data-3.js"></script>
 
-<script src="fichas-data.js?v=23"></script>
+<script src="fichas-data.js?v=24"></script>
 
-<script src="script.js?v=23"></script>
+<script src="script.js?v=24"></script>
 
 
 
@@ -1517,6 +1522,10 @@ if (typeof window.toggleTimeline !== 'function') {
 }
 
 </script>
+
+
+<audio id="bg-music-player" loop preload="auto" src="fondo.mp4" style="display:none;"></audio>
+<audio id="select-sound-player" preload="auto" src="Select%20sound.mp4" style="display:none;"></audio>
 
 </body>
 

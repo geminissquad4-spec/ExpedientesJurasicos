@@ -153,6 +153,136 @@ function getRugido(name) {
     return RUGIDOS_MAP[name] || null;
 }
 
+// =============================================
+//  SISTEMA DE AUDIO: BGM Y EFECTO DE SELECCIÓN
+// =============================================
+
+// ---- EFECTO DE SONIDO DE SELECCIÓN (Select sound.mp4) ----
+var selectAudioPool = [];
+var SELECT_POOL_SIZE = 6;
+for (var sIdx = 0; sIdx < SELECT_POOL_SIZE; sIdx++) {
+    var sa = new Audio('Select%20sound.mp4');
+    sa.volume = 0.5;
+    selectAudioPool.push(sa);
+}
+var selectAudioPointer = 0;
+
+function playSelectSound() {
+    try {
+        var a = selectAudioPool[selectAudioPointer];
+        selectAudioPointer = (selectAudioPointer + 1) % SELECT_POOL_SIZE;
+        a.currentTime = 0;
+        var p = a.play();
+        if (p !== undefined) p.catch(function(){});
+    } catch(e) {}
+}
+
+// Delegación global de clic para elementos interactivos
+document.addEventListener('click', function(e) {
+    var target = e.target.closest('button, a, .filter-btn, .ficha-filter-btn, .species-card, .ficha-wrapper, .ficha-variante-chip, .ficha-sound-chip, .ficha-video-chip, .species-roar-chip, .tl-card-header, .incident-header, .btn-primary, .btn-secondary, .btn-evidence, .modal-close, .contest-close, input, [tabindex]');
+    if (target) {
+        playSelectSound();
+    }
+}, true);
+
+// ---- MÚSICA DE FONDO (fondo.mp4) ----
+var bgMusicPlayer = document.getElementById('bg-music-player');
+var bgMusicToggle = document.getElementById('bg-music-toggle');
+var bgMusicIcon   = document.getElementById('bg-music-icon');
+var bgMusicText   = document.getElementById('bg-music-text');
+
+var isBgMusicMuted = false;
+var isBgMusicInterrupted = false;
+
+function updateBgMusicUI() {
+    if (!bgMusicToggle) return;
+    if (isBgMusicMuted) {
+        bgMusicToggle.classList.add('muted');
+        bgMusicToggle.classList.remove('playing');
+        if (bgMusicIcon) bgMusicIcon.textContent = '🔇';
+        if (bgMusicText) bgMusicText.textContent = 'MÚSICA: OFF';
+    } else {
+        bgMusicToggle.classList.remove('muted');
+        bgMusicToggle.classList.add('playing');
+        if (bgMusicIcon) bgMusicIcon.textContent = '🔊';
+        if (bgMusicText) bgMusicText.textContent = 'MÚSICA: ON';
+    }
+}
+
+function playBgMusic() {
+    if (!bgMusicPlayer) return;
+    if (isBgMusicMuted || isBgMusicInterrupted) return;
+    bgMusicPlayer.volume = 0.35;
+    var p = bgMusicPlayer.play();
+    if (p !== undefined) {
+        p.then(function() {
+            updateBgMusicUI();
+        }).catch(function(err) {
+            console.log('Esperando interacción del usuario para reproducir BGM...');
+        });
+    }
+}
+
+function pauseBgMusic() {
+    if (!bgMusicPlayer) return;
+    try {
+        bgMusicPlayer.pause();
+    } catch(e) {}
+}
+
+function interruptBgMusic() {
+    isBgMusicInterrupted = true;
+    pauseBgMusic();
+}
+
+function releaseBgMusic() {
+    isBgMusicInterrupted = false;
+    setTimeout(function() {
+        if (!isOtherAudioActive()) {
+            playBgMusic();
+        }
+    }, 250);
+}
+
+function isOtherAudioActive() {
+    var isRoar = (typeof isSpeciesRoarPlaying !== 'undefined' && isSpeciesRoarPlaying);
+    var isFichaSnd = (typeof isSoundPlaying !== 'undefined' && isSoundPlaying);
+    var isNarr = (typeof isNarratePlaying !== 'undefined' && isNarratePlaying);
+    var isCrt = (typeof crtOverlay !== 'undefined' && crtOverlay && crtOverlay.classList.contains('open'));
+    var isIndom = (typeof indominusVideo !== 'undefined' && indominusVideo && !indominusVideo.paused && !indominusVideo.ended);
+    return isRoar || isFichaSnd || isNarr || isCrt || isIndom;
+}
+
+function initBgMusicOnFirstInteraction() {
+    function startOnce() {
+        if (!isBgMusicMuted && !isBgMusicInterrupted) {
+            playBgMusic();
+        }
+        document.removeEventListener('click', startOnce);
+        document.removeEventListener('keydown', startOnce);
+        document.removeEventListener('touchstart', startOnce);
+    }
+    document.addEventListener('click', startOnce);
+    document.addEventListener('keydown', startOnce);
+    document.addEventListener('touchstart', startOnce);
+}
+initBgMusicOnFirstInteraction();
+
+if (bgMusicToggle) {
+    bgMusicToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        isBgMusicMuted = !isBgMusicMuted;
+        if (isBgMusicMuted) {
+            pauseBgMusic();
+            updateBgMusicUI();
+        } else {
+            isBgMusicInterrupted = false;
+            playBgMusic();
+            updateBgMusicUI();
+        }
+    });
+}
+
 // ---- REPRODUCTOR DE RUGIDOS (SECCIÓN ESPECIES) ----
 var speciesRoarAudio = document.getElementById('species-roar-player');
 var speciesRoarVideo = document.getElementById('species-video-roar-player');
@@ -168,6 +298,7 @@ function stopSpeciesRoar() {
     }
     isSpeciesRoarPlaying = false;
     activeSpeciesRoarName = null;
+    if (typeof releaseBgMusic === 'function') releaseBgMusic();
     
     document.querySelectorAll('.species-roar-chip.playing').forEach(function(el) {
         el.classList.remove('playing');
@@ -236,6 +367,7 @@ function playSpeciesRoar(src, name) {
     activeSpeciesRoarName = name;
     isSpeciesRoarPlaying = true;
     updateSpeciesRoarButtonState(name, true);
+    if (typeof interruptBgMusic === 'function') interruptBgMusic();
     
     var fileName = src.split('/').pop();
     var candidates = [
@@ -643,6 +775,7 @@ function showCongratulations() {
         if (glitchOverlay) glitchOverlay.classList.remove('active');
         
         if (contestOverlay) contestOverlay.classList.add('open');
+        if (typeof releaseBgMusic === 'function') releaseBgMusic();
         document.body.style.overflow = 'hidden';
         document.body.classList.remove('screen-flicker');
     }, 800);
@@ -666,6 +799,7 @@ function tryAccess() {
                     videoOverlay.classList.add('open');
                     document.body.style.overflow = 'hidden';
                     if (indominusVideo) {
+                        if (typeof interruptBgMusic === 'function') interruptBgMusic();
                         indominusVideo.play().catch(function(err) {
                             console.error("Error playing video:", err);
                             showCongratulations(); // Fallback if video fails
@@ -799,6 +933,7 @@ if (navToggle && navLinks) {
         }
         isSoundPlaying = false;
         activeSoundFichaId = null;
+        if (typeof releaseBgMusic === "function") releaseBgMusic();
         updateSoundButtonState(false);
         document.querySelectorAll('.ficha-sound-chip.playing').forEach(function(el) {
             el.classList.remove('playing');
@@ -819,6 +954,7 @@ if (navToggle && navLinks) {
         }
         isNarratePlaying = false;
         activeNarrateFichaId = null;
+        if (typeof releaseBgMusic === "function") releaseBgMusic();
         updateNarrateButtonState(false);
     }
 
@@ -890,6 +1026,7 @@ if (navToggle && navLinks) {
         activeNarrateFichaId = fichaId;
         isNarratePlaying = true;
         updateNarrateButtonState(true);
+        if (typeof interruptBgMusic === "function") interruptBgMusic();
 
         if (fichaNarratePlayer && narrateSrc) {
             fichaNarratePlayer.src = narrateSrc;
@@ -924,6 +1061,7 @@ if (navToggle && navLinks) {
         activeSoundFichaId = fichaId;
         isSoundPlaying = true;
         updateSoundButtonState(true);
+        if (typeof interruptBgMusic === "function") interruptBgMusic();
 
         var gridChip = document.querySelector('.ficha-sound-chip[data-num="' + fichaId + '"]');
         if (gridChip) {
@@ -1017,6 +1155,7 @@ if (navToggle && navLinks) {
     function openCrtTV(videoSrc, numStr) {
         stopFichaSound();
         stopFichaNarrate();
+        if (typeof interruptBgMusic === "function") interruptBgMusic();
         if (typeof stopSpeciesRoar === 'function') {
             try { stopSpeciesRoar(); } catch(e) {}
         }
@@ -1089,6 +1228,7 @@ if (navToggle && navLinks) {
             if (!fichaModal || !fichaModal.classList.contains('open')) {
                 document.body.style.overflow = '';
             }
+            if (typeof releaseBgMusic === "function") releaseBgMusic();
             isCrtClosing = false;
         }, 380);
     }
@@ -1115,7 +1255,7 @@ if (navToggle && navLinks) {
     }
 
 
-    // Estado de variante por ficha (mapa id → boolean)
+        // Estado de variante por ficha (mapa id → boolean)
     var varianteActivaPorFicha = {};
 
     // Construir las tarjetas
@@ -1137,12 +1277,16 @@ if (navToggle && navLinks) {
             var videoChip = hasVideo
                 ? '<button class="ficha-video-chip" data-num="' + f.id + '" title="Ver video de la escena en televisor CRT"><span class="video-chip-icon">🎬</span> VIDEO</button>'
                 : '';
-            // Botón variante: aparece dentro de la carta si la ficha tiene variante
+            
+            // Botón chip de variante
+            var isVarActive = !!varianteActivaPorFicha[f.id];
             var varianteChip = f.tieneVariante
-                ? '<button class="ficha-variante-chip" data-num="' + f.id + '" title="Ver carta variante"><span class="variante-chip-icon">✦</span> VARIANTE</button>'
+                ? '<button class="ficha-variante-chip' + (isVarActive ? ' variante-activa' : '') + '" data-num="' + f.id + '" title="Ver variante de la ficha #' + f.num + '"><span class="variante-chip-icon">' + (isVarActive ? '↩' : '✦') + '</span> ' + (isVarActive ? 'ORIGINAL' : 'VARIANTE') + '</button>'
                 : '';
 
-            var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}">';
+            var initialImgSrc = (isVarActive && f.varianteFrenteImg) ? f.varianteFrenteImg : f.frenteImg;
+            var initialFallback = (isVarActive ? 'variante_frente_' : 'frente_') + f.num + '.jpg';
+            var frenteContent = '<img class="ficha-img" src="' + initialImgSrc + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src='' + initialFallback + '';}else{this.parentElement.innerHTML='<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>';}">';
 
             wrapper.innerHTML =
                 '<div class="ficha-inner">' +
@@ -1177,7 +1321,7 @@ if (navToggle && navLinks) {
                 }
             }
 
-            // Botón variante: glow + swap de imagen en la propia carta
+            // Click en botón de variante: destello + cambio de imagen
             if (f.tieneVariante) {
                 var varBtn = wrapper.querySelector('.ficha-variante-chip');
                 if (varBtn) {
@@ -1185,41 +1329,37 @@ if (navToggle && navLinks) {
                         e.stopPropagation();
                         var fichaFront = wrapper.querySelector('.ficha-front');
                         var fichaImg   = wrapper.querySelector('.ficha-img');
-                        var btnIcon    = varBtn.querySelector('.variante-chip-icon');
-                        var isVariante = !!(varianteActivaPorFicha[f.id]);
-
-                        // Nuevo estado
-                        isVariante = !isVariante;
+                        var isVariante = !varianteActivaPorFicha[f.id];
                         varianteActivaPorFicha[f.id] = isVariante;
 
-                        // Efecto de iluminación
+                        // Efecto de iluminación y destello
                         fichaFront.classList.add('ficha-variante-glow');
 
                         setTimeout(function() {
-                            // Cambiar imagen
                             if (fichaImg) {
-                                fichaImg.src = isVariante
-                                    ? (f.varianteFrenteImg || f.frenteImg)
-                                    : f.frenteImg;
+                                var targetSrc = isVariante ? (f.varianteFrenteImg || f.frenteImg) : f.frenteImg;
+                                var fallbackName = isVariante ? ('variante_frente_' + f.num + '.jpg') : ('frente_' + f.num + '.jpg');
+                                fichaImg.onerror = function() {
+                                    this.onerror = null;
+                                    this.src = fallbackName;
+                                };
+                                fichaImg.src = targetSrc;
                             }
-                            // Actualizar botón
-                            if (btnIcon) btnIcon.textContent = isVariante ? '↩' : '✦';
                             varBtn.innerHTML = '<span class="variante-chip-icon">' + (isVariante ? '↩' : '✦') + '</span> ' + (isVariante ? 'ORIGINAL' : 'VARIANTE');
                             varBtn.classList.toggle('variante-activa', isVariante);
 
-                            // Quitar glow
                             setTimeout(function() {
                                 fichaFront.classList.remove('ficha-variante-glow');
-                            }, 400);
-                        }, 220);
+                            }, 450);
+                        }, 200);
                     });
                 }
             }
 
-            // Clic: abrir modal (con estado de variante actual)
+            // Click en la carta: abrir modal respetando el estado de variante
             wrapper.addEventListener('click', function() {
-                isVarianteActiva = !!(varianteActivaPorFicha[f.id]);
-                openFichaModal(idx, false, isVarianteActiva);
+                var isVar = !!varianteActivaPorFicha[f.id];
+                openFichaModal(idx, false, isVar);
             });
 
             fichasGrid.appendChild(wrapper);
@@ -1246,7 +1386,7 @@ if (navToggle && navLinks) {
         document.body.style.overflow = '';
     }
 
-    function updateFichaModalContent() {
+        function updateFichaModalContent() {
         var f = FICHAS[currentFichaIndex];
         if (!f) return;
 
@@ -1256,11 +1396,13 @@ if (navToggle && navLinks) {
             fichaModalBadge.className = 'ficha-badge ' + f.clase;
         }
 
-        // Elegir imágenes: normal o variante
-        var frenteImg  = (isVarianteActiva && f.varianteFrenteImg)  ? f.varianteFrenteImg  : f.frenteImg;
-        var reversoImg = (isVarianteActiva && f.varianteReversoImg) ? f.varianteReversoImg : f.reversoImg;
+        var isVar = !!(isVarianteActiva && f.tieneVariante);
+        var frenteImg  = isVar ? (f.varianteFrenteImg || f.frenteImg) : f.frenteImg;
+        var reversoImg = isVar ? (f.varianteReversoImg || f.reversoImg) : f.reversoImg;
         var imgSrc = isShowingBack ? reversoImg : frenteImg;
-        var fallbackSrc = (isShowingBack ? 'reverso_' : 'frente_') + f.num + '.jpg';
+        var fallbackSrc = isVar
+            ? ((isShowingBack ? 'variante_reverso_' : 'variante_frente_') + f.num + '.jpg')
+            : ((isShowingBack ? 'reverso_' : 'frente_') + f.num + '.jpg');
 
         if (fichaModalImg) {
             fichaModalImg.onerror = function() {
@@ -1268,12 +1410,11 @@ if (navToggle && navLinks) {
                 this.src = fallbackSrc;
             };
             fichaModalImg.src = imgSrc;
-            fichaModalImg.alt = 'Ficha #' + f.num + (isShowingBack ? ' reverso' : ' frente') + (isVarianteActiva ? ' (variante)' : '');
+            fichaModalImg.alt = 'Ficha #' + f.num + (isShowingBack ? ' reverso' : ' frente') + (isVar ? ' (variante)' : '');
         }
 
-        // Indicador de variante activa en el título
         if (fichaModalTitle) {
-            fichaModalTitle.textContent = 'FICHA DE HISTORIA #' + f.num + (isVarianteActiva ? '  ✦ VARIANTE' : '');
+            fichaModalTitle.textContent = 'FICHA DE HISTORIA #' + f.num + (isVar ? '  ✦ VARIANTE' : '');
         }
 
         if (fichaToggleText) {
@@ -1284,19 +1425,30 @@ if (navToggle && navLinks) {
         var varianteModalBtn = document.getElementById('ficha-variante-modal-btn');
         if (f.tieneVariante) {
             if (!varianteModalBtn) {
-                // Crear botón si no existe
                 varianteModalBtn = document.createElement('button');
                 varianteModalBtn.id = 'ficha-variante-modal-btn';
                 varianteModalBtn.className = 'btn-primary ficha-variante-modal-btn';
-                varianteModalBtn.innerHTML = '<span class="variante-icon">✦</span> <span id="ficha-variante-modal-text">VER VARIANTE</span>';
                 var btnRow = document.querySelector('.ficha-modal-buttons');
                 if (btnRow) btnRow.appendChild(varianteModalBtn);
                 varianteModalBtn.addEventListener('click', function(e) {
                     e.stopPropagation();
                     isVarianteActiva = !isVarianteActiva;
-                    isShowingBack = false;
-                    var txt = document.getElementById('ficha-variante-modal-text');
-                    if (txt) txt.textContent = isVarianteActiva ? 'VER ORIGINAL' : 'VER VARIANTE';
+                    varianteActivaPorFicha[f.id] = isVarianteActiva;
+                    
+                    // Actualizar también la carta en el grid si está visible
+                    var gridCard = document.querySelector('.ficha-wrapper[data-num="' + f.id + '"]');
+                    if (gridCard) {
+                        var gImg = gridCard.querySelector('.ficha-img');
+                        var gBtn = gridCard.querySelector('.ficha-variante-chip');
+                        if (gImg) {
+                            gImg.src = isVarianteActiva ? (f.varianteFrenteImg || f.frenteImg) : f.frenteImg;
+                        }
+                        if (gBtn) {
+                            gBtn.innerHTML = '<span class="variante-chip-icon">' + (isVarianteActiva ? '↩' : '✦') + '</span> ' + (isVarianteActiva ? 'ORIGINAL' : 'VARIANTE');
+                            gBtn.classList.toggle('variante-activa', isVarianteActiva);
+                        }
+                    }
+
                     if (fichaModalImgWrap) {
                         fichaModalImgWrap.classList.add('flipping');
                         setTimeout(function() {
@@ -1309,11 +1461,12 @@ if (navToggle && navLinks) {
                 });
             }
             varianteModalBtn.style.display = 'inline-flex';
-            var txt = document.getElementById('ficha-variante-modal-text');
-            if (txt) txt.textContent = isVarianteActiva ? 'VER ORIGINAL' : 'VER VARIANTE';
+            varianteModalBtn.innerHTML = '<span class="variante-icon">' + (isVar ? '↩' : '✦') + '</span> <span id="ficha-variante-modal-text">' + (isVar ? 'VER ORIGINAL' : 'VER VARIANTE') + '</span>';
         } else {
             if (varianteModalBtn) varianteModalBtn.style.display = 'none';
         }
+
+
 
         // Configurar botón de sonido en el modal (SÓLO Especies 1-103 y Personajes 109-117)
         // Empresa (104-108), Película (118-198), Novela (199-244), Tributo (245) y Juguetes (246-315) NUNCA muestran sonido

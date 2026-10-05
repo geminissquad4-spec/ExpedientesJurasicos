@@ -113,7 +113,7 @@ a{color:var(--cyan);text-decoration:none}
 .dna-label{font-family:var(--font-mono);font-size:.5rem;color:var(--cyan);letter-spacing:2px;opacity:.7}
 
 /* === CLOCK WIDGET === */
-.clock-widget{position:fixed;top:5rem;right:1.5rem;z-index:900;text-align:right;background:rgba(6,12,8,0.85);border:1px solid var(--mil-border);padding:.6rem 1rem;backdrop-filter:blur(8px)}
+.clock-widget{position:fixed;top:5rem;right:1.5rem;z-index:900;text-align:right;background:rgba(6,12,8,0.90);border:1px solid var(--mil-border);padding:.6rem 1rem;backdrop-filter:blur(10px);display:flex;flex-direction:column;align-items:flex-end;box-shadow:0 0 15px rgba(0,0,0,0.6)}
 .clock-time{font-family:var(--font-orb);font-size:1.3rem;font-weight:700;color:var(--cyan);letter-spacing:3px;text-shadow:0 0 12px var(--cyan)}
 .clock-date{font-family:var(--font-mono);font-size:.6rem;color:var(--text2);letter-spacing:2px;margin-top:.2rem;text-transform:uppercase}
 
@@ -1155,80 +1155,134 @@ a{color:var(--cyan);text-decoration:none}
     }
 }
 
+/* === BOTÓN DE MÚSICA DE FONDO (BGM TOGGLE) === */
+.bg-music-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(6, 20, 14, 0.92);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    font-family: var(--font-orb);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 0.6rem;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 10px rgba(0, 229, 176, 0.25);
+    user-select: none;
+}
 
+.bg-music-btn:hover {
+    background: rgba(0, 229, 176, 0.22);
+    border-color: #5dff6a;
+    color: #5dff6a;
+    box-shadow: 0 0 18px rgba(0, 229, 176, 0.55);
+    transform: translateY(-1px);
+}
 
-/* ============================================================
-   FICHAS CON VARIANTE — botón chip + efecto glow
-   ============================================================ */
+.bg-music-btn.playing {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    animation: bgmPulse 2s infinite alternate;
+}
 
-/* Chip de variante en la cuadrícula (esquina superior izquierda) */
+.bg-music-btn.muted {
+    border-color: rgba(255, 48, 48, 0.6);
+    color: #ff6b6b;
+    background: rgba(25, 8, 8, 0.92);
+    box-shadow: 0 0 8px rgba(255, 48, 48, 0.25);
+    animation: none;
+}
+
+.bg-music-btn.muted:hover {
+    border-color: #ff3030;
+    color: #ff3030;
+    background: rgba(255, 48, 48, 0.2);
+}
+
+@keyframes bgmPulse {
+    0%   { box-shadow: 0 0 8px rgba(0,229,176,0.25); border-color: var(--cyan); }
+    100% { box-shadow: 0 0 20px rgba(0,229,176,0.7); border-color: #5dff6a; }
+}
+
+.bg-music-icon {
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
+/* === BOTÓN CHIP DE VARIANTE EN LA CARTA === */
 .ficha-variante-chip {
     position: absolute;
     top: 0.5rem;
     left: 0.5rem;
-    background: rgba(20, 10, 40, 0.82);
-    border: 1px solid rgba(180, 140, 255, 0.65);
-    color: #c8b4ff;
-    font-family: var(--font-mono);
-    font-size: 0.62rem;
-    letter-spacing: 0.07em;
-    padding: 4px 11px;
-    border-radius: 20px;
+    z-index: 7;
+    background: rgba(25, 10, 48, 0.92);
+    border: 1px solid #b388ff;
+    color: #e0d0ff;
+    font-family: var(--font-orb);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    border-radius: 4px;
     cursor: pointer;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 4px;
     white-space: nowrap;
-    z-index: 5;
-    opacity: 0;
-    transition: opacity 0.2s ease, background 0.2s, border-color 0.2s, transform 0.15s;
-    backdrop-filter: blur(6px);
+    opacity: 0.95;
+    transition: all 0.25s ease;
+    box-shadow: 0 0 10px rgba(179, 136, 255, 0.4);
     pointer-events: auto;
 }
 
-/* Mostrar al pasar el cursor sobre la carta */
-.ficha-wrapper:hover .ficha-variante-chip {
-    opacity: 1;
-}
-
 .ficha-variante-chip:hover {
-    background: rgba(120, 60, 220, 0.55);
-    border-color: rgba(200, 160, 255, 0.90);
-    transform: scale(1.06);
-}
-
-/* Estado: variante activa — siempre visible con color distinto */
-.ficha-variante-chip.variante-activa {
-    opacity: 1;
-    background: rgba(100, 40, 200, 0.70);
-    border-color: rgba(220, 180, 255, 0.95);
+    background: rgba(120, 50, 220, 0.9);
+    border-color: #d1b3ff;
     color: #fff;
-    box-shadow: 0 0 8px rgba(180, 120, 255, 0.50);
+    transform: scale(1.06);
+    box-shadow: 0 0 16px rgba(179, 136, 255, 0.8);
 }
 
-.variante-chip-icon {
-    font-size: 0.75rem;
+.ficha-variante-chip.variante-activa {
+    background: rgba(100, 30, 200, 0.95);
+    border-color: #ffd700;
+    color: #ffd700;
+    box-shadow: 0 0 14px rgba(255, 215, 0, 0.65);
 }
 
-/* ── Efecto de iluminación al cambiar a variante ── */
+/* === EFECTO DE ILUMINACIÓN Y DESTELLO AL CAMBIAR A VARIANTE === */
 @keyframes fichaVarianteGlow {
-    0%   { box-shadow: inset 0 0 0px rgba(180,120,255,0);   filter: brightness(1);   }
-    40%  { box-shadow: inset 0 0 40px rgba(180,120,255,0.7); filter: brightness(1.35); }
-    70%  { box-shadow: inset 0 0 60px rgba(220,180,255,0.5); filter: brightness(1.20); }
-    100% { box-shadow: inset 0 0 0px rgba(180,120,255,0);   filter: brightness(1);   }
+    0% {
+        filter: brightness(1) drop-shadow(0 0 0 rgba(179,136,255,0));
+    }
+    30% {
+        filter: brightness(2.2) contrast(1.2) drop-shadow(0 0 35px rgba(255,255,255,0.95)) drop-shadow(0 0 60px rgba(179,136,255,0.9));
+    }
+    60% {
+        filter: brightness(1.6) drop-shadow(0 0 25px rgba(179,136,255,0.8));
+    }
+    100% {
+        filter: brightness(1) drop-shadow(0 0 0 rgba(179,136,255,0));
+    }
 }
 
 .ficha-front.ficha-variante-glow {
-    animation: fichaVarianteGlow 0.65s ease forwards;
+    animation: fichaVarianteGlow 0.65s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
-/* ── Botón "VER VARIANTE / VER ORIGINAL" dentro del modal ── */
+/* === BOTÓN MODAL DE VARIANTE === */
 .ficha-variante-modal-btn {
-    background: linear-gradient(135deg, rgba(120,60,220,0.22), rgba(80,20,160,0.12));
-    border: 1px solid rgba(180, 140, 255, 0.60);
-    color: #c8b4ff;
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
+    background: linear-gradient(135deg, rgba(120,60,220,0.30), rgba(80,20,160,0.20));
+    border: 1px solid rgba(180, 140, 255, 0.75);
+    color: #e0d0ff;
+    font-family: var(--font-orb);
+    font-size: 0.68rem;
+    font-weight: 700;
     letter-spacing: 0.08em;
     padding: 8px 16px;
     border-radius: 4px;
@@ -1236,21 +1290,14 @@ a{color:var(--cyan);text-decoration:none}
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s;
+    transition: all 0.2s ease;
+    box-shadow: 0 0 10px rgba(180, 140, 255, 0.25);
 }
 
 .ficha-variante-modal-btn:hover {
-    background: linear-gradient(135deg, rgba(140,80,240,0.38), rgba(100,40,200,0.25));
-    border-color: rgba(210, 180, 255, 0.90);
+    background: linear-gradient(135deg, rgba(150,80,250,0.50), rgba(110,40,220,0.35));
+    border-color: rgba(220, 190, 255, 0.95);
+    color: #fff;
     transform: scale(1.03);
-}
-
-.ficha-variante-modal-btn .variante-icon {
-    font-size: 0.85rem;
-    animation: variantePulse 2s ease-in-out infinite;
-}
-
-@keyframes variantePulse {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.45; }
+    box-shadow: 0 0 16px rgba(180, 140, 255, 0.6);
 }
