@@ -782,6 +782,7 @@ if (navToggle && navLinks) {
 
     var currentFichaIndex = 0;
     var isShowingBack = false;
+    var isVarianteActiva = false;   // true = se está mostrando la variante
 
     function stopFichaSound() {
         if (fichaAudioPlayer) {
@@ -1129,13 +1130,15 @@ if (navToggle && navLinks) {
             var soundChip = (isSoundAllowed && f.sonido) ? '<button class="ficha-sound-chip" data-num="' + f.id + '" title="Reproducir sonido de la ficha #' + f.num + '"><span class="sound-chip-icon">🔊</span> SONIDO</button>' : '';
             var hasVideo = (fNum >= 118 && fNum <= 198);
             var videoChip = hasVideo ? '<button class="ficha-video-chip" data-num="' + f.id + '" title="Ver video de la escena en televisor CRT"><span class="video-chip-icon">🎬</span> VIDEO</button>' : '';
-            var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}">';
+            var varianteHint = f.tieneVariante ? '<span class="ficha-variante-hint">✦ doble click → variante</span>' : '';
+            var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}\">';
 
             wrapper.innerHTML =
                 '<div class="ficha-inner">' +
                     '<div class="ficha-front">' +
                         soundChip +
                         videoChip +
+                        varianteHint +
                         frenteContent +
                         '<span class="ficha-badge">' + f.categoria + '</span>' +
                         '<span class="ficha-num-tag">#' + f.num + '</span>' +
@@ -1153,8 +1156,6 @@ if (navToggle && navLinks) {
                 }
             }
 
-
-
             if (hasVideo) {
                 var vChip = wrapper.querySelector('.ficha-video-chip');
                 if (vChip) {
@@ -1165,10 +1166,17 @@ if (navToggle && navLinks) {
                 }
             }
 
+            // Doble clic: abrir modal en modo variante (si la tiene)
+            if (f.tieneVariante) {
+                wrapper.addEventListener('dblclick', function(e) {
+                    e.stopPropagation();
+                    openFichaModal(idx, false, true);
+                });
+            }
 
-            // Al hacer clic, abre la vista en grande (modal)
+            // Clic simple: modal normal
             wrapper.addEventListener('click', function() {
-                openFichaModal(idx, false);
+                openFichaModal(idx, false, false);
             });
 
             fichasGrid.appendChild(wrapper);
@@ -1178,9 +1186,10 @@ if (navToggle && navLinks) {
     }
 
 
-    function openFichaModal(index, showBack) {
+    function openFichaModal(index, showBack, showVariante) {
         currentFichaIndex = index;
         isShowingBack = !!showBack;
+        isVarianteActiva = !!showVariante;
         updateFichaModalContent();
         if (fichaModal) fichaModal.classList.add('open');
         document.body.style.overflow = 'hidden';
@@ -1204,19 +1213,63 @@ if (navToggle && navLinks) {
             fichaModalBadge.className = 'ficha-badge ' + f.clase;
         }
 
-        var imgSrc = isShowingBack ? f.reversoImg : f.frenteImg;
+        // Elegir imágenes: normal o variante
+        var frenteImg  = (isVarianteActiva && f.varianteFrenteImg)  ? f.varianteFrenteImg  : f.frenteImg;
+        var reversoImg = (isVarianteActiva && f.varianteReversoImg) ? f.varianteReversoImg : f.reversoImg;
+        var imgSrc = isShowingBack ? reversoImg : frenteImg;
         var fallbackSrc = (isShowingBack ? 'reverso_' : 'frente_') + f.num + '.jpg';
+
         if (fichaModalImg) {
             fichaModalImg.onerror = function() {
                 this.onerror = null;
                 this.src = fallbackSrc;
             };
             fichaModalImg.src = imgSrc;
-            fichaModalImg.alt = 'Ficha #' + f.num + (isShowingBack ? ' reverso' : ' frente');
+            fichaModalImg.alt = 'Ficha #' + f.num + (isShowingBack ? ' reverso' : ' frente') + (isVarianteActiva ? ' (variante)' : '');
+        }
+
+        // Indicador de variante activa en el título
+        if (fichaModalTitle) {
+            fichaModalTitle.textContent = 'FICHA DE HISTORIA #' + f.num + (isVarianteActiva ? '  ✦ VARIANTE' : '');
         }
 
         if (fichaToggleText) {
             fichaToggleText.textContent = isShowingBack ? 'VER FRENTE DE LA FICHA' : 'VER REVERSO DE LA FICHA';
+        }
+
+        // Botón de variante en el modal (si la ficha la tiene)
+        var varianteModalBtn = document.getElementById('ficha-variante-modal-btn');
+        if (f.tieneVariante) {
+            if (!varianteModalBtn) {
+                // Crear botón si no existe
+                varianteModalBtn = document.createElement('button');
+                varianteModalBtn.id = 'ficha-variante-modal-btn';
+                varianteModalBtn.className = 'btn-primary ficha-variante-modal-btn';
+                varianteModalBtn.innerHTML = '<span class="variante-icon">✦</span> <span id="ficha-variante-modal-text">VER VARIANTE</span>';
+                var btnRow = document.querySelector('.ficha-modal-buttons');
+                if (btnRow) btnRow.appendChild(varianteModalBtn);
+                varianteModalBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    isVarianteActiva = !isVarianteActiva;
+                    isShowingBack = false;
+                    var txt = document.getElementById('ficha-variante-modal-text');
+                    if (txt) txt.textContent = isVarianteActiva ? 'VER ORIGINAL' : 'VER VARIANTE';
+                    if (fichaModalImgWrap) {
+                        fichaModalImgWrap.classList.add('flipping');
+                        setTimeout(function() {
+                            updateFichaModalContent();
+                            fichaModalImgWrap.classList.remove('flipping');
+                        }, 150);
+                    } else {
+                        updateFichaModalContent();
+                    }
+                });
+            }
+            varianteModalBtn.style.display = 'inline-flex';
+            var txt = document.getElementById('ficha-variante-modal-text');
+            if (txt) txt.textContent = isVarianteActiva ? 'VER ORIGINAL' : 'VER VARIANTE';
+        } else {
+            if (varianteModalBtn) varianteModalBtn.style.display = 'none';
         }
 
         // Configurar botón de sonido en el modal (SÓLO Especies 1-103 y Personajes 109-117)
@@ -1283,6 +1336,7 @@ if (navToggle && navLinks) {
         closeCrtTV();
         currentFichaIndex = (currentFichaIndex - 1 + FICHAS.length) % FICHAS.length;
         isShowingBack = false;
+        isVarianteActiva = false;
         updateFichaModalContent();
     }
 
@@ -1292,6 +1346,7 @@ if (navToggle && navLinks) {
         closeCrtTV();
         currentFichaIndex = (currentFichaIndex + 1) % FICHAS.length;
         isShowingBack = false;
+        isVarianteActiva = false;
         updateFichaModalContent();
     }
 

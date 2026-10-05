@@ -1155,3 +1155,67 @@ a{color:var(--cyan);text-decoration:none}
 }
 
 
+
+/* ============================================================
+   FICHAS CON VARIANTE — badge y botón modal
+   ============================================================ */
+
+/* Badge "doble click → variante" en la cuadrícula */
+.ficha-variante-hint {
+    position: absolute;
+    bottom: 38px;           /* justo encima del hint "🔍 AMPLIAR" */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 200, 0, 0.18);
+    border: 1px solid rgba(255, 200, 0, 0.55);
+    color: #ffd700;
+    font-family: var(--font-mono);
+    font-size: 0.60rem;
+    letter-spacing: 0.04em;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 4;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    backdrop-filter: blur(4px);
+}
+
+/* Mostrar badge al pasar el cursor */
+.ficha-wrapper:hover .ficha-variante-hint {
+    opacity: 1;
+}
+
+/* Botón "VER VARIANTE / VER ORIGINAL" en el modal */
+.ficha-variante-modal-btn {
+    background: linear-gradient(135deg, rgba(255,200,0,0.18), rgba(255,160,0,0.10));
+    border: 1px solid rgba(255, 200, 0, 0.55);
+    color: #ffd700;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.1s;
+}
+
+.ficha-variante-modal-btn:hover {
+    background: linear-gradient(135deg, rgba(255,200,0,0.30), rgba(255,160,0,0.20));
+    border-color: rgba(255, 200, 0, 0.85);
+    transform: scale(1.03);
+}
+
+.ficha-variante-modal-btn .variante-icon {
+    font-size: 0.85rem;
+    animation: variantePulse 2s ease-in-out infinite;
+}
+
+@keyframes variantePulse {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.5; }
+}

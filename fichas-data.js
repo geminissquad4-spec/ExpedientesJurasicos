@@ -107,12 +107,16 @@ function getFichaVideo(numInt, numStr) {
     return null;
 }
 
+// Fichas que tienen una variante (doble clic para cambiar)
+var FICHAS_CON_VARIANTE = { 6: true, 111: true, 137: true, 262: true, 331: true, 343: true };
+
 // Genera el array de 369 fichas
 var FICHAS = (function() {
     var arr = [];
     for (var i = 1; i <= 369; i++) {
         var cat = getFichaCategoria(i);
         var num = String(i).padStart(3, '0');
+        var tieneVariante = !!(typeof FICHAS_CON_VARIANTE !== 'undefined' && FICHAS_CON_VARIANTE[i]);
         arr.push({
             id: i,
             num: num,
@@ -121,6 +125,9 @@ var FICHAS = (function() {
             color: cat.color,
             frenteImg: 'fichas/frente_' + num + '.jpg',
             reversoImg: 'fichas/reverso_' + num + '.jpg',
+            varianteFrenteImg: tieneVariante ? 'fichas/variante_frente_' + num + '.jpg' : null,
+            varianteReversoImg: tieneVariante ? 'fichas/variante_reverso_' + num + '.jpg' : null,
+            tieneVariante: tieneVariante,
             sonido: getFichaSonido(i, num),
             narracion: getFichaNarracion(i, num),
             textoNarracion: (typeof TEXTOS_NARRACION !== 'undefined' && TEXTOS_NARRACION[i]) ? TEXTOS_NARRACION[i] : null,
@@ -129,3 +136,4 @@ var FICHAS = (function() {
     }
     return arr;
 })();
+
