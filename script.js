@@ -1115,6 +1115,9 @@ if (navToggle && navLinks) {
     }
 
 
+    // Estado de variante por ficha (mapa id → boolean)
+    var varianteActivaPorFicha = {};
+
     // Construir las tarjetas
     function buildFichas() {
         fichasGrid.innerHTML = '';
@@ -1127,18 +1130,26 @@ if (navToggle && navLinks) {
             var fNum = parseInt(f.num || f.id, 10);
             var isSoundAllowed = ((fNum >= 1 && fNum <= 103) || (fNum >= 109 && fNum <= 117));
 
-            var soundChip = (isSoundAllowed && f.sonido) ? '<button class="ficha-sound-chip" data-num="' + f.id + '" title="Reproducir sonido de la ficha #' + f.num + '"><span class="sound-chip-icon">🔊</span> SONIDO</button>' : '';
+            var soundChip = (isSoundAllowed && f.sonido)
+                ? '<button class="ficha-sound-chip" data-num="' + f.id + '" title="Reproducir sonido de la ficha #' + f.num + '"><span class="sound-chip-icon">🔊</span> SONIDO</button>'
+                : '';
             var hasVideo = (fNum >= 118 && fNum <= 198);
-            var videoChip = hasVideo ? '<button class="ficha-video-chip" data-num="' + f.id + '" title="Ver video de la escena en televisor CRT"><span class="video-chip-icon">🎬</span> VIDEO</button>' : '';
-            var varianteHint = f.tieneVariante ? '<span class="ficha-variante-hint">✦ doble click → variante</span>' : '';
-            var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}\">';
+            var videoChip = hasVideo
+                ? '<button class="ficha-video-chip" data-num="' + f.id + '" title="Ver video de la escena en televisor CRT"><span class="video-chip-icon">🎬</span> VIDEO</button>'
+                : '';
+            // Botón variante: aparece dentro de la carta si la ficha tiene variante
+            var varianteChip = f.tieneVariante
+                ? '<button class="ficha-variante-chip" data-num="' + f.id + '" title="Ver carta variante"><span class="variante-chip-icon">✦</span> VARIANTE</button>'
+                : '';
+
+            var frenteContent = '<img class="ficha-img" src="' + f.frenteImg + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src=\'frente_' + f.num + '.jpg\';}else{this.parentElement.innerHTML=\'<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>\';}">';
 
             wrapper.innerHTML =
                 '<div class="ficha-inner">' +
                     '<div class="ficha-front">' +
                         soundChip +
                         videoChip +
-                        varianteHint +
+                        varianteChip +
                         frenteContent +
                         '<span class="ficha-badge">' + f.categoria + '</span>' +
                         '<span class="ficha-num-tag">#' + f.num + '</span>' +
@@ -1166,17 +1177,49 @@ if (navToggle && navLinks) {
                 }
             }
 
-            // Doble clic: abrir modal en modo variante (si la tiene)
+            // Botón variante: glow + swap de imagen en la propia carta
             if (f.tieneVariante) {
-                wrapper.addEventListener('dblclick', function(e) {
-                    e.stopPropagation();
-                    openFichaModal(idx, false, true);
-                });
+                var varBtn = wrapper.querySelector('.ficha-variante-chip');
+                if (varBtn) {
+                    varBtn.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        var fichaFront = wrapper.querySelector('.ficha-front');
+                        var fichaImg   = wrapper.querySelector('.ficha-img');
+                        var btnIcon    = varBtn.querySelector('.variante-chip-icon');
+                        var isVariante = !!(varianteActivaPorFicha[f.id]);
+
+                        // Nuevo estado
+                        isVariante = !isVariante;
+                        varianteActivaPorFicha[f.id] = isVariante;
+
+                        // Efecto de iluminación
+                        fichaFront.classList.add('ficha-variante-glow');
+
+                        setTimeout(function() {
+                            // Cambiar imagen
+                            if (fichaImg) {
+                                fichaImg.src = isVariante
+                                    ? (f.varianteFrenteImg || f.frenteImg)
+                                    : f.frenteImg;
+                            }
+                            // Actualizar botón
+                            if (btnIcon) btnIcon.textContent = isVariante ? '↩' : '✦';
+                            varBtn.innerHTML = '<span class="variante-chip-icon">' + (isVariante ? '↩' : '✦') + '</span> ' + (isVariante ? 'ORIGINAL' : 'VARIANTE');
+                            varBtn.classList.toggle('variante-activa', isVariante);
+
+                            // Quitar glow
+                            setTimeout(function() {
+                                fichaFront.classList.remove('ficha-variante-glow');
+                            }, 400);
+                        }, 220);
+                    });
+                }
             }
 
-            // Clic simple: modal normal
+            // Clic: abrir modal (con estado de variante actual)
             wrapper.addEventListener('click', function() {
-                openFichaModal(idx, false, false);
+                isVarianteActiva = !!(varianteActivaPorFicha[f.id]);
+                openFichaModal(idx, false, isVarianteActiva);
             });
 
             fichasGrid.appendChild(wrapper);
