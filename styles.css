@@ -550,6 +550,7 @@ a{color:var(--cyan);text-decoration:none}
 .cat-tributo   .ficha-badge{background:rgba(255,215,0,.92);  color:#000}
 .cat-juguetes  .ficha-badge{background:rgba(0,207,255,.90);  color:#000}
 .cat-videojuegos .ficha-badge{background:rgba(255,0,127,.90); color:#fff}
+.cat-especiales  .ficha-badge{background:rgba(160,160,255,.90); color:#fff}
 
 /* Numerito de la ficha */
 .ficha-num-tag{

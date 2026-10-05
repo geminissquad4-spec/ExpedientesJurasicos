@@ -1,6 +1,6 @@
 // =============================================
 //  EXPEDIENTES JURÁSICOS — fichas-data.js
-//  Datos de las 369 Fichas de Historia
+//  Datos de las 372 Fichas de Historia
 // =============================================
 
 // Categorías según numeración:
@@ -12,6 +12,7 @@
 // 245:      Tributo
 // 246–315:  Juguetes
 // 316–369:  Videojuegos
+// 370–372:  Especiales
 
 var TEXTOS_NARRACION = {
     316: "Desarrollador: BlueSky Software. Distribuidor: Sega. Año: 1993. Descripción: Jurassic Park es un videojuego de acción y aventura desarrollado por BlueSky Software y publicado por Sega para Sega Genesis en 1993. Inspirado en la película y en elementos de la novela de Michael Crichton, destaca por permitir jugar como Dr. Alan Grant o como un Velociraptor, cada uno con habilidades y objetivos diferentes. Historia y jugabilidad: Como Alan Grant, el jugador debe recorrer siete áreas de Isla Nublar, enfrentándose a los dinosaurios mientras busca llegar al Centro de Visitantes y escapar en helicóptero. Para sobrevivir cuenta con diversas armas, munición y botiquines. Como Velociraptor, el jugador es más rápido y puede saltar más alto, aunque solo combate con dientes y garras. Su objetivo es enfrentarse o evadir a los guardias de Jurassic Park y finalmente acorralar a Grant en el Centro de Visitantes, a lo largo de cinco niveles.",
@@ -67,6 +68,9 @@ var TEXTOS_NARRACION = {
     366: "El Ophthalmosaurus es una criatura acuática legendaria de torneo disponible en Jurassic World: The Game. Pertenece a la clase Arrecife y puede alcanzar el nivel 40, donde presenta 3,160 de salud, 988 de daño y 1,976 de ferocidad. Su costo en el mercado es de 8,250 ADN, mientras que vender un ejemplar de nivel 1 proporciona 4,130 ADN. Su tiempo de incubación es de 7 días y genera hasta 449 monedas por minuto. Además, el Ophthalmosaurus es utilizado como componente para crear al superhíbrido Ophthacerapsis, mediante su combinación con un Diploceraspis.",
     367: "El Woolly Mammoth fue añadido al Parque Cenozoico de Jurassic World: The Game el 15 de diciembre de 2016 como una criatura legendaria de torneo, no híbrida y perteneciente a la clase Nieve. Se desbloquea al obtener un paquete de Woolly Mammoth mediante la ruleta o al quedar dentro del 1 por ciento superior de su torneo. Una vez desbloqueado, pueden adquirirse ejemplares adicionales en el mercado por 10,000 ADN. Su tasa máxima de generación de ingresos es de 560 monedas por minuto. Además, un Woolly Mammoth de nivel 40 puede fusionarse con un Elasmotherium de nivel 40 para crear el híbrido Mammotherium.",
     368: "El Phorusrhacos fue añadido a la Biosfera de Jurassic World: The Game el 15 de febrero de 2017 como una criatura cenozoica superrara, perteneciente a la clase Sabana y no híbrida. Se desbloquea al completar su evento de batalla llamado Glacial Shift. Una vez obtenido, pueden adquirirse ejemplares adicionales en el mercado por 3,000 ADN. Su tasa máxima de generación de ingresos es de 192 monedas por minuto.",
+    370: "Michael Crichton (1942–2008) fue un médico, escritor, guionista y cineasta estadounidense, reconocido como uno de los principales impulsores del tecno-thriller. Escribió las novelas Parque Jurásico y El mundo perdido, además de colaborar en sus adaptaciones cinematográficas. Estudió literatura y medicina en Harvard y, aunque inicialmente se inclinó por la medicina, desarrolló una gran pasión por la escritura. La idea de Jurassic Park surgió a partir de un proyecto sobre la clonación de un pterodáctilo mediante ADN fósil. Crichton consideró que la historia necesitaba una base científica más convincente, por lo que investigó durante varios años hasta desarrollar la idea de un millonario que utilizara la ingeniería genética para crear un parque de animales prehistóricos. Para desarrollar esta premisa, tomó inspiración de las investigaciones del paleobiólogo George Poinar Jr. sobre la conservación de material biológico en ámbar fosilizado. Más allá de los dinosaurios, Crichton utilizó Jurassic Park para explorar los peligros de la manipulación genética, la arrogancia científica y el intento de controlar la naturaleza. Su trabajo convirtió a Jurassic Park en una obra fundamental de la ciencia ficción.",
+    371: "Steven Allan Spielberg, nacido en Cincinnati, Ohio, el 18 de diciembre de 1946, es un director, guionista y productor estadounidense, considerado uno de los cineastas más influyentes de la industria. Fue una figura clave en la saga Jurassic Park, dirigiendo sus dos primeras películas y participando como productor ejecutivo en las posteriores. Ha sido nominado siete veces al Óscar a Mejor Director, ganándolo por La lista de Schindler en 1993 y Saving Private Ryan en 1998. En 1989, Spielberg conoció a Michael Crichton, quien le habló de su novela sobre dinosaurios clonados. Fascinado por la idea, impulsó a Universal Pictures a adquirir los derechos antes de su publicación. Spielberg vio en la historia una especie de Tiburón en tierra, combinando suspenso, acción y dinosaurios. Con el apoyo de Industrial Light and Magic y los efectos animatrónicos y digitales, logró llevar la visión de Crichton a la pantalla y convertir Jurassic Park en un referente del cine.",
+    372: "Mr. ADN fue un personaje creado por InGen con una finalidad principalmente educativa dentro de Jurassic Park. Su función era ayudar a los visitantes a comprender, de una manera sencilla y entretenida, los complejos procesos científicos empleados para la creación de los dinosaurios del parque. El personaje formaba parte de la experiencia que InGen había preparado para los visitantes antes de que comenzaran sus recorridos por las instalaciones. Antes de cada visita guiada, los visitantes se dirigían al cine del Centro de Visitantes, donde se proyectaba una película protagonizada por el Sr. ADN y John Hammond. A través de esta presentación, ambos explicaban de forma simplificada cómo InGen había conseguido obtener material genético de dinosaurios y utilizarlo para devolver estas criaturas a la vida. De esta manera, el Sr. ADN servía como una especie de guía científica y mascota de Jurassic Park.",
     369: "La Titanoboa fue añadida al Parque Cenozoico de Jurassic World: The Game el 24 de noviembre de 2017 como una criatura cenozoica legendaria de torneo, no híbrida y perteneciente a la clase Caverna. Se desbloquea al obtener un paquete de Titanoboa mediante la ruleta o al quedar dentro del 1 por ciento superior de su torneo. Una vez desbloqueada, pueden adquirirse ejemplares adicionales en el mercado por 11,150 ADN. Su tasa máxima de generación de ingresos es de 499 monedas por minuto.",
 };
 
@@ -80,6 +84,7 @@ function getFichaCategoria(num) {
     if (num === 245)              return { label: 'TRIBUTO',     clase: 'cat-tributo',     color: '#ffd700' };
     if (num >= 246 && num <= 315) return { label: 'JUGUETES',    clase: 'cat-juguetes',    color: '#00cfff' };
     if (num >= 316 && num <= 369) return { label: 'VIDEOJUEGOS', clase: 'cat-videojuegos', color: '#ff007f' };
+    if (num >= 370 && num <= 372) return { label: 'ESPECIALES',  clase: 'cat-especiales',  color: '#c0c0ff' };
     return { label: '???', clase: 'cat-unknown', color: '#607868' };
 }
 
@@ -93,7 +98,7 @@ function getFichaSonido(numInt, numStr) {
 
 // Narraciones de IA disponibles para todas las fichas
 function getFichaNarracion(numInt, numStr) {
-    if (numInt >= 1 && numInt <= 369) {
+    if (numInt >= 1 && numInt <= 372) {
         return 'narracion_' + numStr + '.mp3';
     }
     return null;
@@ -110,10 +115,10 @@ function getFichaVideo(numInt, numStr) {
 // Fichas que tienen una variante (doble clic para cambiar)
 var FICHAS_CON_VARIANTE = { 6: true, 111: true, 137: true, 262: true, 331: true, 343: true };
 
-// Genera el array de 369 fichas
+// Genera el array de 372 fichas
 var FICHAS = (function() {
     var arr = [];
-    for (var i = 1; i <= 369; i++) {
+    for (var i = 1; i <= 372; i++) {
         var cat = getFichaCategoria(i);
         var num = String(i).padStart(3, '0');
         var tieneVariante = !!(typeof FICHAS_CON_VARIANTE !== 'undefined' && FICHAS_CON_VARIANTE[i]);
