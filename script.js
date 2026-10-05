@@ -3,7 +3,11 @@
 // =============================================
 
 // Merge all species parts (defined in separate JS files)
-var ALL_SPECIES = [].concat(SPECIES_PART1, SPECIES_PART2, SPECIES_PART3);
+var ALL_SPECIES = [].concat(
+    (typeof SPECIES_PART1 !== 'undefined' ? SPECIES_PART1 : []),
+    (typeof SPECIES_PART2 !== 'undefined' ? SPECIES_PART2 : []),
+    (typeof SPECIES_PART3 !== 'undefined' ? SPECIES_PART3 : [])
+);
 
 // Image map: species name → local filename
 var IMG_MAP = {
@@ -158,31 +162,25 @@ function getRugido(name) {
 // =============================================
 
 // ---- EFECTO DE SONIDO DE SELECCIÓN (Select sound.mp4) ----
-var selectAudioPool = [];
-var SELECT_POOL_SIZE = 6;
-for (var sIdx = 0; sIdx < SELECT_POOL_SIZE; sIdx++) {
-    var sa = new Audio('Select%20sound.mp4');
-    sa.volume = 0.5;
-    selectAudioPool.push(sa);
-}
-var selectAudioPointer = 0;
-
 function playSelectSound() {
     try {
-        var a = selectAudioPool[selectAudioPointer];
-        selectAudioPointer = (selectAudioPointer + 1) % SELECT_POOL_SIZE;
-        a.currentTime = 0;
-        var p = a.play();
-        if (p !== undefined) p.catch(function(){});
+        var player = document.getElementById('select-sound-player');
+        if (player) {
+            player.currentTime = 0;
+            var p = player.play();
+            if (p !== undefined) p.catch(function(){});
+        }
     } catch(e) {}
 }
 
-// Delegación global de clic para elementos interactivos
+// Delegación global de clic ligera para elementos interactivos
 document.addEventListener('click', function(e) {
-    var target = e.target.closest('button, a, .filter-btn, .ficha-filter-btn, .species-card, .ficha-wrapper, .ficha-variante-chip, .ficha-sound-chip, .ficha-video-chip, .species-roar-chip, .tl-card-header, .incident-header, .btn-primary, .btn-secondary, .btn-evidence, .modal-close, .contest-close, input, [tabindex]');
-    if (target) {
-        playSelectSound();
-    }
+    try {
+        var target = e.target.closest('button, a, .filter-btn, .ficha-filter-btn, .species-card, .ficha-wrapper, .ficha-variante-chip, .ficha-sound-chip, .ficha-video-chip, .species-roar-chip, .tl-card-header, .incident-header, .btn-primary, .btn-secondary, .btn-evidence, .modal-close, .contest-close, input, [tabindex]');
+        if (target) {
+            playSelectSound();
+        }
+    } catch(err) {}
 }, true);
 
 // ---- MÚSICA DE FONDO (fondo.mp4) ----
@@ -195,6 +193,9 @@ var isBgMusicMuted = false;
 var isBgMusicInterrupted = false;
 
 function updateBgMusicUI() {
+    if (!bgMusicToggle) bgMusicToggle = document.getElementById('bg-music-toggle');
+    if (!bgMusicIcon) bgMusicIcon = document.getElementById('bg-music-icon');
+    if (!bgMusicText) bgMusicText = document.getElementById('bg-music-text');
     if (!bgMusicToggle) return;
     if (isBgMusicMuted) {
         bgMusicToggle.classList.add('muted');
@@ -210,20 +211,21 @@ function updateBgMusicUI() {
 }
 
 function playBgMusic() {
-    if (!bgMusicPlayer) return;
-    if (isBgMusicMuted || isBgMusicInterrupted) return;
-    bgMusicPlayer.volume = 0.35;
-    var p = bgMusicPlayer.play();
-    if (p !== undefined) {
-        p.then(function() {
-            updateBgMusicUI();
-        }).catch(function(err) {
-            console.log('Esperando interacción del usuario para reproducir BGM...');
-        });
-    }
+    if (!bgMusicPlayer) bgMusicPlayer = document.getElementById('bg-music-player');
+    if (!bgMusicPlayer || isBgMusicMuted || isBgMusicInterrupted) return;
+    try {
+        bgMusicPlayer.volume = 0.35;
+        var p = bgMusicPlayer.play();
+        if (p !== undefined) {
+            p.then(function() {
+                updateBgMusicUI();
+            }).catch(function() {});
+        }
+    } catch(e) {}
 }
 
 function pauseBgMusic() {
+    if (!bgMusicPlayer) bgMusicPlayer = document.getElementById('bg-music-player');
     if (!bgMusicPlayer) return;
     try {
         bgMusicPlayer.pause();
@@ -245,12 +247,16 @@ function releaseBgMusic() {
 }
 
 function isOtherAudioActive() {
-    var isRoar = (typeof isSpeciesRoarPlaying !== 'undefined' && isSpeciesRoarPlaying);
-    var isFichaSnd = (typeof isSoundPlaying !== 'undefined' && isSoundPlaying);
-    var isNarr = (typeof isNarratePlaying !== 'undefined' && isNarratePlaying);
-    var isCrt = (typeof crtOverlay !== 'undefined' && crtOverlay && crtOverlay.classList.contains('open'));
-    var isIndom = (typeof indominusVideo !== 'undefined' && indominusVideo && !indominusVideo.paused && !indominusVideo.ended);
-    return isRoar || isFichaSnd || isNarr || isCrt || isIndom;
+    try {
+        var isRoar = (typeof isSpeciesRoarPlaying !== 'undefined' && isSpeciesRoarPlaying);
+        var isFichaSnd = (typeof isSoundPlaying !== 'undefined' && isSoundPlaying);
+        var isNarr = (typeof isNarratePlaying !== 'undefined' && isNarratePlaying);
+        var isCrt = (typeof crtOverlay !== 'undefined' && crtOverlay && crtOverlay.classList.contains('open'));
+        var isIndom = (typeof indominusVideo !== 'undefined' && indominusVideo && !indominusVideo.paused && !indominusVideo.ended);
+        return isRoar || isFichaSnd || isNarr || isCrt || isIndom;
+    } catch(e) {
+        return false;
+    }
 }
 
 function initBgMusicOnFirstInteraction() {
@@ -268,20 +274,24 @@ function initBgMusicOnFirstInteraction() {
 }
 initBgMusicOnFirstInteraction();
 
-if (bgMusicToggle) {
-    bgMusicToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        isBgMusicMuted = !isBgMusicMuted;
-        if (isBgMusicMuted) {
-            pauseBgMusic();
-            updateBgMusicUI();
-        } else {
-            isBgMusicInterrupted = false;
-            playBgMusic();
-            updateBgMusicUI();
-        }
-    });
-}
+document.addEventListener('DOMContentLoaded', function() {
+    updateBgMusicUI();
+    var toggleBtn = document.getElementById('bg-music-toggle');
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            isBgMusicMuted = !isBgMusicMuted;
+            if (isBgMusicMuted) {
+                pauseBgMusic();
+                updateBgMusicUI();
+            } else {
+                isBgMusicInterrupted = false;
+                playBgMusic();
+                updateBgMusicUI();
+            }
+        });
+    }
+});
 
 // ---- REPRODUCTOR DE RUGIDOS (SECCIÓN ESPECIES) ----
 var speciesRoarAudio = document.getElementById('species-roar-player');
@@ -1255,7 +1265,7 @@ if (navToggle && navLinks) {
     }
 
 
-        // Estado de variante por ficha (mapa id → boolean)
+            // Estado de variante por ficha (mapa id → boolean)
     var varianteActivaPorFicha = {};
 
     // Construir las tarjetas
@@ -1286,7 +1296,7 @@ if (navToggle && navLinks) {
 
             var initialImgSrc = (isVarActive && f.varianteFrenteImg) ? f.varianteFrenteImg : f.frenteImg;
             var initialFallback = (isVarActive ? 'variante_frente_' : 'frente_') + f.num + '.jpg';
-            var frenteContent = '<img class="ficha-img" src="' + initialImgSrc + '" alt="Ficha ' + f.num + ' frente" loading="lazy" onerror="if(!this.dataset.triedRoot){this.dataset.triedRoot=true;this.src='' + initialFallback + '';}else{this.parentElement.innerHTML='<div class=ficha-placeholder><div class=ficha-placeholder-num>#' + f.num + '</div><div class=ficha-placeholder-label>FRENTE</div></div>';}">';
+            var frenteContent = '<img class="ficha-img" src="' + initialImgSrc + '" alt="Ficha ' + f.num + ' frente" loading="lazy">';
 
             wrapper.innerHTML =
                 '<div class="ficha-inner">' +
@@ -1300,6 +1310,19 @@ if (navToggle && navLinks) {
                         '<span class="ficha-flip-hint">🔍 AMPLIAR FICHA</span>' +
                     '</div>' +
                 '</div>';
+
+            var imgEl = wrapper.querySelector('.ficha-img');
+            if (imgEl) {
+                imgEl.onerror = function() {
+                    if (!this.dataset.triedRoot) {
+                        this.dataset.triedRoot = 'true';
+                        this.src = initialFallback;
+                    } else {
+                        this.onerror = null;
+                        this.parentElement.innerHTML = '<div class="ficha-placeholder"><div class="ficha-placeholder-num">#' + f.num + '</div><div class="ficha-placeholder-label">FRENTE</div></div>';
+                    }
+                };
+            }
 
             if (isSoundAllowed && f.sonido) {
                 var chip = wrapper.querySelector('.ficha-sound-chip');

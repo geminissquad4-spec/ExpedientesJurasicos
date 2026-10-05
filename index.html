@@ -18,7 +18,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="styles.css?v=24">
+<link rel="stylesheet" href="styles.css">
 
 <link rel="icon" type="image/jpeg" href="Expedientes%20Jurásicos%20logo.jpg">
 
@@ -1423,6 +1423,16 @@
 
 
 
+<!-- AUDIO GLOBAL Y BGM (MP3 AUDIO PURO) -->
+<audio id="bg-music-player" loop preload="none" style="display:none;">
+  <source src="fondo.mp3" type="audio/mpeg">
+  <source src="fondo.mp4" type="audio/mp4">
+</audio>
+<audio id="select-sound-player" preload="none" style="display:none;">
+  <source src="Select%20sound.mp3" type="audio/mpeg">
+  <source src="Select%20sound.mp4" type="audio/mp4">
+</audio>
+
 <!-- SCRIPTS -->
 
 <script src="cronologia-data.js"></script>
@@ -1433,9 +1443,9 @@
 
 <script src="species-data-3.js"></script>
 
-<script src="fichas-data.js?v=24"></script>
+<script src="fichas-data.js"></script>
 
-<script src="script.js?v=24"></script>
+<script src="script.js"></script>
 
 
 
@@ -1524,8 +1534,7 @@ if (typeof window.toggleTimeline !== 'function') {
 </script>
 
 
-<audio id="bg-music-player" loop preload="auto" src="fondo.mp4" style="display:none;"></audio>
-<audio id="select-sound-player" preload="auto" src="Select%20sound.mp4" style="display:none;"></audio>
+
 
 </body>
 
