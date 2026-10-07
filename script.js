@@ -1630,3 +1630,180 @@ if (navToggle && navLinks) {
     buildFichas();
 
 })();
+
+// =============================================
+//  MÓDULO DE PRINTS 4K (BONUS CLASIFICADO)
+// =============================================
+(function() {
+    var categoriesGrid   = document.getElementById('prints-categories-grid');
+    var modalOverlay     = document.getElementById('prints-modal-overlay');
+    var modalClose       = document.getElementById('prints-modal-close');
+    var modalTag         = document.getElementById('prints-modal-tag');
+    var modalTitle       = document.getElementById('prints-modal-title');
+    var modalDesc        = document.getElementById('prints-modal-desc');
+    var modalStats       = document.getElementById('prints-modal-stats');
+    var viewerImg        = document.getElementById('prints-viewer-img');
+    var viewerCounter    = document.getElementById('prints-viewer-counter');
+    var downloadBtn      = document.getElementById('prints-download-btn');
+    var prevBtn          = document.getElementById('prints-prev-btn');
+    var nextBtn          = document.getElementById('prints-next-btn');
+    var thumbsContainer  = document.getElementById('prints-thumbs-container');
+
+    if (!categoriesGrid || typeof PRINTS_CATEGORIES === 'undefined') return;
+
+    var currentCategory = null;
+    var currentPrintsList = [];
+    var currentPrintIndex = 0;
+
+    // 1. Construir tarjetas de categorías en la sección
+    function buildPrintsCategories() {
+        categoriesGrid.innerHTML = '';
+        PRINTS_CATEGORIES.forEach(function(cat) {
+            var coverNumStr = String(cat.coverSlide).padStart(3, '0');
+            var coverSrc = 'prints/print_' + coverNumStr + '.jpg';
+
+            var card = document.createElement('div');
+            card.className = 'print-cat-card';
+            card.setAttribute('data-id', cat.id);
+            card.innerHTML =
+                '<div class="print-cat-cover-wrap">' +
+                    '<img class="print-cat-cover-img" src="' + coverSrc + '" alt="' + cat.title + '" loading="lazy">' +
+                    '<span class="print-cat-badge" style="color:' + cat.badgeColor + ';border-color:' + cat.badgeColor + '">' + cat.tag + '</span>' +
+                    '<span class="print-cat-count-pill">' + cat.count + ' PRINTS 4K</span>' +
+                '</div>' +
+                '<div class="print-cat-info">' +
+                    '<div>' +
+                        '<div class="print-cat-title">' + cat.title + '</div>' +
+                        '<div class="print-cat-desc">' + cat.desc + '</div>' +
+                    '</div>' +
+                    '<div class="print-cat-footer">' +
+                        '<span>EXPLORAR COLECCIÓN</span>' +
+                        '<span>→</span>' +
+                    '</div>' +
+                '</div>';
+
+            card.addEventListener('click', function() {
+                openPrintsModal(cat);
+            });
+
+            categoriesGrid.appendChild(card);
+        });
+    }
+
+    // 2. Abrir modal de galería para una categoría
+    function openPrintsModal(cat) {
+        currentCategory = cat;
+        currentPrintsList = getPrintsForCategory(cat);
+        currentPrintIndex = 0;
+
+        if (modalTag) modalTag.textContent = cat.tag;
+        if (modalTitle) modalTitle.textContent = cat.title;
+        if (modalDesc) modalDesc.textContent = cat.desc;
+        if (modalStats) modalStats.textContent = cat.count + ' LÁMINAS EN 4K (33.87 × 19.07 CM / 3840 × 2160 PX)';
+
+        buildThumbnails();
+        showPrintAt(0);
+
+        if (modalOverlay) {
+            modalOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    // 3. Generar miniaturas de la categoría activa
+    function buildThumbnails() {
+        if (!thumbsContainer) return;
+        thumbsContainer.innerHTML = '';
+        currentPrintsList.forEach(function(item, idx) {
+            var thumb = document.createElement('div');
+            thumb.className = 'print-thumb-item' + (idx === currentPrintIndex ? ' active' : '');
+            thumb.setAttribute('data-idx', idx);
+            thumb.innerHTML =
+                '<img src="' + item.src + '" alt="' + item.title + '" loading="lazy">' +
+                '<span class="print-thumb-number">#' + item.indexInCat + '</span>';
+
+            thumb.addEventListener('click', function() {
+                showPrintAt(idx);
+            });
+
+            thumbsContainer.appendChild(thumb);
+        });
+    }
+
+    // 4. Mostrar un print en el visor principal
+    function showPrintAt(index) {
+        if (!currentPrintsList || !currentPrintsList.length) return;
+        currentPrintIndex = (index + currentPrintsList.length) % currentPrintsList.length;
+        var item = currentPrintsList[currentPrintIndex];
+
+        if (viewerImg) {
+            viewerImg.style.opacity = '0.4';
+            viewerImg.src = item.src;
+            viewerImg.onload = function() {
+                viewerImg.style.opacity = '1';
+            };
+        }
+
+        if (viewerCounter) {
+            viewerCounter.textContent = 'LÁMINA ' + item.indexInCat + ' / ' + item.totalInCat;
+        }
+
+        if (downloadBtn) {
+            downloadBtn.href = item.src;
+            downloadBtn.setAttribute('download', item.downloadName);
+        }
+
+        // Actualizar clase activa en miniaturas
+        if (thumbsContainer) {
+            var allThumbs = thumbsContainer.querySelectorAll('.print-thumb-item');
+            allThumbs.forEach(function(t, i) {
+                t.classList.toggle('active', i === currentPrintIndex);
+                if (i === currentPrintIndex) {
+                    t.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+                }
+            });
+        }
+    }
+
+    function closePrintsModal() {
+        if (modalOverlay) {
+            modalOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Event Listeners
+    if (modalClose) modalClose.addEventListener('click', closePrintsModal);
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === this) closePrintsModal();
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            showPrintAt(currentPrintIndex - 1);
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            showPrintAt(currentPrintIndex + 1);
+        });
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (!modalOverlay || !modalOverlay.classList.contains('open')) return;
+        if (e.key === 'Escape') closePrintsModal();
+        if (e.key === 'ArrowLeft') showPrintAt(currentPrintIndex - 1);
+        if (e.key === 'ArrowRight') showPrintAt(currentPrintIndex + 1);
+    });
+
+    // Iniciar renderizado al cargar
+    buildPrintsCategories();
+    document.addEventListener('DOMContentLoaded', buildPrintsCategories);
+    window.openPrintsModal = openPrintsModal;
+    window.buildPrintsCategories = buildPrintsCategories;
+})();

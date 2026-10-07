@@ -286,6 +286,7 @@
 <a href="#especies" class="nav-link" id="nav-especies"><span class="nav-num">03</span> ESPECIES</a>
 
 <a href="#fichas" class="nav-link" id="nav-fichas"><span class="nav-num">04</span> FICHAS</a>
+<a href="#prints" class="nav-link" id="nav-prints"><span class="nav-num">✦</span> PRINTS</a>
 
 <a href="#expediente-literario" class="nav-link" id="nav-expediente"><span class="nav-num">05</span> EXP. LITERARIO</a>
 
@@ -995,6 +996,21 @@
 
 
 
+<!-- PRINTS (BONUS CLASIFICADO) -->
+<section class="section section-prints" id="prints">
+  <div class="section-header">
+    <div class="section-bonus-tag">✦ BONUS CLASIFICADO ✦</div>
+    <h2 class="section-title">ARCHIVOS GRÁFICOS &bull; PRINTS 4K</h2>
+    <p class="section-subtitle">Colección de 112 láminas en ultra alta definición (33.87 &times; 19.07 cm) &mdash; Haz clic en una categoría para abrir la galería y descargar para imprimir</p>
+  </div>
+
+  <div class="prints-categories-grid" id="prints-categories-grid">
+    <!-- Renderizado dinámicamente por JS desde prints-data.js -->
+  </div>
+</section>
+
+
+
 <!-- EXPEDIENTE LITERARIO -->
 
 <section class="section" id="expediente-literario">
@@ -1387,6 +1403,44 @@
 
 
 
+
+<!-- MODAL DE GALERÍA DE PRINTS -->
+<div class="modal-overlay prints-modal-overlay" id="prints-modal-overlay">
+  <div class="prints-modal-box">
+    <button class="prints-modal-close" id="prints-modal-close" title="Cerrar galería">&times;</button>
+    
+    <div class="prints-modal-header">
+      <div class="prints-modal-tag" id="prints-modal-tag">CATEGORÍA</div>
+      <h3 class="prints-modal-title" id="prints-modal-title">Título de la Categoría</h3>
+      <p class="prints-modal-desc" id="prints-modal-desc">Descripción</p>
+      <div class="prints-modal-stats" id="prints-modal-stats">12 LÁMINAS DISPONIBLES &bull; 4K (3840 &times; 2160 PX)</div>
+    </div>
+
+    <!-- Visor de imagen principal seleccionada -->
+    <div class="prints-viewer-wrap">
+      <div class="prints-viewer-stage">
+        <img class="prints-viewer-img" id="prints-viewer-img" src="" alt="Print en 4K" loading="lazy">
+        <div class="prints-viewer-meta">
+          <span class="prints-viewer-counter" id="prints-viewer-counter">1 / 12</span>
+          <a class="btn-primary prints-download-btn" id="prints-download-btn" href="#" download="" target="_blank">
+            <span>🖨️</span> DESCARGAR EN 4K PARA IMPRIMIR
+          </a>
+        </div>
+      </div>
+      
+      <!-- Controles de navegación -->
+      <button class="prints-nav-btn prints-prev-btn" id="prints-prev-btn" title="Anterior">&lsaquo;</button>
+      <button class="prints-nav-btn prints-next-btn" id="prints-next-btn" title="Siguiente">&rsaquo;</button>
+    </div>
+
+    <!-- Carrusel / Grid de miniaturas -->
+    <div class="prints-thumbs-container" id="prints-thumbs-container">
+      <!-- Miniaturas generadas por JS -->
+    </div>
+  </div>
+</div>
+
+
 <!-- REPRODUCTOR DE VIDEO TELEVISOR CRT AÑOS 90 (FICHAS 118-126) -->
 
 <div class="crt-tv-overlay" id="crt-tv-overlay">
@@ -1444,6 +1498,7 @@
 <script src="species-data-3.js"></script>
 
 <script src="fichas-data.js"></script>
+<script src="prints-data.js"></script>
 
 <script src="script.js"></script>
 
