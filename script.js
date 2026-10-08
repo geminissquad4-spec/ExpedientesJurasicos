@@ -1635,6 +1635,7 @@ if (navToggle && navLinks) {
 //  MÓDULO DE PRINTS 4K (BONUS CLASIFICADO)
 // =============================================
 (function() {
+    function initPrintsModule() {
     var categoriesGrid   = document.getElementById('prints-categories-grid');
     var modalOverlay     = document.getElementById('prints-modal-overlay');
     var modalClose       = document.getElementById('prints-modal-close');
@@ -1803,7 +1804,13 @@ if (navToggle && navLinks) {
 
     // Iniciar renderizado al cargar
     buildPrintsCategories();
-    document.addEventListener('DOMContentLoaded', buildPrintsCategories);
     window.openPrintsModal = openPrintsModal;
     window.buildPrintsCategories = buildPrintsCategories;
+    } // end initPrintsModule
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPrintsModule);
+    } else {
+        initPrintsModule();
+    }
 })();
