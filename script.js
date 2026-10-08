@@ -1661,7 +1661,7 @@ if (navToggle && navLinks) {
         categoriesGrid.innerHTML = '';
         PRINTS_CATEGORIES.forEach(function(cat) {
             var coverNumStr = String(cat.coverSlide).padStart(3, '0');
-            var coverSrc = 'prints/print_' + coverNumStr + '.jpg';
+            var coverSrc = 'print_' + coverNumStr + '.jpg';
 
             var card = document.createElement('div');
             card.className = 'print-cat-card';

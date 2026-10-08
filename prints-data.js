@@ -105,7 +105,7 @@ function getPrintsForCategory(cat) {
             indexInCat: s - cat.startSlide + 1,
             totalInCat: cat.count,
             title: cat.title + " #" + (s - cat.startSlide + 1),
-            src: "prints/print_" + numStr + ".jpg",
+            src: "print_" + numStr + ".jpg",
             downloadName: cat.id + "_print_" + numStr + "_4K.jpg"
         });
     }
