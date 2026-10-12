@@ -1,8 +1,8 @@
 // =============================================
 //  EXPEDIENTES JURÁSICOS — prints-data.js
-//  Colección de 215 Prints en 4K (33.87 x 19.07 cm)
+//  Colección de 217 Prints en 4K (33.87 x 19.07 cm)
 //  112 prints (Kenner/Hasbro/Warpath/JPOG/Calendario)
-//  103 prints (Misterios/Sobrevivir/Caos en la Isla)
+//  105 prints (Misterios/Sobrevivir/Caos en la Isla)
 // =============================================
 
 var PRINTS_CATEGORIES = [
@@ -123,8 +123,8 @@ var PRINTS_CATEGORIES = [
         tag: "SOBREVIVIR",
         badgeColor: "#e67e22",
         startSlide: 37,
-        endSlide: 69,
-        count: 33,
+        endSlide: 71,
+        count: 35,
         coverSlide: 37,
         prefix: "arts_",
         desc: "Serie de ilustraciones que documentan la lucha por la supervivencia frente a los dinosaurios."
@@ -134,10 +134,10 @@ var PRINTS_CATEGORIES = [
         title: "Caos en la Isla",
         tag: "CAOS",
         badgeColor: "#e74c3c",
-        startSlide: 70,
-        endSlide: 103,
+        startSlide: 72,
+        endSlide: 105,
         count: 34,
-        coverSlide: 70,
+        coverSlide: 72,
         prefix: "arts_",
         desc: "El caos desatado: arte que captura el colapso total del parque y el terror de sus consecuencias."
     }
