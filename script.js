@@ -157,6 +157,76 @@ function getRugido(name) {
     return RUGIDOS_MAP[name] || null;
 }
 
+// Mapa de variantes y diseños genéticos por especie
+var SPECIES_VARIANTS_MAP = {
+    "Carnotaurus": [
+        {
+            name: "Estándar",
+            tag: "GEN 1",
+            file: "Carnotaurus.png",
+            folderFile: "Especies/Carnotaurus.png"
+        },
+        {
+            name: "Gen 2",
+            tag: "GEN 2",
+            file: "CarnotaurusGen2.png",
+            folderFile: "Especies/CarnotaurusGen2.png"
+        }
+    ],
+    "Edmontosaurus": [
+        {
+            name: "Estándar",
+            tag: "HEMBRA",
+            file: "Edmontosaurus.png",
+            folderFile: "Especies/Edmontosaurus.png"
+        },
+        {
+            name: "Macho",
+            tag: "MACHO",
+            file: "Edmontosaurus Male.png",
+            folderFile: "Especies/Edmontosaurus Male.png"
+        }
+    ],
+    "Tyrannosaurus Rex": [
+        {
+            name: "Estándar",
+            tag: "HEMBRA",
+            file: "Tyrannosaurus Rex.png",
+            folderFile: "Especies/Tyrannosaurus Rex.png"
+        },
+        {
+            name: "Macho",
+            tag: "MACHO",
+            file: "Tyrannosaurus Rex Macho.png",
+            folderFile: "Especies/Tyrannosaurus Rex Macho.png"
+        }
+    ],
+    "Velociraptor": [
+        {
+            name: "Estándar",
+            tag: "ISLA NUBLAR",
+            file: "Velociraptor.png",
+            folderFile: "Especies/Velociraptor.png"
+        },
+        {
+            name: "Gen 2",
+            tag: "ISLA SORNA",
+            file: "Velociraptor Gen 2.png",
+            folderFile: "Especies/Velociraptor Gen 2.png"
+        },
+        {
+            name: "Gen 2 Macho",
+            tag: "MACHO ALFA",
+            file: "Velociraptor Gen 2 Macho.png",
+            folderFile: "Especies/Velociraptor Gen 2 Macho.png"
+        }
+    ]
+};
+
+function getSpeciesVariants(name) {
+    return SPECIES_VARIANTS_MAP[name] || null;
+}
+
 // =============================================
 //  SISTEMA DE AUDIO: BGM Y EFECTO DE SELECCIÓN
 // =============================================
@@ -534,6 +604,11 @@ function buildCards(list) {
             ? '<button class="species-roar-chip" data-name="' + sp.name + '" title="Reproducir rugido de ' + sp.name + '"><span class="roar-chip-icon">🔊</span> RUGIDO</button>'
             : '';
 
+        var variants = getSpeciesVariants(sp.name);
+        var variantsChip = (variants && variants.length > 0)
+            ? '<span class="species-variants-chip">🧬 ' + variants.length + ' DISEÑOS</span>'
+            : '';
+
         var card = document.createElement('div');
         card.className = 'species-card';
         card.setAttribute('data-diet', sp.diet);
@@ -542,6 +617,7 @@ function buildCards(list) {
         card.innerHTML =
             '<div class="species-img-wrap">' +
                 roarChip +
+                variantsChip +
                 imgHTML +
                 '<span class="species-diet-badge ' + dietClass(sp.diet) + '">' + sp.dietLabel + '</span>' +
             '</div>' +
@@ -607,10 +683,9 @@ document.getElementById('species-search').addEventListener('input', function() {
 
 // ---- MODAL ----
 function openModal(sp) {
-    var img = getImg(sp.name);
-    var imgTag = img
-        ? '<img class="modal-img" src="' + img + '" alt="' + sp.name + '" onerror="this.style.display=\'none\'">'
-        : '<div class="modal-img" style="display:flex;align-items:center;justify-content:center;font-size:5rem;background:#0a1220;">' + (sp.emoji || '🦖') + '</div>';
+    var variants = getSpeciesVariants(sp.name);
+    var initialImg = (variants && variants.length > 0) ? variants[0].folderFile : getImg(sp.name);
+    var initialFallback = (variants && variants.length > 0) ? variants[0].file : getImg(sp.name);
 
     var rugidoSrc = getRugido(sp.name);
     var roarBtnHTML = rugidoSrc
@@ -633,10 +708,37 @@ function openModal(sp) {
                 (roarBtnHTML ? '<div>' + roarBtnHTML + '</div>' : '') +
             '</div>' +
         '</div>';
+
     // ---- Full-width image ----
-    var imgHTML2 = img
-        ? '<div class="modal-img-full"><img src="' + img + '" alt="' + sp.name + '" onerror="this.parentElement.style.display=\'none\'"></div>'
+    var imgHTML2 = initialImg
+        ? '<div class="modal-img-full"><img id="species-modal-main-img" src="' + initialImg + '" alt="' + sp.name + '" onerror="if(this.src.indexOf(\'Especies/\')!==-1){this.src=\'' + initialFallback + '\';}else{this.parentElement.style.display=\'none\';}"></div>'
         : '<div class="modal-img-full modal-img-placeholder">' + (sp.emoji || '🦖') + '</div>';
+
+    // ---- Recuadro de Diseños y Variantes Genéticas ----
+    var variantsHTML = '';
+    if (variants && variants.length > 0) {
+        variantsHTML += '<div class="species-variants-panel">';
+        variantsHTML +=   '<div class="species-variants-header">';
+        variantsHTML +=     '<div class="species-variants-title"><span class="species-variants-icon">🧬</span> REGISTRO DE DISEÑOS Y VARIANTES GENÉTICAS</div>';
+        variantsHTML +=     '<span class="species-variants-count">' + variants.length + ' DISEÑOS DISPONIBLES</span>';
+        variantsHTML +=   '</div>';
+        variantsHTML +=   '<div class="species-variants-grid">';
+        variants.forEach(function(v, idx) {
+            var isAct = (idx === 0) ? ' active' : '';
+            variantsHTML += '<button type="button" class="species-variant-btn' + isAct + '" data-img="' + v.folderFile + '" data-fallback="' + v.file + '" data-label="' + v.name + '" title="Ver diseño: ' + v.name + '">';
+            variantsHTML +=   '<div class="species-variant-thumb-box">';
+            variantsHTML +=     '<img src="' + v.folderFile + '" alt="' + v.name + '" onerror="if(this.src.indexOf(\'Especies/\')!==-1){this.src=\'' + v.file + '\';}else{this.style.display=\'none\';}">';
+            variantsHTML +=   '</div>';
+            variantsHTML +=   '<div class="species-variant-info">';
+            variantsHTML +=     '<span class="species-variant-tag">' + v.tag + '</span>';
+            variantsHTML +=     '<span class="species-variant-name">' + v.name + '</span>';
+            variantsHTML +=   '</div>';
+            variantsHTML += '</button>';
+        });
+        variantsHTML +=   '</div>';
+        variantsHTML += '</div>';
+    }
+
     // ---- Stats grid (6 cells) ----
     var statsHTML =
         '<div class="modal-stats-grid">' +
@@ -647,6 +749,7 @@ function openModal(sp) {
             '<div class="stat-cell"><div class="stat-cell-label">LOCALIZACIÓN</div><div class="stat-cell-val">' + sp.location + '</div></div>' +
             '<div class="stat-cell"><div class="stat-cell-label">CLAVE INGEN</div><div class="stat-cell-val modal-key-accent">' + sp.key + '</div></div>' +
         '</div>';
+
     // ---- Text sections ----
     var textHTML =
         '<div class="modal-section-label">DESCRIPCIÓN OFICIAL INGEN</div>' +
@@ -654,7 +757,43 @@ function openModal(sp) {
         '<div class="modal-section-label">ANÁLISIS ADICIONAL</div>' +
         '<div class="modal-desc">' + sp.desc + '<br><br>' + sp.extra + '</div>';
 
-    inner.innerHTML = titleHTML + imgHTML2 + statsHTML + textHTML;
+    inner.innerHTML = titleHTML + imgHTML2 + variantsHTML + statsHTML + textHTML;
+
+    // Listeners para botones de variantes
+    if (variants && variants.length > 0) {
+        var vBtns = inner.querySelectorAll('.species-variant-btn');
+        var mainImg = inner.querySelector('#species-modal-main-img');
+        vBtns.forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (typeof playSelectSound === 'function') {
+                    try { playSelectSound(); } catch(err) {}
+                }
+                vBtns.forEach(function(b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+
+                var newSrc = btn.getAttribute('data-img');
+                var fallbackSrc = btn.getAttribute('data-fallback');
+                var label = btn.getAttribute('data-label');
+
+                if (mainImg) {
+                    mainImg.style.opacity = '0.2';
+                    mainImg.style.transform = 'scale(0.98)';
+                    setTimeout(function() {
+                        mainImg.src = newSrc;
+                        mainImg.onerror = function() {
+                            if (this.src.indexOf('Especies/') !== -1) {
+                                this.src = fallbackSrc;
+                            }
+                        };
+                        mainImg.alt = sp.name + ' - ' + label;
+                        mainImg.style.opacity = '1';
+                        mainImg.style.transform = 'scale(1)';
+                    }, 120);
+                }
+            });
+        });
+    }
 
     if (rugidoSrc) {
         var mBtn = inner.querySelector('#species-modal-roar-btn');
