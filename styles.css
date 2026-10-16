@@ -130,14 +130,14 @@ a{color:var(--cyan);text-decoration:none}
 .ingen-text{color:var(--red);text-shadow:0 0 30px rgba(255,45,45,0.6)}
 .hero-desc{font-size:1.05rem;color:var(--text2);max-width:700px;margin:0 auto 2.5rem;line-height:1.8}
 .hero-stats{display:flex;justify-content:center;align-items:center;gap:2rem;margin-bottom:2.5rem;flex-wrap:wrap}
-.stat-item{text-align:center}
+.hero-stat, .stat-item{text-align:center}
 .stat-num{font-family:var(--font-orb);font-size:2.5rem;font-weight:900;color:var(--cyan);text-shadow:0 0 20px var(--cyan)}
 .stat-label{font-family:var(--font-mono);font-size:.6rem;color:var(--text2);letter-spacing:2px}
 .stat-divider{color:var(--mil-border);font-size:1.5rem}
-.hero-ctas{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-primary{font-family:var(--font-orb);font-size:.75rem;padding:.8rem 2rem;background:var(--mil-green);color:#fff;font-weight:700;letter-spacing:2px;border:2px solid var(--cyan);cursor:pointer;transition:all .3s;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.hero-actions, .hero-ctas{display:flex;gap:1.5rem;justify-content:center;align-items:center;flex-wrap:wrap;margin:0 auto}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-orb);font-size:.75rem;padding:.85rem 2.2rem;background:var(--mil-green);color:#fff;font-weight:700;letter-spacing:2px;border:2px solid var(--cyan);cursor:pointer;transition:all .3s;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);text-decoration:none}
 .btn-primary:hover{background:var(--cyan);color:#000;box-shadow:0 0 30px var(--cyan)}
-.btn-secondary{font-family:var(--font-orb);font-size:.75rem;padding:.8rem 2rem;background:transparent;color:var(--cyan);font-weight:700;letter-spacing:2px;border:1px solid var(--cyan);cursor:pointer;transition:all .3s;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.btn-secondary{display:inline-flex;align-items:center;justify-content:center;font-family:var(--font-orb);font-size:.75rem;padding:.85rem 2.2rem;background:transparent;color:var(--cyan);font-weight:700;letter-spacing:2px;border:1px solid var(--cyan);cursor:pointer;transition:all .3s;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);text-decoration:none}
 .btn-secondary:hover{background:rgba(0,229,176,0.1);box-shadow:0 0 20px rgba(0,229,176,0.3)}
 .hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.6rem;color:var(--text2);letter-spacing:3px;animation:float 2s ease-in-out infinite}
 .scroll-arrow{width:12px;height:12px;border-right:2px solid var(--cyan);border-bottom:2px solid var(--cyan);transform:rotate(45deg)}
@@ -406,15 +406,65 @@ a{color:var(--cyan);text-decoration:none}
     .nav-link{padding:0.8rem 1rem!important;border-bottom:1px solid rgba(0,229,176,0.1)!important;display:block!important}
     .nav-status{font-size:0.6rem!important}
     
-    .hero-title{font-size:clamp(1.2rem, 10vw, 2.5rem)!important;line-height:1.2!important;margin-bottom:1.5rem!important;word-break:break-word!important}
-    .hero-ctas{display:flex!important;flex-direction:column!important;gap:2rem!important;align-items:center!important;width:100%!important;margin:2rem auto!important;padding:0 1.5rem!important}
-    .hero-ctas .btn-primary, .hero-ctas .btn-secondary{display:block!important;width:100%!important;max-width:280px!important;text-align:center!important;padding:1rem 0.5rem!important;margin:0 auto!important;position:relative!important;float:none!important}
+    .hero{padding:5rem 1.2rem 3.5rem!important;min-height:auto!important}
+    .hero-title{font-size:clamp(1.5rem, 8vw, 2.6rem)!important;line-height:1.2!important;margin-bottom:1.2rem!important;word-break:break-word!important}
+    .hero-desc{font-size:0.9rem!important;line-height:1.6!important;margin-bottom:1.8rem!important;padding:0 0.5rem!important}
+    
+    /* Stats en fila uniforme en móvil */
+    .hero-stats{
+        display:grid!important;
+        grid-template-columns:repeat(3, 1fr)!important;
+        gap:0.4rem!important;
+        margin:0 auto 2rem!important;
+        width:100%!important;
+        max-width:420px!important;
+    }
+    .hero-stat, .stat-item{
+        text-align:center!important;
+        padding:0.3rem 0.2rem!important;
+    }
+    .stat-num{
+        font-size:1.65rem!important;
+        line-height:1.2!important;
+    }
+    .stat-label{
+        font-size:0.52rem!important;
+        letter-spacing:1px!important;
+        line-height:1.3!important;
+        margin-top:0.3rem!important;
+    }
+    .stat-divider{display:none!important}
+    
+    /* Botones CTA en móvil - apilados limpiamente sin solapamiento */
+    .hero-actions, .hero-ctas{
+        display:flex!important;
+        flex-direction:column!important;
+        gap:1.2rem!important;
+        align-items:center!important;
+        width:100%!important;
+        margin:1.5rem auto 1rem!important;
+        padding:0!important;
+    }
+    .hero-actions .btn-primary, .hero-actions .btn-secondary,
+    .hero-ctas .btn-primary, .hero-ctas .btn-secondary{
+        display:inline-flex!important;
+        justify-content:center!important;
+        align-items:center!important;
+        width:100%!important;
+        max-width:280px!important;
+        text-align:center!important;
+        padding:0.85rem 1rem!important;
+        margin:0!important;
+        box-sizing:border-box!important;
+        text-decoration:none!important;
+        font-size:0.75rem!important;
+    }
+    
+    /* Ocultar widgets flotantes molestos en móvil */
+    .clock-widget{display:none!important}
+    .dna-widget{display:none!important}
     
     .section{padding:4rem 1.2rem!important}
-    .hero-stats{gap:1rem!important}
-    .stat-num{font-size:2rem!important}
-    .stat-divider{display:none!important}
-    .clock-widget{display:none!important}
     .inc-body-inner{flex-direction:column!important}
     .inc-photo-col{width:100%!important}
     .book-promo{flex-direction:column!important;align-items:center!important;text-align:center!important;gap:1.5rem!important}
