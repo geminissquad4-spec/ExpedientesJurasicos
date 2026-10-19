@@ -1,8 +1,8 @@
 // =============================================
 //  EXPEDIENTES JURÁSICOS — prints-data.js
-//  Colección de 218 Prints en 4K (33.87 x 19.07 cm)
+//  Colección de 289 Prints en 4K (33.87 x 19.07 cm)
 //  112 prints (Kenner/Hasbro/Warpath/JPOG/Calendario)
-//  106 prints (Misterios/Sobrevivir/Caos en la Isla)
+//  177 prints (Misterios/Sobrevivir/Caos/Huellas en el mundo)
 // =============================================
 
 var PRINTS_CATEGORIES = [
@@ -140,6 +140,18 @@ var PRINTS_CATEGORIES = [
         coverSlide: 73,
         prefix: "arts_",
         desc: "El caos desatado: arte que captura el colapso total del parque y el terror de sus consecuencias."
+    },
+    {
+        id: "huellas-mundo",
+        title: "Huellas en el mundo",
+        tag: "HUELLAS",
+        badgeColor: "#3498db",
+        startSlide: 107,
+        endSlide: 177,
+        count: 71,
+        coverSlide: 107,
+        prefix: "arts_",
+        desc: "Expedición global: arte y registros visuales del impacto y dispersión de los dinosaurios por todo el planeta."
     }
 ];
 
