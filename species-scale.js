@@ -250,12 +250,49 @@
       stDiet.className = 'card-diet ' + dietCls;
 
       // Wire roar
-      const roarSrc = (fullSp && fullSp.audio) ? fullSp.audio : sp.rugido;
       stBtnRoar.onclick = () => {
-        if (typeof window.playSpeciesRoar === 'function' && roarSrc) {
+        let roarSrc = sp.rugido || (fullSp && fullSp.audio);
+        if (!roarSrc && typeof window.getRugido === 'function') {
+          roarSrc = window.getRugido(sp.species);
+        }
+        if (!roarSrc) {
+          const cleanName = sp.species.replace(/"[^"]+"/g, '').replace(/\b(Macho|Hembra|macho|hembra|Gen 2|Estandar|estandar)\b/g, '').trim();
+          if (typeof window.getRugido === 'function') roarSrc = window.getRugido(cleanName);
+          if (!roarSrc) roarSrc = 'Rugidos/' + (cleanName || sp.species) + '.mp4';
+        }
+
+        // Tactile button feedback
+        const origHTML = stBtnRoar.innerHTML;
+        stBtnRoar.innerHTML = '🔊 Reproduciendo...';
+        stBtnRoar.style.borderColor = 'var(--c-amber, #f59e0b)';
+        stBtnRoar.style.color = 'var(--c-amber, #f59e0b)';
+
+        const resetBtn = () => {
+          stBtnRoar.innerHTML = origHTML;
+          stBtnRoar.style.borderColor = '';
+          stBtnRoar.style.color = '';
+        };
+
+        if (typeof window.playSpeciesRoar === 'function') {
           window.playSpeciesRoar(roarSrc, sp.species);
+          setTimeout(resetBtn, 3000);
         } else {
-          console.log('[BioScale] Roar audio:', roarSrc);
+          let audioEl = document.getElementById('species-roar-player');
+          if (!audioEl) {
+            audioEl = new Audio();
+            audioEl.id = 'species-roar-player';
+            document.body.appendChild(audioEl);
+          }
+          const fileName = roarSrc.split('/').pop();
+          audioEl.src = 'Rugidos/' + fileName;
+          audioEl.onended = resetBtn;
+          audioEl.play().catch(() => {
+            audioEl.src = fileName;
+            audioEl.play().catch(err => {
+              console.warn('[BioScale] Roar fallback failed:', err);
+              resetBtn();
+            });
+          });
         }
       };
 
