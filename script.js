@@ -18,6 +18,7 @@ var IMG_MAP = {
     "Ankylosaurus":        "Ankylosaurus.png",
     "Baryonyx":            "Baryonyx.png",
     "Brachiosaurus":       "Brachiosaurus.png",
+    "Brachiosaurus Macho": "Brachiosaurus Macho.png",
     "Carnotaurus":         "Carnotaurus.png",
     "Cearadactylus":       "Cearadactylus.png",
     "Ceratosaurus":        "Ceratosaurus.png",
@@ -54,6 +55,7 @@ var IMG_MAP = {
     "Pachycephalosaurus":  "Pachycephalosaurus.png",
     "Pachyrhinosaurus":    "Pachyrhinosaurus.png",
     "Parasaurolophus":     "Parasaurolophus.png",
+    "Parasaurolophus Hembra": "Parasaurolophus Hembra.png",
     "Plateosaurus":        "Plateosaurus.png",
     "Plesiosaurus":        "Plesiosaurus.png",
     "Proceratosaurus":     "Proceratosaurus.png",
@@ -159,6 +161,20 @@ function getRugido(name) {
 
 // Mapa de variantes y diseños genéticos por especie
 var SPECIES_VARIANTS_MAP = {
+    "Brachiosaurus": [
+        {
+            name: "Estándar",
+            tag: "HEMBRA",
+            file: "Brachiosaurus.png",
+            folderFile: "Especies/Brachiosaurus.png"
+        },
+        {
+            name: "Macho",
+            tag: "MACHO",
+            file: "Brachiosaurus Macho.png",
+            folderFile: "Especies/Brachiosaurus Macho.png"
+        }
+    ],
     "Carnotaurus": [
         {
             name: "Estándar",
@@ -185,6 +201,20 @@ var SPECIES_VARIANTS_MAP = {
             tag: "MACHO",
             file: "Edmontosaurus Male.png",
             folderFile: "Especies/Edmontosaurus Male.png"
+        }
+    ],
+    "Parasaurolophus": [
+        {
+            name: "Estándar",
+            tag: "MACHO",
+            file: "Parasaurolophus.png",
+            folderFile: "Especies/Parasaurolophus.png"
+        },
+        {
+            name: "Hembra",
+            tag: "HEMBRA",
+            file: "Parasaurolophus Hembra.png",
+            folderFile: "Especies/Parasaurolophus Hembra.png"
         }
     ],
     "Tyrannosaurus Rex": [
