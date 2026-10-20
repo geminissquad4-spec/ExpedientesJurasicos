@@ -276,7 +276,7 @@ var SPECIES_PART2 = [
         family: "Azhdarchidae",
         diet: "carnivoro",
         dietLabel: "CARNÍVORO",
-        height: "3.5 m",
+        height: "5 m",
         length: "15 m (env.)",
         weight: "800 kg",
         location: "Isla Matanceros",

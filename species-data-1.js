@@ -126,7 +126,7 @@ var SPECIES_PART1 = [
         family: "Cearadactylidae",
         diet: "piscivoro",
         dietLabel: "PISCÍVORO",
-        height: "n/a",
+        height: "1 m",
         length: "4.5 m (env.)",
         weight: "25 kg",
         location: "Isla Nublar",
