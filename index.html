@@ -846,6 +846,113 @@
 
 </div>
 
+<!-- COMPARADOR TÁCTICO 4K DE ESCALA & TAMAÑO -->
+<div class="species-scale-module" id="species-scale-module">
+  <div class="scale-module-header">
+    <div class="scale-header-left">
+      <span class="scale-badge">INGEN BIOSCALE v4.2 &bull; 4K ULTRA-HD</span>
+      <h3 class="scale-title">DIAGRAMA COMPARATIVO DE TAMAÑO &amp; ESCALA REAL</h3>
+      <p class="scale-desc">Explora el diagrama interactivo en ultra alta resolución (4K). Desplaza y haz zoom sobre el lienzo, arrastra la silueta humana para comparar proporciones sobre las líneas punteadas o haz clic en cualquier especie para abrir su expediente táctico.</p>
+    </div>
+    <div class="scale-header-actions">
+      <div class="scale-search-wrap">
+        <input type="text" id="scale-species-search" class="scale-search-input" placeholder="BUSCAR ESPECIE EN EL DIAGRAMA..." autocomplete="off">
+        <div id="scale-search-results" class="scale-search-results"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HUD Toolbar -->
+  <div class="scale-toolbar">
+    <div class="toolbar-group">
+      <button class="scale-btn" id="scale-zoom-in" title="Acercar (Zoom +)"><span>＋</span> Acercar</button>
+      <button class="scale-btn" id="scale-zoom-out" title="Alejar (Zoom -)"><span>－</span> Alejar</button>
+      <button class="scale-btn" id="scale-zoom-reset" title="Restablecer Vista Original"><span>⟲</span> Restablecer</button>
+      <div class="scale-zoom-level" id="scale-zoom-level">100%</div>
+    </div>
+    <div class="toolbar-group">
+      <button class="scale-btn active" id="scale-toggle-human" title="Mostrar/Ocultar Humano">
+        <span class="btn-icon">🧍</span> Silueta Humana (1.80m)
+      </button>
+      <button class="scale-btn active" id="scale-toggle-hotspots" title="Mostrar/Ocultar Puntos Tácticos">
+        <span class="btn-icon">🎯</span> Puntos Tácticos
+      </button>
+      <button class="scale-btn" id="scale-reset-human" title="Regresar Humano al Origen">
+        <span>↩</span> Humano a Base
+      </button>
+      <button class="scale-btn" id="scale-fullscreen-btn" title="Pantalla Completa">
+        <span>⛶</span> Pantalla Completa
+      </button>
+    </div>
+  </div>
+
+  <!-- Interactive Canvas Viewport -->
+  <div class="scale-viewport" id="scale-viewport">
+    <div class="scale-canvas" id="scale-canvas">
+      <img src="species_size_4k.jpg" alt="Diagrama de Escala de Especies InGen 4K" class="scale-bg-img" id="scale-bg-img" draggable="false" />
+      
+      <!-- Hotspots layer -->
+      <div class="scale-hotspots-layer" id="scale-hotspots-layer"></div>
+
+      <!-- Draggable Human Silhouette -->
+      <div class="draggable-human" id="draggable-human" title="Silueta Humana (1.80m) - Arrástrala libremente sobre las líneas para comparar">
+        <div class="human-hud-tag">
+          <span class="tag-height">1.80 m</span>
+          <span class="tag-label">REF. HUMANO</span>
+        </div>
+        <div class="human-laser-line"></div>
+        <img src="human_silhouette.png" alt="Silueta Humana de Referencia 1.80m" class="human-img" draggable="false" />
+      </div>
+    </div>
+
+    <!-- Floating Tactical InGen HUD Card -->
+    <div class="scale-tooltip-card" id="scale-tooltip-card">
+      <button class="card-close" id="scale-tooltip-close" title="Cerrar">&times;</button>
+      <div class="card-header">
+        <div class="card-code" id="st-code">IN-GEN-001</div>
+        <div class="card-diet" id="st-diet">CARNÍVORO</div>
+      </div>
+      <h4 class="card-name" id="st-name">Tyrannosaurus Rex</h4>
+      <div class="card-metrics">
+        <div class="metric-box">
+          <span class="m-lbl">ALTURA</span>
+          <span class="m-val" id="st-height">5.2 m</span>
+        </div>
+        <div class="metric-box">
+          <span class="m-lbl">LONGITUD</span>
+          <span class="m-val" id="st-length">13.5 m</span>
+        </div>
+        <div class="metric-box">
+          <span class="m-lbl">PESO</span>
+          <span class="m-val" id="st-weight">7,000 kg</span>
+        </div>
+      </div>
+      <div class="card-actions">
+        <button class="st-btn st-btn-roar" id="st-btn-roar"><span>🔊</span> Rugido</button>
+        <button class="st-btn st-btn-modal" id="st-btn-modal"><span>📄</span> Ficha Completa</button>
+      </div>
+    </div>
+
+    <!-- Minimap Radar HUD -->
+    <div class="scale-minimap" id="scale-minimap">
+      <div class="minimap-title">RADAR / VISTA GLOBAL</div>
+      <div class="minimap-preview">
+        <img src="species_size_4k.jpg" alt="Minimap Radar" class="minimap-img" />
+        <div class="minimap-viewport-box" id="minimap-viewport-box"></div>
+      </div>
+    </div>
+
+    <!-- Navigation instructions overlay -->
+    <div class="scale-instructions">
+      <span>🖱 Arrastra el lienzo para mover</span>
+      <span>🔍 Rueda del ratón para Zoom</span>
+      <span>🧍 Arrastra el humano sobre las especies</span>
+      <span>🎯 Clic en los puntos para ver fichas</span>
+    </div>
+  </div>
+</div>
+
+
 <div class="filter-bar" id="filter-bar">
 
 <button class="filter-btn active" data-filter="all" id="filter-all">TODAS</button>
@@ -1500,6 +1607,8 @@
 <script src="fichas-data.js"></script>
 <script src="prints-data.js"></script>
 
+<script src="species-scale-data.js"></script>
+<script src="species-scale.js"></script>
 <script src="script.js"></script>
 
 
