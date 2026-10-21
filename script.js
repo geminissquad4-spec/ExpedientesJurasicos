@@ -20,6 +20,7 @@ var IMG_MAP = {
     "Brachiosaurus":       "Brachiosaurus.png",
     "Brachiosaurus Macho": "Brachiosaurus Macho.png",
     "Carnotaurus":         "Carnotaurus.png",
+    "Carnotaurus Gen 2":   "CarnotaurusGen2.png",
     "Cearadactylus":       "Cearadactylus.png",
     "Ceratosaurus":        "Ceratosaurus.png",
     "Chasmosaurus":        "Chasmosaurus.png",
