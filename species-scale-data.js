@@ -878,12 +878,12 @@ var SPECIES_SCALE_CONFIG = window.SPECIES_SCALE_CONFIG = {
     "dietClass": "carnivore",
     "rugido": "Rugidos/Carnotaurus.mp4",
     "image": "CarnotaurusGen2.png",
-    "x": 16.393,
-    "y": 25.061,
-    "w": 14.34,
-    "h": 7.838,
-    "cx": 23.563,
-    "cy": 28.98
+    "x": 17.501,
+    "y": 25.748,
+    "w": 12.594,
+    "h": 6.884,
+    "cx": 23.798,
+    "cy": 29.19
   },
   {
     "id": "hotspot-r4-c3",
@@ -1198,12 +1198,12 @@ var SPECIES_SCALE_CONFIG = window.SPECIES_SCALE_CONFIG = {
     "dietClass": "carnivore",
     "rugido": "Rugidos/Suchomimus.mp4",
     "image": "Suchomimus.png",
-    "x": 57.967,
-    "y": 40.955,
+    "x": 57.173,
+    "y": 41.226,
     "w": 20.71,
-    "h": 9.076,
-    "cx": 68.322,
-    "cy": 45.493
+    "h": 9.944,
+    "cx": 67.528,
+    "cy": 46.198
   },
   {
     "id": "hotspot-r6-c4",
@@ -1218,11 +1218,11 @@ var SPECIES_SCALE_CONFIG = window.SPECIES_SCALE_CONFIG = {
     "dietClass": "carnivore",
     "rugido": "Rugidos/Giganotosaurus.mp4",
     "image": "Giganotosaurus.png",
-    "x": 74.361,
+    "x": 74.788,
     "y": 36.993,
     "w": 25.593,
     "h": 13.217,
-    "cx": 87.158,
+    "cx": 87.584,
     "cy": 43.602
   },
   {
