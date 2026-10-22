@@ -122,20 +122,116 @@ body.in-maintenance {
     border-color: #00e5b0;
 }
 
-/* Contenido Principal / Área de Juego */
-.maint-content {
-    position: relative;
-    z-index: 5;
-    flex: 1;
+/* ---- CONTENEDOR BOTÓN JUGAR ---- */
+.maint-play-container {
+    position: fixed;
+    bottom: 90px; /* encima del pie de hazard tape */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-end; /* Para dejar libre el encabezado de la imagen */
-    padding: 1rem 1.5rem 1.8rem 1.5rem;
-    max-width: 1400px;
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.maint-play-container.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) scale(0.85);
+}
+
+.maint-play-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 1.1rem 2.8rem;
+    background: rgba(0, 229, 176, 0.12);
+    border: 2px solid #00e5b0;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #00e5b0;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    box-shadow: 0 0 28px rgba(0, 229, 176, 0.35), inset 0 0 18px rgba(0, 229, 176, 0.06);
+    backdrop-filter: blur(10px);
+    transition: all 0.22s ease;
+    animation: play-btn-pulse 2.4s ease-in-out infinite;
+}
+
+.maint-play-btn:hover {
+    background: rgba(0, 229, 176, 0.25);
+    box-shadow: 0 0 50px rgba(0, 229, 176, 0.6), inset 0 0 30px rgba(0, 229, 176, 0.12);
+    transform: scale(1.06);
+}
+
+.maint-play-icon {
+    font-size: 2.2rem;
+    line-height: 1;
+}
+
+.maint-play-label {
+    font-size: 1.6rem;
+    font-weight: 900;
+}
+
+.maint-play-sub {
+    font-size: 0.65rem;
+    font-family: 'Share Tech Mono', monospace;
+    color: #88dac0;
+    letter-spacing: 1.5px;
+    opacity: 0.8;
+}
+
+@keyframes play-btn-pulse {
+    0%, 100% { box-shadow: 0 0 28px rgba(0, 229, 176, 0.35), inset 0 0 18px rgba(0, 229, 176, 0.06); }
+    50% { box-shadow: 0 0 50px rgba(0, 229, 176, 0.6), inset 0 0 28px rgba(0, 229, 176, 0.12); }
+}
+
+/* ---- PANEL DEL MINIJUEGO (oculto por defecto) ---- */
+.maint-game-panel {
+    position: fixed;
+    bottom: 80px; /* encima del tape footer */
+    left: 50%;
+    transform: translateX(-50%) translateY(30px);
+    z-index: 20;
+    width: 96%;
+    max-width: 1050px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.maint-game-panel.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Botón Cerrar / Volver dentro del juego */
+.game-close-btn {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    z-index: 30;
+    background: rgba(0,0,0,0.75);
+    border: 1px solid rgba(0,229,176,0.4);
+    color: #88a892;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 3px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
+}
+
+.game-close-btn:hover {
+    background: rgba(0,229,176,0.15);
+    color: #00e5b0;
+    border-color: #00e5b0;
 }
 
 /* ARENA DEL MINIJUEGO */
