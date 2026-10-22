@@ -321,7 +321,7 @@
         fab.id = 'ntm-fab';
         fab.title = "¡No te MUEVAS! - Minijuego Tyrannosaurus Rex";
         fab.innerHTML = `
-            <img src="Rex Move/Rex Model.png" alt="Rex Model">
+            <img src="Rex%20Model.png" onerror="if(this.src.indexOf('Rex%20Move')===-1)this.src='Rex%20Move/Rex%20Model.png';" alt="Rex Model">
             <span>
                 <span class="ntm-fab-title">¡No te MUEVAS!</span>
                 <span class="ntm-fab-sub">Escape del Tyrannosaurus</span>
@@ -332,12 +332,26 @@
     }
 
     // ============================================================
-    //  AUDIO
+    //  AUDIO CON RESOLUCIÓN AUTOMÁTICA (RAÍZ Y CARPETA)
     // ============================================================
+    function createAudioWithFallback(filename, loop, vol) {
+        var primary = encodeURI(filename);
+        var fallback = 'Rex%20Move/' + encodeURI(filename);
+        var a = new Audio(primary);
+        a.loop = !!loop;
+        if (typeof vol === 'number') a.volume = vol;
+        a.addEventListener('error', function() {
+            if (a.src.indexOf('Rex%20Move') === -1 && a.src.indexOf('Rex Move') === -1) {
+                a.src = fallback;
+            }
+        });
+        return a;
+    }
+
     function initAudio() {
-        sndBG   = new Audio('Rex Move/Music Fondo.mp4');  sndBG.loop = true;  sndBG.volume = 0.32;
-        sndEat  = new Audio('Rex Move/T-Rex Eating - Sound Effect.mp4'); sndEat.loop = true; sndEat.volume = 0.55;
-        sndRoar = new Audio('Rex Move/Tyrannosaurus Rex.mp4'); sndRoar.volume = 0.95;
+        sndBG   = createAudioWithFallback('Music Fondo.mp4', true, 0.32);
+        sndEat  = createAudioWithFallback('T-Rex Eating - Sound Effect.mp4', true, 0.55);
+        sndRoar = createAudioWithFallback('Tyrannosaurus Rex.mp4', false, 0.95);
     }
     function playBG()   { if(sndBG)   { sndBG.currentTime=0;   sndBG.play().catch(function(){}); } }
     function stopBG()   { if(sndBG)   { sndBG.pause(); sndBG.currentTime=0; } }
@@ -657,16 +671,43 @@
     }
 
     // ============================================================
-    //  CARGA DE IMÁGENES
+    //  CARGA DE IMÁGENES CON COMPATIBILIDAD DE RUTA
     // ============================================================
+    function loadImageWithFallback(img, filename, onDone) {
+        var primary = encodeURI(filename);
+        var fallback = 'Rex%20Move/' + encodeURI(filename);
+        var finished = false;
+
+        function markDone() {
+            if (!finished) {
+                finished = true;
+                onDone();
+            }
+        }
+
+        img.onload = markDone;
+        img.onerror = function () {
+            // Si falló en la raíz, prueba dentro de la carpeta Rex Move/
+            if (img.src.indexOf('Rex%20Move') === -1 && img.src.indexOf('Rex Move') === -1) {
+                img.src = fallback;
+            } else {
+                console.warn('No se pudo cargar imagen:', filename);
+                markDone();
+            }
+        };
+
+        // Intenta primero en la raíz del repositorio (donde los subiste)
+        img.src = primary;
+    }
+
     function loadImages(cb) {
         var loaded = 0, total = Object.keys(imgs).length;
         function done() { if (++loaded >= total) cb(); }
-        imgs.fondo1.onload  = done; imgs.fondo1.src  = 'Rex Move/Fondo 1.jpg';
-        imgs.fondo2.onload  = done; imgs.fondo2.src  = 'Rex Move/Fondo 2.png';
-        imgs.rexEat.onload  = done; imgs.rexEat.src  = 'Rex Move/Rex Eat Model.png';
-        imgs.rexLook.onload = done; imgs.rexLook.src = 'Rex Move/Rex Model.png';
-        imgs.human.onload   = done; imgs.human.src   = 'Rex Move/Human Model.png';
+        loadImageWithFallback(imgs.fondo1,  'Fondo 1.jpg', done);
+        loadImageWithFallback(imgs.fondo2,  'Fondo 2.png', done);
+        loadImageWithFallback(imgs.rexEat,  'Rex Eat Model.png', done);
+        loadImageWithFallback(imgs.rexLook, 'Rex Model.png', done);
+        loadImageWithFallback(imgs.human,   'Human Model.png', done);
     }
 
     // ============================================================
