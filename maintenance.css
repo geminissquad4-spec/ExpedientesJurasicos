@@ -125,7 +125,7 @@ body.in-maintenance {
 /* ---- CONTENEDOR BOTÓN JUGAR ---- */
 .maint-play-container {
     position: fixed;
-    bottom: 90px; /* encima del pie de hazard tape */
+    bottom: 30px; /* sin footer */
     left: 50%;
     transform: translateX(-50%);
     z-index: 20;
@@ -193,7 +193,7 @@ body.in-maintenance {
 /* ---- PANEL DEL MINIJUEGO (oculto por defecto) ---- */
 .maint-game-panel {
     position: fixed;
-    bottom: 80px; /* encima del tape footer */
+    bottom: 20px; /* sin footer */
     left: 50%;
     transform: translateX(-50%) translateY(30px);
     z-index: 20;

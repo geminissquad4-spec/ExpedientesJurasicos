@@ -129,12 +129,7 @@
                 '</section>' +
             '</div>' +
 
-            // Pie de pantalla
-            '<footer class="maint-footer-tape">' +
-                '<div class="maint-footer-content">' +
-                    'INGEN CORP. // ISLA NUBLAR // RESTAURACIÓN EN PROCESO // ATAJO ADMIN: CTRL + SHIFT + M' +
-                '</div>' +
-            '</footer>' +
+            // (footer eliminado a petición del usuario)
 
             // Modal Admin PIN
             '<div class="maint-admin-modal" id="maint-admin-modal">' +
