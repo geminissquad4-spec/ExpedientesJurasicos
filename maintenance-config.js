@@ -1,11 +1,11 @@
 // ============================================================
 //  EXPEDIENTES JURÁSICOS — CONFIGURACIÓN DE MANTENIMIENTO
-//  ESTADO: MANTENIMIENTO **ACTIVADO**
-//  ➜  Los usuarios verán la pantalla de bloqueo con el Compy.
+//  ESTADO: MANTENIMIENTO **DESACTIVADO**
+//  ➜  La web funciona con normalidad para todos los usuarios.
 // ============================================================
 
 window.MAINTENANCE_CONFIG = {
-    active: true,   // ← MANTENIMIENTO ENCENDIDO
+    active: false,  // ← MANTENIMIENTO APAGADO
 
     adminPin: "1993",
 
