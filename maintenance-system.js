@@ -302,6 +302,8 @@
         var targetCatches = (cfg.minigame && cfg.minigame.targetCatches) || 3;
         var compySpeedMult = (cfg.minigame && cfg.minigame.compySpeedMultiplier) || 1.4;
         var evasionRadius = (cfg.minigame && cfg.minigame.evasionRadius) || 110;
+        // En móvil táctil, mayor radio de evasión (más difícil)
+        if ('ontouchstart' in window) evasionRadius = Math.round(evasionRadius * 1.35);
 
         var cableLevels = [0.18, 0.42, 0.65, 0.82];
         var currentCableIdx = 1;

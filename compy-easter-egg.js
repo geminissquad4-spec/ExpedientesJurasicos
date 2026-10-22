@@ -229,6 +229,78 @@
             .ee-btn-primary:hover { background:#33ffcc; box-shadow:0 0 25px rgba(0,229,176,.7); transform:translateY(-2px); }
             .ee-btn-secondary { background:transparent; border:1px solid #00e5b0; color:#00e5b0; }
             .ee-btn-secondary:hover { background:rgba(0,229,176,.15); }
+
+            /* ---- RESPONSIVE MÓVIL ---- */
+
+            /* Botón flotante más pequeño en móvil */
+            @media (max-width: 600px) {
+                #compy-fab {
+                    bottom: 16px; right: 16px;
+                    padding: 0.5rem 1rem 0.5rem 0.7rem;
+                    font-size: 0.68rem;
+                }
+                #compy-fab img { width: 30px; }
+                #compy-fab .fab-title { font-size: 0.68rem; }
+                #compy-fab .fab-sub { font-size: 0.5rem; }
+            }
+
+            /* Overlay en portrait: pantalla completa real */
+            @media (max-width: 600px) and (orientation: portrait) {
+                #compy-game-overlay { justify-content: flex-start; padding-top: 0; }
+
+                #compy-overlay-header {
+                    width: 100%;
+                    padding: 0.5rem 0.8rem;
+                    box-sizing: border-box;
+                }
+                #compy-overlay-title { font-size: 0.85rem; }
+
+                #compy-ee-arena {
+                    width: 100%;
+                    max-width: 100%;
+                    height: calc(100dvh - 52px); /* ocupa toda la pantalla menos el header */
+                    border-radius: 0;
+                    border-left: none;
+                    border-right: none;
+                }
+
+                /* HUD más compacto */
+                #compy-ee-hud {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 0.25rem;
+                    padding: 0.35rem 0.8rem;
+                    font-size: 0.7rem;
+                }
+                .ee-int-bg { width: 90px; }
+
+                /* Mission pill */
+                #ee-mission-pill {
+                    font-size: 0.62rem;
+                    padding: 0.2rem 0.5rem;
+                    max-width: 78%;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                /* Compy más grande para tocar con el dedo */
+                #compy-ee-actor { width: 140px; height: 52px; }
+
+                /* Modales */
+                .ee-modal { padding: 1.2rem 1.2rem; }
+                .ee-modal-title { font-size: 1.1rem; }
+                .ee-modal-desc { font-size: 0.78rem; }
+                .ee-btn { font-size: 0.7rem; padding: 0.5rem 0.9rem; }
+            }
+
+            /* Landscape en móvil */
+            @media (max-width: 900px) and (orientation: landscape) and (max-height: 500px) {
+                #compy-ee-arena { height: calc(100dvh - 48px); border-radius: 0; }
+                #compy-ee-hud { font-size: 0.68rem; padding: 0.3rem 0.8rem; }
+                #compy-overlay-header { padding: 0.3rem 0.8rem; }
+                #compy-overlay-title { font-size: 0.8rem; }
+            }
         `;
         document.head.appendChild(style);
     }
@@ -372,7 +444,9 @@
 
         var targetCatches   = cfg.targetCatches   || 3;
         var baseMult        = cfg.compySpeedMultiplier || 1.4;
-        var evasionRadius   = cfg.evasionRadius   || 110;
+        var evasionRadius = cfg.evasionRadius || 110;
+        // En móvil táctil, el radio de evasión es mayor (más difícil)
+        if ('ontouchstart' in window) evasionRadius = Math.round(evasionRadius * 1.35);
         var damagePerBite   = cfg.damagePerBite   || 1.2;
         var biteDuration    = cfg.biteDuration    || 900;
 
