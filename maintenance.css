@@ -1,0 +1,524 @@
+/* ============================================================
+   EXPEDIENTES JURÁSICOS — MODO MANTENIMIENTO & MINIJUEGO COMPY
+   Estilo InGen Terminal / Control Room / Emergency Grid
+   ============================================================ */
+
+#maintenance-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999999;
+    background: #020504;
+    color: #c8dac0;
+    font-family: 'Rajdhani', sans-serif;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+body.in-maintenance {
+    overflow: hidden !important;
+}
+
+/* Fondo principal con la imagen de System.pptx */
+.maint-bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 50%, rgba(10,25,18,0.7) 0%, rgba(2,5,4,0.98) 85%);
+}
+
+.maint-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    opacity: 0.88;
+    filter: brightness(0.95) contrast(1.15);
+}
+
+/* Efecto CRT Scanlines y Vignette */
+.maint-scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+    background-size: 100% 3px, 6px 100%;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.85);
+}
+
+/* Cabecera superior HUD */
+.maint-top-bar {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1.4rem;
+    background: rgba(3, 8, 5, 0.88);
+    border-bottom: 2px solid #e74c3c;
+    backdrop-filter: blur(8px);
+}
+
+.maint-alert-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 900;
+    color: #ff3333;
+    letter-spacing: 2px;
+}
+
+.maint-blink-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #ff3333;
+    box-shadow: 0 0 12px #ff3333;
+    animation: maint-pulse-red 1s infinite alternate;
+}
+
+@keyframes maint-pulse-red {
+    from { opacity: 0.3; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1.2); }
+}
+
+.maint-system-clock {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.85rem;
+    color: #00e5b0;
+    letter-spacing: 2px;
+}
+
+.maint-admin-btn {
+    background: transparent;
+    border: 1px solid rgba(0, 229, 176, 0.35);
+    color: #88a892;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.2s ease;
+}
+
+.maint-admin-btn:hover {
+    background: rgba(0, 229, 176, 0.15);
+    color: #00e5b0;
+    border-color: #00e5b0;
+}
+
+/* Contenido Principal / Área de Juego */
+.maint-content {
+    position: relative;
+    z-index: 5;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end; /* Para dejar libre el encabezado de la imagen */
+    padding: 1rem 1.5rem 1.8rem 1.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ARENA DEL MINIJUEGO */
+.compy-game-arena {
+    position: relative;
+    width: 100%;
+    max-width: 1050px;
+    height: clamp(280px, 40vh, 380px);
+    background: rgba(3, 10, 6, 0.78);
+    border: 2px solid rgba(0, 229, 176, 0.45);
+    box-shadow: 0 0 30px rgba(0, 229, 176, 0.2), inset 0 0 35px rgba(0, 0, 0, 0.85);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: crosshair;
+    user-select: none;
+    backdrop-filter: blur(4px);
+}
+
+/* Cables interactivos en el juego */
+.game-cable-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.cable-line {
+    fill: none;
+    stroke-linecap: round;
+}
+
+.cable-core-1 { stroke: #27ae60; stroke-width: 5; }
+.cable-core-2 { stroke: #e67e22; stroke-width: 6; }
+.cable-core-3 { stroke: #2980b9; stroke-width: 5; }
+.cable-core-4 { stroke: #c0392b; stroke-width: 7; }
+
+.cable-severed {
+    stroke-dasharray: 8 6;
+    animation: cable-glitch 0.3s infinite;
+}
+
+@keyframes cable-glitch {
+    0% { stroke-dashoffset: 0; }
+    50% { stroke-dashoffset: 4; }
+    100% { stroke-dashoffset: 0; }
+}
+
+/* Canvas de Chispas Eléctricas */
+#game-sparks-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    pointer-events: none;
+}
+
+/* SPRITE DEL COMPSOGNATHUS */
+.compy-target {
+    position: absolute;
+    z-index: 10;
+    width: 120px;
+    height: 44px;
+    transform-origin: center center;
+    cursor: grab;
+    transition: transform 0.08s linear;
+    filter: drop-shadow(0 0 10px rgba(0, 229, 176, 0.4));
+}
+
+.compy-target:active {
+    cursor: grabbing;
+}
+
+.compy-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.compy-biting {
+    animation: compy-chomping 0.12s infinite alternate ease-in-out;
+}
+
+@keyframes compy-chomping {
+    0% { transform: scale(1) rotate(0deg); }
+    100% { transform: scale(1.06, 0.94) rotate(-3deg); }
+}
+
+.compy-scurrying {
+    animation: compy-running 0.15s infinite alternate ease-in-out;
+}
+
+@keyframes compy-running {
+    0% { transform: translateY(0px) rotate(1deg); }
+    100% { transform: translateY(-4px) rotate(-1deg); }
+}
+
+.compy-dodge {
+    transition: transform 0.18s cubic-bezier(0.2, 0.9, 0.3, 1.2), left 0.22s ease-out, top 0.22s ease-out !important;
+}
+
+/* JAULA DE CONTENCIÓN (VICTORIA) */
+.containment-cage {
+    position: absolute;
+    z-index: 20;
+    width: 160px;
+    height: 120px;
+    background: repeating-linear-gradient(90deg, rgba(231,76,60,0.85) 0px, rgba(231,76,60,0.85) 7px, transparent 7px, transparent 20px),
+                repeating-linear-gradient(0deg, rgba(231,76,60,0.85) 0px, rgba(231,76,60,0.85) 7px, transparent 7px, transparent 20px);
+    border: 4px solid #ff3333;
+    box-shadow: 0 0 30px rgba(255, 51, 51, 0.7), inset 0 0 20px rgba(255, 51, 51, 0.5);
+    border-radius: 6px;
+    display: none;
+    pointer-events: none;
+    transform: translateY(-400px);
+    transition: transform 0.4s cubic-bezier(0.1, 0.9, 0.2, 1.2);
+}
+
+.containment-cage.drop {
+    display: block;
+    transform: translateY(0);
+}
+
+/* HUD DEL JUEGO INFERIOR / ESTADÍSTICAS */
+.game-hud-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 15;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1.2rem;
+    background: rgba(2, 6, 4, 0.94);
+    border-top: 1px solid rgba(0, 229, 176, 0.35);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.82rem;
+    box-sizing: border-box;
+}
+
+.hud-integrity-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    min-width: 230px;
+}
+
+.hud-integrity-bar-bg {
+    width: 130px;
+    height: 11px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid #446655;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.hud-integrity-bar-fill {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(90deg, #e74c3c, #f39c12, #2ecc71);
+    transition: width 0.3s ease;
+}
+
+.hud-catches-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #f1c40f;
+    font-weight: 700;
+}
+
+.catch-pip {
+    display: inline-block;
+    width: 13px;
+    height: 13px;
+    border: 2px solid #f1c40f;
+    border-radius: 50%;
+    background: transparent;
+    transition: background 0.2s ease;
+}
+
+.catch-pip.filled {
+    background: #f1c40f;
+    box-shadow: 0 0 10px #f1c40f;
+}
+
+/* PANTALLAS DE ESTADO DEL JUEGO */
+.game-overlay-msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 30;
+    text-align: center;
+    background: rgba(2, 6, 4, 0.95);
+    border: 2px solid #00e5b0;
+    box-shadow: 0 0 45px rgba(0, 229, 176, 0.5);
+    padding: 1.6rem 2.2rem;
+    border-radius: 8px;
+    display: none;
+    max-width: 90%;
+}
+
+.game-overlay-msg.active {
+    display: block;
+    animation: maint-pop 0.3s ease-out;
+}
+
+@keyframes maint-pop {
+    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+.game-msg-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.game-msg-title.win {
+    color: #2ecc71;
+    text-shadow: 0 0 15px rgba(46, 204, 113, 0.6);
+}
+
+.game-msg-title.lose {
+    color: #e74c3c;
+    text-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
+}
+
+.game-msg-desc {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.9rem;
+    color: #c8dac0;
+    margin-bottom: 1.2rem;
+}
+
+.game-btn {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 0.6rem 1.4rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+}
+
+.game-btn-primary {
+    background: #00e5b0;
+    color: #03140d;
+    box-shadow: 0 0 15px rgba(0, 229, 176, 0.4);
+}
+
+.game-btn-primary:hover {
+    background: #33ffcc;
+    box-shadow: 0 0 25px rgba(0, 229, 176, 0.7);
+    transform: translateY(-2px);
+}
+
+.game-btn-secondary {
+    background: transparent;
+    border: 1px solid #00e5b0;
+    color: #00e5b0;
+    margin-left: 0.8rem;
+}
+
+.game-btn-secondary:hover {
+    background: rgba(0, 229, 176, 0.15);
+}
+
+/* Pie de pantalla con cinta de precaución */
+.maint-footer-tape {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    padding: 0.6rem 0;
+    background: repeating-linear-gradient(
+        -45deg,
+        #f39c12,
+        #f39c12 25px,
+        #1a1505 25px,
+        #1a1505 50px
+    );
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.7);
+    border-top: 2px solid #f39c12;
+    text-align: center;
+}
+
+.maint-footer-content {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.92);
+    padding: 0.35rem 1.8rem;
+    border-radius: 4px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 2px;
+    color: #f1c40f;
+    font-weight: 700;
+    border: 1px solid #f39c12;
+}
+
+/* MODAL DE DESBLOQUEO / ADMIN PIN */
+.maint-admin-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000000;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.maint-admin-modal.open {
+    display: flex;
+}
+
+.maint-admin-card {
+    background: #050d09;
+    border: 2px solid #00e5b0;
+    box-shadow: 0 0 50px rgba(0, 229, 176, 0.4);
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 440px;
+    width: 90%;
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+}
+
+.maint-admin-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #00e5b0;
+    letter-spacing: 2px;
+    margin-bottom: 0.8rem;
+}
+
+.maint-pin-input {
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #00e5b0;
+    color: #00e5b0;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.4rem;
+    padding: 0.6rem;
+    text-align: center;
+    letter-spacing: 6px;
+    margin: 1rem 0;
+    border-radius: 4px;
+    outline: none;
+}
+
+.maint-pin-input:focus {
+    box-shadow: 0 0 15px rgba(0, 229, 176, 0.6);
+}
+
+.game-mission-pill {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    z-index: 15;
+    background: rgba(0, 0, 0, 0.85);
+    border: 1px solid rgba(231, 76, 60, 0.6);
+    color: #ff6666;
+    padding: 0.35rem 0.8rem;
+    border-radius: 4px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    pointer-events: none;
+}
