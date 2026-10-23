@@ -496,8 +496,9 @@
     function startLeap() {
         state = 'leaping';
         leapProgress = 0;
-        raptorStartY = raptorY;
-        leapDuration = 1150 - (killedCount * 70); // Salto cada vez más rápido
+        raptorStartY = 370;
+        raptorY = 370;
+        leapDuration = 1200 - (killedCount * 70); // Salto cada vez más rápido
         if (leapDuration < 800) leapDuration = 800;
 
         // Sonido Dos: chillido del salto / ataque aéreo
@@ -532,9 +533,10 @@
         var rx = raptorX - rw / 2;
         var ry = raptorY - rh / 2;
 
-        // Tolerancia generosa para asegurar diversión y puntería fluida
-        var margin = 40 * raptorScale;
-        var isHit = (lx >= rx - margin && lx <= rx + rw + margin &&
+        // Solo se puede abatir al Raptor cuando está en pleno salto (visible fuera del pastizal)
+        var margin = 45 * raptorScale;
+        var isHit = (state === 'leaping') &&
+                    (lx >= rx - margin && lx <= rx + rw + margin &&
                      ly >= ry - margin && ly <= ry + rh + margin);
 
         if (isHit) {
@@ -649,18 +651,14 @@
             ctx.restore();
         }
 
-        // 2. Si el Raptor está ACECHANDO (Sonido Uno): se dibuja DETRÁS del pastizal
-        if (state === 'lurking') {
-            drawRaptor();
-        }
-
-        // 3. Capa intermedia/frontal: Fondo Pastizal
+        // 2. Capa intermedia/frontal: Fondo Pastizal (hierba alta)
+        // Durante el acecho (Sonido Uno), el Raptor está completamente oculto bajo la hierba.
         if (imgs.pastizal.complete) {
             ctx.drawImage(imgs.pastizal, 0, 0, canvasW, canvasH);
         }
 
-        // 4. Si el Raptor SALTA (Sonido Dos), recibe impacto (shot) o ataca (hit_player):
-        // Pasa AL FRENTE de Fondo Pastizal
+        // 3. El Raptor es visible ÚNICAMENTE cuando SALTA (Sonido Dos), recibe impacto (shot) o ataca (hit_player)
+        // En ese momento salta al frente de Fondo Pastizal
         if (state === 'leaping' || state === 'shot' || state === 'hit_player') {
             drawRaptor();
         }
