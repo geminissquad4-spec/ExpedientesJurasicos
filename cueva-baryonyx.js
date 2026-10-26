@@ -34,18 +34,18 @@
         swayAmp: 0.015 // radianes
     };
 
-    // Baryonyx (tamaño ajustado y ubicado más abajo en la cueva)
+    // Baryonyx (tamaño reducido y situado en el suelo rocoso de la caverna)
     var bary = {
-        baseX: -260,
-        x: -260,
-        by: 35,
-        w: 743,
-        h: 415,
+        baseX: -220,
+        x: -220,
+        by: 155,
+        w: 645,
+        h: 360,
         currentStep: 'paso1', // 'paso1' | 'paso2'
         stepTimer: 0,
         stepInterval: 0.45,
         paso2Count: 0,
-        baseSpeed: 38, // px/s
+        baseSpeed: 36, // px/s
         targetX: 410   // punto donde alcanza la cuerda
     };
 
@@ -503,9 +503,13 @@
         if (state !== 'playing') return;
 
         // Cada pulsación impulsa a Antony hacia arriba
-        antony.climbOffset += 9.5;
-        if (antony.climbOffset > maxClimbDistance) {
+        antony.climbOffset += 11;
+        if (antony.climbOffset >= maxClimbDistance * 0.95) {
             antony.climbOffset = maxClimbDistance;
+            climbProgress = 100;
+            updateHUD();
+            triggerWin();
+            return;
         }
 
         // Impulso en la oscilación de la cuerda al dar el tirón
@@ -617,8 +621,8 @@
         climbProgress = (antony.climbOffset / maxClimbDistance) * 100;
         updateHUD();
 
-        // 2. Condición de victoria: alcanzar el 100% de la cuerda
-        if (climbProgress >= 100) {
+        // 2. Condición de victoria: alcanzar la parte alta de la cuerda y salir
+        if (climbProgress >= 95) {
             triggerWin();
             return;
         }
@@ -661,11 +665,17 @@
             }
         }
 
-        // 6. Condición de captura / derrota
-        // El hocico del Baryonyx alcanza la cuerda en bary.x >= bary.targetX
-        // Si Antony no ha alcanzado la altura de seguridad (climbProgress >= 90%)
-        if (bary.x >= bary.targetX && climbProgress < 90) {
-            triggerLose();
+        // 6. Condición de encuentro en la cuerda
+        // El Baryonyx llega al punto de la cuerda (bary.targetX)
+        if (bary.x >= bary.targetX) {
+            if (climbProgress < 75) {
+                // Antony no subió lo suficiente: es alcanzado por el Baryonyx
+                triggerLose();
+            } else {
+                // Antony trepó a salvo: el Baryonyx muerde el aire por debajo y Antony escapa
+                triggerWin();
+            }
+            return;
         }
     }
 
