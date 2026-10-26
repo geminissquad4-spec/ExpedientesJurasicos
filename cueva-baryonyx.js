@@ -34,20 +34,19 @@
         swayAmp: 0.015 // radianes
     };
 
-    // Baryonyx
-    // En la referencia: bw = 863, bh = 482, bx = -317, by = -23
+    // Baryonyx (tamaño ajustado y ubicado más abajo en la cueva)
     var bary = {
-        baseX: -317,
-        x: -317,
-        by: -23,
-        w: 863,
-        h: 482,
+        baseX: -260,
+        x: -260,
+        by: 35,
+        w: 743,
+        h: 415,
         currentStep: 'paso1', // 'paso1' | 'paso2'
         stepTimer: 0,
         stepInterval: 0.45,
         paso2Count: 0,
         baseSpeed: 38, // px/s
-        targetX: 380   // punto donde alcanza la cuerda
+        targetX: 410   // punto donde alcanza la cuerda
     };
 
     // Escala del canvas y responsive

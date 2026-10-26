@@ -1255,7 +1255,7 @@
     <div class="minijuego-badge badge-red">Duelo de Titanes</div>
     <div class="minijuego-title" style="color:#ff6b6b;">⚔️ ¡EL ÚLTIMO COMBATE!</div>
     <div class="minijuego-desc">
-      Duelo de titanes en el helipuerto nocturno. Controla al Styracosaurus, bloquea con escudo total con S, salta con W y arremete con Espacio para derribar al implacable y letal Carnotaurus "Demon".
+      Duelo de titanes en el helipuerto nocturno. Controla al Styracosaurus, bloquea con escudo total con S, salta con W y arremete con Espacio para derribar al implacable y letal Carnotaurus.
     </div>
     <button class="minijuego-play-btn btn-red" onclick="document.getElementById('styraco-strike-fab') && document.getElementById('styraco-strike-fab').click();">
       ▶ JUGAR AHORA
@@ -1273,7 +1273,22 @@
 
 <div class="minijuegos-grid">
 
-  <!-- 1. ¡No Entres en el Pastizal! (Ataque Raptor) -->
+  <!-- 1. Identifica la Especie (Laboratorio Dr. Boris Wong) -->
+  <div class="minijuego-card">
+    <div class="minijuego-cover-wrap">
+      <img src="IDENTIFICA LA ESPECIE.jpg" onerror="if(this.src.indexOf('Portadas/IDENTIFICA LA ESPECIE.jpg')===-1)this.src='Portadas/IDENTIFICA LA ESPECIE.jpg';" alt="Identifica la Especie" class="minijuego-cover-img" loading="lazy" />
+    </div>
+    <div class="minijuego-badge badge-green">Laboratorio InGen</div>
+    <div class="minijuego-title" style="color:#2ecc71;">🧬 ¡Identifica la Especie!</div>
+    <div class="minijuego-desc">
+      La Dra. Kate Vanegas busca ingresar como pasante al laboratorio del Dr. Boris Wong en Isla Sorna. Identifica las 12 especies prehistóricas retenidas en jaulas de contención para ganar su aprobación taxonómica.
+    </div>
+    <button class="minijuego-play-btn btn-green" onclick="window.openIdentificaEspecie && window.openIdentificaEspecie();">
+      ▶ JUGAR AHORA
+    </button>
+  </div>
+
+  <!-- 2. ¡No Entres en el Pastizal! (Ataque Raptor) -->
   <div class="minijuego-card amber-card">
     <div class="minijuego-cover-wrap">
       <img src="NO ENTRES EN EL PASTIZAL.jpg" onerror="if(this.src.indexOf('Portadas/NO ENTRES EN EL PASTIZAL.jpg')===-1)this.src='Portadas/NO ENTRES EN EL PASTIZAL.jpg';" alt="No Entres en el Pastizal" class="minijuego-cover-img" loading="lazy" />
@@ -1288,7 +1303,7 @@
     </button>
   </div>
 
-  <!-- 2. Buscando al Carnotaurus (NUEVO) -->
+  <!-- 3. Buscando al Carnotaurus -->
   <div class="minijuego-card red-card">
     <div class="minijuego-cover-wrap">
       <img src="BUSCANDO AL CARNOTAURUS.jpg" onerror="if(this.src.indexOf('Portadas/BUSCANDO AL CARNOTAURUS.jpg')===-1)this.src='Portadas/BUSCANDO AL CARNOTAURUS.jpg';" alt="Buscando al Carnotaurus" class="minijuego-cover-img" loading="lazy" />
@@ -1303,7 +1318,37 @@
     </button>
   </div>
 
-  <!-- 3. Atrapa al Compy -->
+  <!-- 4. La Cueva del Baryonyx (Soldado Antony Benton) -->
+  <div class="minijuego-card red-card">
+    <div class="minijuego-cover-wrap">
+      <img src="LA CUEVA DEL BARYONYX.jpg" onerror="if(this.src.indexOf('Portadas/LA CUEVA DEL BARYONYX.jpg')===-1)this.src='Portadas/LA CUEVA DEL BARYONYX.jpg';" alt="La Cueva del Baryonyx" class="minijuego-cover-img" loading="lazy" />
+    </div>
+    <div class="minijuego-badge badge-red">Profundidades Hostiles</div>
+    <div class="minijuego-title" style="color:#ff6b6b;">🐊 ¡La Cueva del Baryonyx!</div>
+    <div class="minijuego-desc">
+      El soldado Antony Benton cayó en la caverna del letal Baryonyx. Pulsa la tecla ESPACIO repetidamente para trepar la cuerda antes de que el depredador acuático lo alcance y lo devore.
+    </div>
+    <button class="minijuego-play-btn btn-red" onclick="window.openCuevaBaryonyx && window.openCuevaBaryonyx();">
+      ▶ JUGAR AHORA
+    </button>
+  </div>
+
+  <!-- 5. Escape de Sorna (Evacuación en Helicóptero) -->
+  <div class="minijuego-card blue-card">
+    <div class="minijuego-cover-wrap">
+      <img src="ESCAPE DE SORNA.jpg" onerror="if(this.src.indexOf('Portadas/ESCAPE DE SORNA.jpg')===-1)this.src='Portadas/ESCAPE DE SORNA.jpg';" alt="Escape de Sorna" class="minijuego-cover-img" loading="lazy" />
+    </div>
+    <div class="minijuego-badge badge-blue">Evacuación Aérea</div>
+    <div class="minijuego-title" style="color:#00d2d3;">🚁 ¡Escape de Sorna!</div>
+    <div class="minijuego-desc">
+      Pilota el helicóptero de InGen en una carrera desesperada hacia la costa. Esquiva las bandadas de Geosternbergias territoriales y elude los colosales cuellos de los Brachiosaurus antes de alcanzar la seguridad del océano.
+    </div>
+    <button class="minijuego-play-btn btn-blue" onclick="window.openEscapeSorna && window.openEscapeSorna();">
+      ▶ JUGAR AHORA
+    </button>
+  </div>
+
+  <!-- 6. Atrapa al Compy -->
   <div class="minijuego-card">
     <div class="minijuego-badge badge-green">Alerta Menor</div>
     <div class="minijuego-title" style="color:#2ecc71;">🦎 ¡Atrapa al Compy!</div>
@@ -2042,6 +2087,9 @@ if (typeof window.toggleTimeline !== 'function') {
 <script src="plesio-swim.js"></script>
 <script src="styraco-strike.js"></script>
 <script src="carno-search.js"></script>
+<script src="identifica-especie.js"></script>
+<script src="cueva-baryonyx.js"></script>
+<script src="escape-de-sorna.js"></script>
 </body>
 
 </html>
