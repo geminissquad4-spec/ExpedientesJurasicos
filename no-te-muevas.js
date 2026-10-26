@@ -243,7 +243,10 @@
         ov.innerHTML = `
             <div id="ntm-header">
                 <div id="ntm-header-title">🦖 ¡NO TE MUEVAS! — RECINTO DEL TYRANNOSAURUS</div>
-                <button id="ntm-close-btn">✕ CERRAR</button>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <button id="ntm-fullscreen-btn" class="minigame-fullscreen-btn">⛶ PANTALLA COMPLETA</button>
+                    <button id="ntm-close-btn">✕ CERRAR</button>
+                </div>
             </div>
 
             <div id="ntm-canvas-wrap">
@@ -747,6 +750,25 @@
 
         // Botones de pantalla
         document.getElementById('ntm-close-btn').addEventListener('click', closeGame);
+        var ntmFullBtn = document.getElementById('ntm-fullscreen-btn');
+        if (ntmFullBtn) {
+            ntmFullBtn.addEventListener('click', function () {
+                var target = document.getElementById('ntm-overlay') || document.documentElement;
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                    else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+                    ntmFullBtn.innerHTML = '🗗 SALIR';
+                } else {
+                    if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                    ntmFullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+                }
+            });
+            document.addEventListener('fullscreenchange', function() {
+                if (!document.fullscreenElement) ntmFullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+                else ntmFullBtn.innerHTML = '🗗 SALIR';
+            });
+        }
         document.getElementById('ntm-start-btn').addEventListener('click', startGame);
 
         document.getElementById('ntm-retry-btn').addEventListener('click', function () {

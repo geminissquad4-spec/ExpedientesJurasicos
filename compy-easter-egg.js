@@ -311,7 +311,10 @@
         overlay.innerHTML = `
             <div id="compy-overlay-header">
                 <div id="compy-overlay-title">⚡ ¡ATRAPA AL COMPY!</div>
-                <button id="compy-overlay-close">✕ CERRAR</button>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <button id="compy-fullscreen-btn" class="minigame-fullscreen-btn">⛶ PANTALLA COMPLETA</button>
+                    <button id="compy-overlay-close">✕ CERRAR</button>
+                </div>
             </div>
             <div id="compy-ee-arena">
                 <div id="ee-mission-pill">⚠️ MISIÓN: ¡ATRAPA AL COMPY ANTES DE QUE DESTRUYA LOS CABLES!</div>
@@ -614,6 +617,25 @@
         });
 
         if (closeBtn) closeBtn.addEventListener('click', closeOverlay);
+        var ceFullBtn = document.getElementById('compy-fullscreen-btn');
+        if (ceFullBtn) {
+            ceFullBtn.addEventListener('click', function () {
+                var target = document.getElementById('compy-game-overlay') || document.documentElement;
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                    else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+                    ceFullBtn.innerHTML = '🗗 SALIR';
+                } else {
+                    if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                    ceFullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+                }
+            });
+            document.addEventListener('fullscreenchange', function() {
+                if (!document.fullscreenElement) ceFullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+                else ceFullBtn.innerHTML = '🗗 SALIR';
+            });
+        }
 
         // Cerrar con Escape
         document.addEventListener('keydown', function(e) {

@@ -438,6 +438,8 @@
             '    letter-spacing:1px; transition:all .2s;',
             '}',
             '#ps-close-btn:hover { background:rgba(0,210,211,.2); color:#fff; border-color:#00d2d3; }',
+            '#ps-fullscreen-btn { background:rgba(0,210,211,.15); border:1px solid rgba(0,210,211,.4); color:#00d2d3; font-family:\'Share Tech Mono\',monospace; font-size:.75rem; padding:.35rem .85rem; border-radius:3px; cursor:pointer; letter-spacing:1px; transition:all .2s; }',
+            '#ps-fullscreen-btn:hover { background:#00d2d3; color:#011422; }',
             '',
             '/* Canvas wrap y stage */',
             '#ps-canvas-wrap {',
@@ -580,6 +582,27 @@
         keysTracker.id = 'ps-keys-tracker';
         keysTracker.innerHTML = '🔑 LLAVES: <span id="ps-keys-val">0</span>/4';
 
+        var fullBtn = document.createElement('button');
+        fullBtn.id  = 'ps-fullscreen-btn';
+        fullBtn.className = 'minigame-fullscreen-btn';
+        fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+        fullBtn.addEventListener('click', function () {
+            var target = document.getElementById('plesio-swim-overlay') || document.documentElement;
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+                fullBtn.innerHTML = '🗗 SALIR';
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+            }
+        });
+        document.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement) fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+            else fullBtn.innerHTML = '🗗 SALIR';
+        });
+
         var closeBtn = document.createElement('button');
         closeBtn.id  = 'ps-close-btn';
         closeBtn.textContent = '✕ CERRAR';
@@ -587,6 +610,7 @@
 
         headerRight.appendChild(oxygenWrap);
         headerRight.appendChild(keysTracker);
+        headerRight.appendChild(fullBtn);
         headerRight.appendChild(closeBtn);
 
         header.appendChild(headerLeft);

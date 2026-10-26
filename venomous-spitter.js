@@ -590,6 +590,7 @@
                 </div>
                 <div style="display:flex;align-items:center;gap:.7rem;">
                     <button id="dilopho-torch-btn">🔦 APAGAR LINTERNA (ESPACIO)</button>
+                    <button id="dilopho-fullscreen-btn" class="minigame-fullscreen-btn">⛶ PANTALLA COMPLETA</button>
                     <button id="dilopho-close-btn">✕ CERRAR</button>
                 </div>
             </div>
@@ -1323,6 +1324,25 @@
         });
 
         closeBtn.addEventListener('click', closeGame);
+        var fullBtn = document.getElementById('dilopho-fullscreen-btn');
+        if (fullBtn) {
+            fullBtn.addEventListener('click', function () {
+                var target = document.getElementById('dilopho-overlay') || document.documentElement;
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                    else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+                    fullBtn.innerHTML = '🗗 SALIR';
+                } else {
+                    if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                    fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+                }
+            });
+            document.addEventListener('fullscreenchange', function() {
+                if (!document.fullscreenElement) fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+                else fullBtn.innerHTML = '🗗 SALIR';
+            });
+        }
         if (loseClose) loseClose.addEventListener('click', closeGame);
         if (loseTimeClose) loseTimeClose.addEventListener('click', closeGame);
         if (winClose) winClose.addEventListener('click', closeGame);

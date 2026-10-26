@@ -1,5 +1,5 @@
 // ============================================================
-//  EXPEDIENTES JURÁSICOS — ¡ATAQUE RAPTOR!
+//  EXPEDIENTES JURÁSICOS — ¡NO ENTRES EN EL PASTIZAL!
 //  Minijuego: Dispara a los Velociraptores en la hierba alta
 // ============================================================
 
@@ -354,8 +354,11 @@
         ov.id = 'raptor-overlay';
         ov.innerHTML = `
             <div id="raptor-header">
-                <div id="raptor-header-title">🌾 ¡CAZA EN LA HIERBA ALTA! — VELOCIRAPTOR</div>
-                <button id="raptor-close-btn">✕ CERRAR</button>
+                <div id="raptor-header-title">🌾 ¡NO ENTRES EN EL PASTIZAL! — VELOCIRAPTOR</div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                    <button id="raptor-fullscreen-btn" class="minigame-fullscreen-btn">⛶ PANTALLA COMPLETA</button>
+                    <button id="raptor-close-btn">✕ CERRAR</button>
+                </div>
             </div>
 
             <div id="raptor-canvas-wrap">
@@ -820,6 +823,25 @@
         });
 
         document.getElementById('raptor-close-btn').addEventListener('click', closeGame);
+        var raFullBtn = document.getElementById('raptor-fullscreen-btn');
+        if (raFullBtn) {
+            raFullBtn.addEventListener('click', function () {
+                var target = document.getElementById('raptor-overlay') || document.documentElement;
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                    else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+                    raFullBtn.innerHTML = '🗗 SALIR';
+                } else {
+                    if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                    raFullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+                }
+            });
+            document.addEventListener('fullscreenchange', function() {
+                if (!document.fullscreenElement) raFullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+                else raFullBtn.innerHTML = '🗗 SALIR';
+            });
+        }
         document.getElementById('raptor-start-btn').addEventListener('click', startGame);
 
         document.getElementById('raptor-retry-btn').addEventListener('click', function () {

@@ -1040,15 +1040,15 @@
 }
 .minijuegos-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-  gap: 1.4rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
   margin-bottom: 2rem;
 }
 .minijuego-card {
-  background: rgba(4, 18, 12, 0.75);
+  background: rgba(4, 18, 12, 0.78);
   border: 1px solid rgba(46, 204, 113, 0.3);
   border-radius: 8px;
-  padding: 1.4rem;
+  padding: 1.3rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1065,7 +1065,7 @@
   background: rgba(4, 24, 14, 0.88);
 }
 .minijuego-card.amber-card {
-  background: rgba(24, 14, 3, 0.75);
+  background: rgba(24, 14, 3, 0.78);
   border-color: rgba(243, 156, 18, 0.35);
 }
 .minijuego-card.amber-card:hover {
@@ -1074,7 +1074,7 @@
   background: rgba(30, 18, 4, 0.88);
 }
 .minijuego-card.red-card {
-  background: rgba(24, 5, 4, 0.75);
+  background: rgba(24, 5, 4, 0.78);
   border-color: rgba(231, 76, 60, 0.35);
 }
 .minijuego-card.red-card:hover {
@@ -1083,7 +1083,7 @@
   background: rgba(32, 6, 5, 0.88);
 }
 .minijuego-card.blue-card {
-  background: rgba(2, 16, 28, 0.75);
+  background: rgba(2, 16, 28, 0.78);
   border-color: rgba(0, 210, 211, 0.35);
 }
 .minijuego-card.blue-card:hover {
@@ -1091,6 +1091,34 @@
   box-shadow: 0 8px 30px rgba(0, 210, 211, .28);
   background: rgba(3, 24, 40, 0.88);
 }
+
+/* Portadas de minijuegos */
+.minijuego-cover-wrap {
+  width: 100%;
+  height: 180px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(46, 204, 113, 0.35);
+  background: #020604;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+}
+.minijuego-card.amber-card .minijuego-cover-wrap { border-color: rgba(243, 156, 18, 0.4); }
+.minijuego-card.red-card .minijuego-cover-wrap   { border-color: rgba(231, 76, 60, 0.4); }
+.minijuego-card.blue-card .minijuego-cover-wrap  { border-color: rgba(0, 210, 211, 0.4); }
+
+.minijuego-cover-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.minijuego-card:hover .minijuego-cover-img {
+  transform: scale(1.06);
+}
+
 .minijuego-badge {
   display: inline-block;
   align-self: flex-start;
@@ -1099,7 +1127,7 @@
   letter-spacing: 1px;
   padding: .2rem .6rem;
   border-radius: 3px;
-  margin-bottom: .7rem;
+  margin-bottom: .6rem;
   text-transform: uppercase;
 }
 .badge-green { background: rgba(46, 204, 113, .15); color: #2ecc71; border: 1px solid rgba(46, 204, 113, .4); }
@@ -1120,7 +1148,7 @@
   font-size: .84rem;
   color: #bbb;
   line-height: 1.55;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.3rem;
   flex: 1;
 }
 .minijuego-play-btn {
@@ -1161,6 +1189,9 @@
 
   <!-- 1. Alerta Dilophosaurus -->
   <div class="minijuego-card">
+    <div class="minijuego-cover-wrap">
+      <img src="Portadas/ALERTA DILOPHOSAURUS.png" alt="Alerta Dilophosaurus" class="minijuego-cover-img" loading="lazy" />
+    </div>
     <div class="minijuego-badge badge-green">Infiltración Nocturna</div>
     <div class="minijuego-title" style="color:#2ecc71;">🩺 ¡Alerta Dilophosaurus!</div>
     <div class="minijuego-desc">
@@ -1173,6 +1204,9 @@
 
   <!-- 2. Cura al Triceratops -->
   <div class="minijuego-card">
+    <div class="minijuego-cover-wrap">
+      <img src="Portadas/CURANDO AL TRIKE.jpg" alt="Curando al Trike" class="minijuego-cover-img" loading="lazy" />
+    </div>
     <div class="minijuego-badge badge-green">Medicina de Campo</div>
     <div class="minijuego-title" style="color:#8fbc5a;">🦕 ¡Cura al Triceratops!</div>
     <div class="minijuego-desc">
@@ -1185,6 +1219,9 @@
 
   <!-- 3. No Te Muevas -->
   <div class="minijuego-card red-card">
+    <div class="minijuego-cover-wrap">
+      <img src="Portadas/NO TE MUEVAS.jpg" alt="No Te Muevas" class="minijuego-cover-img" loading="lazy" />
+    </div>
     <div class="minijuego-badge badge-red">Frente al Tirano</div>
     <div class="minijuego-title" style="color:#e74c3c;">🦖 ¡No Te Muevas!</div>
     <div class="minijuego-desc">
@@ -1197,6 +1234,9 @@
 
   <!-- 4. Escape del Plesiosaurus -->
   <div class="minijuego-card blue-card">
+    <div class="minijuego-cover-wrap">
+      <img src="Portadas/ESCAPE DEL PLESIOSAURUS.jpg" alt="Escape del Plesiosaurus" class="minijuego-cover-img" loading="lazy" />
+    </div>
     <div class="minijuego-badge badge-blue">Inmersión Marina</div>
     <div class="minijuego-title" style="color:#00d2d3;">🌊 ¡Escape del Plesiosaurus!</div>
     <div class="minijuego-desc">
@@ -1207,12 +1247,15 @@
     </button>
   </div>
 
-  <!-- 5. Styraco Strike -->
+  <!-- 5. El Último Combate (Styracosaurus vs Carnotaurus) -->
   <div class="minijuego-card red-card">
+    <div class="minijuego-cover-wrap">
+      <img src="Portadas/EL ULTIMO COMBATE.jpg" alt="El Último Combate" class="minijuego-cover-img" loading="lazy" />
+    </div>
     <div class="minijuego-badge badge-red">Duelo de Titanes</div>
-    <div class="minijuego-title" style="color:#ff6b6b;">⚔️ ¡Styraco Strike!</div>
+    <div class="minijuego-title" style="color:#ff6b6b;">⚔️ ¡EL ÚLTIMO COMBATE!</div>
     <div class="minijuego-desc">
-      Duelo de combate en el helipuerto nocturno. Controla al Styracosaurus, bloquea con escudo total con S, salta con W y arremete con Espacio para derribar al implacable y letal Carnotaurus "Demon".
+      Duelo de titanes en el helipuerto nocturno. Controla al Styracosaurus, bloquea con escudo total con S, salta con W y arremete con Espacio para derribar al implacable y letal Carnotaurus "Demon".
     </div>
     <button class="minijuego-play-btn btn-red" onclick="document.getElementById('styraco-strike-fab') && document.getElementById('styraco-strike-fab').click();">
       ▶ JUGAR AHORA
@@ -1230,10 +1273,13 @@
 
 <div class="minijuegos-grid">
 
-  <!-- 1. Ataque Raptor -->
+  <!-- 1. ¡No Entres en el Pastizal! (Ataque Raptor) -->
   <div class="minijuego-card amber-card">
+    <div class="minijuego-cover-wrap">
+      <img src="Portadas/NO ENTRES EN EL PASTIZAL.jpg" alt="No Entres en el Pastizal" class="minijuego-cover-img" loading="lazy" />
+    </div>
     <div class="minijuego-badge badge-amber">Hierba Alta</div>
-    <div class="minijuego-title" style="color:#f1c40f;">🌾 ¡Ataque Raptor!</div>
+    <div class="minijuego-title" style="color:#f1c40f;">🌾 ¡NO ENTRES EN EL PASTIZAL!</div>
     <div class="minijuego-desc">
       Estás varado en los pastizales de Isla Sorna. Los Velociraptores acechan entre la maleza: escucha su chillido, apunta con la mirilla de tu rifle y dispárales en pleno salto antes de que te alcancen.
     </div>
@@ -1242,7 +1288,22 @@
     </button>
   </div>
 
-  <!-- 2. Atrapa al Compy -->
+  <!-- 2. Buscando al Carnotaurus (NUEVO) -->
+  <div class="minijuego-card red-card">
+    <div class="minijuego-cover-wrap">
+      <img src="Portadas/BUSCANDO AL CARNOTAURUS.jpg" alt="Buscando al Carnotaurus" class="minijuego-cover-img" loading="lazy" />
+    </div>
+    <div class="minijuego-badge badge-red">Camuflaje Activo</div>
+    <div class="minijuego-title" style="color:#e74c3c;">🦖 ¡BUSCANDO AL CARNOTAURUS!</div>
+    <div class="minijuego-desc">
+      El Carnotaurus camaleónico acecha oculto en 7 sectores oscuros de la isla. Usa tu linterna táctica, localízalo antes de que se agote el tiempo y dispárale. Si el tiempo expira, ¡Demon arremeterá contra ti!
+    </div>
+    <button class="minijuego-play-btn btn-red" onclick="window.openCarnoSearch && window.openCarnoSearch();">
+      ▶ JUGAR AHORA
+    </button>
+  </div>
+
+  <!-- 3. Atrapa al Compy -->
   <div class="minijuego-card">
     <div class="minijuego-badge badge-green">Alerta Menor</div>
     <div class="minijuego-title" style="color:#2ecc71;">🦎 ¡Atrapa al Compy!</div>
@@ -1980,6 +2041,7 @@ if (typeof window.toggleTimeline !== 'function') {
 <script src="sick-trike.js"></script>
 <script src="plesio-swim.js"></script>
 <script src="styraco-strike.js"></script>
+<script src="carno-search.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,5 @@
 // ============================================================
-//  EXPEDIENTES JURÁSICOS — ¡STYRACO STRIKE!
+//  EXPEDIENTES JURÁSICOS — ¡EL ÚLTIMO COMBATE!
 //  Juego de Combate: Styracosaurus vs Carnotaurus "Demon"
 // ============================================================
 
@@ -59,7 +59,7 @@
     var styraco = {
         hp: 100,
         maxHp: 100,
-        x: 180, // Centro X
+        x: 120, // Posicionado dentro del helipuerto
         y: FLOOR_Y - STYRACO_H, // Top Y
         baseY: FLOOR_Y - STYRACO_H,
         vy: 0,
@@ -76,7 +76,7 @@
     var carno = {
         hp: 180,
         maxHp: 180,
-        x: 820,
+        x: 600, // Siempre dentro de la pantalla visible del helipuerto
         y: FLOOR_Y - CARNO_H,
         baseY: FLOOR_Y - CARNO_H,
         vy: 0,
@@ -310,6 +310,8 @@
             '    letter-spacing:1px; transition:all .2s;',
             '}',
             '#ss-close-btn:hover { background:rgba(231,76,60,.2); color:#fff; border-color:#e74c3c; }',
+            '#ss-fullscreen-btn { background:rgba(46,204,113,.15); border:1px solid rgba(46,204,113,.4); color:#2ecc71; font-family:\'Share Tech Mono\',monospace; font-size:.75rem; padding:.35rem .9rem; border-radius:3px; cursor:pointer; letter-spacing:1px; transition:all .2s; }',
+            '#ss-fullscreen-btn:hover { background:#2ecc71; color:#020b06; }',
             '',
             '/* Canvas wrap y stage */',
             '#ss-canvas-wrap {',
@@ -469,13 +471,42 @@
         barsWrap.appendChild(vsBadge);
         barsWrap.appendChild(cnBox);
 
+        var btnGroup = document.createElement('div');
+        btnGroup.style.display = 'flex';
+        btnGroup.style.alignItems = 'center';
+        btnGroup.style.gap = '8px';
+
+        var fullBtn = document.createElement('button');
+        fullBtn.id = 'ss-fullscreen-btn';
+        fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+        fullBtn.addEventListener('click', function () {
+            var target = document.getElementById('styraco-strike-overlay') || document.documentElement;
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+                fullBtn.innerHTML = '🗗 SALIR';
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+            }
+        });
+
+        document.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement) fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+            else fullBtn.innerHTML = '🗗 SALIR';
+        });
+
         var closeBtn = document.createElement('button');
         closeBtn.id  = 'ss-close-btn';
         closeBtn.textContent = '✕ CERRAR';
         closeBtn.addEventListener('click', closeGame);
 
+        btnGroup.appendChild(fullBtn);
+        btnGroup.appendChild(closeBtn);
+
         header.appendChild(barsWrap);
-        header.appendChild(closeBtn);
+        header.appendChild(btnGroup);
         ov.appendChild(header);
 
         // ---- CANVAS WRAP Y STAGE CENTRADO ----
@@ -497,7 +528,7 @@
         var sTitle = document.createElement('div');
         sTitle.className = 'ss-screen-title';
         sTitle.style.color = '#e74c3c';
-        sTitle.textContent = '⚔️ ¡STYRACO STRIKE!';
+        sTitle.textContent = '⚔️ ¡EL ÚLTIMO COMBATE!';
 
         var sSub = document.createElement('div');
         sSub.className = 'ss-screen-sub';
@@ -646,7 +677,7 @@
         var fabText = document.createElement('span');
         var fabTitle = document.createElement('span');
         fabTitle.className = 'ss-fab-title';
-        fabTitle.textContent = '¡STYRACO STRIKE!';
+        fabTitle.textContent = '¡EL ÚLTIMO COMBATE!';
         var fabSub = document.createElement('span');
         fabSub.className = 'ss-fab-sub';
         fabSub.textContent = 'VS CARNOTAURUS "DEMON"';
@@ -712,7 +743,7 @@
     // ============================================================
     function initFighters() {
         styraco.hp = styraco.maxHp = 100;
-        styraco.x = 180;
+        styraco.x = 120;
         styraco.y = FLOOR_Y - STYRACO_H;
         styraco.baseY = FLOOR_Y - STYRACO_H;
         styraco.vy = 0;
@@ -725,7 +756,7 @@
 
         carno.hp = carno.maxHp = 180;
         carno.speed = 235;
-        carno.x = 820;
+        carno.x = 600;
         carno.y = FLOOR_Y - CARNO_H;
         carno.baseY = FLOOR_Y - CARNO_H;
         carno.vy = 0;
@@ -843,8 +874,8 @@
                 }
             }
 
-            // Límites de pantalla para Styraco
-            styraco.x = Math.max(30, Math.min(carno.x - 70, styraco.x));
+            // Límites de pantalla para Styraco (nunca sale de la pantalla visible)
+            styraco.x = Math.max(20, Math.min(carno.x - 170, styraco.x));
         } else {
             styraco.action = 'dead';
         }
@@ -934,7 +965,10 @@
                 carno.x -= carno.speed * dt;
             } else if (carno.aiState === 'retreat') {
                 carno.action = 'walk';
-                carno.x += carno.speed * 0.9 * dt;
+                // Solo retroceder si no está ya al borde derecho visible
+                if (carno.x < 610) {
+                    carno.x += carno.speed * 0.9 * dt;
+                }
             } else {
                 carno.action = 'neutral';
             }
@@ -950,8 +984,8 @@
                 }
             }
 
-            // Límites de pantalla para Carno
-            carno.x = Math.max(styraco.x + 80, Math.min(LW - 50, carno.x));
+            // Límites de pantalla para Carno: máximo x=620 para que su cuerpo entero siempre esté visible
+            carno.x = Math.max(styraco.x + 170, Math.min(620, carno.x));
         } else {
             carno.action = 'dead';
         }
@@ -973,7 +1007,7 @@
                     var dmg = 12 + Math.floor(Math.random() * 5); // 12-16 daño (Carno tiene 180 HP, más difícil de vencer)
                     carno.hp = Math.max(0, carno.hp - dmg);
                     carno.hurtFlash = 0.22;
-                    carno.x += 40; // Retroceso
+                    carno.x = Math.min(620, carno.x + 30); // Retroceso limitado para no salirse de pantalla
                     shakeScreen(12, 0.35);
                     spawnBlood(carno.x + 40, carno.y + 110, 24);
                     playAudio(sndCarno);
@@ -1002,7 +1036,7 @@
                     var cDmg = isJumpAtk ? (38 + Math.floor(Math.random() * 9)) : (30 + Math.floor(Math.random() * 8));
                     styraco.hp = Math.max(0, styraco.hp - cDmg);
                     styraco.hurtFlash = 0.25;
-                    styraco.x -= 55; // Retroceso severo
+                    styraco.x = Math.max(20, styraco.x - 40); // Retroceso limitado
                     shakeScreen(20, 0.45);
                     spawnBlood(styraco.x + STYRACO_W * 0.45, styraco.y + 120, 32);
                     playAudio(sndStyraco);

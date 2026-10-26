@@ -269,6 +269,8 @@
             '    letter-spacing:1px; transition:all .2s;',
             '}',
             '#st-close-btn:hover { background:rgba(46,204,113,.2); color:#fff; border-color:#2ecc71; }',
+            '#st-fullscreen-btn { background:rgba(46,204,113,.15); border:1px solid rgba(46,204,113,.4); color:#2ecc71; font-family:\'Share Tech Mono\',monospace; font-size:.75rem; padding:.35rem .85rem; border-radius:3px; cursor:pointer; letter-spacing:1px; transition:all .2s; }',
+            '#st-fullscreen-btn:hover { background:#2ecc71; color:#020b06; }',
             '',
             '/* Canvas wrap y stage */',
             '#st-canvas-wrap {',
@@ -480,12 +482,34 @@
         strikesLabel.textContent = 'LILAS: 0/3';
         strikesBox.appendChild(strikesLabel);
 
+        var fullBtn = document.createElement('button');
+        fullBtn.id  = 'st-fullscreen-btn';
+        fullBtn.className = 'minigame-fullscreen-btn';
+        fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+        fullBtn.addEventListener('click', function () {
+            var target = document.getElementById('sick-trike-overlay') || document.documentElement;
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+                fullBtn.innerHTML = '🗗 SALIR';
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+            }
+        });
+        document.addEventListener('fullscreenchange', function() {
+            if (!document.fullscreenElement) fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+            else fullBtn.innerHTML = '🗗 SALIR';
+        });
+
         var closeBtn = document.createElement('button');
         closeBtn.id  = 'st-close-btn';
         closeBtn.textContent = '✕ CERRAR';
         closeBtn.addEventListener('click', closeGame);
 
         headerRight.appendChild(strikesBox);
+        headerRight.appendChild(fullBtn);
         headerRight.appendChild(closeBtn);
 
         header.appendChild(headerLeft);
