@@ -15,49 +15,49 @@
         {
             num: 1,
             name: 'SECTOR 01: PERÍMETRO NORTE',
-            bg: 'Carno Search/Busca 1.jpg',
+            bg: 'Busca 1.jpg',
             time: 20,
             x: 820, y: 340, w: 230, h: 129
         },
         {
             num: 2,
             name: 'SECTOR 02: LADERA ROCOSA',
-            bg: 'Carno Search/Busca 2.jpg',
+            bg: 'Busca 2.jpg',
             time: 18,
             x: 240, y: 280, w: 205, h: 115
         },
         {
             num: 3,
             name: 'SECTOR 03: ESPESURA CENTRAL',
-            bg: 'Carno Search/Busca 3.jpg',
+            bg: 'Busca 3.jpg',
             time: 16,
             x: 740, y: 260, w: 180, h: 101
         },
         {
             num: 4,
             name: 'SECTOR 04: ACANTILADO OSCURO',
-            bg: 'Carno Search/Busca 4.jpg',
+            bg: 'Busca 4.jpg',
             time: 14,
             x: 160, y: 190, w: 155, h: 87
         },
         {
             num: 5,
             name: 'SECTOR 05: CLARO DE SOMBRAS',
-            bg: 'Carno Search/Busca 5.jpg',
+            bg: 'Busca 5.jpg',
             time: 12,
             x: 520, y: 220, w: 135, h: 76
         },
         {
             num: 6,
             name: 'SECTOR 06: BARRANCO DE LA SELVA',
-            bg: 'Carno Search/Busca 6.jpg',
+            bg: 'Busca 6.jpg',
             time: 10,
             x: 890, y: 310, w: 118, h: 66
         },
         {
             num: 7,
             name: 'SECTOR 07: NIDO DEL CAMALEÓN (FINAL)',
-            bg: 'Carno Search/Busca 7.jpg',
+            bg: 'Busca 7.jpg',
             time: 8,
             x: 610, y: 280, w: 98, h: 55
         }
@@ -196,19 +196,28 @@
     }
 
     // ============================================================
-    //  AUDIO
+    //  AUDIO CON FALLBACK (RAÍZ Y SUBDIRECTORIO)
     // ============================================================
+    function createAudioWithFallback(filename, loop, vol) {
+        var a = new Audio();
+        if (loop) a.loop = true;
+        if (typeof vol === 'number') a.volume = vol;
+        var triedFolder = false;
+        a.src = filename;
+        a.addEventListener('error', function () {
+            if (!triedFolder) {
+                triedFolder = true;
+                a.src = 'Carno Search/' + filename;
+            }
+        });
+        return a;
+    }
+
     function initAudio() {
         try {
-            sndSearch = new Audio('Carno Search/Search.mp4');
-            sndSearch.loop = true;
-            sndSearch.volume = 0.85;
-
-            sndFind = new Audio('Carno Search/find.mp4');
-            sndFind.volume = 1.0;
-
-            sndAttack = new Audio('Carno Search/Carno Sound.mp4');
-            sndAttack.volume = 1.0;
+            sndSearch = createAudioWithFallback('Search.mp4', true, 0.85);
+            sndFind   = createAudioWithFallback('find.mp4', false, 1.0);
+            sndAttack = createAudioWithFallback('Carno Sound.mp4', false, 1.0);
         } catch (e) {}
     }
 
@@ -221,8 +230,24 @@
     }
 
     // ============================================================
-    //  CARGA DE IMÁGENES
+    //  CARGA DE IMÁGENES CON FALLBACK (RAÍZ Y SUBDIRECTORIO)
     // ============================================================
+    function loadImageWithFallback(img, filename, onDone) {
+        var finished = false;
+        function markDone() {
+            if (!finished) { finished = true; if (onDone) onDone(); }
+        }
+        img.onload = markDone;
+        img.onerror = function () {
+            if (img.src.indexOf('Carno%20Search') === -1 && img.src.indexOf('Carno Search') === -1) {
+                img.src = 'Carno Search/' + filename;
+            } else {
+                markDone();
+            }
+        };
+        img.src = filename;
+    }
+
     function loadAssets(callback) {
         var total = LEVELS.length + 3;
         var loaded = 0;
@@ -231,26 +256,16 @@
             if (loaded >= total && callback) callback();
         }
 
-        // Cargar fondos 1 a 7
+        // Cargar fondos 1 a 7 (busca primero en raíz y luego en Carno Search/)
         for (var i = 0; i < LEVELS.length; i++) {
             var img = new Image();
-            img.onload = done;
-            img.onerror = done;
-            img.src = LEVELS[i].bg;
             imgs.bg[i] = img;
+            loadImageWithFallback(img, LEVELS[i].bg, done);
         }
 
-        imgs.camo.onload = done;
-        imgs.camo.onerror = done;
-        imgs.camo.src = 'Carno Search/CarnoC Camo.png';
-
-        imgs.find.onload = done;
-        imgs.find.onerror = done;
-        imgs.find.src = 'Carno Search/CarnoC Find.png';
-
-        imgs.attack.onload = done;
-        imgs.attack.onerror = done;
-        imgs.attack.src = 'Carno Search/CarnoC Attack.png';
+        loadImageWithFallback(imgs.camo,   'CarnoC Camo.png',   done);
+        loadImageWithFallback(imgs.find,   'CarnoC Find.png',   done);
+        loadImageWithFallback(imgs.attack, 'CarnoC Attack.png', done);
     }
 
     // ============================================================
@@ -337,13 +352,13 @@
         startScreen.innerHTML = [
             '<div class="cs-screen-title" style="color:#f39c12;">🔦 BUSCANDO AL CARNOTAURUS</div>',
             '<div class="cs-screen-sub">',
-            'El letal Carnotaurus "Demon" posee la capacidad genética de camuflarse en la oscuridad de la selva.<br>',
+            'Los sigilosos Carnotaurus Camaleónicos poseen la capacidad genética de camuflarse en la oscuridad de la selva.<br>',
             'Deberás inspeccionar <strong>7 sectores clasificados</strong> con tu linterna táctica y dispararle antes de que se agote el tiempo.<br><br>',
             '⚡ <strong>REGLAS DE SUPERVIVENCIA:</strong><br>',
             '• Usa el ratón o desliza el dedo en tu celular para mover el foco de luz de la linterna.<br>',
             '• Haz clic o pulsa sobre el Carnotaurus para disparar y revelar su camuflaje.<br>',
             '• Empiezas con <strong>20 segundos</strong>, pero el tiempo se reducirá en cada nivel.<br>',
-            '• <em>Si el tiempo expira sin encontrarlo, ¡el Carnotaurus saltará a atacarte!</em>',
+            '• <em>Si el tiempo expira sin encontrarlo, ¡el Carnotaurus Camaleónico saltará a atacarte!</em>',
             '</div>',
             '<button class="cs-btn cs-btn-primary" id="cs-btn-start">INICIAR BÚSQUEDA</button>'
         ].join('');
@@ -370,7 +385,7 @@
         loseScreen.innerHTML = [
             '<div class="cs-screen-title" style="color:#ff4757;">💀 ¡DEVORADO POR EL CARNOTAURUS!</div>',
             '<div class="cs-screen-sub">',
-            'El tiempo expiró. Demon emergió de las sombras en una embestida letal.<br>',
+            'El tiempo expiró. Un Carnotaurus Camaleónico emergió de las sombras en una embestida letal.<br>',
             'La selva no perdona a quienes bajan la guardia.',
             '</div>',
             '<button class="cs-btn cs-btn-danger" id="cs-btn-lose-retry">REINTENTAR</button>'
