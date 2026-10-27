@@ -1030,6 +1030,10 @@
   align-items: center;
   gap: .6rem;
 }
+.minijuegos-group-title.mantenimiento {
+  color: #00d2d3;
+  border-bottom-color: rgba(0, 210, 211, .4);
+}
 .minijuegos-group-title.misterios {
   color: #2ecc71;
   border-bottom-color: rgba(46, 204, 113, .4);
@@ -1037,6 +1041,10 @@
 .minijuegos-group-title.sobrevivir {
   color: #f39c12;
   border-bottom-color: rgba(243, 156, 18, .4);
+}
+.minijuegos-group-title.caos {
+  color: #e74c3c;
+  border-bottom-color: rgba(231, 76, 60, .4);
 }
 .minijuegos-grid {
   display: grid;
@@ -1095,7 +1103,8 @@
 /* Portadas de minijuegos */
 .minijuego-cover-wrap {
   width: 100%;
-  height: 180px;
+  aspect-ratio: 16 / 9;
+  height: auto;
   border-radius: 6px;
   overflow: hidden;
   margin-bottom: 1rem;
@@ -1103,6 +1112,9 @@
   background: #020604;
   position: relative;
   box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .minijuego-card.amber-card .minijuego-cover-wrap { border-color: rgba(243, 156, 18, 0.4); }
 .minijuego-card.red-card .minijuego-cover-wrap   { border-color: rgba(231, 76, 60, 0.4); }
@@ -1111,12 +1123,13 @@
 .minijuego-cover-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
-  transition: transform 0.4s ease;
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 .minijuego-card:hover .minijuego-cover-img {
-  transform: scale(1.06);
+  transform: scale(1.02);
+  filter: brightness(1.08);
 }
 
 .minijuego-badge {
@@ -1179,7 +1192,33 @@
 </style>
 
 <!-- ========================================== -->
-<!-- SUB-APARTADO 1: MISTERIOS EN LA ISLA        -->
+<!-- SUB-APARTADO 1: MANTENIMIENTO DEL SITIO     -->
+<!-- ========================================== -->
+<div class="minijuegos-group-title mantenimiento">
+  <span>🛠️</span> MANTENIMIENTO DEL SITIO
+</div>
+
+<div class="minijuegos-grid">
+
+  <!-- 1. Atrapa al Compy -->
+  <div class="minijuego-card blue-card">
+    <div class="minijuego-cover-wrap">
+      <img src="ATRAPA AL COMPY.png" onerror="if(this.src.indexOf('Portadas/ATRAPA AL COMPY.png')===-1)this.src='Portadas/ATRAPA AL COMPY.png';" alt="Atrapa al Compy" class="minijuego-cover-img" loading="lazy" />
+    </div>
+    <div class="minijuego-badge badge-blue">Falla en la Red</div>
+    <div class="minijuego-title" style="color:#00d2d3;">🦎 ¡Atrapa al Compy!</div>
+    <div class="minijuego-desc">
+      Los escurridizos Compsognathus han invadido el tendido eléctrico del parque mordiendo cables clave. Pulsa velozmente sobre ellos para capturarlos antes de que causen un cortocircuito en el sistema de seguridad.
+    </div>
+    <button class="minijuego-play-btn btn-blue" onclick="document.getElementById('compy-fab') && document.getElementById('compy-fab').click();">
+      ▶ JUGAR AHORA
+    </button>
+  </div>
+
+</div>
+
+<!-- ========================================== -->
+<!-- SUB-APARTADO 2: MISTERIOS EN LA ISLA        -->
 <!-- ========================================== -->
 <div class="minijuegos-group-title misterios">
   <span>🔍</span> MISTERIOS EN LA ISLA
@@ -1265,7 +1304,7 @@
 </div>
 
 <!-- ========================================== -->
-<!-- SUB-APARTADO 2: SOBREVIVIR EN LA ISLA       -->
+<!-- SUB-APARTADO 3: SOBREVIVIR EN LA ISLA       -->
 <!-- ========================================== -->
 <div class="minijuegos-group-title sobrevivir">
   <span>⚡</span> SOBREVIVIR EN LA ISLA
@@ -1348,20 +1387,33 @@
     </button>
   </div>
 
-  <!-- 6. Atrapa al Compy -->
-  <div class="minijuego-card">
-    <div class="minijuego-badge badge-green">Alerta Menor</div>
-    <div class="minijuego-title" style="color:#2ecc71;">🦎 ¡Atrapa al Compy!</div>
-    <div class="minijuego-desc">
-      Los escurridizos Compsognathus han invadido el tendido eléctrico del parque mordiendo cables clave. Pulsa velozmente para capturarlos antes de que causen un cortocircuito en el sistema de seguridad.
+</div>
+
+<!-- ========================================== -->
+<!-- SUB-APARTADO 4: CAOS EN LA ISLA             -->
+<!-- ========================================== -->
+<div class="minijuegos-group-title caos">
+  <span>🚨</span> CAOS EN LA ISLA
+</div>
+
+<div class="minijuegos-grid">
+
+  <!-- 1. Ahuyentando a los Ornithocheirus -->
+  <div class="minijuego-card red-card">
+    <div class="minijuego-cover-wrap">
+      <img src="AHUYENTANDO A LOS ORNITHOCHEIRUS.jpg" onerror="if(this.src.indexOf('Portadas/AHUYENTANDO A LOS ORNITHOCHEIRUS.jpg')===-1)this.src='Portadas/AHUYENTANDO A LOS ORNITHOCHEIRUS.jpg';" alt="Ahuyentando a los Ornithocheirus" class="minijuego-cover-img" loading="lazy" />
     </div>
-    <button class="minijuego-play-btn btn-green" onclick="document.getElementById('compy-fab') && document.getElementById('compy-fab').click();">
+    <div class="minijuego-badge badge-red">Ataque Aéreo</div>
+    <div class="minijuego-title" style="color:#ff6b6b;">🦅 ¡Ahuyentando a los Ornithocheirus!</div>
+    <div class="minijuego-desc">
+      Una bandada de feroces Ornithocheirus desciende en picada sobre la aldea tribal en Isla Sorna. Apunta con tu mira y dispara justo cuando los reptiles alados se lancen en picada para salvar a los 4 aldeanos. ¡Conecta 15 disparos para ahuyentarlos!
+    </div>
+    <button class="minijuego-play-btn btn-red" onclick="window.openAhuyentandoOrnithos && window.openAhuyentandoOrnithos();">
       ▶ JUGAR AHORA
     </button>
   </div>
 
 </div>
-
 </section>
 
 
@@ -2090,6 +2142,7 @@ if (typeof window.toggleTimeline !== 'function') {
 <script src="identifica-especie.js"></script>
 <script src="cueva-baryonyx.js"></script>
 <script src="escape-de-sorna.js"></script>
+<script src="ahuyentando-ornithos.js"></script>
 </body>
 
 </html>

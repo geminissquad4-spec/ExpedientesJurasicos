@@ -879,6 +879,10 @@
         if (!ov) return;
         ov.classList.add('open');
 
+        if (typeof window.interruptBgMusic === 'function') {
+            window.interruptBgMusic();
+        }
+
         if (!ctx) ctx = canvas.getContext('2d');
         resize();
         startIntro();
@@ -890,6 +894,10 @@
         stopAllAudio();
         state = 'idle';
         showModal(null);
+
+        if (typeof window.releaseBgMusic === 'function') {
+            window.releaseBgMusic();
+        }
     }
 
     // Exponer globalmente

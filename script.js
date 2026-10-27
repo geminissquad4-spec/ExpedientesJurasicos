@@ -347,6 +347,32 @@ function releaseBgMusic() {
     }, 250);
 }
 
+// Lista de todos los overlays de minijuegos del sitio
+var allMinigameOverlaySelectors = [
+    '#compy-game-overlay',
+    '#dilopho-overlay',
+    '#sick-trike-overlay',
+    '#ntm-overlay',
+    '#plesio-swim-overlay',
+    '#styraco-strike-overlay',
+    '#raptor-overlay',
+    '#carno-search-overlay',
+    '#ide-overlay',
+    '#cb-overlay',
+    '#eds-overlay',
+    '#ao-overlay'
+];
+
+function isAnyMinigameOpen() {
+    for (var i = 0; i < allMinigameOverlaySelectors.length; i++) {
+        var el = document.querySelector(allMinigameOverlaySelectors[i]);
+        if (el && (el.classList.contains('open') || el.classList.contains('show') || (el.style && el.style.display && el.style.display !== 'none' && el.style.display !== ''))) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function isOtherAudioActive() {
     try {
         var isRoar = (typeof isSpeciesRoarPlaying !== 'undefined' && isSpeciesRoarPlaying);
@@ -354,11 +380,52 @@ function isOtherAudioActive() {
         var isNarr = (typeof isNarratePlaying !== 'undefined' && isNarratePlaying);
         var isCrt = (typeof crtOverlay !== 'undefined' && crtOverlay && crtOverlay.classList.contains('open'));
         var isIndom = (typeof indominusVideo !== 'undefined' && indominusVideo && !indominusVideo.paused && !indominusVideo.ended);
-        return isRoar || isFichaSnd || isNarr || isCrt || isIndom;
+        var isMiniOpen = isAnyMinigameOpen();
+        return isRoar || isFichaSnd || isNarr || isCrt || isIndom || isMiniOpen;
     } catch(e) {
         return false;
     }
 }
+
+// Exponer funciones de música a nivel global para todos los minijuegos
+window.pauseBgMusic = pauseBgMusic;
+window.playBgMusic = playBgMusic;
+window.interruptBgMusic = interruptBgMusic;
+window.releaseBgMusic = releaseBgMusic;
+window.isAnyMinigameOpen = isAnyMinigameOpen;
+
+// Observer global: Pausar música automáticamente cuando CUALQUIER minijuego se abre,
+// y reanudar la música del sitio cuando el minijuego se cierra.
+try {
+    var minigameAudioObserver = new MutationObserver(function() {
+        if (isAnyMinigameOpen()) {
+            if (!isBgMusicInterrupted) {
+                interruptBgMusic();
+            }
+        } else {
+            if (isBgMusicInterrupted && !isOtherAudioActive()) {
+                releaseBgMusic();
+            }
+        }
+    });
+    if (document.body) {
+        minigameAudioObserver.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class', 'style'],
+            subtree: true,
+            childList: true
+        });
+    } else {
+        document.addEventListener('DOMContentLoaded', function() {
+            minigameAudioObserver.observe(document.body, {
+                attributes: true,
+                attributeFilter: ['class', 'style'],
+                subtree: true,
+                childList: true
+            });
+        });
+    }
+} catch(e) {}
 
 function initBgMusicOnFirstInteraction() {
     function startOnce() {
