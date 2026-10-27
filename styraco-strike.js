@@ -403,6 +403,46 @@
             '.ss-btn-secondary { background:transparent; border:1px solid #e74c3c; color:#ff6b6b; }',
             '.ss-btn-secondary:hover { background:rgba(231,76,60,.15); }',
             '',
+            '/* Controles táctiles virtuales para celulares */',
+            '#ss-touch-controls {',
+            '    position: absolute; bottom: 12px; left: 0; right: 0;',
+            '    display: none; justify-content: space-between; align-items: flex-end;',
+            '    padding: 0 16px; pointer-events: none; z-index: 20;',
+            '}',
+            '@media (max-width: 1024px), (hover: none) and (pointer: coarse) {',
+            '    #ss-touch-controls { display: flex; }',
+            '}',
+            '.ss-touch-dpad, .ss-touch-actions {',
+            '    display: flex; gap: 10px; pointer-events: auto;',
+            '}',
+            '.ss-touch-btn {',
+            '    width: 56px; height: 56px; border-radius: 50%;',
+            '    background: rgba(14, 5, 4, 0.78); border: 2px solid rgba(231, 76, 60, 0.6);',
+            '    color: #fff; font-family: "Orbitron", monospace; font-size: 1.15rem;',
+            '    font-weight: 900; display: flex; align-items: center; justify-content: center;',
+            '    user-select: none; -webkit-user-select: none; touch-action: none;',
+            '    box-shadow: 0 4px 15px rgba(0,0,0,0.6); transition: transform 0.1s, background 0.1s, border-color 0.1s;',
+            '    cursor: pointer;',
+            '}',
+            '.ss-touch-btn:active, .ss-touch-btn.active {',
+            '    background: rgba(231, 76, 60, 0.7); border-color: #ff6b6b;',
+            '    box-shadow: 0 0 20px rgba(255, 107, 107, 0.85); transform: scale(0.92);',
+            '}',
+            '.ss-touch-btn.attack {',
+            '    width: 66px; height: 66px; background: rgba(231, 76, 60, 0.88);',
+            '    border-color: #ff7675; font-size: 0.82rem;',
+            '}',
+            '.ss-touch-btn.attack:active, .ss-touch-btn.attack.active {',
+            '    background: #ff4757; box-shadow: 0 0 25px rgba(255, 71, 87, 0.95);',
+            '}',
+            '.ss-touch-btn.shield {',
+            '    background: rgba(46, 204, 113, 0.55); border-color: #2ecc71;',
+            '    font-size: 0.85rem;',
+            '}',
+            '.ss-touch-btn.shield:active, .ss-touch-btn.shield.active {',
+            '    background: rgba(46, 204, 113, 0.9); box-shadow: 0 0 20px rgba(46, 204, 113, 0.95);',
+            '}',
+            '',
             '/* Responsive */',
             '@media (max-width: 600px) {',
             '    #styraco-strike-fab { bottom: 284px; right: 16px; padding: .5rem .9rem .5rem .65rem; }',
@@ -413,6 +453,8 @@
             '    #ss-header { padding:.35rem .6rem; }',
             '    .ss-fighter-name { font-size:.7rem; }',
             '    .ss-health-bg { height: 12px; }',
+            '    .ss-touch-btn { width: 50px; height: 50px; font-size: 1rem; }',
+            '    .ss-touch-btn.attack { width: 60px; height: 60px; font-size: 0.78rem; }',
             '}'
         ].join('\n');
         document.head.appendChild(s);
@@ -520,6 +562,22 @@
         canvas.id = 'ss-canvas';
         stage.appendChild(canvas);
 
+        // Controles táctiles virtuales para celulares
+        var touchWrap = document.createElement('div');
+        touchWrap.id = 'ss-touch-controls';
+        touchWrap.innerHTML = [
+            '<div class="ss-touch-dpad">',
+            '    <button class="ss-touch-btn" id="ss-touch-left" title="Retroceder">◀</button>',
+            '    <button class="ss-touch-btn" id="ss-touch-right" title="Avanzar">▶</button>',
+            '</div>',
+            '<div class="ss-touch-actions">',
+            '    <button class="ss-touch-btn shield" id="ss-touch-shield" title="Escudo">🛡️</button>',
+            '    <button class="ss-touch-btn" id="ss-touch-jump" title="Salto">▲</button>',
+            '    <button class="ss-touch-btn attack" id="ss-touch-attack" title="Ataque">⚔️</button>',
+            '</div>'
+        ].join('');
+        stage.appendChild(touchWrap);
+
         // ---- PANTALLA INICIO ----
         var startScreen = document.createElement('div');
         startScreen.id  = 'ss-start-screen';
@@ -540,6 +598,7 @@
             '• <span class="ss-key-badge">S</span>: <strong>ESCUDO</strong> (bloqueo total: ningún ataque te dañará)<br>' +
             '• <span class="ss-key-badge">W</span>: <strong>SALTAR</strong> para esquivar arremetidas<br>' +
             '• <span class="ss-key-badge">ESPACIO</span>: <strong>ATACAR</strong> con tus cuernos frontales<br>' +
+            '📱 <em>En celulares: usa los botones virtuales en pantalla (◀, ▶, 🛡️, ▲, ⚔️).</em><br>' +
             '<em>¡Ten cuidado! Demon es un depredador experto que contraataca con combos brutales.</em>';
 
         var instruct = document.createElement('div');
@@ -714,6 +773,35 @@
                 case 'Space':                   keys.space = false; break;
             }
         });
+
+        // Controles táctiles virtuales para celulares y tablets
+        function bindTouchBtn(id, keyName) {
+            var btn = document.getElementById(id);
+            if (!btn) return;
+            function press(e) {
+                if (e) e.preventDefault();
+                if (state !== 'fighting') return;
+                keys[keyName] = true;
+                btn.classList.add('active');
+            }
+            function release(e) {
+                if (e) e.preventDefault();
+                keys[keyName] = false;
+                btn.classList.remove('active');
+            }
+            btn.addEventListener('touchstart', press, { passive: false });
+            btn.addEventListener('touchend', release, { passive: false });
+            btn.addEventListener('touchcancel', release, { passive: false });
+            btn.addEventListener('pointerdown', press);
+            btn.addEventListener('pointerup', release);
+            btn.addEventListener('pointercancel', release);
+        }
+
+        bindTouchBtn('ss-touch-left', 'a');
+        bindTouchBtn('ss-touch-right', 'd');
+        bindTouchBtn('ss-touch-jump', 'w');
+        bindTouchBtn('ss-touch-shield', 's');
+        bindTouchBtn('ss-touch-attack', 'space');
     }
 
     // ============================================================

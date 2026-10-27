@@ -360,7 +360,8 @@ var allMinigameOverlaySelectors = [
     '#ide-overlay',
     '#cb-overlay',
     '#eds-overlay',
-    '#ao-overlay'
+    '#ao-overlay',
+    '#cg-overlay'
 ];
 
 function isAnyMinigameOpen() {

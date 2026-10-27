@@ -223,6 +223,10 @@
             if (state === 'playing') render();
         };
         img.onerror = function () {
+            if (filename === 'Perdiste_Baryonyx.png') {
+                img.src = 'Baryonyx%20Cave/Perdiste.png';
+                return;
+            }
             if (img.src.indexOf('Baryonyx%20Cave') === -1 && img.src.indexOf('Baryonyx Cave') === -1) {
                 img.src = 'Baryonyx%20Cave/' + resolveURI(filename);
             } else if (filename === 'Baryonyx Cueva Fondo.png') {
@@ -235,7 +239,7 @@
     }
 
     function preloadAll() {
-        ['Antony.png', 'Baryonyx Cueva Fondo.png', 'Baryonyx Cueva Fondo.jpg', 'Paso 1.png', 'Paso 2.png', 'Perdiste.png'].forEach(getImage);
+        ['Antony.png', 'Baryonyx Cueva Fondo.png', 'Baryonyx Cueva Fondo.jpg', 'Paso 1.png', 'Paso 2.png', 'Perdiste_Baryonyx.png'].forEach(getImage);
     }
 
     function initAudio() {
@@ -722,7 +726,7 @@
         // 2. CASO DERROTA: MOSTRAR IMAGEN DE PERDISTE
         // ========================================================
         if (state === 'lost') {
-            var perdisteImg = getImage('Perdiste.png');
+            var perdisteImg = getImage('Perdiste_Baryonyx.png');
             if (perdisteImg.complete && perdisteImg.naturalWidth) {
                 // Dibujar en el lugar del ataque
                 var pw = bary.w * scale;

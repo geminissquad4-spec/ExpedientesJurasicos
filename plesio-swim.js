@@ -529,6 +529,46 @@
             '.ps-btn-danger { background:transparent; border:1px solid #e74c3c; color:#e74c3c; }',
             '.ps-btn-danger:hover { background:rgba(231,76,60,.15); }',
             '',
+            '/* Controles táctiles virtuales para celulares */',
+            '#ps-touch-controls {',
+            '    position: absolute; bottom: 12px; left: 0; right: 0;',
+            '    display: none; justify-content: space-between; align-items: flex-end;',
+            '    padding: 0 16px; pointer-events: none; z-index: 20;',
+            '}',
+            '@media (max-width: 1024px), (hover: none) and (pointer: coarse) {',
+            '    #ps-touch-controls { display: flex; }',
+            '}',
+            '.ps-touch-dpad {',
+            '    display: flex; flex-direction: column; align-items: center; gap: 4px; pointer-events: auto;',
+            '}',
+            '.ps-touch-dpad-row {',
+            '    display: flex; gap: 6px;',
+            '}',
+            '.ps-touch-actions {',
+            '    display: flex; gap: 10px; pointer-events: auto;',
+            '}',
+            '.ps-touch-btn {',
+            '    width: 50px; height: 50px; border-radius: 50%;',
+            '    background: rgba(1, 15, 25, 0.78); border: 2px solid rgba(0, 210, 211, 0.6);',
+            '    color: #00d2d3; font-family: "Orbitron", monospace; font-size: 1.15rem;',
+            '    font-weight: 900; display: flex; align-items: center; justify-content: center;',
+            '    user-select: none; -webkit-user-select: none; touch-action: none;',
+            '    box-shadow: 0 4px 15px rgba(0,0,0,0.6); transition: transform 0.1s, background 0.1s, border-color 0.1s;',
+            '    cursor: pointer;',
+            '}',
+            '.ps-touch-btn:active, .ps-touch-btn.active {',
+            '    background: rgba(0, 210, 211, 0.4); border-color: #55efc4; color: #fff;',
+            '    box-shadow: 0 0 20px rgba(85, 239, 196, 0.85); transform: scale(0.92);',
+            '}',
+            '.ps-touch-btn.action {',
+            '    width: auto; min-width: 90px; height: 52px; border-radius: 26px;',
+            '    background: rgba(0, 210, 211, 0.82); border-color: #55efc4; color: #011422;',
+            '    font-size: 0.78rem; letter-spacing: 1px; padding: 0 16px; font-weight: 900;',
+            '}',
+            '.ps-touch-btn.action:active, .ps-touch-btn.action.active {',
+            '    background: #55efc4; box-shadow: 0 0 25px rgba(85, 239, 196, 0.95);',
+            '}',
+            '',
             '/* Responsive */',
             '@media (max-width: 600px) {',
             '    #plesio-swim-fab { bottom: 232px; right: 16px; padding: .5rem .9rem .5rem .65rem; }',
@@ -539,6 +579,8 @@
             '    #ps-header { padding:.35rem .6rem; }',
             '    #ps-header-title { font-size:.72rem; }',
             '    #ps-oxygen-bar-bg { width: 75px; }',
+            '    .ps-touch-btn { width: 44px; height: 44px; font-size: 1rem; }',
+            '    .ps-touch-btn.action { height: 46px; font-size: 0.72rem; padding: 0 12px; }',
             '}'
         ].join('\n');
         document.head.appendChild(s);
@@ -628,6 +670,24 @@
         canvas.id = 'ps-canvas';
         stage.appendChild(canvas);
 
+        // Controles táctiles virtuales para celulares
+        var touchWrap = document.createElement('div');
+        touchWrap.id = 'ps-touch-controls';
+        touchWrap.innerHTML = [
+            '<div class="ps-touch-dpad">',
+            '    <button class="ps-touch-btn" id="ps-touch-up">▲</button>',
+            '    <div class="ps-touch-dpad-row">',
+            '        <button class="ps-touch-btn" id="ps-touch-left">◀</button>',
+            '        <button class="ps-touch-btn" id="ps-touch-down">▼</button>',
+            '        <button class="ps-touch-btn" id="ps-touch-right">▶</button>',
+            '    </div>',
+            '</div>',
+            '<div class="ps-touch-actions">',
+            '    <button class="ps-touch-btn action" id="ps-touch-interact">🔍 REGISTRAR</button>',
+            '</div>'
+        ].join('');
+        stage.appendChild(touchWrap);
+
         // ---- PANTALLA INICIO ----
         var startScreen = document.createElement('div');
         startScreen.id  = 'ps-start-screen';
@@ -646,6 +706,7 @@
             '🤿 <strong>Oxígeno:</strong> Debes <strong style="color:#00d2d3;">subir a la superficie a respirar cada 10 segundos</strong> o te ahogarás.<br>' +
             '🦕 <strong>Plesiosaurus:</strong> ¡Cada llave que encuentres atraerá a otro depredador! Evita chocar o perderás 15 segundos.<br>' +
             '🪨 <strong>Rocas y Corales:</strong> Hay 10 escondites. Si revisas uno vacío, recibirás una penalización de 10 segundos.<br>' +
+            '📱 <em>En celulares: usa los botones táctiles en pantalla o desliza para nadar.</em><br>' +
             '<em>¡Tienes 2 minutos para conseguir las 4 llaves y escapar a la superficie!</em>';
 
         var instruct = document.createElement('div');
@@ -888,6 +949,47 @@
         canvas.addEventListener('pointerleave', function () {
             if (!isPointerDown) mouseTarget = null;
         });
+
+        // Controles táctiles virtuales para celulares
+        function bindPsTouchBtn(id, keyName) {
+            var btn = document.getElementById(id);
+            if (!btn) return;
+            function press(e) {
+                if (e) e.preventDefault();
+                if (state !== 'playing') return;
+                keys[keyName] = true;
+                btn.classList.add('active');
+            }
+            function release(e) {
+                if (e) e.preventDefault();
+                keys[keyName] = false;
+                btn.classList.remove('active');
+            }
+            btn.addEventListener('touchstart', press, { passive: false });
+            btn.addEventListener('touchend', release, { passive: false });
+            btn.addEventListener('touchcancel', release, { passive: false });
+            btn.addEventListener('pointerdown', press);
+            btn.addEventListener('pointerup', release);
+            btn.addEventListener('pointercancel', release);
+        }
+
+        bindPsTouchBtn('ps-touch-up', 'up');
+        bindPsTouchBtn('ps-touch-down', 'down');
+        bindPsTouchBtn('ps-touch-left', 'left');
+        bindPsTouchBtn('ps-touch-right', 'right');
+
+        var actBtn = document.getElementById('ps-touch-interact');
+        if (actBtn) {
+            function tapInteract(e) {
+                if (e) e.preventDefault();
+                if (state !== 'playing') return;
+                interactClosestSpot();
+                actBtn.classList.add('active');
+                setTimeout(function () { actBtn.classList.remove('active'); }, 150);
+            }
+            actBtn.addEventListener('touchstart', tapInteract, { passive: false });
+            actBtn.addEventListener('pointerdown', tapInteract);
+        }
     }
 
     // Interacción al acercarse a un escondite
