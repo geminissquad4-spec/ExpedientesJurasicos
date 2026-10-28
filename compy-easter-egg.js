@@ -590,8 +590,8 @@
         });
         compy.addEventListener('touchstart', function(e) { e.preventDefault(); compy.dispatchEvent(new MouseEvent('mousedown')); });
 
-        if (btnReplay) btnReplay.addEventListener('click', function() { reset(); requestAnimationFrame(loop); });
-        if (btnRetry)  btnRetry.addEventListener('click',  function() { reset(); requestAnimationFrame(loop); });
+        if (btnReplay) btnReplay.addEventListener('click', function() { if (window.registerMinigameAttempt) window.registerMinigameAttempt('compy'); reset(); requestAnimationFrame(loop); });
+        if (btnRetry)  btnRetry.addEventListener('click',  function() { if (window.registerMinigameAttempt) window.registerMinigameAttempt('compy'); reset(); requestAnimationFrame(loop); });
         if (btnCloseW) btnCloseW.addEventListener('click', closeOverlay);
 
         reset();

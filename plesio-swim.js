@@ -763,7 +763,7 @@
         var wRetry = document.createElement('button');
         wRetry.className = 'ps-btn ps-btn-primary';
         wRetry.textContent = '🔄 JUGAR DE NUEVO';
-        wRetry.addEventListener('click', function () { showScreen(null); startGame(); });
+        wRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('plesio-swim'); showScreen(null); startGame(); });
         var wClose = document.createElement('button');
         wClose.className = 'ps-btn ps-btn-secondary';
         wClose.textContent = 'CERRAR';
@@ -795,7 +795,7 @@
         var dRetry = document.createElement('button');
         dRetry.className = 'ps-btn ps-btn-primary';
         dRetry.textContent = '🔄 INTENTAR DE NUEVO';
-        dRetry.addEventListener('click', function () { showScreen(null); startGame(); });
+        dRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('plesio-swim'); showScreen(null); startGame(); });
         var dClose = document.createElement('button');
         dClose.className = 'ps-btn ps-btn-danger';
         dClose.textContent = 'CERRAR';
@@ -827,7 +827,7 @@
         var tRetry = document.createElement('button');
         tRetry.className = 'ps-btn ps-btn-primary';
         tRetry.textContent = '🔄 INTENTAR DE NUEVO';
-        tRetry.addEventListener('click', function () { showScreen(null); startGame(); });
+        tRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('plesio-swim'); showScreen(null); startGame(); });
         var tClose = document.createElement('button');
         tClose.className = 'ps-btn ps-btn-danger';
         tClose.textContent = 'CERRAR';

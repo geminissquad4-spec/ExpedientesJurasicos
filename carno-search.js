@@ -409,10 +409,12 @@
         // Eventos de botones
         document.getElementById('cs-btn-start').addEventListener('click', startSearch);
         document.getElementById('cs-btn-win-replay').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('carno-search');
             showScreen(null);
             startSearch();
         });
         document.getElementById('cs-btn-lose-retry').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('carno-search');
             showScreen(null);
             startSearch();
         });

@@ -845,12 +845,14 @@
         document.getElementById('raptor-start-btn').addEventListener('click', startGame);
 
         document.getElementById('raptor-retry-btn').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('raptor');
             document.getElementById('raptor-lose-screen').classList.remove('show');
             startGame();
         });
         document.getElementById('raptor-lose-close').addEventListener('click', closeGame);
 
         document.getElementById('raptor-win-replay').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('raptor');
             document.getElementById('raptor-win-screen').classList.remove('show');
             startGame();
         });

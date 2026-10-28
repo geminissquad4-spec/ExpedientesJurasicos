@@ -772,12 +772,14 @@
         document.getElementById('ntm-start-btn').addEventListener('click', startGame);
 
         document.getElementById('ntm-retry-btn').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('ntm');
             document.getElementById('ntm-caught-screen').classList.remove('show');
             stopAll(); startGame();
         });
         document.getElementById('ntm-caught-close').addEventListener('click', closeGame);
 
         document.getElementById('ntm-win-replay').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('ntm');
             document.getElementById('ntm-win-screen').classList.remove('show');
             stopAll(); startGame();
         });

@@ -617,7 +617,7 @@
         var wRetry = document.createElement('button');
         wRetry.className = 'st-btn st-btn-primary';
         wRetry.textContent = '🔄 JUGAR DE NUEVO';
-        wRetry.addEventListener('click', function () { showScreen(null); startGame(); });
+        wRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('sick-trike'); showScreen(null); startGame(); });
         var wClose = document.createElement('button');
         wClose.className = 'st-btn st-btn-secondary';
         wClose.textContent = 'CERRAR';
@@ -654,7 +654,7 @@
         var lRetry = document.createElement('button');
         lRetry.className = 'st-btn st-btn-primary';
         lRetry.textContent = '🔄 INTENTAR DE NUEVO';
-        lRetry.addEventListener('click', function () { showScreen(null); startGame(); });
+        lRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('sick-trike'); showScreen(null); startGame(); });
         var lClose = document.createElement('button');
         lClose.className = 'st-btn st-btn-danger';
         lClose.textContent = 'CERRAR';
@@ -842,7 +842,13 @@
                 el.style.left  = (dot.x * scale) + 'px';
                 el.style.top   = (dot.y * scale) + 'px';
                 el.title       = 'Examinar excremento';
-                el.addEventListener('click', function () { onDotClick(idx); });
+                el.addEventListener('pointerdown', function (e) {
+                    if (e.cancelable) e.preventDefault();
+                    onDotClick(idx);
+                });
+                el.addEventListener('click', function (e) {
+                    onDotClick(idx);
+                });
                 stage.appendChild(el);
             })(dots[i], i);
         }

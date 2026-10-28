@@ -474,8 +474,14 @@
 
         // Eventos
         document.getElementById('cb-btn-start').addEventListener('click', startGame);
-        document.getElementById('cb-btn-win-replay').addEventListener('click', startGame);
-        document.getElementById('cb-btn-lose-retry').addEventListener('click', startGame);
+        document.getElementById('cb-btn-win-replay').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('cueva-baryonyx');
+            startGame();
+        });
+        document.getElementById('cb-btn-lose-retry').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('cueva-baryonyx');
+            startGame();
+        });
 
         // Tocar el lienzo también ayuda a escalar en móvil
         canvas.addEventListener('touchstart', function (e) {

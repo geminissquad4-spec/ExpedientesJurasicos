@@ -1348,9 +1348,18 @@
         if (winClose) winClose.addEventListener('click', closeGame);
 
         startBtn.addEventListener('click', startGame);
-        if (retryBtn) retryBtn.addEventListener('click', startGame);
-        if (retryTimeBtn) retryTimeBtn.addEventListener('click', startGame);
-        if (winReplay) winReplay.addEventListener('click', startGame);
+        if (retryBtn) retryBtn.addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('dilopho');
+            startGame();
+        });
+        if (retryTimeBtn) retryTimeBtn.addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('dilopho');
+            startGame();
+        });
+        if (winReplay) winReplay.addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('dilopho');
+            startGame();
+        });
 
         torchBtn.addEventListener('click', toggleFlashlight);
 

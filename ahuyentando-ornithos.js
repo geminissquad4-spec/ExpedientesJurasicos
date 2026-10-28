@@ -732,8 +732,14 @@
 
         // Eventos de controles
         document.getElementById('ao-btn-start').addEventListener('click', startGame);
-        document.getElementById('ao-btn-win-replay').addEventListener('click', startGame);
-        document.getElementById('ao-btn-lose-retry').addEventListener('click', startGame);
+        document.getElementById('ao-btn-win-replay').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('ahuyentando-ornithos');
+            startGame();
+        });
+        document.getElementById('ao-btn-lose-retry').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('ahuyentando-ornithos');
+            startGame();
+        });
 
         document.getElementById('ao-btn-mute').addEventListener('click', function () {
             isMuted = !isMuted;

@@ -932,8 +932,14 @@
         document.getElementById('ha-btn-open-modal').addEventListener('click', openDNAModal);
         document.getElementById('ha-btn-close-modal').addEventListener('click', closeDNAModal);
         document.getElementById('ha-btn-next-hybrid').addEventListener('click', nextHybrid);
-        document.getElementById('ha-btn-retry').addEventListener('click', retryCurrentHybrid);
-        document.getElementById('ha-btn-win-restart').addEventListener('click', restartAll);
+        document.getElementById('ha-btn-retry').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('hibridacion-adn');
+            retryCurrentHybrid();
+        });
+        document.getElementById('ha-btn-win-restart').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('hibridacion-adn');
+            restartAll();
+        });
 
         document.getElementById('ha-search-box').addEventListener('input', function (e) {
             searchQuery = e.target.value.toLowerCase().trim();
@@ -1000,6 +1006,10 @@
                 '<div class="ha-scan-name">' + sp.name + '</div>'
             ].join('');
 
+            card.addEventListener('pointerdown', function (e) {
+                if (e.cancelable) e.preventDefault();
+                handleSpeciesSelected(sp);
+            });
             card.addEventListener('click', function () {
                 handleSpeciesSelected(sp);
             });

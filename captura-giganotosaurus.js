@@ -568,8 +568,14 @@
         // Eventos de botones de interfaz
         document.getElementById('cg-btn-close').addEventListener('click', closeGame);
         document.getElementById('cg-btn-start').addEventListener('click', startGame);
-        document.getElementById('cg-btn-win-restart').addEventListener('click', startGame);
-        document.getElementById('cg-btn-lose-restart').addEventListener('click', startGame);
+        document.getElementById('cg-btn-win-restart').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('captura-giganoto');
+            startGame();
+        });
+        document.getElementById('cg-btn-lose-restart').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('captura-giganoto');
+            startGame();
+        });
 
         document.getElementById('cg-btn-mute').addEventListener('click', function () {
             isMuted = !isMuted;

@@ -655,7 +655,7 @@
         var wRetry = document.createElement('button');
         wRetry.className = 'ss-btn ss-btn-primary';
         wRetry.textContent = '🔄 PELEAR DE NUEVO';
-        wRetry.addEventListener('click', function () { showScreen(null); startGame(); });
+        wRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('styraco-strike'); showScreen(null); startGame(); });
         var wClose = document.createElement('button');
         wClose.className = 'ss-btn ss-btn-secondary';
         wClose.textContent = 'CERRAR';
@@ -687,7 +687,7 @@
         var lRetry = document.createElement('button');
         lRetry.className = 'ss-btn ss-btn-primary';
         lRetry.textContent = '🔄 REINTENTAR';
-        lRetry.addEventListener('click', function () { showScreen(null); startGame(); });
+        lRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('styraco-strike'); showScreen(null); startGame(); });
         var lClose = document.createElement('button');
         lClose.className = 'ss-btn ss-btn-secondary';
         lClose.textContent = 'CERRAR';

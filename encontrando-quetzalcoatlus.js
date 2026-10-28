@@ -532,8 +532,14 @@
         // Eventos de botones
         document.getElementById('eq-btn-close').addEventListener('click', closeGame);
         document.getElementById('eq-btn-start').addEventListener('click', startGame);
-        document.getElementById('eq-btn-win-restart').addEventListener('click', startGame);
-        document.getElementById('eq-btn-lose-restart').addEventListener('click', startGame);
+        document.getElementById('eq-btn-win-restart').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('encontrando-quetza');
+            startGame();
+        });
+        document.getElementById('eq-btn-lose-restart').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('encontrando-quetza');
+            startGame();
+        });
 
         document.getElementById('eq-btn-mute').addEventListener('click', function () {
             isMuted = !isMuted;

@@ -20,6 +20,7 @@
 
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="maintenance.css">
+<link rel="stylesheet" href="mobile-minigames.css">
 <script src="maintenance-config.js"></script>
 <script src="maintenance-system.js"></script>
 
@@ -1210,7 +1211,8 @@
     <div class="minijuego-desc">
       Los escurridizos Compsognathus han invadido el tendido eléctrico del parque mordiendo cables clave. Pulsa velozmente sobre ellos para capturarlos antes de que causen un cortocircuito en el sistema de seguridad.
     </div>
-    <button class="minijuego-play-btn btn-blue" onclick="document.getElementById('compy-fab') && document.getElementById('compy-fab').click();">
+    <div class="minijuego-attempts-pill" data-game-id="compy"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-blue" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('compy'); document.getElementById('compy-fab') && document.getElementById('compy-fab').click();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1236,7 +1238,8 @@
     <div class="minijuego-desc">
       La energía principal de la clínica InGen falló. Explora con tu linterna para encontrar los 5 suministros clasificados en 2 minutos, pero apaga la luz inmediatamente cuando escuches la advertencia del Dilophosaurus acechando.
     </div>
-    <button class="minijuego-play-btn btn-green" onclick="document.getElementById('dilopho-fab') && document.getElementById('dilopho-fab').click();">
+    <div class="minijuego-attempts-pill" data-game-id="dilopho"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-green" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('dilopho'); document.getElementById('dilopho-fab') && document.getElementById('dilopho-fab').click();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1251,7 +1254,8 @@
     <div class="minijuego-desc">
       Jackson necesita salvar a un Triceratops gravemente intoxicado. Examina los puntos en la enorme montaña de excremento para encontrar el medicamento oculto antes de recoger 3 Lilas de Persia mortales.
     </div>
-    <button class="minijuego-play-btn btn-green" onclick="document.getElementById('sick-trike-fab') && document.getElementById('sick-trike-fab').click();">
+    <div class="minijuego-attempts-pill" data-game-id="sick-trike"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-green" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('sick-trike'); document.getElementById('sick-trike-fab') && document.getElementById('sick-trike-fab').click();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1266,7 +1270,8 @@
     <div class="minijuego-desc">
       Ayuda a Jackson a escapar del recinto del T-Rex. Arrastra al personaje mientras el coloso está distraído devorando su presa, pero congela todo movimiento cuando levante la cabeza y te mire fijamente.
     </div>
-    <button class="minijuego-play-btn btn-red" onclick="document.getElementById('ntm-fab') && document.getElementById('ntm-fab').click();">
+    <div class="minijuego-attempts-pill" data-game-id="ntm"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-red" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('ntm'); document.getElementById('ntm-fab') && document.getElementById('ntm-fab').click();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1281,7 +1286,8 @@
     <div class="minijuego-desc">
       Bucea en las profundidades del recinto marino. Localiza las 4 llaves ocultas tras rocas y corales, esquiva los feroces ataques de los Plesiosaurios patrulleros y sube a la superficie a respirar cada 10 segundos.
     </div>
-    <button class="minijuego-play-btn btn-blue" onclick="document.getElementById('plesio-swim-fab') && document.getElementById('plesio-swim-fab').click();">
+    <div class="minijuego-attempts-pill" data-game-id="plesio-swim"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-blue" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('plesio-swim'); document.getElementById('plesio-swim-fab') && document.getElementById('plesio-swim-fab').click();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1296,7 +1302,8 @@
     <div class="minijuego-desc">
       Duelo de titanes en el helipuerto nocturno. Controla al Styracosaurus, bloquea con escudo total con S, salta con W y arremete con Espacio para derribar al implacable y letal Carnotaurus.
     </div>
-    <button class="minijuego-play-btn btn-red" onclick="document.getElementById('styraco-strike-fab') && document.getElementById('styraco-strike-fab').click();">
+    <div class="minijuego-attempts-pill" data-game-id="styraco-strike"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-red" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('styraco-strike'); document.getElementById('styraco-strike-fab') && document.getElementById('styraco-strike-fab').click();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1322,7 +1329,8 @@
     <div class="minijuego-desc">
       La Dra. Kate Vanegas busca ingresar como pasante al laboratorio del Dr. Boris Wong en Isla Sorna. Identifica las 12 especies prehistóricas retenidas en jaulas de contención para ganar su aprobación taxonómica.
     </div>
-    <button class="minijuego-play-btn btn-green" onclick="window.openIdentificaEspecie && window.openIdentificaEspecie();">
+    <div class="minijuego-attempts-pill" data-game-id="identifica-especie"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-green" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('identifica-especie'); window.openIdentificaEspecie && window.openIdentificaEspecie();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1337,7 +1345,8 @@
     <div class="minijuego-desc">
       Estás varado en los pastizales de Isla Sorna. Los Velociraptores acechan entre la maleza: escucha su chillido, apunta con la mirilla de tu rifle y dispárales en pleno salto antes de que te alcancen.
     </div>
-    <button class="minijuego-play-btn btn-amber" onclick="document.getElementById('raptor-fab') && document.getElementById('raptor-fab').click();">
+    <div class="minijuego-attempts-pill" data-game-id="raptor"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-amber" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('raptor'); document.getElementById('raptor-fab') && document.getElementById('raptor-fab').click();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1352,7 +1361,8 @@
     <div class="minijuego-desc">
       El Carnotaurus camaleónico acecha oculto en 7 sectores oscuros de la isla. Usa tu linterna táctica, localízalo antes de que se agote el tiempo y dispárale. Si el tiempo expira, ¡el Carnotaurus Camaleónico arremeterá contra ti!
     </div>
-    <button class="minijuego-play-btn btn-red" onclick="window.openCarnoSearch && window.openCarnoSearch();">
+    <div class="minijuego-attempts-pill" data-game-id="carno-search"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-red" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('carno-search'); window.openCarnoSearch && window.openCarnoSearch();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1367,7 +1377,8 @@
     <div class="minijuego-desc">
       El soldado Antony Benton cayó en la caverna del letal Baryonyx. Pulsa la tecla ESPACIO repetidamente para trepar la cuerda antes de que el depredador acuático lo alcance y lo devore.
     </div>
-    <button class="minijuego-play-btn btn-red" onclick="window.openCuevaBaryonyx && window.openCuevaBaryonyx();">
+    <div class="minijuego-attempts-pill" data-game-id="cueva-baryonyx"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-red" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('cueva-baryonyx'); window.openCuevaBaryonyx && window.openCuevaBaryonyx();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1382,7 +1393,8 @@
     <div class="minijuego-desc">
       Pilota el helicóptero de InGen en una carrera desesperada hacia la costa. Esquiva las bandadas de Geosternbergias territoriales y elude los colosales cuellos de los Brachiosaurus antes de alcanzar la seguridad del océano.
     </div>
-    <button class="minijuego-play-btn btn-blue" onclick="window.openEscapeSorna && window.openEscapeSorna();">
+    <div class="minijuego-attempts-pill" data-game-id="escape-sorna"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-blue" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('escape-sorna'); window.openEscapeSorna && window.openEscapeSorna();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1408,7 +1420,8 @@
     <div class="minijuego-desc">
       Una bandada de feroces Ornithocheirus desciende en picada sobre la aldea tribal en Isla Sorna. Apunta con tu mira y dispara justo cuando los reptiles alados se lancen en picada para salvar a los 4 aldeanos. ¡Conecta 15 disparos para ahuyentarlos!
     </div>
-    <button class="minijuego-play-btn btn-red" onclick="window.openAhuyentandoOrnithos && window.openAhuyentandoOrnithos();">
+    <div class="minijuego-attempts-pill" data-game-id="ahuyentando-ornithos"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-red" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('ahuyentando-ornithos'); window.openAhuyentandoOrnithos && window.openAhuyentandoOrnithos();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1423,7 +1436,8 @@
     <div class="minijuego-desc">
       El Dr. Daniel Moreno nos encomienda hibridar ADN por encargo confidencial del ejército. Deduce las pistas biológicas, secuenciando los genomas correctos para sintetizar 10 criaturas bioarmadas, desde la Tanaconda hasta el colosal Ultimasaurus.
     </div>
-    <button class="minijuego-play-btn btn-red" onclick="window.openHibridacionADN && window.openHibridacionADN();">
+    <div class="minijuego-attempts-pill" data-game-id="hibridacion-adn"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-red" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('hibridacion-adn'); window.openHibridacionADN && window.openHibridacionADN();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1438,7 +1452,8 @@
     <div class="minijuego-desc">
       El gigantesco depredador alfa se acerca a paso destructivo hacia el complejo. Introduce la secuencia exacta de botones en la consola para accionar el cierre perimetral de las compuertas de acero antes de que te devore.
     </div>
-    <button class="minijuego-play-btn btn-red" onclick="window.openCapturaGiganoto && window.openCapturaGiganoto();">
+    <div class="minijuego-attempts-pill" data-game-id="captura-giganoto"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-red" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('captura-giganoto'); window.openCapturaGiganoto && window.openCapturaGiganoto();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1453,7 +1468,8 @@
     <div class="minijuego-desc">
       Ed y su equipo se adentran en el recinto del Quetzalcoatlus en Isla Matanceros. Localiza a los colosos alados reales camuflados entre la densa vegetación y ramas falsas en menos de 10 segundos y con 5 vidas antes de que te ataquen.
     </div>
-    <button class="minijuego-play-btn btn-red" onclick="window.openEncontrandoQuetza && window.openEncontrandoQuetza();">
+    <div class="minijuego-attempts-pill" data-game-id="encontrando-quetza"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
+    <button class="minijuego-play-btn btn-red" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('encontrando-quetza'); window.openEncontrandoQuetza && window.openEncontrandoQuetza();">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -2176,6 +2192,7 @@ if (typeof window.toggleTimeline !== 'function') {
 
 
 
+<script src="site-access-system.js"></script>
 <script src="compy-easter-egg.js"></script>
 <script src="no-te-muevas.js"></script>
 <script src="raptor-attack.js"></script>

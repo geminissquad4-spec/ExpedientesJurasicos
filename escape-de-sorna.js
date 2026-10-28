@@ -490,8 +490,14 @@
 
         // Eventos de botones
         document.getElementById('eds-btn-start').addEventListener('click', startGame);
-        document.getElementById('eds-btn-win-replay').addEventListener('click', startGame);
-        document.getElementById('eds-btn-lose-retry').addEventListener('click', startGame);
+        document.getElementById('eds-btn-win-replay').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('escape-sorna');
+            startGame();
+        });
+        document.getElementById('eds-btn-lose-retry').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('escape-sorna');
+            startGame();
+        });
 
         // Eventos táctiles para botones virtuales
         var btnUp = document.getElementById('eds-touch-up');

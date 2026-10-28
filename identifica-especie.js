@@ -458,10 +458,12 @@
         document.getElementById('ide-btn-next').addEventListener('click', advanceDialogue);
         document.getElementById('ide-btn-skip').addEventListener('click', skipDialogue);
         document.getElementById('ide-btn-win-replay').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('identifica-especie');
             showModal(null);
             startGame();
         });
         document.getElementById('ide-btn-lose-retry').addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('identifica-especie');
             showModal(null);
             startGame();
         });
@@ -621,6 +623,10 @@
             var btn = document.createElement('button');
             btn.className = 'ide-choice-btn';
             btn.textContent = optName;
+            btn.addEventListener('pointerdown', function (e) {
+                if (e.cancelable) e.preventDefault();
+                handleChoice(optName, btn);
+            });
             btn.addEventListener('click', function () {
                 handleChoice(optName, btn);
             });
