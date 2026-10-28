@@ -22,8 +22,7 @@
 #plesio-swim-overlay,
 #raptor-overlay,
 #styraco-strike-overlay,
-#compy-overlay,
-#ingen-gate-overlay {
+#compy-overlay {
   height: 100vh !important;
   height: 100dvh !important;
   max-height: 100dvh !important;
@@ -41,8 +40,7 @@
 .ha-cards-grid,
 .ide-dialog-box,
 .cg-modal-card,
-.ao-rules-box,
-.ingen-gate-card {
+.ao-rules-box {
   -webkit-overflow-scrolling: touch !important;
   overscroll-behavior: contain !important;
 }
