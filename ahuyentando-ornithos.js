@@ -572,8 +572,10 @@
             '  justify-content: center;',
             '  flex-direction: column;',
             '  padding: 1.5rem;',
-            '  z-index: 10;',
+            '  z-index: 100;',
             '  text-align: center;',
+            '  overflow-y: auto;',
+            '  -webkit-overflow-scrolling: touch;',
             '}',
             '.ao-modal.show { display: flex; animation: ao-modal-pop 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28); }',
             '@keyframes ao-modal-pop { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }',
@@ -585,6 +587,11 @@
             '  max-width: 650px;',
             '  width: 90%;',
             '  box-shadow: 0 0 45px rgba(231, 76, 60, 0.35);',
+            '  margin: auto;',
+            '  max-height: 88dvh;',
+            '  overflow-y: auto;',
+            '  -webkit-overflow-scrolling: touch;',
+            '  box-sizing: border-box;',
             '}',
             '.ao-modal-title {',
             '  font-size: 1.45rem;',
@@ -652,6 +659,85 @@
             '  justify-content: space-between;',
             '  border-top: 1px solid rgba(255, 255, 255, 0.08);',
             '  flex-shrink: 0;',
+            '}',
+            '',
+            '/* Optimizaciones Mobile y Pantallas Táctiles */',
+            '@media (max-width: 768px) {',
+            '  #ao-header {',
+            '    padding: 0.35rem 0.6rem;',
+            '    flex-wrap: wrap;',
+            '    gap: 0.35rem;',
+            '    justify-content: space-between;',
+            '  }',
+            '  #ao-title {',
+            '    font-size: 0.78rem;',
+            '    letter-spacing: 1px;',
+            '    gap: 0.4rem;',
+            '  }',
+            '  #ao-hud-center {',
+            '    order: 3;',
+            '    width: 100%;',
+            '    justify-content: center;',
+            '    gap: 0.3rem;',
+            '  }',
+            '  .ao-pill {',
+            '    font-size: 0.68rem;',
+            '    padding: 0.2rem 0.45rem;',
+            '  }',
+            '  #ao-header-right {',
+            '    gap: 0.35rem;',
+            '  }',
+            '  .ao-ctrl-btn {',
+            '    padding: 0.3rem 0.55rem;',
+            '    font-size: 0.68rem;',
+            '    min-height: 36px;',
+            '  }',
+            '  .ao-modal {',
+            '    padding: 0.6rem;',
+            '  }',
+            '  .ao-modal-card {',
+            '    width: 95%;',
+            '    max-width: 95vw;',
+            '    padding: 1.2rem 1rem;',
+            '    max-height: 86dvh;',
+            '  }',
+            '  .ao-modal-title {',
+            '    font-size: 1.15rem;',
+            '    margin-bottom: 0.5rem;',
+            '  }',
+            '  .ao-modal-sub {',
+            '    font-size: 0.82rem;',
+            '    line-height: 1.45;',
+            '    margin-bottom: 0.8rem;',
+            '  }',
+            '  .ao-rules-box {',
+            '    font-size: 0.74rem;',
+            '    line-height: 1.4;',
+            '    padding: 0.55rem 0.75rem;',
+            '    margin-bottom: 0.9rem;',
+            '  }',
+            '  .ao-primary-btn {',
+            '    width: 100%;',
+            '    min-height: 48px;',
+            '    font-size: 0.95rem;',
+            '    padding: 0.8rem 1.2rem;',
+            '    display: flex;',
+            '    align-items: center;',
+            '    justify-content: center;',
+            '    box-sizing: border-box;',
+            '    touch-action: manipulation;',
+            '  }',
+            '  #ao-footer {',
+            '    font-size: 0.64rem;',
+            '    padding: 0.25rem 0.6rem;',
+            '    flex-direction: column;',
+            '    text-align: center;',
+            '    gap: 0.2rem;',
+            '  }',
+            '}',
+            '@media (max-width: 480px) {',
+            '  #ao-title { font-size: 0.72rem; }',
+            '  .ao-pill-villager { font-size: 0.62rem; padding: 0.15rem 0.35rem; }',
             '}'
         ].join('\n');
         document.head.appendChild(styleEl);
@@ -678,11 +764,12 @@
             '</div>',
             '<div id="ao-canvas-wrap">',
             '  <canvas id="ao-canvas"></canvas>',
-            '  <!-- Modal Briefing -->',
+            '</div>',
+            '<!-- Modal Briefing -->',
             '  <div class="ao-modal show" id="ao-brief-screen">',
             '    <div class="ao-modal-card">',
             '      <div class="ao-modal-title">⚔️ DEFENDIENDO LA ALDEA</div>',
-            '      <div class="ao-modal-sub">Una bandada de gigantescos <strong>Ornithocheirus</strong> acecha la aldea tribal en Isla Sorna. Tu deber es proteger a los 4 aldeanos disparando tu fusil a los depredadores alados antes de que los capturen.</div>',
+            '      <div class="ao-modal-sub">Una bandada de feroces Ornithocheirus desciende en picada sobre la aldea tribal en Costa Rica. Apunta con tu mira y dispara justo cuando los reptiles alados se lancen en picada para salvar a los 4 aldeanos. ¡Conecta 15 disparos para ahuyentarlos!</div>',
             '      <div class="ao-rules-box">',
             '        ⚠️ <strong>REGLAS Y DIFICULTAD CRECIENTE:</strong><br>',
             '        • <strong>SOLO DISPARA EN PICADA:</strong> Mientras planean en el cielo son inalcanzables. Dispárales justo cuando se lancen a atacar.<br>',
@@ -690,7 +777,7 @@
             '        • <strong>CHILLIDO DE ALERTA:</strong> Escucharás su rugido de ataque cuando inicien la picada.<br>',
             '        • <strong>OBJETIVO:</strong> Logra <strong>15 impactos certeros</strong> para ahuyentar definitivamente a la bandada.',
             '      </div>',
-            '      <button class="ao-primary-btn" id="ao-btn-start">▶ COMENZAR DEFENSA</button>',
+            '      <button class="ao-primary-btn" id="ao-btn-start">▶ INICIAR JUEGO</button>',
             '    </div>',
             '  </div>',
             '  <!-- Modal Victoria -->',
@@ -719,10 +806,9 @@
             '      <button class="ao-primary-btn" id="ao-btn-lose-retry">↺ REINTENTAR MISIÓN</button>',
             '    </div>',
             '  </div>',
-            '</div>',
             '<div id="ao-footer">',
             '  <span>🎯 CONTROL: Mueve el cursor para apuntar | CLIC IZQUIERDO para disparar en plena picada</span>',
-            '  <span>ISLA SORNA // CAOS EN LA ISLA</span>',
+            '  <span>COSTA RICA // CAOS EN LA ISLA</span>',
             '</div>'
         ].join('\n');
         document.body.appendChild(ov);
@@ -730,27 +816,46 @@
         canvas = document.getElementById('ao-canvas');
         ctx = canvas.getContext('2d');
 
-        // Eventos de controles
-        document.getElementById('ao-btn-start').addEventListener('click', startGame);
-        document.getElementById('ao-btn-win-replay').addEventListener('click', function () {
+        // Eventos de controles con soporte táctil inmediato para móviles
+        function bindTouchBtn(id, fn) {
+            var el = document.getElementById(id);
+            if (!el) return;
+            var lastCall = 0;
+            function trigger(e) {
+                var now = Date.now();
+                if (now - lastCall < 300) return;
+                lastCall = now;
+                if (e) {
+                    if (e.cancelable) e.preventDefault();
+                    e.stopPropagation();
+                }
+                fn();
+            }
+            el.addEventListener('click', trigger);
+            el.addEventListener('touchend', trigger);
+        }
+
+        bindTouchBtn('ao-btn-start', startGame);
+        bindTouchBtn('ao-btn-win-replay', function () {
             if (window.registerMinigameAttempt) window.registerMinigameAttempt('ahuyentando-ornithos');
             startGame();
         });
-        document.getElementById('ao-btn-lose-retry').addEventListener('click', function () {
+        bindTouchBtn('ao-btn-lose-retry', function () {
             if (window.registerMinigameAttempt) window.registerMinigameAttempt('ahuyentando-ornithos');
             startGame();
         });
 
-        document.getElementById('ao-btn-mute').addEventListener('click', function () {
+        bindTouchBtn('ao-btn-mute', function () {
             isMuted = !isMuted;
-            this.textContent = isMuted ? '🔇 SILENCIADO' : '🔊 SONIDO';
+            var btnMute = document.getElementById('ao-btn-mute');
+            if (btnMute) btnMute.textContent = isMuted ? '🔇 SILENCIADO' : '🔊 SONIDO';
             if (sndMusic) {
                 if (isMuted) sndMusic.pause();
                 else if (state === 'playing') sndMusic.play().catch(function () {});
             }
         });
 
-        document.getElementById('ao-btn-fs').addEventListener('click', function () {
+        bindTouchBtn('ao-btn-fs', function () {
             var el = document.getElementById('ao-overlay');
             if (!document.fullscreenElement) {
                 if (el.requestFullscreen) el.requestFullscreen();
@@ -760,10 +865,11 @@
             }
         });
 
-        document.getElementById('ao-btn-close').addEventListener('click', closeGame);
+        bindTouchBtn('ao-btn-close', closeGame);
 
-        // Control de mira y disparo en canvas
+        // Control de mira y disparo en canvas (Ratón y Táctil Móvil)
         var wrap = document.getElementById('ao-canvas-wrap');
+
         wrap.addEventListener('mousemove', function (e) {
             updateMousePos(e.clientX, e.clientY);
             isMouseInside = true;
@@ -778,26 +884,40 @@
         });
 
         wrap.addEventListener('mousedown', function (e) {
+            if (state !== 'playing') return;
             if (e.button === 0) {
                 updateMousePos(e.clientX, e.clientY);
                 handleShoot();
             }
         });
 
-        // Soporte táctil móvil
-        wrap.addEventListener('touchstart', function (e) {
-            if (e.touches && e.touches.length > 0) {
-                e.preventDefault();
-                updateMousePos(e.touches[0].clientX, e.touches[0].clientY);
-                handleShoot();
-            }
-        }, { passive: false });
+        // Soporte táctil móvil directo para disparar tocando la pantalla
+        function onTouchShoot(e) {
+            if (state !== 'playing') return;
+            if (!e.touches || e.touches.length === 0) return;
+            if (e.cancelable) e.preventDefault();
+            isMouseInside = true;
+            updateMousePos(e.touches[0].clientX, e.touches[0].clientY);
+            handleShoot();
+        }
 
+        function onTouchMove(e) {
+            if (state !== 'playing') return;
+            if (!e.touches || e.touches.length === 0) return;
+            if (e.cancelable) e.preventDefault();
+            isMouseInside = true;
+            updateMousePos(e.touches[0].clientX, e.touches[0].clientY);
+        }
+
+        canvas.addEventListener('touchstart', onTouchShoot, { passive: false });
+        canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+        wrap.addEventListener('touchstart', function (e) {
+            if (state !== 'playing') return;
+            onTouchShoot(e);
+        }, { passive: false });
         wrap.addEventListener('touchmove', function (e) {
-            if (e.touches && e.touches.length > 0) {
-                e.preventDefault();
-                updateMousePos(e.touches[0].clientX, e.touches[0].clientY);
-            }
+            if (state !== 'playing') return;
+            onTouchMove(e);
         }, { passive: false });
 
         window.addEventListener('resize', resizeCanvas);
@@ -958,8 +1078,10 @@
                 var dy = mousePos.y - orn.y;
                 var dist = Math.sqrt(dx * dx + dy * dy);
 
-                // Hitbox generosa para buena jugabilidad
-                if (dist <= orn.hitBoxRadius + 28) {
+                // Hitbox generosa para buena jugabilidad (con margen extra en pantallas táctiles móviles)
+                var isTouchDevice = ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+                var touchBonus = isTouchDevice ? 26 : 0;
+                if (dist <= orn.hitBoxRadius + 28 + touchBonus) {
                     hitAny = true;
                     registerHit(orn);
                     break;

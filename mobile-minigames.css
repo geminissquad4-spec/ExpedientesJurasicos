@@ -82,6 +82,7 @@ button,
 @media (max-width: 768px) {
 
   /* Encabezados y barras de control superiores */
+  #ao-header,
   .ao-header,
   .cg-header,
   .eq-header,
