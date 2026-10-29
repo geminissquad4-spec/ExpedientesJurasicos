@@ -22,7 +22,8 @@
 #plesio-swim-overlay,
 #raptor-overlay,
 #styraco-strike-overlay,
-#compy-overlay {
+#compy-overlay,
+#cryo-escape-overlay {
   height: 100vh !important;
   height: 100dvh !important;
   max-height: 100dvh !important;
@@ -40,7 +41,8 @@
 .ha-cards-grid,
 .ide-dialog-box,
 .cg-modal-card,
-.ao-rules-box {
+.ao-rules-box,
+.cryo-modal-card {
   -webkit-overflow-scrolling: touch !important;
   overscroll-behavior: contain !important;
 }

@@ -33,6 +33,7 @@
         'cueva-baryonyx':       { name: '¡La Cueva del Baryonyx!',         category: 'Sobrevivir en la Isla' },
         'escape-sorna':         { name: '¡Escape de Sorna!',               category: 'Sobrevivir en la Isla' },
         'ahuyentando-ornithos': { name: '¡Ahuyentando a los Ornithocheirus!', category: 'Caos en la Isla' },
+        'escapa-cryolo':        { name: '¡Escapa del Cryolophosaurus!',    category: 'Caos en la Isla' },
         'hibridacion-adn':      { name: 'Hibridación de ADN',              category: 'Caos en la Isla' },
         'captura-giganoto':     { name: 'Captura al Giganotosaurus',       category: 'Caos en la Isla' },
         'encontrando-quetza':   { name: '¡Encontrando al Quetzalcoatlus!', category: 'Caos en la Isla' }
