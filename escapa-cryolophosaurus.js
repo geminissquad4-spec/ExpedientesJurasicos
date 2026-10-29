@@ -19,47 +19,189 @@
     var GROUND_Y = 570;
     var TARGET_DISTANCE = 1500; // 1,500 metros para mayor tiempo de juego
 
-    var ASSETS_BASE = 'Escapa del Cryolophosaurus/';
-    var SPRITES_BASE = 'Escapa del Cryolophosaurus/web_sprites/';
-
-    // Catálogo de Sprites
-    var SPRITE_SOURCES = {
-        // Fondo
-        bg: ASSETS_BASE + 'Fondo Largo Opt.jpg',
-        bgFallback: ASSETS_BASE + 'Fondo Largo.png',
-
-        // Meta Final: Búnker
-        bunker: SPRITES_BASE + 'bunker.png',
-        bunkerFallback: ASSETS_BASE + 'Bunker.png',
-
-        // Carlos
-        carlosRun1: SPRITES_BASE + 'carlos_run1.png',
-        carlosRun2: SPRITES_BASE + 'carlos_run2.png',
-        carlosJump: SPRITES_BASE + 'carlos_jump.png',
-        carlosSlide: SPRITES_BASE + 'carlos_slide.png',
-
-        // Cryolophosaurus (Flipped to face RIGHT)
-        cryoRun1: SPRITES_BASE + 'cryo_run1.png',
-        cryoRun2: SPRITES_BASE + 'cryo_run2.png',
-        cryoScream: SPRITES_BASE + 'cryo_scream.png',
-
-        // Obstáculos Terrestres
-        roca1: SPRITES_BASE + 'roca1.png',
-        roca2: SPRITES_BASE + 'roca2.png',
-        roca3: SPRITES_BASE + 'roca3.png',
-        hoja1: SPRITES_BASE + 'hoja1.png',
-        hoja2: SPRITES_BASE + 'hoja2.png',
-        hoja3: SPRITES_BASE + 'hoja3.png',
-        coeluroSuelo: SPRITES_BASE + 'coeluro_suelo.png',
-        microxGround: SPRITES_BASE + 'microx.png', // Flipped to face LEFT
-
-        // Obstáculos Aéreos
-        pteraFly: SPRITES_BASE + 'ptera_fly.png',
-        coeluroFly: SPRITES_BASE + 'coeluro_fly.png',
-        microxFly: SPRITES_BASE + 'microx.png', // Flipped to face LEFT
-
-        // Coleccionable
-        huevo: SPRITES_BASE + 'huevo.png'
+    // Catálogo de Sprites con múltiples rutas de fallback (raíz de GitHub, carpetas y codificadas)
+    var SPRITE_CANDIDATES = {
+        bg: [
+            'Fondo Largo Opt.jpg',
+            'Fondo%20Largo%20Opt.jpg',
+            'Fondo Largo.png',
+            'Fondo%20Largo.png',
+            'Fondo Laargo.png',
+            'Fondo%20Laargo.png',
+            'Fondo Laargo.jpg',
+            'Fondo%20Laargo.jpg',
+            'Escapa del Cryolophosaurus/Fondo Largo Opt.jpg',
+            'Escapa%20del%20Cryolophosaurus/Fondo%20Largo%20Opt.jpg',
+            'Escapa del Cryolophosaurus/Fondo Largo.png',
+            'Escapa%20del%20Cryolophosaurus/Fondo%20Largo.png'
+        ],
+        bunker: [
+            'bunker.png',
+            'Bunker.png',
+            'Escapa del Cryolophosaurus/web_sprites/bunker.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/bunker.png',
+            'Escapa del Cryolophosaurus/Bunker.png',
+            'Escapa%20del%20Cryolophosaurus/Bunker.png'
+        ],
+        carlosRun1: [
+            'carlos_run1.png',
+            'Carlos Run1.png',
+            'Carlos%20Run1.png',
+            'Escapa del Cryolophosaurus/web_sprites/carlos_run1.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/carlos_run1.png',
+            'Escapa del Cryolophosaurus/Carlos Run1.png',
+            'Escapa%20del%20Cryolophosaurus/Carlos%20Run1.png'
+        ],
+        carlosRun2: [
+            'carlos_run2.png',
+            'Carlos Run2.png',
+            'Carlos%20Run2.png',
+            'Escapa del Cryolophosaurus/web_sprites/carlos_run2.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/carlos_run2.png',
+            'Escapa del Cryolophosaurus/Carlos Run2.png',
+            'Escapa%20del%20Cryolophosaurus/Carlos%20Run2.png'
+        ],
+        carlosJump: [
+            'carlos_jump.png',
+            'Carlos Jump.png',
+            'Carlos%20Jump.png',
+            'Escapa del Cryolophosaurus/web_sprites/carlos_jump.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/carlos_jump.png',
+            'Escapa del Cryolophosaurus/Carlos Jump.png',
+            'Escapa%20del%20Cryolophosaurus/Carlos%20Jump.png'
+        ],
+        carlosSlide: [
+            'carlos_slide.png',
+            'Carlos Barrida.png',
+            'Carlos%20Barrida.png',
+            'Escapa del Cryolophosaurus/web_sprites/carlos_slide.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/carlos_slide.png',
+            'Escapa del Cryolophosaurus/Carlos Barrida.png',
+            'Escapa%20del%20Cryolophosaurus/Carlos%20Barrida.png'
+        ],
+        cryoRun1: [
+            'cryo_run1.png',
+            'Cryo Run1.png',
+            'Cryo%20Run1.png',
+            'Escapa del Cryolophosaurus/web_sprites/cryo_run1.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/cryo_run1.png',
+            'Escapa del Cryolophosaurus/Cryo Run1.png',
+            'Escapa%20del%20Cryolophosaurus/Cryo%20Run1.png'
+        ],
+        cryoRun2: [
+            'cryo_run2.png',
+            'Cryo Run2.png',
+            'Cryo%20Run2.png',
+            'Escapa del Cryolophosaurus/web_sprites/cryo_run2.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/cryo_run2.png',
+            'Escapa del Cryolophosaurus/Cryo Run2.png',
+            'Escapa%20del%20Cryolophosaurus/Cryo%20Run2.png'
+        ],
+        cryoScream: [
+            'cryo_scream.png',
+            'Cryo Scream.png',
+            'Cryo%20Scream.png',
+            'Escapa del Cryolophosaurus/web_sprites/cryo_scream.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/cryo_scream.png',
+            'Escapa del Cryolophosaurus/Cryo Scream.png',
+            'Escapa%20del%20Cryolophosaurus/Cryo%20Scream.png'
+        ],
+        roca1: [
+            'roca1.png',
+            'RocaD1.png',
+            'Escapa del Cryolophosaurus/web_sprites/roca1.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/roca1.png',
+            'Escapa del Cryolophosaurus/RocaD1.png',
+            'Escapa%20del%20Cryolophosaurus/RocaD1.png'
+        ],
+        roca2: [
+            'roca2.png',
+            'RocaD2.png',
+            'Escapa del Cryolophosaurus/web_sprites/roca2.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/roca2.png',
+            'Escapa del Cryolophosaurus/RocaD2.png',
+            'Escapa%20del%20Cryolophosaurus/RocaD2.png'
+        ],
+        roca3: [
+            'roca3.png',
+            'RocaD3.png',
+            'Escapa del Cryolophosaurus/web_sprites/roca3.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/roca3.png',
+            'Escapa del Cryolophosaurus/RocaD3.png',
+            'Escapa%20del%20Cryolophosaurus/RocaD3.png'
+        ],
+        hoja1: [
+            'hoja1.png',
+            'HojaD1.png',
+            'Escapa del Cryolophosaurus/web_sprites/hoja1.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/hoja1.png',
+            'Escapa del Cryolophosaurus/HojaD1.png',
+            'Escapa%20del%20Cryolophosaurus/HojaD1.png'
+        ],
+        hoja2: [
+            'hoja2.png',
+            'HojaD2.png',
+            'Escapa del Cryolophosaurus/web_sprites/hoja2.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/hoja2.png',
+            'Escapa del Cryolophosaurus/HojaD2.png',
+            'Escapa%20del%20Cryolophosaurus/HojaD2.png'
+        ],
+        hoja3: [
+            'hoja3.png',
+            'HojaD3.png',
+            'Escapa del Cryolophosaurus/web_sprites/hoja3.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/hoja3.png',
+            'Escapa del Cryolophosaurus/HojaD3.png',
+            'Escapa%20del%20Cryolophosaurus/HojaD3.png'
+        ],
+        coeluroSuelo: [
+            'coeluro_suelo.png',
+            'CoeluroSuelo.png',
+            'Escapa del Cryolophosaurus/web_sprites/coeluro_suelo.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/coeluro_suelo.png',
+            'Escapa del Cryolophosaurus/CoeluroSuelo.png',
+            'Escapa%20del%20Cryolophosaurus/CoeluroSuelo.png'
+        ],
+        coeluroFly: [
+            'coeluro_fly.png',
+            'CoeluroFly.png',
+            'Escapa del Cryolophosaurus/web_sprites/coeluro_fly.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/coeluro_fly.png',
+            'Escapa del Cryolophosaurus/CoeluroFly.png',
+            'Escapa%20del%20Cryolophosaurus/CoeluroFly.png'
+        ],
+        pteraFly: [
+            'ptera_fly.png',
+            'PteraFly.png',
+            'Escapa del Cryolophosaurus/web_sprites/ptera_fly.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/ptera_fly.png',
+            'Escapa del Cryolophosaurus/PteraFly.png',
+            'Escapa%20del%20Cryolophosaurus/PteraFly.png'
+        ],
+        microxGround: [
+            'microx.png',
+            'Microx.png',
+            'Escapa del Cryolophosaurus/web_sprites/microx.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/microx.png',
+            'Escapa del Cryolophosaurus/Microx.png',
+            'Escapa%20del%20Cryolophosaurus/Microx.png'
+        ],
+        microxFly: [
+            'microx.png',
+            'Microx.png',
+            'Escapa del Cryolophosaurus/web_sprites/microx.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/microx.png',
+            'Escapa del Cryolophosaurus/Microx.png',
+            'Escapa%20del%20Cryolophosaurus/Microx.png'
+        ],
+        huevo: [
+            'huevo.png',
+            'HuevoS.png',
+            'Escapa del Cryolophosaurus/web_sprites/huevo.png',
+            'Escapa%20del%20Cryolophosaurus/web_sprites/huevo.png',
+            'Escapa del Cryolophosaurus/HuevoS.png',
+            'Escapa%20del%20Cryolophosaurus/HuevoS.png'
+        ]
     };
 
     // ------------------------------------------------------------
@@ -84,27 +226,64 @@
         return audioCtx;
     }
 
+    function createResilientAudio(candidates, loop, vol) {
+        var audio = new Audio();
+        audio.loop = !!loop;
+        audio.volume = vol !== undefined ? vol : 0.7;
+
+        var idx = 0;
+        function tryNextSrc() {
+            if (idx >= candidates.length) return;
+            var src = candidates[idx++];
+            audio.src = src;
+        }
+        audio.addEventListener('error', function () {
+            tryNextSrc();
+        });
+        tryNextSrc();
+        return audio;
+    }
+
     function initAudios() {
         if (!sndMusic) {
-            sndMusic = new Audio(ASSETS_BASE + 'EscapeCryolophosaurus.mp4');
-            sndMusic.loop = true;
-            sndMusic.volume = 0.5;
+            sndMusic = createResilientAudio([
+                'EscapeCryolophosaurus.mp4',
+                'EscapeCryolophosaurus.mp3',
+                'Escapa del Cryolophosaurus/EscapeCryolophosaurus.mp4',
+                'Escapa%20del%20Cryolophosaurus/EscapeCryolophosaurus.mp4'
+            ], true, 0.5);
         }
         if (!sndCryo) {
-            sndCryo = new Audio(ASSETS_BASE + 'CryolophosaurusR.mp4');
-            sndCryo.volume = 0.9;
+            sndCryo = createResilientAudio([
+                'CryolophosaurusR.mp4',
+                'CryolophosaurusR.mp3',
+                'Escapa del Cryolophosaurus/CryolophosaurusR.mp4',
+                'Escapa%20del%20Cryolophosaurus/CryolophosaurusR.mp4'
+            ], false, 0.9);
         }
         if (!sndPtera) {
-            sndPtera = new Audio(ASSETS_BASE + 'PteranodonR.mp4');
-            sndPtera.volume = 0.75;
+            sndPtera = createResilientAudio([
+                'PteranodonR.mp4',
+                'PteranodonR.mp3',
+                'Escapa del Cryolophosaurus/PteranodonR.mp4',
+                'Escapa%20del%20Cryolophosaurus/PteranodonR.mp4'
+            ], false, 0.75);
         }
         if (!sndCoeluro) {
-            sndCoeluro = new Audio(ASSETS_BASE + 'CoelurosauravusR.mp4');
-            sndCoeluro.volume = 0.7;
+            sndCoeluro = createResilientAudio([
+                'CoelurosauravusR.mp4',
+                'CoelurosauravusR.mp3',
+                'Escapa del Cryolophosaurus/CoelurosauravusR.mp4',
+                'Escapa%20del%20Cryolophosaurus/CoelurosauravusR.mp4'
+            ], false, 0.7);
         }
         if (!sndMicro) {
-            sndMicro = new Audio(ASSETS_BASE + 'MicroraptorR.mp4');
-            sndMicro.volume = 0.7;
+            sndMicro = createResilientAudio([
+                'MicroraptorR.mp4',
+                'MicroraptorR.mp3',
+                'Escapa del Cryolophosaurus/MicroraptorR.mp4',
+                'Escapa%20del%20Cryolophosaurus/MicroraptorR.mp4'
+            ], false, 0.7);
         }
     }
 
@@ -174,43 +353,132 @@
     }
 
     // ------------------------------------------------------------
-    // 3. PRECARGA DE IMÁGENES
+    // 3. PRECARGA INTELIGENTE Y AUTO-PROCESAMIENTO DE SPRITES
     // ------------------------------------------------------------
     var images = {};
     var imagesLoaded = false;
 
+    // Recorte automático de márgenes transparentes y orientación para compatibilidad con archivos directos
+    function autoCropAndFlipSprite(img, needsFlip) {
+        try {
+            var temp = document.createElement('canvas');
+            temp.width = img.naturalWidth || img.width;
+            temp.height = img.naturalHeight || img.height;
+            var tctx = temp.getContext('2d');
+            tctx.drawImage(img, 0, 0);
+
+            var imgData = tctx.getImageData(0, 0, temp.width, temp.height);
+            var data = imgData.data;
+            var minX = temp.width, minY = temp.height, maxX = 0, maxY = 0;
+            var found = false;
+
+            // Escaneo rápido saltando de 3 en 3 píxeles
+            for (var y = 0; y < temp.height; y += 3) {
+                for (var x = 0; x < temp.width; x += 3) {
+                    var a = data[(y * temp.width + x) * 4 + 3];
+                    if (a > 15) {
+                        if (x < minX) minX = x;
+                        if (x > maxX) maxX = x;
+                        if (y < minY) minY = y;
+                        if (y > maxY) maxY = y;
+                        found = true;
+                    }
+                }
+            }
+
+            if (!found) return img;
+
+            var cropW = Math.max(1, maxX - minX + 1);
+            var cropH = Math.max(1, maxY - minY + 1);
+
+            var outCanvas = document.createElement('canvas');
+            outCanvas.width = cropW;
+            outCanvas.height = cropH;
+            var outCtx = outCanvas.getContext('2d');
+
+            if (needsFlip) {
+                outCtx.translate(cropW, 0);
+                outCtx.scale(-1, 1);
+            }
+
+            outCtx.drawImage(temp, minX, minY, cropW, cropH, 0, 0, cropW, cropH);
+            return outCanvas;
+        } catch (e) {
+            // En caso de restricciones CORS en file://, voltear simplemente si se requiere
+            if (needsFlip) {
+                var fCanvas = document.createElement('canvas');
+                fCanvas.width = img.naturalWidth || img.width;
+                fCanvas.height = img.naturalHeight || img.height;
+                var fCtx = fCanvas.getContext('2d');
+                fCtx.translate(fCanvas.width, 0);
+                fCtx.scale(-1, 1);
+                fCtx.drawImage(img, 0, 0);
+                return fCanvas;
+            }
+            return img;
+        }
+    }
+
+    function loadCandidateImage(key, candidates, callback) {
+        var idx = 0;
+        function tryNext() {
+            if (idx >= candidates.length) {
+                callback(null);
+                return;
+            }
+            var src = candidates[idx++];
+            var img = new Image();
+            img.onload = function () {
+                var needsFlip = false;
+                // Si se carga el archivo original del Cryolophosaurus, voltearlo para que mire a la DERECHA
+                if ((key === 'cryoRun1' || key === 'cryoRun2' || key === 'cryoScream') && (src.indexOf('Cryo') !== -1 || src.indexOf('cryo') !== -1)) {
+                    if (img.naturalWidth > 1000) {
+                        needsFlip = true;
+                    }
+                }
+                // Si se carga el archivo original del Microraptor (Microx), voltearlo para que mire a la IZQUIERDA
+                if ((key === 'microxGround' || key === 'microxFly') && (src.indexOf('Microx') !== -1 || src.indexOf('microx') !== -1)) {
+                    if (img.naturalWidth > 1000) {
+                        needsFlip = true;
+                    }
+                }
+
+                // Si es un sprite sin recortar de gran resolución (ej. 2400x1340 o 1919x1076)
+                if (img.naturalWidth > 650 && key !== 'bg') {
+                    try {
+                        var processed = autoCropAndFlipSprite(img, needsFlip);
+                        callback(processed);
+                    } catch (e) {
+                        callback(img);
+                    }
+                } else {
+                    callback(img);
+                }
+            };
+            img.onerror = function () {
+                tryNext();
+            };
+            img.src = src;
+        }
+        tryNext();
+    }
+
     function preloadImages(callback) {
-        var keys = Object.keys(SPRITE_SOURCES);
+        var keys = Object.keys(SPRITE_CANDIDATES);
         var loadedCount = 0;
         var total = keys.length;
 
         keys.forEach(function (key) {
-            var img = new Image();
-            img.onload = function () {
-                images[key] = img;
-                loadedCount++;
-                if (loadedCount === total) {
-                    imagesLoaded = true;
-                    if (callback) callback();
-                }
-            };
-            img.onerror = function () {
-                // Si falla Fondo Largo Opt.jpg, intentar fallback PNG
-                if (key === 'bg' && SPRITE_SOURCES.bgFallback) {
-                    img.src = SPRITE_SOURCES.bgFallback;
-                    return;
-                }
-                if (key === 'bunker' && SPRITE_SOURCES.bunkerFallback) {
-                    img.src = SPRITE_SOURCES.bunkerFallback;
-                    return;
+            loadCandidateImage(key, SPRITE_CANDIDATES[key], function (resImg) {
+                if (resImg) {
+                    images[key] = resImg;
                 }
                 loadedCount++;
                 if (loadedCount === total) {
                     imagesLoaded = true;
                     if (callback) callback();
                 }
-            };
-            img.src = SPRITE_SOURCES[key];
+            });
         });
     }
 
@@ -1436,6 +1704,11 @@
 
     window.openEscapaCryolo = openGame;
     window.closeEscapaCryolo = closeGame;
+
+    // Precarga automática inmediata en segundo plano
+    if (typeof window !== 'undefined') {
+        preloadImages();
+    }
 
     // Inicializar estilos CSS inyectados para el minijuego
     injectStyles();
