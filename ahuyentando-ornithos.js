@@ -27,6 +27,7 @@
     var hits = 0;
     var targetHits = 15;
     var isMuted = false;
+    var isPaused = false;
     var aniFrame = null;
     var lastTime = 0;
     var shakeDuration = 0;
@@ -803,10 +804,11 @@
             '      <div class="ao-pill ao-pill-villager alive" id="ao-v4" title="Aldeano 4"><span class="v-ic">👩</span><span class="v-txt"> Aldeano 4</span></div>',
             '    </div>',
             '  </div>',
-            '  <div id="ao-header-right">',
-            '    <button class="ao-ctrl-btn" id="ao-btn-mute" title="Silenciar / Activar Sonido"><span class="b-ic">🔊</span><span class="b-txt"> SONIDO</span></button>',
-            '    <button class="ao-ctrl-btn" id="ao-btn-fs" title="Pantalla Completa"><span class="b-ic">⛶</span><span class="b-txt"> PANTALLA COMPLETA</span></button>',
-            '    <button class="ao-ctrl-btn ao-btn-close" id="ao-btn-close" title="Cerrar"><span class="b-ic">✕</span><span class="b-txt"> CERRAR</span></button>',
+            '  <div id="ao-header-right" class="ej-header-actions">',
+            '    <button class="ej-btn-header" id="ao-btn-mute" title="Silenciar / Activar Sonido"><span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span></button>',
+            '    <button class="ej-btn-header" id="ao-btn-pause" title="Pausar / Reanudar"><span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span></button>',
+            '    <button class="ej-btn-header" id="ao-btn-fs" title="Pantalla Completa"><span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span></button>',
+            '    <button class="ej-btn-header ej-btn-header-danger" id="ao-btn-close" title="Cerrar"><span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span></button>',
             '  </div>',
             '</div>',
             '<div id="ao-canvas-wrap">',
@@ -837,7 +839,10 @@
             '      • Aldeanos rescatados: 4 / 4<br>',
             '      • Estado de la aldea: PROTEGIDA',
             '    </div>',
-            '    <button class="ao-primary-btn ao-btn-green" id="ao-btn-win-replay">↺ JUGAR DE NUEVO</button>',
+            '    <div class="ej-modal-actions">',
+            '      <button class="ej-btn-replay" id="ao-btn-win-replay">↺ Volver a jugar</button>',
+            '      <button class="ej-btn-return" id="ao-btn-win-return">✕ Regresar al sitio</button>',
+            '    </div>',
             '  </div>',
             '</div>',
             '<!-- Modal Derrota -->',
@@ -850,7 +855,18 @@
             '      • Aldeanos perdidos: 4 / 4<br>',
             '      • Recuerda disparar de inmediato en cuanto escuches el chillido de picada.',
             '    </div>',
-            '    <button class="ao-primary-btn" id="ao-btn-lose-retry">↺ REINTENTAR MISIÓN</button>',
+            '    <div class="ej-modal-actions">',
+            '      <button class="ej-btn-replay" id="ao-btn-lose-retry">↺ Volver a jugar</button>',
+            '      <button class="ej-btn-return" id="ao-btn-lose-return">✕ Regresar al sitio</button>',
+            '    </div>',
+            '  </div>',
+            '</div>',
+            '<!-- Overlay de Pausa -->',
+            '<div class="ej-pause-overlay" id="ao-pause-screen" style="display:none;">',
+            '  <div class="ej-pause-card">',
+            '    <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>',
+            '    <div class="ej-pause-sub">Ataque aéreo suspendido temporalmente</div>',
+            '    <button class="ej-btn-resume" id="ao-btn-resume">▶ REANUDAR</button>',
             '  </div>',
             '</div>',
             '<div id="ao-footer">',
@@ -887,10 +903,14 @@
             if (window.registerMinigameAttempt) window.registerMinigameAttempt('ahuyentando-ornithos');
             startGame();
         });
+        bindTouchBtn('ao-btn-win-return', closeGame);
         bindTouchBtn('ao-btn-lose-retry', function () {
             if (window.registerMinigameAttempt) window.registerMinigameAttempt('ahuyentando-ornithos');
             startGame();
         });
+        bindTouchBtn('ao-btn-lose-return', closeGame);
+        bindTouchBtn('ao-btn-pause', togglePause);
+        bindTouchBtn('ao-btn-resume', togglePause);
 
         bindTouchBtn('ao-btn-mute', function () {
             isMuted = !isMuted;
@@ -1030,6 +1050,16 @@
     function startGame() {
         showModal(null);
         state = 'playing';
+        isPaused = false;
+        var aoPauseScr = document.getElementById('ao-pause-screen');
+        if (aoPauseScr) aoPauseScr.style.display = 'none';
+        var aoPauseBtn = document.getElementById('ao-btn-pause');
+        if (aoPauseBtn) {
+            var ic = aoPauseBtn.querySelector('.b-ic');
+            var txt = aoPauseBtn.querySelector('.b-txt');
+            if (ic) ic.textContent = '⏸️';
+            if (txt) txt.textContent = ' PAUSA';
+        }
         hits = 0;
         particles = [];
         floatingTexts = [];
@@ -1284,8 +1314,40 @@
     // ============================================================
     //  BUCLE PRINCIPAL (GAME LOOP)
     // ============================================================
+    function togglePause() {
+        if (state !== 'playing') return;
+        isPaused = !isPaused;
+        var btnPause = document.getElementById('ao-btn-pause');
+        var pauseScreen = document.getElementById('ao-pause-screen');
+        if (isPaused) {
+            if (sndMusic) try { sndMusic.pause(); } catch (e) {}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.b-ic');
+                var txt = btnPause.querySelector('.b-txt');
+                if (ic) ic.textContent = '▶';
+                if (txt) txt.textContent = ' REANUDAR';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'flex';
+        } else {
+            if (sndMusic && !isMuted) try { sndMusic.play().catch(function(){}); } catch (e) {}
+            lastTime = performance.now();
+            if (btnPause) {
+                var ic = btnPause.querySelector('.b-ic');
+                var txt = btnPause.querySelector('.b-txt');
+                if (ic) ic.textContent = '⏸️';
+                if (txt) txt.textContent = ' PAUSA';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'none';
+        }
+    }
+
     function gameLoop(now) {
         if (state !== 'playing') return;
+        if (isPaused) {
+            lastTime = now;
+            aniFrame = requestAnimationFrame(gameLoop);
+            return;
+        }
         var dt = Math.min(0.06, (now - lastTime) / 1000);
         lastTime = now;
 

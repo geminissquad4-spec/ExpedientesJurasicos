@@ -85,6 +85,8 @@
     var imagesCache = {};
     var sndMusic = null;
     var currentRoar = null;
+    var isMuted = false;
+    var isPaused = false;
 
     // ============================================================
     //  ESTILOS CSS
@@ -354,33 +356,72 @@
 
         var hRight = document.createElement('div');
         hRight.id = 'ide-header-right';
+        hRight.className = 'ej-header-actions';
+
+        var muteBtn = document.createElement('button');
+        muteBtn.id = 'ide-mute-btn';
+        muteBtn.className = 'ej-btn-header';
+        muteBtn.innerHTML = '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
+        muteBtn.addEventListener('click', function () {
+            isMuted = !isMuted;
+            muteBtn.innerHTML = isMuted ? '<span class="ej-ic">🔇</span><span class="ej-btn-lbl"> SILENCIADO</span>' : '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
+            if (sndMusic) sndMusic.muted = isMuted;
+            if (currentRoar) currentRoar.muted = isMuted;
+        });
+
+    function togglePause() {
+        if (state !== 'playing' && state !== 'dialog') return;
+        isPaused = !isPaused;
+        var pScreen = document.getElementById('ide-pause-screen');
+        var pBtn = document.getElementById('ide-pause-btn');
+        if (isPaused) {
+            if (pScreen) {
+                pScreen.style.display = 'flex';
+                pScreen.classList.add('active');
+            }
+            if (pBtn) pBtn.innerHTML = '<span class="ej-ic">▶</span><span class="ej-btn-lbl"> REANUDAR</span>';
+            if (sndMusic) sndMusic.pause();
+            if (currentRoar) currentRoar.pause();
+        } else {
+            if (pScreen) {
+                pScreen.style.display = 'none';
+                pScreen.classList.remove('active');
+            }
+            if (pBtn) pBtn.innerHTML = '<span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span>';
+            if (sndMusic && !isMuted) sndMusic.play().catch(function () {});
+            if (currentRoar && !isMuted) currentRoar.play().catch(function () {});
+        }
+    }
+
+        var pauseBtn = document.createElement('button');
+        pauseBtn.id = 'ide-pause-btn';
+        pauseBtn.className = 'ej-btn-header';
+        pauseBtn.innerHTML = '<span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span>';
+        pauseBtn.addEventListener('click', togglePause);
 
         var fullBtn = document.createElement('button');
         fullBtn.id = 'ide-fullscreen-btn';
-        fullBtn.className = 'ide-btn-header';
-        fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+        fullBtn.className = 'ej-btn-header';
+        fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
         fullBtn.addEventListener('click', function () {
             var target = document.getElementById('ide-overlay') || document.documentElement;
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                 if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                 else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                fullBtn.innerHTML = '🗗 SALIR';
             } else {
                 if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
                 else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
             }
-        });
-        document.addEventListener('fullscreenchange', function() {
-            if (!document.fullscreenElement) fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
-            else fullBtn.innerHTML = '🗗 SALIR';
         });
 
         var closeBtn = document.createElement('button');
         closeBtn.id = 'ide-close-btn';
-        closeBtn.textContent = '✕ CERRAR';
+        closeBtn.className = 'ej-btn-header ej-btn-header-danger';
+        closeBtn.innerHTML = '<span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span>';
         closeBtn.addEventListener('click', closeGame);
 
+        hRight.appendChild(muteBtn);
+        hRight.appendChild(pauseBtn);
         hRight.appendChild(fullBtn);
         hRight.appendChild(closeBtn);
 
@@ -432,7 +473,10 @@
             '<strong>Dr. Boris Wong:</strong> "¡Excelente trabajo taxonómico, Dra. Vanegas! Ha demostrado una agudeza visual impecable identificando a los 12 especímenes en sus celdas.<br><br>',
             '<strong style=\\"color:#2ecc71;\\">¡OFICIALMENTE HA SIDO ACEPTADA COMO PASANTE EN EL LABORATORIO GENÉTICO DE ISLA SORNA!</strong>"',
             '</div>',
-            '<button class="ide-btn ide-btn-green" id="ide-btn-win-replay">EVALUAR OTRA VEZ</button>'
+            '<div class="ej-modal-actions">',
+            '  <button class="ej-btn-replay" id="ide-btn-win-replay">↺ Volver a jugar</button>',
+            '  <button class="ej-btn-return" id="ide-btn-win-return">✕ Regresar al sitio</button>',
+            '</div>'
         ].join('');
         stage.appendChild(winScreen);
 
@@ -446,9 +490,26 @@
             '<strong>Dr. Boris Wong:</strong> "Lo lamento mucho, Dra. Vanegas. Ha acumulado 3 errores taxonómicos. En este laboratorio no podemos permitirnos confusiones de especies con organismos de esta envergadura.<br><br>',
             '<strong style=\\"color:#ff6b6b;\\">NO HA SIDO ADMITIDA A LA PASANTÍA. DEBERÁ REPASAR LOS EXPEDIENTES.</strong>"',
             '</div>',
-            '<button class="ide-btn ide-btn-red" id="ide-btn-lose-retry">REINTENTAR EVALUACIÓN</button>'
+            '<div class="ej-modal-actions">',
+            '  <button class="ej-btn-replay" id="ide-btn-lose-retry">↺ Volver a jugar</button>',
+            '  <button class="ej-btn-return" id="ide-btn-lose-return">✕ Regresar al sitio</button>',
+            '</div>'
         ].join('');
         stage.appendChild(loseScreen);
+
+        var pauseModal = document.createElement('div');
+        pauseModal.className = 'ej-pause-overlay';
+        pauseModal.id = 'ide-pause-screen';
+        pauseModal.style.display = 'none';
+        pauseModal.innerHTML = [
+            '<div class="ej-pause-card">',
+            '  <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>',
+            '  <div class="ej-pause-sub">Evaluación taxonómica en pausa</div>',
+            '  <button class="ej-btn-resume" id="ide-btn-resume">▶ REANUDAR</button>',
+            '</div>'
+        ].join('');
+        stage.appendChild(pauseModal);
+
 
         wrap.appendChild(stage);
         ov.appendChild(wrap);
@@ -467,6 +528,12 @@
             showModal(null);
             startGame();
         });
+        var ideWinRet = document.getElementById('ide-btn-win-return');
+        if (ideWinRet) ideWinRet.addEventListener('click', closeGame);
+        var ideLoseRet = document.getElementById('ide-btn-lose-return');
+        if (ideLoseRet) ideLoseRet.addEventListener('click', closeGame);
+        var ideResumeBtn = document.getElementById('ide-btn-resume');
+        if (ideResumeBtn) ideResumeBtn.addEventListener('click', togglePause);
     }
 
     // ============================================================
@@ -556,6 +623,7 @@
     //  LÓGICA DEL JUEGO (IDENTIFICACIÓN)
     // ============================================================
     function startGame() {
+        isPaused = false;
         state = 'playing';
         currentRound = 0;
         strikes = 0;
@@ -895,6 +963,12 @@
     }
 
     function closeGame() {
+        if (isPaused) togglePause();
+        var pScreen = document.getElementById('ide-pause-screen');
+        if (pScreen) {
+            pScreen.style.display = 'none';
+            pScreen.classList.remove('active');
+        }
         var ov = document.getElementById('ide-overlay');
         if (ov) ov.classList.remove('open');
         stopAllAudio();

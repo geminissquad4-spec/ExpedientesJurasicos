@@ -49,6 +49,8 @@
     var sndMusic  = null;
     var sndSick   = null;
     var sndCurado = null;
+    var isMuted   = false;
+    var isPaused  = false;
 
     // ============================================================
     //  RESOLUCIÓN DE ARCHIVOS (RAÍZ + CARPETA DE RESPALDO)
@@ -130,10 +132,14 @@
         // 1er intento: SIEMPRE Flor (Lila de Persia)
         // 2do intento: Rara vez Medicamento (~7%), normalmente Flor
         // 3er intento en adelante: 22% de probabilidad de Medicamento cada uno
-        dotTypes[0] = 'flower';
-        dotTypes[1] = (Math.random() < 0.07) ? 'medicine' : 'flower';
+        // Dificultad reducida (mayor probabilidad de hallar la medicina):
+        // 1er intento: 40% Medicamento, 60% Flor
+        // 2do intento: 75% Medicamento, 25% Flor
+        // 3er intento en adelante: 100% Medicamento garantizado
+        dotTypes[0] = (Math.random() < 0.40) ? 'medicine' : 'flower';
+        dotTypes[1] = (Math.random() < 0.75) ? 'medicine' : 'flower';
         for (var j = 2; j < TOTAL_DOTS; j++) {
-            dotTypes[j] = (Math.random() < 0.22) ? 'medicine' : 'flower';
+            dotTypes[j] = 'medicine';
         }
 
         // Posiciones dentro de la montaña de excremento
@@ -482,33 +488,76 @@
         strikesLabel.textContent = 'LILAS: 0/3';
         strikesBox.appendChild(strikesLabel);
 
+        headerRight.className = 'ej-header-actions';
+
+        var muteBtn = document.createElement('button');
+        muteBtn.id = 'st-mute-btn';
+        muteBtn.className = 'ej-btn-header';
+        muteBtn.innerHTML = '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
+        muteBtn.addEventListener('click', function () {
+            isMuted = !isMuted;
+            muteBtn.innerHTML = isMuted ? '<span class="ej-ic">🔇</span><span class="ej-btn-lbl"> SILENCIADO</span>' : '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
+            if (sndMusic) sndMusic.muted = isMuted;
+            if (sndSick) sndSick.muted = isMuted;
+            if (sndCurado) sndCurado.muted = isMuted;
+        });
+
+    var isPaused = false;
+
+    function togglePause() {
+        if (state !== 'playing' && state !== 'revealed') return;
+        isPaused = !isPaused;
+        var pScreen = document.getElementById('st-pause-screen');
+        var pBtn = document.getElementById('st-pause-btn');
+        if (isPaused) {
+            if (pScreen) {
+                pScreen.style.display = 'flex';
+                pScreen.classList.add('active');
+            }
+            if (pBtn) pBtn.innerHTML = '<span class="ej-ic">▶</span><span class="ej-btn-lbl"> REANUDAR</span>';
+            if (sndMusic) sndMusic.pause();
+            if (sndSick) sndSick.pause();
+        } else {
+            if (pScreen) {
+                pScreen.style.display = 'none';
+                pScreen.classList.remove('active');
+            }
+            if (pBtn) pBtn.innerHTML = '<span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span>';
+            if (sndMusic && !isMuted) sndMusic.play().catch(function () {});
+            drawScene();
+        }
+    }
+
+        var pauseBtn = document.createElement('button');
+        pauseBtn.id = 'st-pause-btn';
+        pauseBtn.className = 'ej-btn-header';
+        pauseBtn.innerHTML = '<span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span>';
+        pauseBtn.addEventListener('click', togglePause);
+
         var fullBtn = document.createElement('button');
         fullBtn.id  = 'st-fullscreen-btn';
-        fullBtn.className = 'minigame-fullscreen-btn';
-        fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+        fullBtn.className = 'ej-btn-header';
+        fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
         fullBtn.addEventListener('click', function () {
             var target = document.getElementById('sick-trike-overlay') || document.documentElement;
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                 if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                 else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                fullBtn.innerHTML = '🗗 SALIR';
             } else {
                 if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
                 else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
             }
-        });
-        document.addEventListener('fullscreenchange', function() {
-            if (!document.fullscreenElement) fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
-            else fullBtn.innerHTML = '🗗 SALIR';
         });
 
         var closeBtn = document.createElement('button');
         closeBtn.id  = 'st-close-btn';
-        closeBtn.textContent = '✕ CERRAR';
+        closeBtn.className = 'ej-btn-header ej-btn-header-danger';
+        closeBtn.innerHTML = '<span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span>';
         closeBtn.addEventListener('click', closeGame);
 
         headerRight.appendChild(strikesBox);
+        headerRight.appendChild(muteBtn);
+        headerRight.appendChild(pauseBtn);
         headerRight.appendChild(fullBtn);
         headerRight.appendChild(closeBtn);
 
@@ -614,13 +663,14 @@
             'El Triceratops expulsó el veneno y se recuperó por completo. <strong style="color:#2ecc71;">¡Excelente trabajo veterinario!</strong>';
 
         var wBtns = document.createElement('div');
+        wBtns.className = 'ej-modal-actions';
         var wRetry = document.createElement('button');
-        wRetry.className = 'st-btn st-btn-primary';
-        wRetry.textContent = '🔄 JUGAR DE NUEVO';
+        wRetry.className = 'ej-btn-replay';
+        wRetry.textContent = '↺ Volver a jugar';
         wRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('sick-trike'); showScreen(null); startGame(); });
         var wClose = document.createElement('button');
-        wClose.className = 'st-btn st-btn-secondary';
-        wClose.textContent = 'CERRAR';
+        wClose.className = 'ej-btn-return';
+        wClose.textContent = '✕ Regresar al sitio';
         wClose.addEventListener('click', closeGame);
         wBtns.appendChild(wRetry); wBtns.appendChild(wClose);
 
@@ -651,13 +701,14 @@
             'Jackson está consternado por la pérdida.';
 
         var lBtns = document.createElement('div');
+        lBtns.className = 'ej-modal-actions';
         var lRetry = document.createElement('button');
-        lRetry.className = 'st-btn st-btn-primary';
-        lRetry.textContent = '🔄 INTENTAR DE NUEVO';
+        lRetry.className = 'ej-btn-replay';
+        lRetry.textContent = '↺ Volver a jugar';
         lRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('sick-trike'); showScreen(null); startGame(); });
         var lClose = document.createElement('button');
-        lClose.className = 'st-btn st-btn-danger';
-        lClose.textContent = 'CERRAR';
+        lClose.className = 'ej-btn-return';
+        lClose.textContent = '✕ Regresar al sitio';
         lClose.addEventListener('click', closeGame);
         lBtns.appendChild(lRetry); lBtns.appendChild(lClose);
 
@@ -666,6 +717,21 @@
         loseScreen.appendChild(lSub);
         loseScreen.appendChild(lBtns);
         stage.appendChild(loseScreen);
+
+        var pauseModal = document.createElement('div');
+        pauseModal.className = 'ej-pause-overlay';
+        pauseModal.id = 'st-pause-screen';
+        pauseModal.style.display = 'none';
+        pauseModal.innerHTML = [
+            '<div class="ej-pause-card">',
+            '  <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>',
+            '  <div class="ej-pause-sub">Tratamiento veterinario en pausa</div>',
+            '  <button class="ej-btn-resume" id="st-btn-resume">▶ REANUDAR</button>',
+            '</div>'
+        ].join('');
+        stage.appendChild(pauseModal);
+        var stResume = pauseModal.querySelector('#st-btn-resume'); if (stResume) stResume.addEventListener('click', togglePause);
+
 
         wrap.appendChild(stage);
         ov.appendChild(wrap);
@@ -891,7 +957,7 @@
     }
 
     function onDotClick(idx) {
-        if (state !== 'playing') return;
+        if (state !== 'playing' || isPaused) return;
         var dot = dots[idx];
         if (!dot || dot.used) return;
 
@@ -914,7 +980,7 @@
         clickOrder++;
 
         showReveal(resultType, function () {
-            state = 'playing';
+            state = 'playing'; isPaused = false;
             if (resultType === 'flower') {
                 strikes++;
                 updateHUD();
@@ -993,6 +1059,7 @@
     // ============================================================
     function openGame() {
         var ov = document.getElementById('sick-trike-overlay');
+        window.openSickTrike = openGame;
         if (!ov) return;
         ov.classList.add('open');
         state      = 'idle';
@@ -1016,6 +1083,12 @@
     }
 
     function closeGame() {
+        if (isPaused) togglePause();
+        var pScreen = document.getElementById('st-pause-screen');
+        if (pScreen) {
+            pScreen.style.display = 'none';
+            pScreen.classList.remove('active');
+        }
         var ov = document.getElementById('sick-trike-overlay');
         if (ov) ov.classList.remove('open');
         clearInterval(sickTimer);
@@ -1041,6 +1114,9 @@
             if (ov && ov.classList.contains('open')) resize();
         });
     }
+
+    // Exponer función global para abrir desde la tarjeta de minijuegos
+    window.openSickTrike = openGame;
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);

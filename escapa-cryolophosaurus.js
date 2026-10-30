@@ -1363,10 +1363,11 @@
             '      <div class="cryo-progress-fill" id="hud-cryo-progress"></div>',
             '    </div>',
             '  </div>',
-            '  <div class="cryo-actions">',
-            '    <button class="cryo-btn-icon" id="btn-cryo-mute" title="Silenciar / Activar sonido">🔊</button>',
-            '    <button class="cryo-btn-icon" id="btn-cryo-pause" title="Pausar juego">⏸️</button>',
-            '    <button class="cryo-btn-icon btn-close" id="btn-cryo-close" title="Cerrar juego">✕</button>',
+            '  <div class="cryo-actions ej-header-actions" id="cryo-header-actions">',
+            '    <button class="ej-btn-header" id="btn-cryo-mute" title="Silenciar / Activar sonido"><span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span></button>',
+            '    <button class="ej-btn-header" id="btn-cryo-pause" title="Pausar / Reanudar"><span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span></button>',
+            '    <button class="ej-btn-header" id="btn-cryo-fs" title="Pantalla Completa"><span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span></button>',
+            '    <button class="ej-btn-header ej-btn-header-danger" id="btn-cryo-close" title="Cerrar juego"><span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span></button>',
             '  </div>',
             '</div>',
 
@@ -1384,6 +1385,15 @@
             '      <span class="t-icon">⬇️</span>',
             '      <span class="t-txt">BARRIDA</span>',
             '    </button>',
+            '  </div>',
+            '</div>',
+
+            '<!-- MODAL: PAUSA -->',
+            '<div class="ej-pause-overlay" id="cryo-pause-screen" style="display:none;">',
+            '  <div class="ej-pause-box">',
+            '    <h2 style="margin:0 0 10px;color:#00f5ff;font-family:\'Orbitron\',sans-serif;font-size:1.4rem;letter-spacing:2px;">⏸️ JUEGO PAUSADO</h2>',
+            '    <p style="margin:0 0 20px;color:#88dac0;font-size:0.85rem;font-family:\'Share Tech Mono\',monospace;">Misión de escape detenida temporalmente.</p>',
+            '    <button class="ej-btn-replay" id="cryo-btn-resume" style="width:100%;max-width:240px;margin:0 auto;padding:10px 18px;font-size:0.9rem;">▶ REANUDAR</button>',
             '  </div>',
             '</div>',
 
@@ -1428,9 +1438,9 @@
             '      <div class="stat-box"><span class="s-label">Obstáculos:</span><strong class="s-val" id="go-dodged">0</strong></div>',
             '      <div class="stat-box"><span class="s-label">Huevos:</span><strong class="s-val" id="go-eggs">0</strong></div>',
             '    </div>',
-            '    <div class="cryo-modal-actions">',
-            '      <button class="cryo-primary-btn danger" id="btn-restart-game">🔄 REINTENTAR ESCAPE</button>',
-            '      <button class="cryo-secondary-btn" id="btn-exit-game">✕ SALIR</button>',
+            '    <div class="ej-modal-actions">',
+            '      <button class="ej-btn-replay" id="btn-restart-game">↺ Volver a jugar</button>',
+            '      <button class="ej-btn-return" id="btn-exit-game">✕ Regresar al sitio</button>',
             '    </div>',
             '  </div>',
             '</div>',
@@ -1449,9 +1459,9 @@
             '      <div class="stat-box"><span class="s-label">Esquivados:</span><strong class="s-val" id="vic-dodged">0</strong></div>',
             '      <div class="stat-box"><span class="s-label">Huevos:</span><strong class="s-val" id="vic-eggs">0</strong></div>',
             '    </div>',
-            '    <div class="cryo-modal-actions">',
-            '      <button class="cryo-primary-btn success" id="btn-play-again">🎮 JUGAR DE NUEVO</button>',
-            '      <button class="cryo-secondary-btn" id="btn-exit-victory">✕ SALIR AL CATÁLOGO</button>',
+            '    <div class="ej-modal-actions">',
+            '      <button class="ej-btn-replay" id="btn-play-again">↺ Volver a jugar</button>',
+            '      <button class="ej-btn-return" id="btn-exit-victory">✕ Regresar al sitio</button>',
             '    </div>',
             '  </div>',
             '</div>'
@@ -1507,9 +1517,11 @@
         var mBriefing = document.getElementById('cryo-modal-briefing');
         var mGameOver = document.getElementById('cryo-modal-gameover');
         var mVictory = document.getElementById('cryo-modal-victory');
+        var mPause = document.getElementById('cryo-pause-screen');
         if (mBriefing) mBriefing.classList.add('hidden');
         if (mGameOver) mGameOver.classList.add('hidden');
         if (mVictory) mVictory.classList.add('hidden');
+        if (mPause) mPause.style.display = 'none';
     }
 
     function showGameOverModal() {
@@ -1589,20 +1601,25 @@
 
         // Pausa
         var btnPause = document.getElementById('btn-cryo-pause');
-        if (btnPause) {
-            btnPause.addEventListener('click', function () {
-                if (gameState === 'playing') {
-                    gameState = 'paused';
-                    btnPause.textContent = '▶';
-                    if (sndMusic) sndMusic.pause();
-                } else if (gameState === 'paused') {
-                    gameState = 'playing';
-                    btnPause.textContent = '⏸️';
-                    if (sndMusic && !isMuted) sndMusic.play().catch(function () {});
-                    animFrameId = requestAnimationFrame(gameLoop);
-                }
-            });
+        var btnResume = document.getElementById('cryo-btn-resume');
+        function togglePause() {
+            var pauseScreen = document.getElementById('cryo-pause-screen');
+            if (gameState === 'playing') {
+                gameState = 'paused';
+                if (btnPause) btnPause.innerHTML = '<span class="ej-ic">▶</span><span class="ej-btn-lbl"> REANUDAR</span>';
+                if (pauseScreen) pauseScreen.style.display = 'flex';
+                if (sndMusic) sndMusic.pause();
+            } else if (gameState === 'paused') {
+                gameState = 'playing';
+                if (btnPause) btnPause.innerHTML = '<span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span>';
+                if (pauseScreen) pauseScreen.style.display = 'none';
+                if (sndMusic && !isMuted) sndMusic.play().catch(function () {});
+                lastFrameTime = performance.now();
+                animFrameId = requestAnimationFrame(gameLoop);
+            }
         }
+        if (btnPause) btnPause.addEventListener('click', togglePause);
+        if (btnResume) btnResume.addEventListener('click', togglePause);
 
         // Controles Táctiles Móviles
         var btnTouchJump = document.getElementById('touch-btn-jump');

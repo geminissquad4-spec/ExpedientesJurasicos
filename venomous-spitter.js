@@ -182,7 +182,9 @@
     var sndTension     = null; // Música de fondo en loop
     var sndAdvertencia = null; // Aviso previo del Dilophosaurus
     var sndAttack      = null; // Ataque y rugido mortal
-    var sndError       = null; // Audio al tocar objeto erróneo
+    var sndError       = null;
+    var isMuted        = false;
+    var isPaused       = false;
 
     // ============================================================
     //  RESOLUCIÓN DE ARCHIVOS (RAÍZ + CARPETA DE RESPALDO)
@@ -425,13 +427,8 @@
                 to   { background:#c0392b; border-color:#d63031; box-shadow:0 0 5px #c0392b; color:#ffeaa7; }
             }
 
-            #dilopho-close-btn {
-                background:transparent; border:1px solid rgba(46,204,113,.4); color:#2ecc71;
-                font-family:'Share Tech Mono',monospace; font-size:.75rem;
-                padding:.35rem .9rem; border-radius:3px; cursor:pointer;
-                letter-spacing:1px; transition:all .2s;
-            }
-            #dilopho-close-btn:hover { background:rgba(46,204,113,.2); color:#fff; border-color:#2ecc71; }
+            
+            
 
             /* Canvas wrap */
             #dilopho-canvas-wrap {
@@ -588,10 +585,12 @@
                     <div id="dilopho-header-timer">⏱️ 02:00</div>
                     <div id="dilopho-header-tracker" class="normal">🟢 SALA DESPEJADA</div>
                 </div>
-                <div style="display:flex;align-items:center;gap:.7rem;">
-                    <button id="dilopho-torch-btn">🔦 APAGAR LINTERNA (ESPACIO)</button>
-                    <button id="dilopho-fullscreen-btn" class="minigame-fullscreen-btn">⛶ PANTALLA COMPLETA</button>
-                    <button id="dilopho-close-btn">✕ CERRAR</button>
+                <button id="dilopho-torch-btn">🔦 APAGAR LINTERNA (ESPACIO)</button>
+                <div class="ej-header-actions">
+                    <button id="dilopho-mute-btn" class="ej-btn-header"><span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span></button>
+                    <button id="dilopho-pause-btn" class="ej-btn-header"><span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span></button>
+                    <button id="dilopho-fullscreen-btn" class="ej-btn-header"><span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span></button>
+                    <button id="dilopho-close-btn" class="ej-btn-header ej-btn-header-danger"><span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span></button>
                 </div>
             </div>
 
@@ -604,12 +603,8 @@
                 <div class="dilopho-screen show" id="dilopho-start-screen">
                     <div class="dilopho-screen-title" style="color:#2ecc71;">🏥 ACOSO EN LA CLÍNICA</div>
                     <div class="dilopho-screen-sub">
-                        La energía principal de la clínica InGen falló y un <strong>Dilophosaurus</strong> merodea en las sombras.<br>
-                        Tu misión es encontrar los <strong style="color:#2ecc71;">5 objetos clasificados en 2 minutos</strong> usando tu linterna.<br><br>
-                        ⚠️ <strong>ATENCIÓN:</strong> Cuando escuches el audio de <strong>Advertencia</strong>, el Dilophosaurus se prepara para entrar.<br>
-                        <strong style="color:#f1c40f;">¡Apaga la linterna inmediatamente antes de que te descubra!</strong><br>
-                        Espera en silencio hasta que el dinosaurio se marche de la sala.<br>
-                        <em>Cuidado con los objetos inútiles: tocarlos activará una alarma de error.</em>
+                        Samuel se encuentra dentro de la clínica abandonada de Nublar. Explora con tu linterna para encontrar los 5 suministros clasificados en 2 minutos, pero apaga la luz inmediatamente cuando escuches la advertencia del Dilophosaurus acechando.<br><br>
+                        ⚠️ <strong>ATENCIÓN:</strong> Cuando escuches el audio de <strong>Advertencia</strong>, el Dilophosaurus te está acechando. ¡Apaga la linterna con la <strong>Barra Espaciadora</strong> o el botón táctil antes de que ataque!
                     </div>
                     <div class="dilopho-instruct">
                         <div class="dilopho-inst-item">
@@ -639,8 +634,10 @@
                         No apagaste la linterna a tiempo o encendiste la luz mientras el dinosaurio aún estaba en la sala.<br>
                         Su veneno corrosivo impactó directamente en tus ojos.
                     </div>
-                    <button class="dilopho-btn dilopho-btn-primary" id="dilopho-retry-btn">🔄 REINTENTAR</button>
-                    <button class="dilopho-btn dilopho-btn-secondary" id="dilopho-lose-close">CERRAR</button>
+                    <div class="ej-modal-actions">
+                        <button class="ej-btn-replay" id="dilopho-retry-btn">↺ Volver a jugar</button>
+                        <button class="ej-btn-return" id="dilopho-lose-close">✕ Regresar al sitio</button>
+                    </div>
                 </div>
 
                 <!-- Pantalla derrota (Tiempo agotado) -->
@@ -650,8 +647,10 @@
                         Pasaron los 2 minutos sin recuperar todos los suministros.<br>
                         Los sistemas de seguridad se bloquearon por completo y la clínica quedó sellada.
                     </div>
-                    <button class="dilopho-btn dilopho-btn-primary" id="dilopho-retry-time-btn">🔄 REINTENTAR</button>
-                    <button class="dilopho-btn dilopho-btn-secondary" id="dilopho-lose-time-close">CERRAR</button>
+                    <div class="ej-modal-actions">
+                        <button class="ej-btn-replay" id="dilopho-retry-time-btn">↺ Volver a jugar</button>
+                        <button class="ej-btn-return" id="dilopho-lose-time-close">✕ Regresar al sitio</button>
+                    </div>
                 </div>
 
                 <!-- Pantalla victoria -->
@@ -661,9 +660,21 @@
                         ¡Has recuperado los 5 objetos clasificados burlando al Dilophosaurus en la oscuridad total!<br>
                         El laboratorio de la Dra. Sorkin y los embriones Barbasol están asegurados.
                     </div>
-                    <button class="dilopho-btn dilopho-btn-primary" id="dilopho-win-replay">🔄 JUGAR DE NUEVO</button>
-                    <button class="dilopho-btn dilopho-btn-secondary" id="dilopho-win-close">CERRAR</button>
+                    <div class="ej-modal-actions">
+                        <button class="ej-btn-replay" id="dilopho-win-replay">↺ Volver a jugar</button>
+                        <button class="ej-btn-return" id="dilopho-win-close">✕ Regresar al sitio</button>
+                    </div>
                 </div>
+            
+                <!-- Overlay de Pausa -->
+                <div class="ej-pause-overlay" id="dilopho-pause-screen" style="display:none;">
+                    <div class="ej-pause-card">
+                        <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>
+                        <div class="ej-pause-sub">Exploración de la clínica en pausa</div>
+                        <button class="ej-btn-resume" id="dilopho-btn-resume">▶ REANUDAR</button>
+                    </div>
+                </div>
+
             </div>
 
             <div id="dilopho-status-bar">
@@ -1189,7 +1200,43 @@
     // ============================================================
     //  BUCLE PRINCIPAL DEL JUEGO
     // ============================================================
+
+    function togglePause() {
+        if (state !== 'searching' && state !== 'warning' && state !== 'prowling') return;
+        isPaused = !isPaused;
+        var btnPause = document.getElementById('dilopho-pause-btn');
+        var pauseScreen = document.getElementById('dilopho-pause-screen');
+        if (isPaused) {
+            if (sndTension) try { sndTension.pause(); } catch(e){}
+            if (sndAdvertencia) try { sndAdvertencia.pause(); } catch(e){}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '▶';
+                if (lbl) lbl.textContent = ' REANUDAR';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'flex';
+        } else {
+            if (sndTension && !isMuted) try { sndTension.play().catch(function(){}); } catch(e){}
+            lastTime = performance.now();
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '⏸️';
+                if (lbl) lbl.textContent = ' PAUSA';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'none';
+        }
+    }
+
     function gameLoop(now) {
+        if (isPaused) {
+            lastTime = now;
+            if (state === 'searching' || state === 'warning' || state === 'prowling') {
+                aniFrame = requestAnimationFrame(gameLoop);
+            }
+            return;
+        }
         var dt = Math.min((now - lastTime) / 1000, 0.1);
         lastTime = now;
 
@@ -1247,7 +1294,7 @@
                     triggerJumpscare();
                 } else if (prowlTimeLeft <= 0) {
                     // El dinosaurio se marchó a salvo
-                    state = 'searching';
+                    state = 'searching'; isPaused = false;
                     postProwlSafeTimer = 3.5;
                     nextThreatTimer = getNextThreatInterval();
                     updateTorchButtonUI();
@@ -1269,7 +1316,7 @@
     function startGame() {
         timeLeft = GAME_DURATION;
         flashlightOn = true;
-        state = 'searching';
+        state = 'searching'; isPaused = false;
         nextThreatTimer = 12 + Math.random() * 4; // Primera advertencia rápida a los ~12-16 segundos
         postProwlSafeTimer = 0;
         floatingTexts = [];
@@ -1315,13 +1362,15 @@
         var winReplay = document.getElementById('dilopho-win-replay');
         var winClose = document.getElementById('dilopho-win-close');
 
-        fab.addEventListener('click', function () {
+        function openGame() {
             ov.classList.add('open');
             resizeCanvas();
             hideScreens();
             document.getElementById('dilopho-start-screen').classList.add('show');
             state = 'idle';
-        });
+        }
+        window.openDilophoGame = openGame;
+        fab.addEventListener('click', openGame);
 
         closeBtn.addEventListener('click', closeGame);
         var fullBtn = document.getElementById('dilopho-fullscreen-btn');
@@ -1331,16 +1380,16 @@
                 if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                     if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                     else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                    fullBtn.innerHTML = '🗗 SALIR';
+                    fullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
                 } else {
                     if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
                     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                    fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+                    fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
                 }
             });
             document.addEventListener('fullscreenchange', function() {
-                if (!document.fullscreenElement) fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
-                else fullBtn.innerHTML = '🗗 SALIR';
+                if (!document.fullscreenElement) fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+                else fullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
             });
         }
         if (loseClose) loseClose.addEventListener('click', closeGame);

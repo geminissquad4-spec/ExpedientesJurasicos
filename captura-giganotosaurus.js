@@ -110,6 +110,7 @@
     var sndMusic = null;
     var sndScream = null;
     var isMuted = false;
+    var isPaused = false;
 
     function getImage(filename) {
         if (imageCache[filename]) return imageCache[filename];
@@ -491,10 +492,11 @@
             '  <div class="cg-hud-chip" id="cg-hud-doors" style="color:#00d2d3;">COMPUERTAS: 0%</div>',
             '  <div class="cg-hud-chip" id="cg-hud-round" style="color:#feca57;">RONDA: 1/5</div>',
             '</div>',
-            '<div class="cg-header-btns">',
-            '  <button class="cg-tool-btn" id="cg-btn-mute" title="Activar/Desactivar Sonido">🔊</button>',
-            '  <button class="cg-tool-btn" id="cg-btn-full" title="Pantalla Completa">⛶</button>',
-            '  <button class="cg-close-btn" id="cg-btn-close">✕ SALIR</button>',
+            '<div class="cg-header-btns ej-header-actions" id="cg-header-btns">',
+            '  <button class="ej-btn-header" id="cg-btn-mute" title="Activar/Desactivar Sonido"><span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span></button>',
+            '  <button class="ej-btn-header" id="cg-btn-pause" title="Pausar / Reanudar"><span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span></button>',
+            '  <button class="ej-btn-header" id="cg-btn-full" title="Pantalla Completa"><span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span></button>',
+            '  <button class="ej-btn-header ej-btn-header-danger" id="cg-btn-close" title="Cerrar"><span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span></button>',
             '</div>'
         ].join('');
         overlay.appendChild(header);
@@ -543,7 +545,10 @@
             '  <div class="cg-modal-sub" style="text-align:center;">',
             '    ¡Excelente trabajo de ingeniería táctica! Las compuertas blindadas de InGen se han sellado al 100% con éxito hermético. El Giganotosaurus se estrelló contra las puertas de titanio sin poder franquear el perímetro. ¡Has salvado al personal de la base!',
             '  </div>',
-            '  <button class="cg-modal-btn green" id="cg-btn-win-restart">JUGAR DE NUEVO 🔄</button>',
+            '  <div class="ej-modal-actions">',
+  '    <button class="ej-btn-replay" id="cg-btn-win-restart">↺ Volver a jugar</button>',
+  '    <button class="ej-btn-return" id="cg-btn-win-return">✕ Regresar al sitio</button>',
+  '  </div>',
             '</div>'
         ].join('');
         canvasWrap.appendChild(winModal);
@@ -558,15 +563,40 @@
             '  <div class="cg-modal-sub" style="text-align:center;">',
             '    El Giganotosaurus alcanzó la base antes de que pudieras cerrar las compuertas de seguridad. ¡El colosal carnívoro ha irrumpido en la sala de mando y te ha devorado!',
             '  </div>',
-            '  <button class="cg-modal-btn" id="cg-btn-lose-restart">REINTENTAR BLOQUEO 🔄</button>',
+            '  <div class="ej-modal-actions">',
+  '    <button class="ej-btn-replay" id="cg-btn-lose-restart">↺ Volver a jugar</button>',
+  '    <button class="ej-btn-return" id="cg-btn-lose-return">✕ Regresar al sitio</button>',
+  '  </div>',
             '</div>'
         ].join('');
         canvasWrap.appendChild(loseModal);
+
+        var pauseModal = document.createElement('div');
+        pauseModal.className = 'ej-pause-overlay';
+        pauseModal.id = 'cg-pause-screen';
+        pauseModal.style.display = 'none';
+        pauseModal.innerHTML = [
+            '<div class="ej-pause-card">',
+            '  <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>',
+            '  <div class="ej-pause-sub">Protocolo de compuertas suspendido</div>',
+            '  <button class="ej-btn-resume" id="cg-btn-resume">▶ REANUDAR</button>',
+            '</div>'
+        ].join('');
+        canvasWrap.appendChild(pauseModal);
+
 
         document.body.appendChild(overlay);
 
         // Eventos de botones de interfaz
         document.getElementById('cg-btn-close').addEventListener('click', closeGame);
+        var cgWinRet = document.getElementById('cg-btn-win-return');
+        if (cgWinRet) cgWinRet.addEventListener('click', closeGame);
+        var cgLoseRet = document.getElementById('cg-btn-lose-return');
+        if (cgLoseRet) cgLoseRet.addEventListener('click', closeGame);
+        var cgPauseBtn = document.getElementById('cg-btn-pause');
+        if (cgPauseBtn) cgPauseBtn.addEventListener('click', togglePause);
+        var cgResumeBtn = document.getElementById('cg-btn-resume');
+        if (cgResumeBtn) cgResumeBtn.addEventListener('click', togglePause);
         document.getElementById('cg-btn-start').addEventListener('click', startGame);
         document.getElementById('cg-btn-win-restart').addEventListener('click', function () {
             if (window.registerMinigameAttempt) window.registerMinigameAttempt('captura-giganoto');
@@ -911,11 +941,45 @@
     // ------------------------------------------------------------
     // 10. BUCLE DE ACTUALIZACIÓN Y DIBUJADO (4 CAPAS)
     // ------------------------------------------------------------
+        function togglePause() {
+        if (!overlay || !overlay.classList.contains('open') || gameState === 'win' || gameState === 'lose') return;
+        isPaused = !isPaused;
+        var btnPause = document.getElementById('cg-btn-pause');
+        var pauseScreen = document.getElementById('cg-pause-screen');
+        if (isPaused) {
+            if (sndMusic) try { sndMusic.pause(); } catch (e) {}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '▶';
+                if (lbl) lbl.textContent = ' REANUDAR';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'flex';
+        } else {
+            if (sndMusic && !isMuted) try { sndMusic.play().catch(function(){}); } catch (e) {}
+            lastTimestamp = performance.now();
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '⏸️';
+                if (lbl) lbl.textContent = ' PAUSA';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'none';
+        }
+    }
+
     function gameLoop(timestamp) {
         if (!lastTimestamp) lastTimestamp = timestamp;
         var dt = (timestamp - lastTimestamp) / 1000;
         lastTimestamp = timestamp;
         if (dt > 0.1) dt = 0.1; // Limitar saltos de cuadro
+
+        if (isPaused) {
+            if (overlay && overlay.classList.contains('open')) {
+                animFrameId = requestAnimationFrame(gameLoop);
+            }
+            return;
+        }
 
         update(dt);
         render();

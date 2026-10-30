@@ -19,7 +19,11 @@
     // Progreso de escalada de Antony (0 a 100%)
     var climbProgress = 0;
     var maxClimbDistance = 330; // píxeles de elevación vertical
-    var slipSpeed = 12; // px/s de resbalamiento si no se pulsa espacio
+    var slipSpeed = 24; // px/s de resbalamiento si no se pulsa espacio
+    var slipTimer = 0;
+    var nextSlipTime = 3.5 + Math.random() * 2.0;
+    var slipAlertTimer = 0;
+    var slipAlertAmount = 0;
 
     // Posición y oscilación de Antony y la cuerda
     // En la referencia: ax = 905, ay = -23 en canvas de 1200x520
@@ -59,6 +63,7 @@
     var sndMusic = null;
     var currentRoar = null;
     var isMuted = false;
+    var isPaused = false;
     var audioCtx = null;
 
     // ============================================================
@@ -269,7 +274,30 @@
         } catch (e) {}
     }
 
-    function playBaryonyxGrowl() {
+        function playSlipSound() {
+        if (isMuted) return;
+        try {
+            if (!audioCtx) {
+                var AC = window.AudioContext || window.webkitAudioContext;
+                if (AC) audioCtx = new AC();
+            }
+            if (!audioCtx) return;
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            var osc = audioCtx.createOscillator();
+            var gain = audioCtx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(320, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(70, audioCtx.currentTime + 0.28);
+            gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.28);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.28);
+        } catch(e){}
+    }
+
+function playBaryonyxGrowl() {
         if (isMuted) return;
         try {
             if (!audioCtx) {
@@ -328,51 +356,54 @@
 
         var hRight = document.createElement('div');
         hRight.id = 'cb-header-right';
+        hRight.className = 'ej-header-actions';
 
         var muteBtn = document.createElement('button');
         muteBtn.id = 'cb-mute-btn';
-        muteBtn.className = 'cb-btn-header';
-        muteBtn.innerHTML = '🔊 SONIDO';
+        muteBtn.className = 'ej-btn-header';
+        muteBtn.innerHTML = '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
         muteBtn.addEventListener('click', function () {
             isMuted = !isMuted;
             if (isMuted) {
-                muteBtn.innerHTML = '🔇 SILENCIO';
+                muteBtn.innerHTML = '<span class="ej-ic">🔇</span><span class="ej-btn-lbl"> SILENCIADO</span>';
                 if (sndMusic) sndMusic.muted = true;
                 if (currentRoar) currentRoar.muted = true;
             } else {
-                muteBtn.innerHTML = '🔊 SONIDO';
+                muteBtn.innerHTML = '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
                 if (sndMusic) sndMusic.muted = false;
                 if (currentRoar) currentRoar.muted = false;
             }
         });
 
+        var pauseBtn = document.createElement('button');
+        pauseBtn.id = 'cb-pause-btn';
+        pauseBtn.className = 'ej-btn-header';
+        pauseBtn.innerHTML = '<span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span>';
+        pauseBtn.addEventListener('click', togglePause);
+
         var fullBtn = document.createElement('button');
         fullBtn.id = 'cb-fullscreen-btn';
-        fullBtn.className = 'cb-btn-header';
-        fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+        fullBtn.className = 'ej-btn-header';
+        fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
         fullBtn.addEventListener('click', function () {
             var target = document.getElementById('cb-overlay') || document.documentElement;
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                 if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                 else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                fullBtn.innerHTML = '🗗 SALIR';
             } else {
                 if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
                 else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
             }
-        });
-        document.addEventListener('fullscreenchange', function() {
-            if (!document.fullscreenElement) fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
-            else fullBtn.innerHTML = '🗗 SALIR';
         });
 
         var closeBtn = document.createElement('button');
         closeBtn.id = 'cb-close-btn';
-        closeBtn.textContent = '✕ CERRAR';
+        closeBtn.className = 'ej-btn-header ej-btn-header-danger';
+        closeBtn.innerHTML = '<span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span>';
         closeBtn.addEventListener('click', closeGame);
 
         hRight.appendChild(muteBtn);
+        hRight.appendChild(pauseBtn);
         hRight.appendChild(fullBtn);
         hRight.appendChild(closeBtn);
 
@@ -450,7 +481,10 @@
             '¡Antony Benton logró trepar a tiempo hacia la superficie de Isla Sorna! El Baryonyx mordió el aire vacío en la profundidad de la caverna.<br><br>',
             '<strong style="color:#2ecc71;">¡EL SOLDADO HA SOBREVIVIDO AL ENCUENTRO!</strong>',
             '</div>',
-            '<button class="cb-btn cb-btn-green" id="cb-btn-win-replay">ESCALAR OTRA VEZ ↺</button>'
+            '<div class="ej-modal-actions">',
+            '  <button class="ej-btn-replay" id="cb-btn-win-replay">↺ Volver a jugar</button>',
+            '  <button class="ej-btn-return" id="cb-btn-win-return">✕ Regresar al sitio</button>',
+            '</div>'
         ].join('');
         stage.appendChild(winScreen);
 
@@ -464,9 +498,26 @@
             'Antony no logró escalar la cuerda a tiempo y el colosal depredador lo alcanzó con sus mandíbulas.<br><br>',
             '<strong style="color:#ff6b6b;">DEBERÁS REINTENTAR LA ESCALADA Y SUBIR MÁS RÁPIDO.</strong>',
             '</div>',
-            '<button class="cb-btn cb-btn-red" id="cb-btn-lose-retry">REINTENTAR ESCAPE ↺</button>'
+            '<div class="ej-modal-actions">',
+            '  <button class="ej-btn-replay" id="cb-btn-lose-retry">↺ Volver a jugar</button>',
+            '  <button class="ej-btn-return" id="cb-btn-lose-return">✕ Regresar al sitio</button>',
+            '</div>'
         ].join('');
         stage.appendChild(loseScreen);
+
+        var pauseModal = document.createElement('div');
+        pauseModal.className = 'ej-pause-overlay';
+        pauseModal.id = 'cb-pause-screen';
+        pauseModal.style.display = 'none';
+        pauseModal.innerHTML = [
+            '<div class="ej-pause-card">',
+            '  <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>',
+            '  <div class="ej-pause-sub">Escalada de cuerda suspendida</div>',
+            '  <button class="ej-btn-resume" id="cb-btn-resume">▶ REANUDAR</button>',
+            '</div>'
+        ].join('');
+        stage.appendChild(pauseModal);
+
 
         wrap.appendChild(stage);
         ov.appendChild(wrap);
@@ -482,6 +533,12 @@
             if (window.registerMinigameAttempt) window.registerMinigameAttempt('cueva-baryonyx');
             startGame();
         });
+        var cbWinRet = document.getElementById('cb-btn-win-return');
+        if (cbWinRet) cbWinRet.addEventListener('click', closeGame);
+        var cbLoseRet = document.getElementById('cb-btn-lose-return');
+        if (cbLoseRet) cbLoseRet.addEventListener('click', closeGame);
+        var cbResumeBtn = document.getElementById('cb-btn-resume');
+        if (cbResumeBtn) cbResumeBtn.addEventListener('click', togglePause);
 
         // Tocar el lienzo también ayuda a escalar en móvil
         canvas.addEventListener('touchstart', function (e) {
@@ -560,11 +617,11 @@
     // ============================================================
     function startGame() {
         showModal(null);
-        state = 'playing';
+        state = 'playing'; isPaused = false;
 
         climbProgress = 0;
         antony.climbOffset = 0;
-        antony.swayAngle = 0;
+        antony.swayAngle = 0; slipTimer = 0; slipAlertTimer = 0;
 
         bary.x = bary.baseX;
         bary.currentStep = 'paso1';
@@ -607,8 +664,41 @@
         }
     }
 
+
+    function togglePause() {
+        if (state !== 'playing') return;
+        isPaused = !isPaused;
+        var btnPause = document.getElementById('cb-pause-btn');
+        var pauseScreen = document.getElementById('cb-pause-screen');
+        if (isPaused) {
+            if (sndMusic) try { sndMusic.pause(); } catch(e){}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '▶';
+                if (lbl) lbl.textContent = ' REANUDAR';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'flex';
+        } else {
+            if (sndMusic && !isMuted) try { sndMusic.play().catch(function(){}); } catch(e){}
+            lastTime = performance.now();
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '⏸️';
+                if (lbl) lbl.textContent = ' PAUSA';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'none';
+        }
+    }
+
     function gameLoop(now) {
         if (state !== 'playing') return;
+        if (isPaused) {
+            lastTime = now;
+            aniFrame = requestAnimationFrame(gameLoop);
+            return;
+        }
         var dt = Math.min(0.06, (now - lastTime) / 1000);
         lastTime = now;
 
@@ -622,10 +712,25 @@
     //  ACTUALIZACIÓN FÍSICA
     // ============================================================
     function update(dt) {
-        // 1. Resbalamiento suave si no se trepa activamente
+        // 1. Resbalamiento activo y caídas por cuerda resbalosa
         if (antony.climbOffset > 0) {
             antony.climbOffset = Math.max(0, antony.climbOffset - slipSpeed * dt);
         }
+
+        // Riesgo de resbalón súbito si Antony está subiendo
+        if (antony.climbOffset > 35) {
+            slipTimer += dt;
+            if (slipTimer >= nextSlipTime) {
+                slipTimer = 0;
+                nextSlipTime = 3.2 + Math.random() * 2.8;
+                slipAlertAmount = Math.round(28 + Math.random() * 20); // pierde altura
+                antony.climbOffset = Math.max(0, antony.climbOffset - slipAlertAmount);
+                slipAlertTimer = 1.4;
+                antony.swayAngle += (Math.random() > 0.5 ? 1 : -1) * 0.08;
+                playSlipSound();
+            }
+        }
+        if (slipAlertTimer > 0) slipAlertTimer -= dt;
 
         // Progreso porcentual
         climbProgress = (antony.climbOffset / maxClimbDistance) * 100;
@@ -786,7 +891,23 @@
             var drawX = -aw / 2;
             var drawY = (antony.baseY - antony.climbOffset) * scale;
 
+            if (slipAlertTimer > 0) {
+                // Parpadeo de alerta en rojo al resbalar
+                ctx.shadowColor = '#ff4757';
+                ctx.shadowBlur = 18 * scale;
+            }
             ctx.drawImage(antImg, drawX, drawY, aw, ah);
+
+            if (slipAlertTimer > 0) {
+                ctx.save();
+                ctx.font = 'bold ' + Math.round(14 * scale) + 'px Orbitron, sans-serif';
+                ctx.fillStyle = '#ff4757';
+                ctx.shadowColor = '#000';
+                ctx.shadowBlur = 6;
+                ctx.textAlign = 'center';
+                ctx.fillText('⚠️ ¡RESBALÓN! -' + slipAlertAmount + 'm', drawX + aw/2, drawY - 12 * scale);
+                ctx.restore();
+            }
             ctx.restore();
         }
 

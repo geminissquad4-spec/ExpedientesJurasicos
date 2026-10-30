@@ -17,49 +17,49 @@
             name: 'SECTOR 01: PERÍMETRO NORTE',
             bg: 'Busca 1.jpg',
             time: 20,
-            x: 820, y: 340, w: 230, h: 129
+            x: 774, y: 314, w: 322, h: 181
         },
         {
             num: 2,
             name: 'SECTOR 02: LADERA ROCOSA',
             bg: 'Busca 2.jpg',
             time: 18,
-            x: 240, y: 280, w: 205, h: 115
+            x: 199, y: 257, w: 287, h: 161
         },
         {
             num: 3,
             name: 'SECTOR 03: ESPESURA CENTRAL',
             bg: 'Busca 3.jpg',
             time: 16,
-            x: 740, y: 260, w: 180, h: 101
+            x: 704, y: 240, w: 252, h: 141
         },
         {
             num: 4,
             name: 'SECTOR 04: ACANTILADO OSCURO',
             bg: 'Busca 4.jpg',
             time: 14,
-            x: 160, y: 190, w: 155, h: 87
+            x: 129, y: 173, w: 217, h: 122
         },
         {
             num: 5,
             name: 'SECTOR 05: CLARO DE SOMBRAS',
             bg: 'Busca 5.jpg',
             time: 12,
-            x: 520, y: 220, w: 135, h: 76
+            x: 493, y: 205, w: 189, h: 106
         },
         {
             num: 6,
             name: 'SECTOR 06: BARRANCO DE LA SELVA',
             bg: 'Busca 6.jpg',
             time: 10,
-            x: 890, y: 310, w: 118, h: 66
+            x: 867, y: 297, w: 165, h: 92
         },
         {
             num: 7,
             name: 'SECTOR 07: NIDO DEL CAMALEÓN (FINAL)',
             bg: 'Busca 7.jpg',
             time: 8,
-            x: 610, y: 280, w: 98, h: 55
+            x: 590, y: 269, w: 137, h: 77
         }
     ];
 
@@ -68,6 +68,8 @@
     var currentLevelIdx = 0;
     var timeLeft = 20;
     var timerInterval = null;
+    var isMuted = false;
+    var isPaused = false;
     var scale = 1;
     var canvasW = 0, canvasH = 0;
     var canvas, ctx, stage;
@@ -300,33 +302,49 @@
 
         var hRight = document.createElement('div');
         hRight.id = 'cs-header-right';
+        hRight.className = 'ej-header-actions';
+
+        var muteBtn = document.createElement('button');
+        muteBtn.id = 'cs-mute-btn';
+        muteBtn.className = 'ej-btn-header';
+        muteBtn.innerHTML = '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
+        muteBtn.addEventListener('click', function () {
+            isMuted = !isMuted;
+            muteBtn.innerHTML = isMuted ? '<span class="ej-ic">🔇</span><span class="ej-btn-lbl"> SILENCIADO</span>' : '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
+            if (sndAmbience) sndAmbience.muted = isMuted;
+            if (sndJumpscare) sndJumpscare.muted = isMuted;
+            if (sndRoar) sndRoar.muted = isMuted;
+        });
+
+        var pauseBtn = document.createElement('button');
+        pauseBtn.id = 'cs-pause-btn';
+        pauseBtn.className = 'ej-btn-header';
+        pauseBtn.innerHTML = '<span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span>';
+        pauseBtn.addEventListener('click', togglePause);
 
         var fullBtn = document.createElement('button');
         fullBtn.id = 'cs-fullscreen-btn';
-        fullBtn.className = 'cs-btn-header';
-        fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+        fullBtn.className = 'ej-btn-header';
+        fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
         fullBtn.addEventListener('click', function () {
             var target = document.getElementById('carno-search-overlay') || document.documentElement;
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                 if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                 else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                fullBtn.innerHTML = '🗗 SALIR';
             } else {
                 if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
                 else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
             }
-        });
-        document.addEventListener('fullscreenchange', function() {
-            if (!document.fullscreenElement) fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
-            else fullBtn.innerHTML = '🗗 SALIR';
         });
 
         var closeBtn = document.createElement('button');
         closeBtn.id = 'cs-close-btn';
-        closeBtn.textContent = '✕ CERRAR';
+        closeBtn.className = 'ej-btn-header ej-btn-header-danger';
+        closeBtn.innerHTML = '<span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span>';
         closeBtn.addEventListener('click', closeGame);
 
+        hRight.appendChild(muteBtn);
+        hRight.appendChild(pauseBtn);
         hRight.appendChild(fullBtn);
         hRight.appendChild(closeBtn);
 
@@ -374,7 +392,10 @@
             '¡Has sobrevivido a los 7 sectores de la isla y neutralizado la amenaza del Carnotaurus camaleónico!<br>',
             'Tu destreza y reflejos tácticos salvaron la expedición.',
             '</div>',
-            '<button class="cs-btn cs-btn-green" id="cs-btn-win-replay">JUGAR DE NUEVO</button>'
+            '<div class="ej-modal-actions">',
+            '  <button class="ej-btn-replay" id="cs-btn-win-replay">↺ Volver a jugar</button>',
+            '  <button class="ej-btn-return" id="cs-btn-win-return">✕ Regresar al sitio</button>',
+            '</div>'
         ].join('');
         stage.appendChild(winScreen);
 
@@ -388,9 +409,26 @@
             'El tiempo expiró. Un Carnotaurus Camaleónico emergió de las sombras en una embestida letal.<br>',
             'La selva no perdona a quienes bajan la guardia.',
             '</div>',
-            '<button class="cs-btn cs-btn-danger" id="cs-btn-lose-retry">REINTENTAR</button>'
+            '<div class="ej-modal-actions">',
+            '  <button class="ej-btn-replay" id="cs-btn-lose-retry">↺ Volver a jugar</button>',
+            '  <button class="ej-btn-return" id="cs-btn-lose-return">✕ Regresar al sitio</button>',
+            '</div>'
         ].join('');
         stage.appendChild(loseScreen);
+
+        var pauseModal = document.createElement('div');
+        pauseModal.className = 'ej-pause-overlay';
+        pauseModal.id = 'cs-pause-screen';
+        pauseModal.style.display = 'none';
+        pauseModal.innerHTML = [
+            '<div class="ej-pause-card">',
+            '  <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>',
+            '  <div class="ej-pause-sub">Exploración táctica pausada</div>',
+            '  <button class="ej-btn-resume" id="cs-btn-resume">▶ REANUDAR</button>',
+            '</div>'
+        ].join('');
+        stage.appendChild(pauseModal);
+
 
         wrap.appendChild(stage);
         ov.appendChild(wrap);
@@ -418,6 +456,12 @@
             showScreen(null);
             startSearch();
         });
+        var csWinRet = document.getElementById('cs-btn-win-return');
+        if (csWinRet) csWinRet.addEventListener('click', closeGame);
+        var csLoseRet = document.getElementById('cs-btn-lose-return');
+        if (csLoseRet) csLoseRet.addEventListener('click', closeGame);
+        var csResumeBtn = document.getElementById('cs-btn-resume');
+        if (csResumeBtn) csResumeBtn.addEventListener('click', togglePause);
 
         // Configurar inputs de linterna y disparo
         setupControls();
@@ -535,7 +579,7 @@
         currentLevelIdx = idx;
         var lvl = LEVELS[currentLevelIdx];
         timeLeft = lvl.time;
-        state = 'playing';
+        state = 'playing'; isPaused = false;
 
         var lvlPill = document.getElementById('cs-level-pill');
         if (lvlPill) lvlPill.textContent = 'SECTOR ' + (currentLevelIdx + 1) + '/7: ' + lvl.name;
@@ -546,20 +590,50 @@
         startTimer();
     }
 
+    
+    function togglePause() {
+        if (state !== 'playing') return;
+        isPaused = !isPaused;
+        var btnPause = document.getElementById('cs-pause-btn');
+        var pauseScreen = document.getElementById('cs-pause-screen');
+        if (isPaused) {
+            if (sndAmbience) try { sndAmbience.pause(); } catch(e){}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '▶';
+                if (lbl) lbl.textContent = ' REANUDAR';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'flex';
+        } else {
+            if (sndAmbience && !isMuted) try { sndAmbience.play().catch(function(){}); } catch(e){}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '⏸️';
+                if (lbl) lbl.textContent = ' PAUSA';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'none';
+        }
+    }
+
     function startTimer() {
         if (timerInterval) clearInterval(timerInterval);
         updateTimerDisplay();
 
-        var startTime = performance.now();
-        var initial = timeLeft;
+        var lastTick = performance.now();
 
         timerInterval = setInterval(function () {
             if (state !== 'playing') {
                 clearInterval(timerInterval);
                 return;
             }
-            var elapsed = (performance.now() - startTime) / 1000;
-            timeLeft = Math.max(0, initial - elapsed);
+            var now = performance.now();
+            var dt = (now - lastTick) / 1000;
+            lastTick = now;
+            if (isPaused) return;
+
+            timeLeft = Math.max(0, timeLeft - dt);
             updateTimerDisplay();
 
             if (timeLeft <= 0) {

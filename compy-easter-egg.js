@@ -311,9 +311,11 @@
         overlay.innerHTML = `
             <div id="compy-overlay-header">
                 <div id="compy-overlay-title">⚡ ¡ATRAPA AL COMPY!</div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                    <button id="compy-fullscreen-btn" class="minigame-fullscreen-btn">⛶ PANTALLA COMPLETA</button>
-                    <button id="compy-overlay-close">✕ CERRAR</button>
+                <div class="ej-header-actions">
+                    <button class="ej-btn-header" id="compy-mute-btn" title="Silenciar / Activar Sonido"><span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span></button>
+                    <button class="ej-btn-header" id="compy-pause-btn" title="Pausar / Reanudar"><span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span></button>
+                    <button class="ej-btn-header" id="compy-fullscreen-btn" title="Pantalla Completa"><span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span></button>
+                    <button class="ej-btn-header ej-btn-header-danger" id="compy-overlay-close" title="Cerrar"><span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span></button>
                 </div>
             </div>
             <div id="compy-ee-arena">
@@ -343,16 +345,28 @@
                     </div>
                     <div id="ee-status">⚡ COMPY MASTICANDO CABLE</div>
                 </div>
+                <div class="ej-pause-overlay" id="compy-pause-screen" style="display:none;">
+                    <div class="ej-pause-box">
+                        <h2 style="margin:0 0 10px;color:#00f5ff;font-family:'Orbitron',sans-serif;font-size:1.4rem;letter-spacing:2px;">⏸️ JUEGO PAUSADO</h2>
+                        <p style="margin:0 0 20px;color:#88dac0;font-size:0.85rem;font-family:'Share Tech Mono',monospace;">La red eléctrica está en pausa temporal.</p>
+                        <button class="ej-btn-replay" id="compy-btn-resume" style="width:100%;max-width:240px;margin:0 auto;padding:10px 18px;font-size:0.9rem;">▶ REANUDAR</button>
+                    </div>
+                </div>
                 <div class="ee-modal" id="ee-win-modal">
                     <div class="ee-modal-title win">¡COMPY CAPTURADO!</div>
                     <div class="ee-modal-desc">Has restaurado la integridad de la red eléctrica de InGen Corporation.</div>
-                    <button class="ee-btn ee-btn-primary" id="ee-btn-replay">VOLVER A JUGAR</button>
-                    <button class="ee-btn ee-btn-secondary" id="ee-btn-close-win">CERRAR</button>
+                    <div class="ej-modal-actions">
+                        <button class="ej-btn-replay" id="ee-btn-replay">↺ Volver a jugar</button>
+                        <button class="ej-btn-return" id="ee-btn-close-win">✕ Regresar al sitio</button>
+                    </div>
                 </div>
                 <div class="ee-modal" id="ee-lose-modal">
                     <div class="ee-modal-title lose">¡FALLO TOTAL DE ENERGÍA!</div>
                     <div class="ee-modal-desc">El Compy cortó los cables principales. Reinicia los disyuntores.</div>
-                    <button class="ee-btn ee-btn-primary" id="ee-btn-retry">REINTENTAR</button>
+                    <div class="ej-modal-actions">
+                        <button class="ej-btn-replay" id="ee-btn-retry">↺ Volver a jugar</button>
+                        <button class="ej-btn-return" id="ee-btn-close-lose">✕ Regresar al sitio</button>
+                    </div>
                 </div>
             </div>
         `;
@@ -373,14 +387,46 @@
         return fab;
     }
 
-    // ---- AUDIO ----
+    // ---- AUDIO & ESTADO GLOBAL ----
     var audioCtx = null;
+    var isMuted = false;
+    var isPaused = false;
+    var gameStarted = false;
+
+    function toggleMute() {
+        isMuted = !isMuted;
+        var btn = document.getElementById('compy-mute-btn');
+        if (btn) {
+            btn.innerHTML = isMuted
+                ? '<span class="ej-ic">🔇</span><span class="ej-btn-lbl"> MUDO</span>'
+                : '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
+        }
+    }
+
+    function togglePause() {
+        if (!gameStarted) return;
+        isPaused = !isPaused;
+        var screen = document.getElementById('compy-pause-screen');
+        var btn = document.getElementById('compy-pause-btn');
+        var arena = document.getElementById('compy-ee-arena');
+        if (isPaused) {
+            if (screen) screen.style.display = 'flex';
+            if (btn) btn.innerHTML = '<span class="ej-ic">▶</span><span class="ej-btn-lbl"> REANUDAR</span>';
+            if (arena) arena.classList.add('is-paused');
+        } else {
+            if (screen) screen.style.display = 'none';
+            if (btn) btn.innerHTML = '<span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span>';
+            if (arena) arena.classList.remove('is-paused');
+        }
+    }
+
     function getAC() {
         if (!audioCtx) { var AC = window.AudioContext || window.webkitAudioContext; if (AC) audioCtx = new AC(); }
         if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
         return audioCtx;
     }
     function playSparkSound() {
+        if (isMuted) return;
         try {
             var ctx = getAC(); if (!ctx) return;
             var sz = ctx.sampleRate * 0.08, buf = ctx.createBuffer(1, sz, ctx.sampleRate), d = buf.getChannelData(0);
@@ -392,6 +438,7 @@
         } catch(e) {}
     }
     function playChirp() {
+        if (isMuted) return;
         try {
             var audio = new Audio('Rugidos/Compsognathus.mp4');
             audio.currentTime = 0;
@@ -411,6 +458,7 @@
         } catch(e) {}
     }
     function playCage() {
+        if (isMuted) return;
         try {
             var ctx = getAC(); if(!ctx) return;
             var o = ctx.createOscillator(), g = ctx.createGain();
@@ -437,6 +485,7 @@
         var btnReplay = document.getElementById('ee-btn-replay');
         var btnRetry  = document.getElementById('ee-btn-retry');
         var btnCloseW = document.getElementById('ee-btn-close-win');
+        var btnCloseL = document.getElementById('ee-btn-close-lose');
 
         var ctx2d = canvas.getContext('2d');
         var W = arena.clientWidth || 800, H = arena.clientHeight || 400;
@@ -457,6 +506,7 @@
         var state, integrity, catches, mult, cableIdx, cX, cY, facing, biting, biteTimer, tX, tY, lastT;
 
         function reset() {
+            if (isPaused) togglePause();
             state = 'playing'; integrity = 100; catches = 0; mult = baseMult;
             cableIdx = 1; cX = W*0.5; cY = H*cableLevels[1]; facing = 1;
             biting = true; biteTimer = 0; tX = cX; tY = cY; lastT = performance.now();
@@ -517,6 +567,11 @@
         }
 
         function loop(now) {
+            if (isPaused) {
+                lastT = now;
+                requestAnimationFrame(loop);
+                return;
+            }
             var dt = Math.min((now - lastT)/1000, 0.1); lastT = now;
             if (state === 'playing') {
                 if (biting) {
@@ -548,7 +603,7 @@
 
         // Evasión del cursor
         arena.addEventListener('mousemove', function(e) {
-            if (state !== 'playing') return;
+            if (state !== 'playing' || isPaused) return;
             var r = arena.getBoundingClientRect();
             var mx = e.clientX - r.left, my = e.clientY - r.top;
             var dist = Math.hypot(mx-cX, my-cY);
@@ -564,7 +619,7 @@
             }
         });
         arena.addEventListener('touchmove', function(e) {
-            if (state !== 'playing') return;
+            if (state !== 'playing' || isPaused) return;
             var r = arena.getBoundingClientRect();
             var mx = e.touches[0].clientX - r.left, my = e.touches[0].clientY - r.top;
             var dist = Math.hypot(mx-cX, my-cY);
@@ -582,7 +637,7 @@
 
         // Capturar compy
         compy.addEventListener('mousedown', function(e) {
-            e.stopPropagation(); if (state !== 'playing') return;
+            e.stopPropagation(); if (state !== 'playing' || isPaused) return;
             catches++; playChirp(); addSparks(cX, cY, 30, '#f1c40f');
             var pip = document.getElementById('ee-pip-'+catches); if(pip) pip.classList.add('on');
             if (catches >= targetCatches) { gameOver(true); }
@@ -593,6 +648,7 @@
         if (btnReplay) btnReplay.addEventListener('click', function() { if (window.registerMinigameAttempt) window.registerMinigameAttempt('compy'); reset(); requestAnimationFrame(loop); });
         if (btnRetry)  btnRetry.addEventListener('click',  function() { if (window.registerMinigameAttempt) window.registerMinigameAttempt('compy'); reset(); requestAnimationFrame(loop); });
         if (btnCloseW) btnCloseW.addEventListener('click', closeOverlay);
+        if (btnCloseL) btnCloseL.addEventListener('click', closeOverlay);
 
         reset();
         requestAnimationFrame(loop);
@@ -601,6 +657,7 @@
     function closeOverlay() {
         var ov = document.getElementById('compy-game-overlay');
         if (ov) ov.classList.remove('open');
+        if (isPaused) togglePause();
     }
 
     function init() {
@@ -609,14 +666,22 @@
         var fab = buildFAB();
         var overlay = document.getElementById('compy-game-overlay');
         var closeBtn = document.getElementById('compy-overlay-close');
-        var gameStarted = false;
+        var muteBtn = document.getElementById('compy-mute-btn');
+        var pauseBtn = document.getElementById('compy-pause-btn');
+        var resumeBtn = document.getElementById('compy-btn-resume');
 
-        fab.addEventListener('click', function() {
+        function openGame() {
             overlay.classList.add('open');
             if (!gameStarted) { gameStarted = true; initGame(); }
-        });
+        }
+        window.openCompyGame = openGame;
+        fab.addEventListener('click', openGame);
 
+        if (muteBtn) muteBtn.addEventListener('click', toggleMute);
+        if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
+        if (resumeBtn) resumeBtn.addEventListener('click', togglePause);
         if (closeBtn) closeBtn.addEventListener('click', closeOverlay);
+
         var ceFullBtn = document.getElementById('compy-fullscreen-btn');
         if (ceFullBtn) {
             ceFullBtn.addEventListener('click', function () {
@@ -624,16 +689,19 @@
                 if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                     if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                     else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                    ceFullBtn.innerHTML = '🗗 SALIR';
+                    ceFullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
                 } else {
                     if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
                     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                    ceFullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+                    ceFullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
                 }
             });
             document.addEventListener('fullscreenchange', function() {
-                if (!document.fullscreenElement) ceFullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
-                else ceFullBtn.innerHTML = '🗗 SALIR';
+                if (!document.fullscreenElement) {
+                    ceFullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+                } else {
+                    ceFullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
+                }
             });
         }
 

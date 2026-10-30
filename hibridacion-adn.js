@@ -271,6 +271,7 @@
     var currentRoar = null;
     var audioCtx = null;
     var isMuted = false;
+    var isPaused = false;
     var activeCategory = 'all';
     var searchQuery = '';
 
@@ -792,10 +793,11 @@
             '  <div class="ha-hud-chip" id="ha-hud-stage" style="color:#00d2d3;">PROYECTO: 1/10</div>',
             '  <div class="ha-hud-chip" id="ha-hud-genes" style="color:#feca57;">ADN EMPALMADO: 0/2</div>',
             '</div>',
-            '<div class="ha-header-btns">',
-            '  <button class="ha-tool-btn" id="ha-btn-mute" title="Sonido">🔊</button>',
-            '  <button class="ha-tool-btn" id="ha-btn-full" title="Pantalla Completa">⛶</button>',
-            '  <button class="ha-close-btn" id="ha-btn-close">✕ SALIR</button>',
+            '<div class="ha-header-btns ej-header-actions" id="ha-header-btns">',
+            '  <button class="ej-btn-header" id="ha-btn-mute" title="Sonido"><span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span></button>',
+            '  <button class="ej-btn-header" id="ha-btn-pause" title="Pausar / Reanudar"><span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span></button>',
+            '  <button class="ej-btn-header" id="ha-btn-full" title="Pantalla Completa"><span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span></button>',
+            '  <button class="ej-btn-header ej-btn-header-danger" id="ha-btn-close" title="Cerrar"><span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span></button>',
             '</div>'
         ].join('');
         overlay.appendChild(header);
@@ -901,7 +903,10 @@
             '  <div style="font-size:0.92rem; color:#cbd5e1; line-height:1.6; margin-bottom:1.5rem;" id="ha-error-msg">',
             '    El ADN seleccionado resultó incompatible con la cadena celular. El embrión ha colapsado.',
             '  </div>',
-            '  <button class="ha-modal-btn red" id="ha-btn-retry">REINTENTAR HIBRIDACIÓN 🔄</button>',
+            '  <div class="ej-modal-actions">',
+  '    <button class="ej-btn-replay" id="ha-btn-retry">↺ Volver a jugar</button>',
+  '    <button class="ej-btn-return" id="ha-btn-err-return">✕ Regresar al sitio</button>',
+  '  </div>',
             '</div>'
         ].join('');
         overlay.appendChild(errScreen);
@@ -916,10 +921,27 @@
             '  <div style="font-size:0.92rem; color:#cbd5e1; line-height:1.6; margin-bottom:1.5rem;">',
             '    ¡Excelente labor científica! Los 10 híbridos han sido sintetizados con éxito para el ejército, culminando con la creación del imparable <strong>Ultimasaurus</strong>. El Dr. Daniel Moreno ha quedado plenamente impresionado con tu destreza genética.',
             '  </div>',
-            '  <button class="ha-modal-btn" id="ha-btn-win-restart">REINICIAR PROYECTO 🔄</button>',
+            '  <div class="ej-modal-actions">',
+  '    <button class="ej-btn-replay" id="ha-btn-win-restart">↺ Volver a jugar</button>',
+  '    <button class="ej-btn-return" id="ha-btn-win-return">✕ Regresar al sitio</button>',
+  '  </div>',
             '</div>'
         ].join('');
         overlay.appendChild(winScreen);
+
+        var pauseModal = document.createElement('div');
+        pauseModal.className = 'ej-pause-overlay';
+        pauseModal.id = 'ha-pause-screen';
+        pauseModal.style.display = 'none';
+        pauseModal.innerHTML = [
+            '<div class="ej-pause-card">',
+            '  <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>',
+            '  <div class="ej-pause-sub">Laboratorio de hibridación en pausa</div>',
+            '  <button class="ej-btn-resume" id="ha-btn-resume">▶ REANUDAR</button>',
+            '</div>'
+        ].join('');
+        overlay.appendChild(pauseModal);
+
 
         document.body.appendChild(overlay);
 
@@ -928,6 +950,14 @@
 
         // Eventos de botones
         document.getElementById('ha-btn-close').addEventListener('click', closeGame);
+        var haWinRet = document.getElementById('ha-btn-win-return');
+        if (haWinRet) haWinRet.addEventListener('click', closeGame);
+        var haErrRet = document.getElementById('ha-btn-err-return');
+        if (haErrRet) haErrRet.addEventListener('click', closeGame);
+        var haPauseBtn = document.getElementById('ha-btn-pause');
+        if (haPauseBtn) haPauseBtn.addEventListener('click', togglePause);
+        var haResumeBtn = document.getElementById('ha-btn-resume');
+        if (haResumeBtn) haResumeBtn.addEventListener('click', togglePause);
         document.getElementById('ha-btn-start').addEventListener('click', startHybridization);
         document.getElementById('ha-btn-open-modal').addEventListener('click', openDNAModal);
         document.getElementById('ha-btn-close-modal').addEventListener('click', closeDNAModal);
@@ -1168,6 +1198,33 @@
         currentGeneStep = 0;
         state = 'playing';
         loadHybridStep();
+    }
+
+    
+    function togglePause() {
+        if (!overlay || !overlay.classList.contains('open')) return;
+        isPaused = !isPaused;
+        var btnPause = document.getElementById('ha-btn-pause');
+        var pauseScreen = document.getElementById('ha-pause-screen');
+        if (isPaused) {
+            if (sndMusic) try { sndMusic.pause(); } catch (e) {}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '▶';
+                if (lbl) lbl.textContent = ' REANUDAR';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'flex';
+        } else {
+            if (sndMusic && !isMuted) try { sndMusic.play().catch(function(){}); } catch (e) {}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '⏸️';
+                if (lbl) lbl.textContent = ' PAUSA';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'none';
+        }
     }
 
     function startHybridization() {

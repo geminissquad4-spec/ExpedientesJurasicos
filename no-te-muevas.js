@@ -52,6 +52,8 @@
     var sndBG   = null;
     var sndEat  = null;
     var sndRoar = null;
+    var isMuted  = false;
+    var isPaused = false;
 
     // ---- DOM ----
     var canvas, ctx;
@@ -124,13 +126,8 @@
                 font-family:'Orbitron',monospace; font-size:.95rem; font-weight:900;
                 color:#e74c3c; letter-spacing:2px; text-transform:uppercase;
             }
-            #ntm-close-btn {
-                background:transparent; border:1px solid rgba(231,76,60,.4); color:#cc8888;
-                font-family:'Share Tech Mono',monospace; font-size:.75rem;
-                padding:.3rem .9rem; border-radius:3px; cursor:pointer;
-                letter-spacing:1px; transition:all .2s;
-            }
-            #ntm-close-btn:hover { background:rgba(231,76,60,.2); color:#ff6b6b; border-color:#e74c3c; }
+            
+            
 
             /* Canvas wrap */
             #ntm-canvas-wrap {
@@ -243,9 +240,11 @@
         ov.innerHTML = `
             <div id="ntm-header">
                 <div id="ntm-header-title">🦖 ¡NO TE MUEVAS! — RECINTO DEL TYRANNOSAURUS</div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                    <button id="ntm-fullscreen-btn" class="minigame-fullscreen-btn">⛶ PANTALLA COMPLETA</button>
-                    <button id="ntm-close-btn">✕ CERRAR</button>
+                <div class="ej-header-actions" style="display:flex;align-items:center;gap:8px;">
+                    <button id="ntm-mute-btn" class="ej-btn-header"><span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span></button>
+                    <button id="ntm-pause-btn" class="ej-btn-header"><span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span></button>
+                    <button id="ntm-fullscreen-btn" class="ej-btn-header"><span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span></button>
+                    <button id="ntm-close-btn" class="ej-btn-header ej-btn-header-danger"><span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span></button>
                 </div>
             </div>
 
@@ -288,8 +287,10 @@
                         El Tyrannosaurus detectó el movimiento de Jackson.<br>
                         Recuerda: su visión se basa en el movimiento. En cuanto levante la mirada, suelta el control y no muevas ni un píxel.
                     </div>
-                    <button class="ntm-btn ntm-btn-primary" id="ntm-retry-btn">🔄 REINTENTAR</button>
-                    <button class="ntm-btn ntm-btn-secondary" id="ntm-caught-close">CERRAR</button>
+                    <div class="ej-modal-actions">
+                        <button class="ej-btn-replay" id="ntm-retry-btn">↺ Volver a jugar</button>
+                        <button class="ej-btn-return" id="ntm-caught-close">✕ Regresar al sitio</button>
+                    </div>
                 </div>
 
                 <!-- Pantalla de victoria -->
@@ -299,9 +300,21 @@
                         ¡Cruzaste todo el recinto del Tyrannosaurus sin ser devorado!<br>
                         Sobreviviste a la criatura más imponente de Jurassic Park.
                     </div>
-                    <button class="ntm-btn ntm-btn-primary" id="ntm-win-replay">🔄 JUGAR DE NUEVO</button>
-                    <button class="ntm-btn ntm-btn-secondary" id="ntm-win-close">CERRAR</button>
+                    <div class="ej-modal-actions">
+                        <button class="ej-btn-replay" id="ntm-win-replay">↺ Volver a jugar</button>
+                        <button class="ej-btn-return" id="ntm-win-close">✕ Regresar al sitio</button>
+                    </div>
                 </div>
+            
+                <!-- Overlay de Pausa -->
+                <div class="ej-pause-overlay" id="ntm-pause-screen" style="display:none;">
+                    <div class="ej-pause-card">
+                        <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>
+                        <div class="ej-pause-sub">Escape del Tyrannosaurus en pausa</div>
+                        <button class="ej-btn-resume" id="ntm-btn-resume">▶ REANUDAR</button>
+                    </div>
+                </div>
+
             </div>
 
             <div id="ntm-status-bar">
@@ -465,7 +478,42 @@
     // ============================================================
     //  BUCLE PRINCIPAL DE JUEGO
     // ============================================================
+
+    function togglePause() {
+        if (state !== 'eating' && state !== 'looking') return;
+        isPaused = !isPaused;
+        var btnPause = document.getElementById('ntm-pause-btn');
+        var pauseScreen = document.getElementById('ntm-pause-screen');
+        if (isPaused) {
+            if (sndBG) try { sndBG.pause(); } catch(e){}
+            if (sndEat) try { sndEat.pause(); } catch(e){}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '▶';
+                if (lbl) lbl.textContent = ' REANUDAR';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'flex';
+        } else {
+            if (sndBG && !isMuted) try { sndBG.play().catch(function(){}); } catch(e){}
+            if (sndEat && !isMuted && state === 'eating') try { sndEat.play().catch(function(){}); } catch(e){}
+            lastTime = performance.now();
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '⏸️';
+                if (lbl) lbl.textContent = ' PAUSA';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'none';
+        }
+    }
+
     function gameLoop(now) {
+        if (isPaused) {
+            lastTime = now;
+            if (state !== 'idle') aniFrame = requestAnimationFrame(gameLoop);
+            return;
+        }
         var dt = Math.min((now - lastTime) / 1000, 0.1);
         lastTime = now;
 
@@ -719,7 +767,7 @@
     function closeGame() {
         stopAll();
         if (aniFrame) { cancelAnimationFrame(aniFrame); aniFrame = null; }
-        state = 'idle';
+        state = 'idle'; isPaused = false;
         document.getElementById('ntm-overlay').classList.remove('open');
     }
 
@@ -736,20 +784,37 @@
         var gameReady  = false;
 
         // Abrir overlay al pulsar el botón del Rex
-        document.getElementById('ntm-fab').addEventListener('click', function () {
+        function openGame() {
             overlay.classList.add('open');
             if (!gameReady) {
                 gameReady = true;
                 setupCanvas();
                 loadImages(function () {
-                    render(0); // Muestra la escena inicial
-                    attachInput();
+                    render(0);
                 });
             }
-        });
+        }
+        window.openNoTeMuevas = openGame;
+        document.getElementById('ntm-fab').addEventListener('click', openGame);
 
         // Botones de pantalla
         document.getElementById('ntm-close-btn').addEventListener('click', closeGame);
+
+        var muteBtn = document.getElementById('ntm-mute-btn');
+        if (muteBtn) {
+            muteBtn.addEventListener('click', function () {
+                isMuted = !isMuted;
+                muteBtn.innerHTML = isMuted ? '<span class="ej-ic">🔇</span><span class="ej-btn-lbl"> SILENCIADO</span>' : '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
+                if (sndBG) sndBG.muted = isMuted;
+                if (sndEat) sndEat.muted = isMuted;
+                if (sndRoar) sndRoar.muted = isMuted;
+            });
+        }
+        var pauseBtn = document.getElementById('ntm-pause-btn');
+        if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
+        var resumeBtn = document.getElementById('ntm-btn-resume');
+        if (resumeBtn) resumeBtn.addEventListener('click', togglePause);
+
         var ntmFullBtn = document.getElementById('ntm-fullscreen-btn');
         if (ntmFullBtn) {
             ntmFullBtn.addEventListener('click', function () {
@@ -757,16 +822,16 @@
                 if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                     if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                     else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                    ntmFullBtn.innerHTML = '🗗 SALIR';
+                    ntmFullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
                 } else {
                     if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
                     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                    ntmFullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+                    ntmFullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
                 }
             });
             document.addEventListener('fullscreenchange', function() {
-                if (!document.fullscreenElement) ntmFullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
-                else ntmFullBtn.innerHTML = '🗗 SALIR';
+                if (!document.fullscreenElement) ntmFullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+                else ntmFullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
             });
         }
         document.getElementById('ntm-start-btn').addEventListener('click', startGame);

@@ -100,6 +100,8 @@
     // ---- AUDIO ----
     var sndMusic  = null;
     var sndAttack = null;
+    var isMuted = false;
+    var isPaused = false;
 
     // ============================================================
     //  RESOLUCIÓN DE ARCHIVOS (RAÍZ + CARPETA DE RESPALDO)
@@ -624,34 +626,50 @@
         keysTracker.id = 'ps-keys-tracker';
         keysTracker.innerHTML = '🔑 LLAVES: <span id="ps-keys-val">0</span>/4';
 
+        headerRight.className = 'ej-header-actions';
+
+        var muteBtn = document.createElement('button');
+        muteBtn.id = 'ps-mute-btn';
+        muteBtn.className = 'ej-btn-header';
+        muteBtn.innerHTML = '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
+        muteBtn.addEventListener('click', function () {
+            isMuted = !isMuted;
+            muteBtn.innerHTML = isMuted ? '<span class="ej-ic">🔇</span><span class="ej-btn-lbl"> SILENCIADO</span>' : '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
+            if (sndMusic) sndMusic.muted = isMuted;
+            if (sndAttack) sndAttack.muted = isMuted;
+        });
+
+        var pauseBtn = document.createElement('button');
+        pauseBtn.id = 'ps-pause-btn';
+        pauseBtn.className = 'ej-btn-header';
+        pauseBtn.innerHTML = '<span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span>';
+        pauseBtn.addEventListener('click', togglePause);
+
         var fullBtn = document.createElement('button');
         fullBtn.id  = 'ps-fullscreen-btn';
-        fullBtn.className = 'minigame-fullscreen-btn';
-        fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+        fullBtn.className = 'ej-btn-header';
+        fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
         fullBtn.addEventListener('click', function () {
             var target = document.getElementById('plesio-swim-overlay') || document.documentElement;
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                 if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                 else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                fullBtn.innerHTML = '🗗 SALIR';
             } else {
                 if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
                 else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
             }
-        });
-        document.addEventListener('fullscreenchange', function() {
-            if (!document.fullscreenElement) fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
-            else fullBtn.innerHTML = '🗗 SALIR';
         });
 
         var closeBtn = document.createElement('button');
         closeBtn.id  = 'ps-close-btn';
-        closeBtn.textContent = '✕ CERRAR';
+        closeBtn.className = 'ej-btn-header ej-btn-header-danger';
+        closeBtn.innerHTML = '<span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span>';
         closeBtn.addEventListener('click', closeGame);
 
         headerRight.appendChild(oxygenWrap);
         headerRight.appendChild(keysTracker);
+        headerRight.appendChild(muteBtn);
+        headerRight.appendChild(pauseBtn);
         headerRight.appendChild(fullBtn);
         headerRight.appendChild(closeBtn);
 
@@ -760,13 +778,14 @@
             'El equipo de rescate te sacó del agua sano y salvo. <strong style="color:#55efc4;">¡Gran habilidad de buceo!</strong>';
 
         var wBtns = document.createElement('div');
+        wBtns.className = 'ej-modal-actions';
         var wRetry = document.createElement('button');
-        wRetry.className = 'ps-btn ps-btn-primary';
-        wRetry.textContent = '🔄 JUGAR DE NUEVO';
+        wRetry.className = 'ej-btn-replay';
+        wRetry.textContent = '↺ Volver a jugar';
         wRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('plesio-swim'); showScreen(null); startGame(); });
         var wClose = document.createElement('button');
-        wClose.className = 'ps-btn ps-btn-secondary';
-        wClose.textContent = 'CERRAR';
+        wClose.className = 'ej-btn-return';
+        wClose.textContent = '✕ Regresar al sitio';
         wClose.addEventListener('click', closeGame);
         wBtns.appendChild(wRetry); wBtns.appendChild(wClose);
 
@@ -792,13 +811,14 @@
             '<strong style="color:#f1c40f;">Consejo:</strong> Vigila tu barra de oxígeno y sube a la superficie regularmente.';
 
         var dBtns = document.createElement('div');
+        dBtns.className = 'ej-modal-actions';
         var dRetry = document.createElement('button');
-        dRetry.className = 'ps-btn ps-btn-primary';
-        dRetry.textContent = '🔄 INTENTAR DE NUEVO';
+        dRetry.className = 'ej-btn-replay';
+        dRetry.textContent = '↺ Volver a jugar';
         dRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('plesio-swim'); showScreen(null); startGame(); });
         var dClose = document.createElement('button');
-        dClose.className = 'ps-btn ps-btn-danger';
-        dClose.textContent = 'CERRAR';
+        dClose.className = 'ej-btn-return';
+        dClose.textContent = '✕ Regresar al sitio';
         dClose.addEventListener('click', closeGame);
         dBtns.appendChild(dRetry); dBtns.appendChild(dClose);
 
@@ -824,13 +844,14 @@
             'No abras escondites vacíos para evitar perder 10 segundos.';
 
         var tBtns = document.createElement('div');
+        tBtns.className = 'ej-modal-actions';
         var tRetry = document.createElement('button');
-        tRetry.className = 'ps-btn ps-btn-primary';
-        tRetry.textContent = '🔄 INTENTAR DE NUEVO';
+        tRetry.className = 'ej-btn-replay';
+        tRetry.textContent = '↺ Volver a jugar';
         tRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('plesio-swim'); showScreen(null); startGame(); });
         var tClose = document.createElement('button');
-        tClose.className = 'ps-btn ps-btn-danger';
-        tClose.textContent = 'CERRAR';
+        tClose.className = 'ej-btn-return';
+        tClose.textContent = '✕ Regresar al sitio';
         tClose.addEventListener('click', closeGame);
         tBtns.appendChild(tRetry); tBtns.appendChild(tClose);
 
@@ -838,6 +859,21 @@
         timeScreen.appendChild(tSub);
         timeScreen.appendChild(tBtns);
         stage.appendChild(timeScreen);
+
+        var pauseModal = document.createElement('div');
+        pauseModal.className = 'ej-pause-overlay';
+        pauseModal.id = 'ps-pause-screen';
+        pauseModal.style.display = 'none';
+        pauseModal.innerHTML = [
+            '<div class="ej-pause-card">',
+            '  <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>',
+            '  <div class="ej-pause-sub">Inmersión acuática en pausa</div>',
+            '  <button class="ej-btn-resume" id="ps-btn-resume">▶ REANUDAR</button>',
+            '</div>'
+        ].join('');
+        stage.appendChild(pauseModal);
+        var psResume = pauseModal.querySelector('#ps-btn-resume'); if (psResume) psResume.addEventListener('click', togglePause);
+
 
         wrap.appendChild(stage);
         ov.appendChild(wrap);
@@ -1516,7 +1552,7 @@
     // ============================================================
     function startGame() {
         showScreen(null);
-        state = 'playing';
+        state = 'playing'; isPaused = false;
 
         initGameEntities();
         updateHUD();
@@ -1532,10 +1568,43 @@
         }
     }
 
+
+    function togglePause() {
+        if (state !== 'playing') return;
+        isPaused = !isPaused;
+        var btnPause = document.getElementById('ps-pause-btn');
+        var pauseScreen = document.getElementById('ps-pause-screen');
+        if (isPaused) {
+            if (sndMusic) try { sndMusic.pause(); } catch(e){}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '▶';
+                if (lbl) lbl.textContent = ' REANUDAR';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'flex';
+        } else {
+            if (sndMusic && !isMuted) try { sndMusic.play().catch(function(){}); } catch(e){}
+            lastTime = performance.now();
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '⏸️';
+                if (lbl) lbl.textContent = ' PAUSA';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'none';
+        }
+    }
+
     function gameLoop(now) {
+        if (isPaused) {
+            lastTime = now;
+            if (state === 'playing') aniFrame = requestAnimationFrame(gameLoop);
+            return;
+        }
         var dt = (now - lastTime) / 1000;
         lastTime = now;
-        if (dt > 0.1) dt = 0.1; // Limitar salto de frames si se minimiza
+        if (dt > 0.1) dt = 0.1;
 
         updateGame(dt);
         drawScene();
@@ -1579,6 +1648,7 @@
     // ============================================================
     function openGame() {
         var ov = document.getElementById('plesio-swim-overlay');
+        window.openPlesioSwim = openGame;
         if (!ov) return;
         ov.classList.add('open');
         state = 'idle';
@@ -1622,6 +1692,9 @@
             if (ov && ov.classList.contains('open')) resize();
         });
     }
+
+    // Exponer función global para abrir desde la tarjeta de minijuegos
+    window.openPlesioSwim = openGame;
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);

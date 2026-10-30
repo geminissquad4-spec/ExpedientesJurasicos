@@ -1212,7 +1212,7 @@
       Los escurridizos Compsognathus han invadido el tendido eléctrico del parque mordiendo cables clave. Pulsa velozmente sobre ellos para capturarlos antes de que causen un cortocircuito en el sistema de seguridad.
     </div>
     <div class="minijuego-attempts-pill" data-game-id="compy"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
-    <button class="minijuego-play-btn btn-blue" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('compy'); document.getElementById('compy-fab') && document.getElementById('compy-fab').click();">
+    <button class="minijuego-play-btn btn-blue" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('compy'); (window.openCompyGame && window.openCompyGame()) || (document.getElementById('compy-fab') && document.getElementById('compy-fab').click());">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1236,10 +1236,10 @@
     <div class="minijuego-badge badge-green">Infiltración Nocturna</div>
     <div class="minijuego-title" style="color:#2ecc71;">🩺 ¡Alerta Dilophosaurus!</div>
     <div class="minijuego-desc">
-      La energía principal de la clínica InGen falló. Explora con tu linterna para encontrar los 5 suministros clasificados en 2 minutos, pero apaga la luz inmediatamente cuando escuches la advertencia del Dilophosaurus acechando.
+      Samuel se encuentra dentro de la clínica abandonada de Nublar. Explora con tu linterna para encontrar los 5 suministros clasificados en 2 minutos, pero apaga la luz inmediatamente cuando escuches la advertencia del Dilophosaurus acechando.
     </div>
     <div class="minijuego-attempts-pill" data-game-id="dilopho"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
-    <button class="minijuego-play-btn btn-green" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('dilopho'); document.getElementById('dilopho-fab') && document.getElementById('dilopho-fab').click();">
+    <button class="minijuego-play-btn btn-green" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('dilopho'); (window.openDilophoGame && window.openDilophoGame()) || (document.getElementById('dilopho-fab') && document.getElementById('dilopho-fab').click());">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1255,7 +1255,7 @@
       Jackson necesita salvar a un Triceratops gravemente intoxicado. Examina los puntos en la enorme montaña de excremento para encontrar el medicamento oculto antes de recoger 3 Lilas de Persia mortales.
     </div>
     <div class="minijuego-attempts-pill" data-game-id="sick-trike"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
-    <button class="minijuego-play-btn btn-green" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('sick-trike'); document.getElementById('sick-trike-fab') && document.getElementById('sick-trike-fab').click();">
+    <button class="minijuego-play-btn btn-green" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('sick-trike'); (window.openSickTrike && window.openSickTrike()) || (document.getElementById('sick-trike-fab') && document.getElementById('sick-trike-fab').click());">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1271,7 +1271,7 @@
       Ayuda a Jackson a escapar del recinto del T-Rex. Arrastra al personaje mientras el coloso está distraído devorando su presa, pero congela todo movimiento cuando levante la cabeza y te mire fijamente.
     </div>
     <div class="minijuego-attempts-pill" data-game-id="ntm"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
-    <button class="minijuego-play-btn btn-red" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('ntm'); document.getElementById('ntm-fab') && document.getElementById('ntm-fab').click();">
+    <button class="minijuego-play-btn btn-red" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('ntm'); (window.openNoTeMuevas && window.openNoTeMuevas()) || (document.getElementById('ntm-fab') && document.getElementById('ntm-fab').click());">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1287,7 +1287,7 @@
       Bucea en las profundidades del recinto marino. Localiza las 4 llaves ocultas tras rocas y corales, esquiva los feroces ataques de los Plesiosaurios patrulleros y sube a la superficie a respirar cada 10 segundos.
     </div>
     <div class="minijuego-attempts-pill" data-game-id="plesio-swim"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
-    <button class="minijuego-play-btn btn-blue" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('plesio-swim'); document.getElementById('plesio-swim-fab') && document.getElementById('plesio-swim-fab').click();">
+    <button class="minijuego-play-btn btn-blue" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('plesio-swim'); (window.openPlesioSwim && window.openPlesioSwim()) || (document.getElementById('plesio-swim-fab') && document.getElementById('plesio-swim-fab').click());">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1303,7 +1303,7 @@
       Duelo de titanes en el helipuerto nocturno. Controla al Styracosaurus, bloquea con escudo total con S, salta con W y arremete con Espacio para derribar al implacable y letal Carnotaurus.
     </div>
     <div class="minijuego-attempts-pill" data-game-id="styraco-strike"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
-    <button class="minijuego-play-btn btn-red" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('styraco-strike'); document.getElementById('styraco-strike-fab') && document.getElementById('styraco-strike-fab').click();">
+    <button class="minijuego-play-btn btn-red" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('styraco-strike'); (window.openStyracoStrike && window.openStyracoStrike()) || (document.getElementById('styraco-strike-fab') && document.getElementById('styraco-strike-fab').click());">
       ▶ JUGAR AHORA
     </button>
   </div>
@@ -1346,7 +1346,7 @@
       Estás varado en los pastizales de Isla Sorna. Los Velociraptores acechan entre la maleza: escucha su chillido, apunta con la mirilla de tu rifle y dispárales en pleno salto antes de que te alcancen.
     </div>
     <div class="minijuego-attempts-pill" data-game-id="raptor"><span class="attempts-label">🎯 Tus intentos:</span><strong class="attempts-num">0</strong></div>
-    <button class="minijuego-play-btn btn-amber" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('raptor'); document.getElementById('raptor-fab') && document.getElementById('raptor-fab').click();">
+    <button class="minijuego-play-btn btn-amber" onclick="window.registerMinigameAttempt && window.registerMinigameAttempt('raptor'); (window.openRaptorAttack && window.openRaptorAttack()) || (document.getElementById('raptor-fab') && document.getElementById('raptor-fab').click());">
       ▶ JUGAR AHORA
     </button>
   </div>

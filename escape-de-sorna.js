@@ -66,6 +66,7 @@
     var sndMusic = null;
     var activeRoars = [];
     var isMuted = false;
+    var isPaused = false;
     var audioCtx = null;
 
     // Lista de Brachiosaurus pre-planificados (en % de progreso)
@@ -347,51 +348,54 @@
 
         var hRight = document.createElement('div');
         hRight.id = 'eds-header-right';
+        hRight.className = 'ej-header-actions';
 
         var muteBtn = document.createElement('button');
         muteBtn.id = 'eds-mute-btn';
-        muteBtn.className = 'eds-btn-header';
-        muteBtn.innerHTML = '🔊 SONIDO';
+        muteBtn.className = 'ej-btn-header';
+        muteBtn.innerHTML = '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
         muteBtn.addEventListener('click', function () {
             isMuted = !isMuted;
             if (isMuted) {
-                muteBtn.innerHTML = '🔇 SILENCIO';
+                muteBtn.innerHTML = '<span class="ej-ic">🔇</span><span class="ej-btn-lbl"> SILENCIADO</span>';
                 if (sndMusic) sndMusic.muted = true;
                 activeRoars.forEach(function (r) { r.muted = true; });
             } else {
-                muteBtn.innerHTML = '🔊 SONIDO';
+                muteBtn.innerHTML = '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
                 if (sndMusic) sndMusic.muted = false;
                 activeRoars.forEach(function (r) { r.muted = false; });
             }
         });
 
+        var pauseBtn = document.createElement('button');
+        pauseBtn.id = 'eds-pause-btn';
+        pauseBtn.className = 'ej-btn-header';
+        pauseBtn.innerHTML = '<span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span>';
+        pauseBtn.addEventListener('click', togglePause);
+
         var fullBtn = document.createElement('button');
         fullBtn.id = 'eds-fullscreen-btn';
-        fullBtn.className = 'eds-btn-header';
-        fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+        fullBtn.className = 'ej-btn-header';
+        fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
         fullBtn.addEventListener('click', function () {
             var target = document.getElementById('eds-overlay') || document.documentElement;
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                 if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                 else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                fullBtn.innerHTML = '🗗 SALIR';
             } else {
                 if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
                 else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
             }
-        });
-        document.addEventListener('fullscreenchange', function() {
-            if (!document.fullscreenElement) fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
-            else fullBtn.innerHTML = '🗗 SALIR';
         });
 
         var closeBtn = document.createElement('button');
         closeBtn.id = 'eds-close-btn';
-        closeBtn.textContent = '✕ CERRAR';
+        closeBtn.className = 'ej-btn-header ej-btn-header-danger';
+        closeBtn.innerHTML = '<span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span>';
         closeBtn.addEventListener('click', closeGame);
 
         hRight.appendChild(muteBtn);
+        hRight.appendChild(pauseBtn);
         hRight.appendChild(fullBtn);
         hRight.appendChild(closeBtn);
 
@@ -466,7 +470,10 @@
             '¡Has alcanzado las aguas abiertas del Pacífico! Has logrado esquivar las feroces arremetidas de los Geosternbergias y sobrevolar los colosales cuellos de los Brachiosaurus sin destruir la aeronave.<br><br>',
             '<strong style="color:#2ecc71;">¡LA TRIPULACIÓN ESTÁ A SALVO EN RUMBO A TIERRA FIRME!</strong>',
             '</div>',
-            '<button class="eds-btn eds-btn-green" id="eds-btn-win-replay">VOLVER A VOLAR ↺</button>'
+            '<div class="ej-modal-actions">',
+            '  <button class="ej-btn-replay" id="eds-btn-win-replay">↺ Volver a jugar</button>',
+            '  <button class="ej-btn-return" id="eds-btn-win-return">✕ Regresar al sitio</button>',
+            '</div>'
         ].join('');
         stage.appendChild(winScreen);
 
@@ -480,9 +487,26 @@
             'El fuselaje del helicóptero no soportó los impactos y la aeronave se precipitó sobre la espesura de Isla Sorna.<br><br>',
             '<strong style="color:#ff6b6b;">DEBERÁS INICIAR UNA NUEVA MANIOBRA DE EVACUACIÓN.</strong>',
             '</div>',
-            '<button class="eds-btn eds-btn-red" id="eds-btn-lose-retry">REINTENTAR ESCAPE ↺</button>'
+            '<div class="ej-modal-actions">',
+            '  <button class="ej-btn-replay" id="eds-btn-lose-retry">↺ Volver a jugar</button>',
+            '  <button class="ej-btn-return" id="eds-btn-lose-return">✕ Regresar al sitio</button>',
+            '</div>'
         ].join('');
         stage.appendChild(loseScreen);
+
+        var pauseModal = document.createElement('div');
+        pauseModal.className = 'ej-pause-overlay';
+        pauseModal.id = 'eds-pause-screen';
+        pauseModal.style.display = 'none';
+        pauseModal.innerHTML = [
+            '<div class="ej-pause-card">',
+            '  <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>',
+            '  <div class="ej-pause-sub">Vuelo de evacuación suspendido</div>',
+            '  <button class="ej-btn-resume" id="eds-btn-resume">▶ REANUDAR</button>',
+            '</div>'
+        ].join('');
+        stage.appendChild(pauseModal);
+
 
         wrap.appendChild(stage);
         ov.appendChild(wrap);
@@ -498,6 +522,12 @@
             if (window.registerMinigameAttempt) window.registerMinigameAttempt('escape-sorna');
             startGame();
         });
+        var edsWinRet = document.getElementById('eds-btn-win-return');
+        if (edsWinRet) edsWinRet.addEventListener('click', closeGame);
+        var edsLoseRet = document.getElementById('eds-btn-lose-return');
+        if (edsLoseRet) edsLoseRet.addEventListener('click', closeGame);
+        var edsResumeBtn = document.getElementById('eds-btn-resume');
+        if (edsResumeBtn) edsResumeBtn.addEventListener('click', togglePause);
 
         // Eventos táctiles para botones virtuales
         var btnUp = document.getElementById('eds-touch-up');
@@ -598,7 +628,7 @@
     // ============================================================
     function startGame() {
         showModal(null);
-        state = 'playing';
+        state = 'playing'; isPaused = false;
 
         flightTimer = 0;
         progress = 0;
@@ -660,8 +690,41 @@
         }
     }
 
+
+    function togglePause() {
+        if (state !== 'playing') return;
+        isPaused = !isPaused;
+        var btnPause = document.getElementById('eds-pause-btn');
+        var pauseScreen = document.getElementById('eds-pause-screen');
+        if (isPaused) {
+            if (sndMusic) try { sndMusic.pause(); } catch(e){}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '▶';
+                if (lbl) lbl.textContent = ' REANUDAR';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'flex';
+        } else {
+            if (sndMusic && !isMuted) try { sndMusic.play().catch(function(){}); } catch(e){}
+            lastTime = performance.now();
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '⏸️';
+                if (lbl) lbl.textContent = ' PAUSA';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'none';
+        }
+    }
+
     function gameLoop(now) {
         if (state !== 'playing') return;
+        if (isPaused) {
+            lastTime = now;
+            aniFrame = requestAnimationFrame(gameLoop);
+            return;
+        }
         var dt = Math.min(0.06, (now - lastTime) / 1000);
         lastTime = now;
 

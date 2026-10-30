@@ -68,6 +68,7 @@
     var sndMusic = null;
     var sndRoar = null;
     var isMuted = false;
+    var isPaused = false;
 
     function getImage(filename) {
         if (imageCache[filename]) return imageCache[filename];
@@ -455,10 +456,11 @@
             '    <span id="eq-timer-text" style="font-weight:700; color:#2ecc71;">10.0s</span>',
             '  </div>',
             '</div>',
-            '<div class="eq-header-btns">',
-            '  <button class="eq-tool-btn" id="eq-btn-mute" title="Activar/Desactivar Sonido">🔊</button>',
-            '  <button class="eq-tool-btn" id="eq-btn-full" title="Pantalla Completa">⛶</button>',
-            '  <button class="eq-close-btn" id="eq-btn-close">✕ SALIR</button>',
+            '<div class="eq-header-btns ej-header-actions" id="eq-header-btns">',
+            '  <button class="ej-btn-header" id="eq-btn-mute" title="Activar/Desactivar Sonido"><span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span></button>',
+            '  <button class="ej-btn-header" id="eq-btn-pause" title="Pausar / Reanudar"><span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span></button>',
+            '  <button class="ej-btn-header" id="eq-btn-full" title="Pantalla Completa"><span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span></button>',
+            '  <button class="ej-btn-header ej-btn-header-danger" id="eq-btn-close" title="Cerrar"><span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span></button>',
             '</div>'
         ].join('');
         overlay.appendChild(header);
@@ -507,7 +509,10 @@
             '  <div class="eq-modal-sub" style="text-align:center;">',
             '    ¡Impresionante agudeza visual! Ed y su equipo lograron rastrear y catalogar a los 4 Quetzalcoatlus a lo largo de los 4 niveles sin perturbar a la bandada. Los reyes del cielo han remontado el vuelo libremente sobre el dosel de la selva de Isla Matanceros.',
             '  </div>',
-            '  <button class="eq-modal-btn" id="eq-btn-win-restart">JUGAR DE NUEVO 🔄</button>',
+            '  <div class="ej-modal-actions">',
+  '    <button class="ej-btn-replay" id="eq-btn-win-restart">↺ Volver a jugar</button>',
+  '    <button class="ej-btn-return" id="eq-btn-win-return">✕ Regresar al sitio</button>',
+  '  </div>',
             '</div>'
         ].join('');
         canvasWrap.appendChild(winModal);
@@ -522,15 +527,40 @@
             '  <div class="eq-modal-sub" id="eq-lose-desc" style="text-align:center;">',
             '    El gigantesco pterosaurio se sintió amenazado por tus movimientos y se ha abalanzado furiosamente sobre el equipo.',
             '  </div>',
-            '  <button class="eq-modal-btn red" id="eq-btn-lose-restart">REINTENTAR EXPEDICIÓN 🔄</button>',
+            '  <div class="ej-modal-actions">',
+  '    <button class="ej-btn-replay" id="eq-btn-lose-restart">↺ Volver a jugar</button>',
+  '    <button class="ej-btn-return" id="eq-btn-lose-return">✕ Regresar al sitio</button>',
+  '  </div>',
             '</div>'
         ].join('');
         canvasWrap.appendChild(loseModal);
+
+        var pauseModal = document.createElement('div');
+        pauseModal.className = 'ej-pause-overlay';
+        pauseModal.id = 'eq-pause-screen';
+        pauseModal.style.display = 'none';
+        pauseModal.innerHTML = [
+            '<div class="ej-pause-card">',
+            '  <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>',
+            '  <div class="ej-pause-sub">Expedición suspendida temporalmente</div>',
+            '  <button class="ej-btn-resume" id="eq-btn-resume">▶ REANUDAR</button>',
+            '</div>'
+        ].join('');
+        canvasWrap.appendChild(pauseModal);
+
 
         document.body.appendChild(overlay);
 
         // Eventos de botones
         document.getElementById('eq-btn-close').addEventListener('click', closeGame);
+        var eqWinRet = document.getElementById('eq-btn-win-return');
+        if (eqWinRet) eqWinRet.addEventListener('click', closeGame);
+        var eqLoseRet = document.getElementById('eq-btn-lose-return');
+        if (eqLoseRet) eqLoseRet.addEventListener('click', closeGame);
+        var eqPauseBtn = document.getElementById('eq-btn-pause');
+        if (eqPauseBtn) eqPauseBtn.addEventListener('click', togglePause);
+        var eqResumeBtn = document.getElementById('eq-btn-resume');
+        if (eqResumeBtn) eqResumeBtn.addEventListener('click', togglePause);
         document.getElementById('eq-btn-start').addEventListener('click', startGame);
         document.getElementById('eq-btn-win-restart').addEventListener('click', function () {
             if (window.registerMinigameAttempt) window.registerMinigameAttempt('encontrando-quetza');
@@ -623,7 +653,7 @@
                 var candX = 70 + Math.random() * 1050;
                 var ok = true;
                 for (var i = 0; i < usedXs.length; i++) {
-                    if (Math.abs(usedXs[i] - candX) < 62) { // Separación mínima ajustada (+20%)
+                    if (Math.abs(usedXs[i] - candX) < 72) { // Separación mínima ajustada (+20%)
                         ok = false;
                         break;
                     }
@@ -638,12 +668,12 @@
             return fallbackX;
         }
 
-        // 1. Generar Quetza Models reales (+20% tamaño adicional: 258 a 298px de alto)
+        // 1. Generar Quetza Models reales (+15% de tamaño adicional)
         for (var m = 0; m < cfg.modelsCount; m++) {
-            var mh = 258 + Math.random() * 40;
+            var mh = 297 + Math.random() * 46;
             var mw = Math.round(mh * MODEL_ASPECT);
             var mx = Math.round(getNonOverlappingX());
-            var my = Math.round(330 + Math.random() * 45); // Al ras del suelo
+            var my = Math.round(315 + Math.random() * 45); // Al ras del suelo
             entities.push({
                 type: 'model',
                 id: 'model_' + m,
@@ -661,12 +691,12 @@
             });
         }
 
-        // 2. Generar Quetza Brunches falsos (+20% tamaño adicional: 252 a 298px de alto)
+        // 2. Generar Quetza Brunches falsos (+15% de tamaño adicional)
         for (var b = 0; b < cfg.brunchesCount; b++) {
-            var bh = 252 + Math.random() * 46;
+            var bh = 290 + Math.random() * 53;
             var bw = Math.round(bh * BRUNCH_ASPECT);
             var bx = Math.round(getNonOverlappingX());
-            var by = Math.round(325 + Math.random() * 50); // Al ras del suelo
+            var by = Math.round(310 + Math.random() * 45); // Al ras del suelo
             entities.push({
                 type: 'brunch',
                 id: 'brunch_' + b,
@@ -678,7 +708,6 @@
             });
         }
 
-        // Ordenar entidades por coordenada Y para oclusión natural (más al fondo primero)
         entities.sort(function (a, b) {
             return (a.y + a.h) - (b.y + b.h);
         });
@@ -917,11 +946,45 @@
     // ------------------------------------------------------------
     // 11. BUCLE PRINCIPAL DE ACTUALIZACIÓN Y DIBUJADO (CAPAS 1, 2, 3)
     // ------------------------------------------------------------
+        function togglePause() {
+        if (!overlay || !overlay.classList.contains('open') || gameState === 'win' || gameState === 'lose') return;
+        isPaused = !isPaused;
+        var btnPause = document.getElementById('eq-btn-pause');
+        var pauseScreen = document.getElementById('eq-pause-screen');
+        if (isPaused) {
+            if (sndMusic) try { sndMusic.pause(); } catch (e) {}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '▶';
+                if (lbl) lbl.textContent = ' REANUDAR';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'flex';
+        } else {
+            if (sndMusic && !isMuted) try { sndMusic.play().catch(function(){}); } catch (e) {}
+            lastTimestamp = performance.now();
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '⏸️';
+                if (lbl) lbl.textContent = ' PAUSA';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'none';
+        }
+    }
+
     function gameLoop(timestamp) {
         if (!lastTimestamp) lastTimestamp = timestamp;
         var dt = (timestamp - lastTimestamp) / 1000;
         lastTimestamp = timestamp;
         if (dt > 0.1) dt = 0.1;
+
+        if (isPaused) {
+            if (overlay && overlay.classList.contains('open')) {
+                animFrameId = requestAnimationFrame(gameLoop);
+            }
+            return;
+        }
 
         update(dt);
         render();

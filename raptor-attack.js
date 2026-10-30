@@ -13,7 +13,7 @@
     var TARGET_RAPTORS = 5;
 
     // ---- ESTADO DEL JUEGO ----
-    var state = 'idle'; // idle | lurking | leaping | shot | hit_player | won | lost
+    var state = 'idle'; isPaused = false; // idle | lurking | leaping | shot | hit_player | won | lost
     var killedCount = 0;
     var raptorX = 600, raptorY = 325, raptorStartY = 325;
     var raptorScale = 0.52;
@@ -56,6 +56,8 @@
     var sndUno   = null;
     var sndDos   = null;
     var sndTres  = null;
+    var isMuted  = false;
+    var isPaused = false;
 
     // ============================================================
     //  RESOLUCIÓN DE ARCHIVOS (RAÍZ + CARPETA DE RESPALDO)
@@ -240,13 +242,8 @@
                 font-family:'Orbitron',monospace; font-size:.95rem; font-weight:900;
                 color:#f1c40f; letter-spacing:2px; text-transform:uppercase;
             }
-            #raptor-close-btn {
-                background:transparent; border:1px solid rgba(243,156,18,.4); color:#e6b800;
-                font-family:'Share Tech Mono',monospace; font-size:.75rem;
-                padding:.3rem .9rem; border-radius:3px; cursor:pointer;
-                letter-spacing:1px; transition:all .2s;
-            }
-            #raptor-close-btn:hover { background:rgba(243,156,18,.2); color:#fff; border-color:#f1c40f; }
+            
+            
 
             /* Canvas wrap */
             #raptor-canvas-wrap {
@@ -355,9 +352,11 @@
         ov.innerHTML = `
             <div id="raptor-header">
                 <div id="raptor-header-title">🌾 ¡NO ENTRES EN EL PASTIZAL! — VELOCIRAPTOR</div>
-                <div style="display:flex;align-items:center;gap:8px;">
-                    <button id="raptor-fullscreen-btn" class="minigame-fullscreen-btn">⛶ PANTALLA COMPLETA</button>
-                    <button id="raptor-close-btn">✕ CERRAR</button>
+                <div class="ej-header-actions" style="display:flex;align-items:center;gap:8px;">
+                    <button id="raptor-mute-btn" class="ej-btn-header"><span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span></button>
+                    <button id="raptor-pause-btn" class="ej-btn-header"><span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span></button>
+                    <button id="raptor-fullscreen-btn" class="ej-btn-header"><span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span></button>
+                    <button id="raptor-close-btn" class="ej-btn-header ej-btn-header-danger"><span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span></button>
                 </div>
             </div>
 
@@ -401,8 +400,10 @@
                         El Velociraptor cayó sobre ti antes de que pudieras jalar el gatillo.<br>
                         <em>"Clever girl..."</em> Sé más rápido con el disparo en cuanto salte.
                     </div>
-                    <button class="raptor-btn raptor-btn-primary" id="raptor-retry-btn">🔄 REINTENTAR</button>
-                    <button class="raptor-btn raptor-btn-secondary" id="raptor-lose-close">CERRAR</button>
+                    <div class="ej-modal-actions">
+                        <button class="ej-btn-replay" id="raptor-retry-btn">↺ Volver a jugar</button>
+                        <button class="ej-btn-return" id="raptor-lose-close">✕ Regresar al sitio</button>
+                    </div>
                 </div>
 
                 <!-- Pantalla victoria -->
@@ -412,9 +413,21 @@
                         ¡Has abatido a los 5 Velociraptores con reflejos de cazador experto!<br>
                         Lograste cruzar la hierba alta de Isla Sorna con vida.
                     </div>
-                    <button class="raptor-btn raptor-btn-primary" id="raptor-win-replay">🔄 JUGAR DE NUEVO</button>
-                    <button class="raptor-btn raptor-btn-secondary" id="raptor-win-close">CERRAR</button>
+                    <div class="ej-modal-actions">
+                        <button class="ej-btn-replay" id="raptor-win-replay">↺ Volver a jugar</button>
+                        <button class="ej-btn-return" id="raptor-win-close">✕ Regresar al sitio</button>
+                    </div>
                 </div>
+            
+                <!-- Overlay de Pausa -->
+                <div class="ej-pause-overlay" id="raptor-pause-screen" style="display:none;">
+                    <div class="ej-pause-card">
+                        <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>
+                        <div class="ej-pause-sub">Cacería en el pastizal en pausa</div>
+                        <button class="ej-btn-resume" id="raptor-btn-resume">▶ REANUDAR</button>
+                    </div>
+                </div>
+
             </div>
 
             <div id="raptor-status-bar">
@@ -701,7 +714,40 @@
     // ============================================================
     //  BUCLE PRINCIPAL
     // ============================================================
+
+    function togglePause() {
+        if (state !== 'lurking' && state !== 'leaping') return;
+        isPaused = !isPaused;
+        var btnPause = document.getElementById('raptor-pause-btn');
+        var pauseScreen = document.getElementById('raptor-pause-screen');
+        if (isPaused) {
+            if (sndBG) try { sndBG.pause(); } catch(e){}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '▶';
+                if (lbl) lbl.textContent = ' REANUDAR';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'flex';
+        } else {
+            if (sndBG && !isMuted) try { sndBG.play().catch(function(){}); } catch(e){}
+            lastTime = performance.now();
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '⏸️';
+                if (lbl) lbl.textContent = ' PAUSA';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'none';
+        }
+    }
+
     function gameLoop(now) {
+        if (isPaused) {
+            lastTime = now;
+            if (state !== 'idle') aniFrame = requestAnimationFrame(gameLoop);
+            return;
+        }
         var dt = Math.min((now - lastTime) / 1000, 0.1);
         lastTime = now;
 
@@ -810,7 +856,7 @@
         var overlay = document.getElementById('raptor-overlay');
         var ready = false;
 
-        document.getElementById('raptor-fab').addEventListener('click', function () {
+        function openGame() {
             overlay.classList.add('open');
             if (!ready) {
                 ready = true;
@@ -820,9 +866,28 @@
                     attachInput();
                 });
             }
-        });
+        }
+        window.openRaptorAttack = openGame;
+        document.getElementById('raptor-fab').addEventListener('click', openGame);
 
         document.getElementById('raptor-close-btn').addEventListener('click', closeGame);
+
+        var muteBtn = document.getElementById('raptor-mute-btn');
+        if (muteBtn) {
+            muteBtn.addEventListener('click', function () {
+                isMuted = !isMuted;
+                muteBtn.innerHTML = isMuted ? '<span class="ej-ic">🔇</span><span class="ej-btn-lbl"> SILENCIADO</span>' : '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
+                if (sndBG) sndBG.muted = isMuted;
+                if (sndUno) sndUno.muted = isMuted;
+                if (sndDos) sndDos.muted = isMuted;
+                if (sndTres) sndTres.muted = isMuted;
+            });
+        }
+        var pauseBtn = document.getElementById('raptor-pause-btn');
+        if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
+        var resumeBtn = document.getElementById('raptor-btn-resume');
+        if (resumeBtn) resumeBtn.addEventListener('click', togglePause);
+
         var raFullBtn = document.getElementById('raptor-fullscreen-btn');
         if (raFullBtn) {
             raFullBtn.addEventListener('click', function () {
@@ -830,16 +895,16 @@
                 if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                     if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                     else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                    raFullBtn.innerHTML = '🗗 SALIR';
+                    raFullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
                 } else {
                     if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
                     else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                    raFullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+                    raFullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
                 }
             });
             document.addEventListener('fullscreenchange', function() {
-                if (!document.fullscreenElement) raFullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
-                else raFullBtn.innerHTML = '🗗 SALIR';
+                if (!document.fullscreenElement) raFullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+                else raFullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
             });
         }
         document.getElementById('raptor-start-btn').addEventListener('click', startGame);

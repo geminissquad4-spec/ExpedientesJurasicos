@@ -385,3 +385,320 @@ button,
     object-fit: contain !important;
   }
 }
+
+
+/* ------------------------------------------------------------
+   5. MENÚ SUPERIOR ESTANDARIZADO PARA TODOS LOS MINIJUEGOS
+   [ 🔊 SONIDO ] [ ⏸️ PAUSA ] [ ⛶ PANTALLA COMPLETA ] [ ✕ CERRAR ]
+   ------------------------------------------------------------ */
+.ej-header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+  z-index: 100 !important;
+}
+
+.ej-btn-header {
+  background: rgba(0, 20, 20, 0.75) !important;
+  border: 1.5px solid #00f5ff !important;
+  color: #00f5ff !important;
+  font-family: 'Share Tech Mono', 'Courier New', monospace !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  padding: 0.35rem 0.75rem !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  letter-spacing: 1px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  text-transform: uppercase !important;
+  transition: all 0.2s ease !important;
+  line-height: 1 !important;
+  height: 32px !important;
+  box-sizing: border-box !important;
+  touch-action: manipulation !important;
+}
+
+.ej-btn-header:hover {
+  background: rgba(0, 245, 255, 0.22) !important;
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.5) !important;
+  color: #ffffff !important;
+}
+
+.ej-btn-header.ej-btn-header-danger {
+  border-color: #ff4757 !important;
+  color: #ff4757 !important;
+  background: rgba(255, 71, 87, 0.1) !important;
+}
+
+.ej-btn-header.ej-btn-header-danger:hover {
+  background: #ff4757 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 12px rgba(255, 71, 87, 0.6) !important;
+}
+
+/* Responsividad para botones del header en celulares */
+@media (max-width: 768px), (max-height: 520px) {
+  .ej-header-actions {
+    gap: 4px !important;
+  }
+  .ej-btn-header {
+    height: 30px !important;
+    min-width: 30px !important;
+    padding: 0 6px !important;
+    font-size: 0.75rem !important;
+  }
+  .ej-btn-header .ej-btn-lbl {
+    display: none !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   6. BOTONES ESTANDARIZADOS DE FIN DE JUEGO (VICTORIA / DERROTA)
+   [ ↺ Volver a jugar ]  [ ✕ Regresar al sitio ]
+   ------------------------------------------------------------ */
+.ej-modal-actions {
+  display: flex !important;
+  gap: 14px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin-top: 1.25rem !important;
+  flex-wrap: wrap !important;
+  width: 100% !important;
+  z-index: 10 !important;
+}
+
+.ej-btn-replay {
+  background: linear-gradient(135deg, #2ecc71, #27ae60) !important;
+  border: 2px solid #2ecc71 !important;
+  color: #ffffff !important;
+  font-family: 'Orbitron', 'Share Tech Mono', sans-serif !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 1px !important;
+  padding: 0.75rem 1.4rem !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 18px rgba(46, 204, 113, 0.45) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  text-transform: uppercase !important;
+  transition: all 0.2s ease !important;
+  min-height: 44px !important;
+  touch-action: manipulation !important;
+}
+
+.ej-btn-replay:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(46, 204, 113, 0.65) !important;
+  background: linear-gradient(135deg, #32d677, #2ecc71) !important;
+}
+
+.ej-btn-return {
+  background: rgba(231, 76, 60, 0.15) !important;
+  border: 2px solid #ff4757 !important;
+  color: #ff6b6b !important;
+  font-family: 'Orbitron', 'Share Tech Mono', sans-serif !important;
+  font-size: 0.88rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 1px !important;
+  padding: 0.75rem 1.4rem !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 18px rgba(255, 71, 87, 0.25) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  text-transform: uppercase !important;
+  transition: all 0.2s ease !important;
+  min-height: 44px !important;
+  touch-action: manipulation !important;
+}
+
+.ej-btn-return:hover {
+  background: #ff4757 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 24px rgba(255, 71, 87, 0.55) !important;
+}
+
+/* ------------------------------------------------------------
+   7. OVERLAY ESTANDARIZADO DE PAUSA
+   ------------------------------------------------------------ */
+.ej-pause-overlay {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.85) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  display: none;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 9999 !important;
+  color: #00f5ff !important;
+  font-family: 'Orbitron', sans-serif !important;
+  text-align: center !important;
+}
+
+.ej-pause-overlay.active,
+.ej-pause-overlay.is-active,
+.ej-pause-overlay.show,
+.ej-pause-overlay.open {
+  display: flex !important;
+  animation: ej-fade-in 0.2s ease !important;
+}
+
+@keyframes ej-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ej-pause-card {
+  background: rgba(10, 20, 18, 0.95) !important;
+  border: 2px solid #00f5ff !important;
+  border-radius: 12px !important;
+  padding: 2rem 2.5rem !important;
+  box-shadow: 0 0 40px rgba(0, 245, 255, 0.35) !important;
+  max-width: 90vw !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.ej-pause-title {
+  font-size: 1.5rem !important;
+  letter-spacing: 2px !important;
+  color: #00f5ff !important;
+  margin: 0 !important;
+}
+
+.ej-pause-sub {
+  font-family: 'Share Tech Mono', monospace !important;
+  font-size: 0.88rem !important;
+  color: #a0e0dc !important;
+  letter-spacing: 1px !important;
+  margin: 0 !important;
+}
+
+.ej-btn-resume {
+  background: linear-gradient(135deg, #00f5ff, #00a8ff) !important;
+  border: none !important;
+  color: #000 !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 0.92rem !important;
+  padding: 0.75rem 1.8rem !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  letter-spacing: 1.5px !important;
+  box-shadow: 0 4px 20px rgba(0, 245, 255, 0.5) !important;
+  transition: all 0.2s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-top: 6px !important;
+}
+
+.ej-btn-resume:hover {
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 28px rgba(0, 245, 255, 0.8) !important;
+}
+
+
+/* Reglas globales de alta especificidad para botones del encabezado en todos los minijuegos */
+.ej-header-actions,
+#ao-header-right,
+#ntm-header .ej-header-actions,
+#dilopho-header .ej-header-actions,
+#raptor-header .ej-header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-left: auto !important;
+  flex-shrink: 0 !important;
+  z-index: 100 !important;
+}
+
+.ej-header-actions button,
+.ej-header-actions .ej-btn-header,
+#ntm-mute-btn, #ntm-pause-btn, #ntm-fullscreen-btn,
+#dilopho-mute-btn, #dilopho-pause-btn, #dilopho-fullscreen-btn,
+#raptor-mute-btn, #raptor-pause-btn, #raptor-fullscreen-btn,
+#ao-btn-mute, #ao-btn-pause, #ao-btn-fs {
+  background: rgba(0, 20, 20, 0.85) !important;
+  border: 1.5px solid #00f5ff !important;
+  color: #00f5ff !important;
+  font-family: 'Share Tech Mono', 'Courier New', monospace !important;
+  font-size: 0.75rem !important;
+  font-weight: 700 !important;
+  padding: 0.35rem 0.75rem !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  letter-spacing: 1px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 5px !important;
+  text-transform: uppercase !important;
+  transition: all 0.2s ease !important;
+  line-height: 1 !important;
+  height: 32px !important;
+  box-sizing: border-box !important;
+  touch-action: manipulation !important;
+  box-shadow: 0 0 8px rgba(0, 245, 255, 0.25) !important;
+}
+
+.ej-header-actions button:hover,
+.ej-header-actions .ej-btn-header:hover,
+#ntm-mute-btn:hover, #ntm-pause-btn:hover, #ntm-fullscreen-btn:hover,
+#dilopho-mute-btn:hover, #dilopho-pause-btn:hover, #dilopho-fullscreen-btn:hover,
+#raptor-mute-btn:hover, #raptor-pause-btn:hover, #raptor-fullscreen-btn:hover,
+#ao-btn-mute:hover, #ao-btn-pause:hover, #ao-btn-fs:hover {
+  background: rgba(0, 245, 255, 0.25) !important;
+  box-shadow: 0 0 14px rgba(0, 245, 255, 0.6) !important;
+  color: #ffffff !important;
+}
+
+.ej-header-actions button.ej-btn-header-danger,
+.ej-header-actions #ntm-close-btn,
+.ej-header-actions #dilopho-close-btn,
+.ej-header-actions #raptor-close-btn,
+.ej-header-actions #ao-btn-close {
+  border-color: #ff4757 !important;
+  color: #ff4757 !important;
+  background: rgba(255, 71, 87, 0.12) !important;
+  box-shadow: 0 0 8px rgba(255, 71, 87, 0.3) !important;
+}
+
+.ej-header-actions button.ej-btn-header-danger:hover,
+.ej-header-actions #ntm-close-btn:hover,
+.ej-header-actions #dilopho-close-btn:hover,
+.ej-header-actions #raptor-close-btn:hover,
+.ej-header-actions #ao-btn-close:hover {
+  background: #ff4757 !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 16px rgba(255, 71, 87, 0.7) !important;
+}
+
+/* Evitar que el t?tulo desborde y empuje los botones fuera del viewport */
+#ntm-header-title,
+#dilopho-header-title,
+#raptor-header-title,
+#ao-header-title {
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  max-width: 48vw !important;
+}

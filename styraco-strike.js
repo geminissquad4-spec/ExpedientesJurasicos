@@ -124,6 +124,8 @@
     var sndMusic   = null;
     var sndStyraco = null;
     var sndCarno   = null;
+    var isMuted    = false;
+    var isPaused   = false;
 
     // ============================================================
     //  RESOLUCIÓN DE ARCHIVOS
@@ -514,36 +516,49 @@
         barsWrap.appendChild(cnBox);
 
         var btnGroup = document.createElement('div');
-        btnGroup.style.display = 'flex';
-        btnGroup.style.alignItems = 'center';
-        btnGroup.style.gap = '8px';
+        btnGroup.className = 'ej-header-actions';
+
+        var muteBtn = document.createElement('button');
+        muteBtn.id = 'ss-mute-btn';
+        muteBtn.className = 'ej-btn-header';
+        muteBtn.innerHTML = '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
+        muteBtn.addEventListener('click', function () {
+            isMuted = !isMuted;
+            muteBtn.innerHTML = isMuted ? '<span class="ej-ic">🔇</span><span class="ej-btn-lbl"> SILENCIADO</span>' : '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
+            if (sndMusic) sndMusic.muted = isMuted;
+            if (sndStyraco) sndStyraco.muted = isMuted;
+            if (sndCarno) sndCarno.muted = isMuted;
+        });
+
+        var pauseBtn = document.createElement('button');
+        pauseBtn.id = 'ss-pause-btn';
+        pauseBtn.className = 'ej-btn-header';
+        pauseBtn.innerHTML = '<span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span>';
+        pauseBtn.addEventListener('click', togglePause);
 
         var fullBtn = document.createElement('button');
         fullBtn.id = 'ss-fullscreen-btn';
-        fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
+        fullBtn.className = 'ej-btn-header';
+        fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
         fullBtn.addEventListener('click', function () {
             var target = document.getElementById('styraco-strike-overlay') || document.documentElement;
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                 if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                 else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                fullBtn.innerHTML = '🗗 SALIR';
             } else {
                 if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
                 else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
             }
-        });
-
-        document.addEventListener('fullscreenchange', function() {
-            if (!document.fullscreenElement) fullBtn.innerHTML = '⛶ PANTALLA COMPLETA';
-            else fullBtn.innerHTML = '🗗 SALIR';
         });
 
         var closeBtn = document.createElement('button');
         closeBtn.id  = 'ss-close-btn';
-        closeBtn.textContent = '✕ CERRAR';
+        closeBtn.className = 'ej-btn-header ej-btn-header-danger';
+        closeBtn.innerHTML = '<span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span>';
         closeBtn.addEventListener('click', closeGame);
 
+        btnGroup.appendChild(muteBtn);
+        btnGroup.appendChild(pauseBtn);
         btnGroup.appendChild(fullBtn);
         btnGroup.appendChild(closeBtn);
 
@@ -652,13 +667,14 @@
             '<strong style="color:#2ecc71;">¡Eres el verdadero rey de la defensa!</strong>';
 
         var wBtns = document.createElement('div');
+        wBtns.className = 'ej-modal-actions';
         var wRetry = document.createElement('button');
-        wRetry.className = 'ss-btn ss-btn-primary';
-        wRetry.textContent = '🔄 PELEAR DE NUEVO';
+        wRetry.className = 'ej-btn-replay';
+        wRetry.textContent = '↺ Volver a jugar';
         wRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('styraco-strike'); showScreen(null); startGame(); });
         var wClose = document.createElement('button');
-        wClose.className = 'ss-btn ss-btn-secondary';
-        wClose.textContent = 'CERRAR';
+        wClose.className = 'ej-btn-return';
+        wClose.textContent = '✕ Regresar al sitio';
         wClose.addEventListener('click', closeGame);
         wBtns.appendChild(wRetry); wBtns.appendChild(wClose);
 
@@ -684,13 +700,14 @@
             '¡Aprovecha cuando él falle para contraatacar!';
 
         var lBtns = document.createElement('div');
+        lBtns.className = 'ej-modal-actions';
         var lRetry = document.createElement('button');
-        lRetry.className = 'ss-btn ss-btn-primary';
-        lRetry.textContent = '🔄 REINTENTAR';
+        lRetry.className = 'ej-btn-replay';
+        lRetry.textContent = '↺ Volver a jugar';
         lRetry.addEventListener('click', function () { if (window.registerMinigameAttempt) window.registerMinigameAttempt('styraco-strike'); showScreen(null); startGame(); });
         var lClose = document.createElement('button');
-        lClose.className = 'ss-btn ss-btn-secondary';
-        lClose.textContent = 'CERRAR';
+        lClose.className = 'ej-btn-return';
+        lClose.textContent = '✕ Regresar al sitio';
         lClose.addEventListener('click', closeGame);
         lBtns.appendChild(lRetry); lBtns.appendChild(lClose);
 
@@ -698,6 +715,21 @@
         loseScreen.appendChild(lSub);
         loseScreen.appendChild(lBtns);
         stage.appendChild(loseScreen);
+
+        var pauseModal = document.createElement('div');
+        pauseModal.className = 'ej-pause-overlay';
+        pauseModal.id = 'ss-pause-screen';
+        pauseModal.style.display = 'none';
+        pauseModal.innerHTML = [
+            '<div class="ej-pause-card">',
+            '  <div class="ej-pause-title">⏸️ JUEGO EN PAUSA</div>',
+            '  <div class="ej-pause-sub">Combate en el helipuerto en pausa</div>',
+            '  <button class="ej-btn-resume" id="ss-btn-resume">▶ REANUDAR</button>',
+            '</div>'
+        ].join('');
+        stage.appendChild(pauseModal);
+        var ssResume = pauseModal.querySelector('#ss-btn-resume'); if (ssResume) ssResume.addEventListener('click', togglePause);
+
 
         wrap.appendChild(stage);
         ov.appendChild(wrap);
@@ -1323,7 +1355,7 @@
     // ============================================================
     function startGame() {
         showScreen(null);
-        state = 'fighting';
+        state = 'fighting'; isPaused = false;
 
         initFighters();
         updateHUD();
@@ -1339,7 +1371,40 @@
         }
     }
 
+
+    function togglePause() {
+        if (state !== 'fighting') return;
+        isPaused = !isPaused;
+        var btnPause = document.getElementById('ss-pause-btn');
+        var pauseScreen = document.getElementById('ss-pause-screen');
+        if (isPaused) {
+            if (sndMusic) try { sndMusic.pause(); } catch(e){}
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '▶';
+                if (lbl) lbl.textContent = ' REANUDAR';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'flex';
+        } else {
+            if (sndMusic && !isMuted) try { sndMusic.play().catch(function(){}); } catch(e){}
+            lastTime = performance.now();
+            if (btnPause) {
+                var ic = btnPause.querySelector('.ej-ic');
+                var lbl = btnPause.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '⏸️';
+                if (lbl) lbl.textContent = ' PAUSA';
+            }
+            if (pauseScreen) pauseScreen.style.display = 'none';
+        }
+    }
+
     function fightLoop(now) {
+        if (isPaused) {
+            lastTime = now;
+            if (state === 'fighting') aniFrame = requestAnimationFrame(fightLoop);
+            return;
+        }
         var dt = (now - lastTime) / 1000;
         lastTime = now;
         if (dt > 0.08) dt = 0.08;
