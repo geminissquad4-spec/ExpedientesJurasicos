@@ -702,3 +702,23 @@ button,
   text-overflow: ellipsis !important;
   max-width: 48vw !important;
 }
+
+/* Soporte específico para Alerta Dilophosaurus en móviles */
+#dilopho-start-screen,
+.dilopho-screen {
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+@media (max-width: 768px) {
+  #dilopho-header .ej-header-actions .ej-btn-lbl {
+    display: none !important;
+  }
+  #dilopho-torch-btn {
+    display: none !important;
+  }
+  .dilopho-floating-torch-btn {
+    display: inline-flex !important;
+  }
+}

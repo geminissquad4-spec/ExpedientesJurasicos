@@ -263,7 +263,7 @@
     }
 
     function playAudio(snd) {
-        if (!snd) return;
+        if (!snd || isMuted) return;
         try {
             snd.currentTime = 0;
             snd.play().catch(function () {});
@@ -281,6 +281,7 @@
     // Efecto de sonido sintético de hallazgo positivo
     var audioCtx = null;
     function playPickupFX() {
+        if (isMuted) return;
         try {
             var AC = window.AudioContext || window.webkitAudioContext;
             if (!audioCtx && AC) audioCtx = new AC();
@@ -357,6 +358,8 @@
                 background: #000;
                 display: none; flex-direction: column;
                 user-select: none;
+                -webkit-user-select: none;
+                touch-action: none;
             }
             #dilopho-overlay.open { display: flex; }
 
@@ -365,24 +368,26 @@
                 flex-shrink: 0;
                 display: flex; align-items: center; justify-content: space-between;
                 padding: .5rem 1.2rem;
-                background: rgba(3, 14, 8, .92);
+                background: rgba(3, 14, 8, .94);
                 border-bottom: 2px solid #2ecc71;
-                backdrop-filter: blur(4px);
+                backdrop-filter: blur(6px);
                 z-index: 10;
-                gap: 1rem;
+                gap: 0.8rem;
             }
             #dilopho-header-left {
-                display: flex; align-items: center; gap: .8rem;
+                display: flex; align-items: center; gap: .75rem;
+                min-width: 0;
             }
             #dilopho-header-title {
                 font-family:'Orbitron',monospace; font-size:.9rem; font-weight:900;
                 color:#2ecc71; letter-spacing:2px; text-transform:uppercase;
+                white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
             }
             #dilopho-header-timer {
                 font-family:'Orbitron',monospace; font-size:.95rem; font-weight:700;
                 color:#f1c40f; background:rgba(0,0,0,.6); padding:.25rem .7rem;
                 border:1px solid rgba(241,196,15,.5); border-radius:4px;
-                letter-spacing:1px;
+                letter-spacing:1px; flex-shrink: 0;
             }
 
             /* Marcador de Estado en el Header */
@@ -390,7 +395,7 @@
                 font-family: 'Share Tech Mono', monospace; font-size: .8rem; font-weight: 700;
                 padding: .25rem .75rem; border-radius: 4px; letter-spacing: 1px;
                 border: 1px solid rgba(46,204,113,.4); color: #2ecc71; background: rgba(46,204,113,.12);
-                transition: all .2s;
+                transition: all .2s; flex-shrink: 0;
             }
             #dilopho-header-tracker.warning {
                 border-color: #e74c3c; color: #ff7675; background: rgba(231,76,60,.25);
@@ -405,7 +410,7 @@
                 box-shadow: 0 0 14px rgba(46,204,113,.5);
             }
 
-            /* Botón linterna */
+            /* Botón linterna de cabecera (escritorio) */
             #dilopho-torch-btn {
                 background: #f1c40f; color: #111;
                 border: 2px solid #f39c12; border-radius: 4px;
@@ -413,6 +418,7 @@
                 padding: .45rem 1.1rem; cursor: pointer;
                 letter-spacing: 1.5px; transition: all .18s ease;
                 box-shadow: 0 0 15px rgba(241,196,15,.6);
+                white-space: nowrap;
             }
             #dilopho-torch-btn.off {
                 background: #111; color: #2ecc71;
@@ -427,8 +433,75 @@
                 to   { background:#c0392b; border-color:#d63031; box-shadow:0 0 5px #c0392b; color:#ffeaa7; }
             }
 
-            
-            
+            /* Botón Flotante Linterna para Celulares */
+            .dilopho-floating-torch-btn {
+                display: none;
+                position: absolute;
+                bottom: 24px;
+                right: 20px;
+                z-index: 60;
+                background: rgba(241, 196, 15, 0.95);
+                color: #111;
+                border: 2.5px solid #f39c12;
+                border-radius: 50px;
+                padding: 0.75rem 1.4rem;
+                font-family: 'Orbitron', monospace;
+                font-size: 0.85rem;
+                font-weight: 900;
+                letter-spacing: 1.2px;
+                cursor: pointer;
+                box-shadow: 0 0 22px rgba(241, 196, 15, 0.75), 0 4px 14px rgba(0,0,0,0.85);
+                touch-action: manipulation;
+                align-items: center;
+                gap: 0.55rem;
+                transition: all 0.2s ease;
+                user-select: none;
+                -webkit-user-select: none;
+            }
+            .dilopho-floating-torch-btn.off {
+                background: rgba(10, 26, 16, 0.94);
+                color: #2ecc71;
+                border-color: #2ecc71;
+                box-shadow: 0 0 16px rgba(46, 204, 113, 0.5);
+            }
+            .dilopho-floating-torch-btn.danger-pulse {
+                animation: dilopho-torch-alert 0.32s infinite alternate;
+            }
+            .dilopho-floating-torch-btn.prowling-locked {
+                background: rgba(24, 12, 2, 0.94);
+                color: #f39c12;
+                border-color: #f39c12;
+                box-shadow: 0 0 16px rgba(243, 156, 18, 0.5);
+                opacity: 0.9;
+            }
+
+            /* Botones estándar de cabecera (.ej-btn-header) */
+            .ej-header-actions {
+                display: flex; align-items: center; gap: 0.5rem;
+                flex-shrink: 0;
+            }
+            .ej-btn-header {
+                display: inline-flex; align-items: center; gap: 0.35rem;
+                background: rgba(4, 28, 14, 0.88);
+                color: #2ecc71; border: 1.5px solid #2ecc71;
+                border-radius: 4px; padding: 0.45rem 0.85rem;
+                font-family: 'Orbitron', monospace; font-size: 0.78rem; font-weight: 700;
+                cursor: pointer; letter-spacing: 1px;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+            }
+            .ej-btn-header:hover {
+                background: #2ecc71; color: #020b06;
+                box-shadow: 0 0 14px rgba(46, 204, 113, 0.6);
+            }
+            .ej-btn-header-danger {
+                background: rgba(30, 6, 6, 0.88);
+                color: #ff4757; border-color: #ff4757;
+            }
+            .ej-btn-header-danger:hover {
+                background: #ff4757; color: #fff;
+                box-shadow: 0 0 14px rgba(255, 71, 87, 0.7);
+            }
 
             /* Canvas wrap */
             #dilopho-canvas-wrap {
@@ -437,6 +510,7 @@
                 display: flex; align-items: center; justify-content: center;
                 overflow: hidden;
                 background: #020403;
+                touch-action: none;
             }
             #dilopho-canvas {
                 display: block;
@@ -490,7 +564,7 @@
                 gap: 1rem; flex-wrap: wrap;
             }
             #dilopho-items-wrap {
-                display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+                display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
             }
             .dilopho-item-slot {
                 display: flex; align-items: center; gap: .4rem;
@@ -508,70 +582,335 @@
             }
             .dilopho-item-icon { font-size: .95rem; }
 
-            /* --- PANTALLAS MODALES (Inicio, Derrota, Victoria) --- */
+            /* --- PANTALLAS MODALES (Inicio, Derrota, Victoria, Pausa) --- */
             .dilopho-screen {
-                position: absolute; inset: 0; z-index: 25;
+                position: absolute; inset: 0; z-index: 100;
                 display: none; flex-direction: column;
-                align-items: center; justify-content: center;
+                align-items: center; justify-content: flex-start;
                 text-align: center;
-                background: rgba(2, 6, 4, .88);
+                background: rgba(2, 6, 4, .92);
                 backdrop-filter: blur(8px);
                 font-family: 'Share Tech Mono',monospace;
                 padding: 1.2rem;
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                box-sizing: border-box;
             }
             .dilopho-screen.show { display: flex; animation: dilopho-pop .3s ease-out; }
             @keyframes dilopho-pop {
-                from { opacity: 0; transform: scale(.95); }
+                from { opacity: 0; transform: scale(.96); }
                 to   { opacity: 1; transform: scale(1); }
+            }
+            .dilopho-screen-card {
+                margin: auto;
+                max-width: 760px;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
             }
             .dilopho-screen-title {
                 font-family:'Orbitron',monospace;
-                font-size: clamp(1.4rem, 4vw, 2.3rem);
+                font-size: clamp(1.3rem, 3.8vw, 2.2rem);
                 font-weight: 900; letter-spacing: 3px; text-transform: uppercase;
                 margin-bottom: .5rem;
             }
             .dilopho-screen-sub {
                 font-size: clamp(.75rem, 1.8vw, .95rem); color: #ccc;
-                margin-bottom: 1.6rem; max-width: 580px; line-height: 1.6;
+                margin-bottom: 1.2rem; max-width: 620px; line-height: 1.55;
             }
+
+            /* Banner de Pantalla Completa en el Inicio */
+            .dilopho-mobile-fs-banner {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.9rem;
+                background: linear-gradient(135deg, rgba(6, 44, 23, 0.94) 0%, rgba(2, 24, 12, 0.98) 100%);
+                border: 1.5px solid #2ecc71;
+                border-radius: 8px;
+                padding: 0.75rem 1.15rem;
+                margin: 0.5rem auto 1rem;
+                max-width: 650px;
+                width: 96%;
+                box-shadow: 0 0 20px rgba(46, 204, 113, 0.3);
+            }
+            .dilopho-fs-banner-info {
+                display: flex;
+                align-items: center;
+                gap: 0.8rem;
+                text-align: left;
+            }
+            .dilopho-fs-icon {
+                font-size: 1.7rem;
+                line-height: 1;
+                filter: drop-shadow(0 0 8px rgba(46, 204, 113, 0.7));
+            }
+            .dilopho-fs-text strong {
+                display: block;
+                color: #2ecc71;
+                font-family: 'Orbitron', monospace;
+                font-size: 0.82rem;
+                letter-spacing: 1px;
+            }
+            .dilopho-fs-text span {
+                display: block;
+                color: #bbf7d0;
+                font-size: 0.73rem;
+                line-height: 1.35;
+            }
+            .dilopho-btn-fs-toggle {
+                background: rgba(46, 204, 113, 0.22);
+                border: 1.5px solid #2ecc71;
+                color: #2ecc71;
+                font-family: 'Orbitron', monospace;
+                font-size: 0.75rem;
+                font-weight: 700;
+                padding: 0.5rem 0.95rem;
+                border-radius: 5px;
+                cursor: pointer;
+                white-space: nowrap;
+                transition: all 0.2s ease;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+            }
+            .dilopho-btn-fs-toggle:hover {
+                background: #2ecc71;
+                color: #031408;
+                box-shadow: 0 0 16px rgba(46, 204, 113, 0.7);
+            }
+
             .dilopho-instruct {
-                display: flex; gap: 1.4rem; margin: .6rem 0 1.6rem;
+                display: flex; gap: 1rem; margin: .5rem 0 1.3rem;
                 flex-wrap: wrap; justify-content: center;
                 font-size: .78rem; color: #ddd;
             }
             .dilopho-inst-item {
                 display:flex; flex-direction:column; align-items:center; gap:.3rem;
                 background:rgba(255,255,255,.05); border:1px solid rgba(46,204,113,.25);
-                border-radius:6px; padding:.65rem .85rem; min-width:115px;
+                border-radius:6px; padding:.65rem .85rem; min-width:125px;
+                font-size: .73rem;
             }
-            .dilopho-inst-icon { font-size: 1.6rem; }
+            .dilopho-inst-icon { font-size: 1.5rem; }
+
+            /* Acciones Inicio */
+            .dilopho-start-actions {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                flex-wrap: wrap;
+                margin-top: 0.5rem;
+            }
             .dilopho-btn {
                 font-family:'Orbitron',monospace; font-size:.85rem; font-weight:700;
                 letter-spacing:1.5px; text-transform:uppercase;
-                padding:.75rem 2rem; border-radius:4px; cursor:pointer;
-                transition:all .2s; border:none; margin:.3rem;
+                padding:.75rem 1.8rem; border-radius:5px; cursor:pointer;
+                transition:all .2s; border:none; margin:.25rem;
+                display: inline-flex; align-items: center; gap: 0.5rem;
             }
-            .dilopho-btn-primary { background:#2ecc71; color:#031408; box-shadow:0 0 16px rgba(46,204,113,.5); }
-            .dilopho-btn-primary:hover { background:#a8ff3e; box-shadow:0 0 30px rgba(168,255,62,.75); transform:translateY(-2px); }
-            .dilopho-btn-secondary { background:transparent; border:1px solid #2ecc71; color:#2ecc71; }
-            .dilopho-btn-secondary:hover { background:rgba(46,204,113,.15); }
+            .dilopho-btn-primary {
+                background:#2ecc71; color:#031408;
+                box-shadow:0 0 16px rgba(46,204,113,.5);
+            }
+            .dilopho-btn-primary:hover {
+                background:#a8ff3e; box-shadow:0 0 30px rgba(168,255,62,.75);
+                transform:translateY(-2px);
+            }
+            .dilopho-btn-fullscreen {
+                background: linear-gradient(135deg, #00f5ff 0%, #0984e3 100%);
+                color: #011422;
+                border: 2px solid #00f5ff;
+                box-shadow: 0 0 20px rgba(0, 245, 255, 0.45);
+                font-weight: 900;
+            }
+            .dilopho-btn-fullscreen:hover {
+                background: #00f5ff;
+                color: #000;
+                box-shadow: 0 0 32px rgba(0, 245, 255, 0.85);
+                transform: translateY(-2px);
+            }
+
+            /* --- OVERLAY DE PAUSA --- */
+            .ej-pause-overlay {
+                position: absolute; inset: 0; z-index: 70;
+                background: rgba(1, 10, 5, 0.92);
+                backdrop-filter: blur(10px);
+                display: flex; align-items: center; justify-content: center;
+                animation: dilopho-pop 0.25s ease-out;
+            }
+            .ej-pause-card {
+                background: rgba(3, 20, 10, 0.95);
+                border: 2px solid #2ecc71;
+                border-radius: 10px;
+                padding: 2.2rem 3rem;
+                text-align: center;
+                box-shadow: 0 0 35px rgba(46, 204, 113, 0.4);
+                max-width: 440px; width: 90%;
+            }
+            .ej-pause-title {
+                font-family: 'Orbitron', monospace;
+                font-size: 1.6rem; font-weight: 900;
+                color: #2ecc71; letter-spacing: 2px;
+                margin-bottom: 0.6rem;
+            }
+            .ej-pause-sub {
+                font-family: 'Share Tech Mono', monospace;
+                font-size: 0.85rem; color: #a8ff3e;
+                margin-bottom: 1.6rem; letter-spacing: 1px;
+            }
+            .ej-btn-resume {
+                background: #2ecc71; color: #020b06;
+                border: none; border-radius: 5px;
+                font-family: 'Orbitron', monospace; font-size: 0.95rem; font-weight: 900;
+                padding: 0.8rem 2.2rem; cursor: pointer; letter-spacing: 1.5px;
+                box-shadow: 0 0 20px rgba(46, 204, 113, 0.5);
+                transition: all 0.2s ease;
+            }
+            .ej-btn-resume:hover {
+                background: #a8ff3e; transform: translateY(-2px);
+                box-shadow: 0 0 30px rgba(168, 255, 62, 0.8);
+            }
+
+
+            /* --- OPTIMIZACIÓN CELULAR HORIZONTAL (LANDSCAPE) --- */
+            @media (max-height: 520px) {
+                #dilopho-torch-btn { display: none !important; }
+                #dilopho-header-tracker { display: none !important; }
+                #dilopho-header { padding: 0.25rem 0.8rem; gap: 0.4rem; }
+                #dilopho-header-title { font-size: 0.75rem; max-width: 40vw; }
+                #dilopho-header-timer { font-size: 0.8rem; padding: 0.15rem 0.45rem; }
+                .ej-header-actions .ej-btn-lbl { display: none !important; }
+                .ej-header-actions .ej-btn-header { padding: 0.28rem 0.5rem; font-size: 0.75rem; }
+                #dilopho-status-bar { padding: 0.25rem 0.8rem; font-size: 0.68rem; gap: 0.3rem; }
+                .dilopho-item-slot { padding: 0.15rem 0.4rem; font-size: 0.65rem; }
+                .dilopho-floating-torch-btn {
+                    bottom: 12px;
+                    right: 14px;
+                    padding: 0.45rem 1rem;
+                    font-size: 0.76rem;
+                }
+                .dilopho-screen { padding: 0.5rem 1rem; }
+                .dilopho-screen-title { font-size: 1.15rem; margin-bottom: 0.2rem; }
+                .dilopho-screen-sub { font-size: 0.72rem; margin-bottom: 0.4rem; line-height: 1.35; }
+                .dilopho-mobile-fs-banner { padding: 0.35rem 0.75rem; margin: 0.25rem auto 0.45rem; }
+                .dilopho-fs-icon { font-size: 1.2rem; }
+                .dilopho-fs-text strong { font-size: 0.75rem; }
+                .dilopho-fs-text span { font-size: 0.66rem; }
+                .dilopho-btn-fs-toggle { font-size: 0.7rem; padding: 0.35rem 0.7rem; }
+                .dilopho-instruct { display: none !important; }
+                .dilopho-start-actions { margin-top: 0.3rem; }
+                .dilopho-btn { padding: 0.48rem 1.2rem; font-size: 0.78rem; }
+            }
 
             /* --- RESPONSIVE MÓVIL --- */
-            @media (max-width: 600px) {
-                #dilopho-fab { bottom: 180px; right: 16px; left: auto; padding: .5rem .9rem .5rem .65rem; }
-                #dilopho-fab img { width: 36px; height: auto; max-height: 26px; }
-                .dilopho-fab-title { font-size: .65rem; }
-                .dilopho-fab-sub   { display: none; }
-                #dilopho-status-bar { font-size: .68rem; padding: .35rem .6rem; }
-                #dilopho-header { padding: .35rem .6rem; }
-                #dilopho-header-title { font-size: .72rem; }
-                #dilopho-torch-btn { font-size: .68rem; padding: .35rem .65rem; }
-                .dilopho-item-slot { font-size: .65rem; padding: .25rem .45rem; }
+            @media (max-width: 900px), (hover: none) and (pointer: coarse) {
+                .dilopho-floating-torch-btn {
+                    display: inline-flex;
+                }
+            }
+
+            @media (max-width: 720px) {
+                #dilopho-header {
+                    padding: .4rem .6rem;
+                    gap: .4rem;
+                }
+                #dilopho-header-left {
+                    gap: .4rem;
+                }
+                #dilopho-header-title {
+                    font-size: .72rem;
+                    max-width: 34vw;
+                }
+                #dilopho-header-timer {
+                    font-size: .8rem;
+                    padding: .2rem .45rem;
+                }
+                #dilopho-header-tracker {
+                    display: none;
+                }
+                #dilopho-torch-btn {
+                    display: none;
+                }
+                .ej-header-actions {
+                    gap: 4px;
+                }
+                .ej-btn-header {
+                    padding: 0.35rem 0.5rem;
+                    font-size: 0.72rem;
+                }
+                .ej-btn-header .ej-btn-lbl {
+                    display: none;
+                }
+                #dilopho-status-bar {
+                    font-size: .68rem;
+                    padding: .35rem .6rem;
+                    gap: .4rem;
+                }
+                #dilopho-status-bar > div:first-child {
+                    font-size: .65rem;
+                }
+                #dilopho-items-wrap {
+                    gap: .3rem;
+                }
+                .dilopho-item-slot {
+                    font-size: .65rem;
+                    padding: .22rem .4rem;
+                }
+                .dilopho-mobile-fs-banner {
+                    flex-direction: column;
+                    text-align: center;
+                    padding: .65rem .75rem;
+                    gap: .55rem;
+                }
+                .dilopho-fs-banner-info {
+                    flex-direction: column;
+                    text-align: center;
+                    gap: .35rem;
+                }
+                .dilopho-fs-text strong {
+                    font-size: .78rem;
+                }
+                .dilopho-fs-text span {
+                    font-size: .68rem;
+                }
+                .dilopho-btn-fs-toggle {
+                    width: 100%;
+                    justify-content: center;
+                }
+                .dilopho-instruct {
+                    gap: .5rem;
+                    margin: .4rem 0 .9rem;
+                }
+                .dilopho-inst-item {
+                    width: 44%;
+                    min-width: 110px;
+                    padding: .45rem .5rem;
+                    font-size: .68rem;
+                }
+                .dilopho-inst-icon {
+                    font-size: 1.25rem;
+                }
+                .dilopho-start-actions {
+                    flex-direction: column;
+                    width: 100%;
+                }
+                .dilopho-start-actions .dilopho-btn {
+                    width: 100%;
+                    justify-content: center;
+                    box-sizing: border-box;
+                }
+                .dilopho-floating-torch-btn {
+                    bottom: 16px;
+                    right: 14px;
+                    padding: 0.65rem 1.1rem;
+                    font-size: 0.76rem;
+                }
             }
         `;
         document.head.appendChild(s);
     }
-
     // ============================================================
     //  HTML DEL OVERLAY
     // ============================================================
@@ -587,10 +926,10 @@
                 </div>
                 <button id="dilopho-torch-btn">🔦 APAGAR LINTERNA (ESPACIO)</button>
                 <div class="ej-header-actions">
-                    <button id="dilopho-mute-btn" class="ej-btn-header"><span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span></button>
-                    <button id="dilopho-pause-btn" class="ej-btn-header"><span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span></button>
-                    <button id="dilopho-fullscreen-btn" class="ej-btn-header"><span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span></button>
-                    <button id="dilopho-close-btn" class="ej-btn-header ej-btn-header-danger"><span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span></button>
+                    <button id="dilopho-mute-btn" class="ej-btn-header" title="Silenciar / Activar Sonido"><span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span></button>
+                    <button id="dilopho-pause-btn" class="ej-btn-header" title="Pausar / Reanudar"><span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span></button>
+                    <button id="dilopho-fullscreen-btn" class="ej-btn-header" title="Pantalla Completa"><span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span></button>
+                    <button id="dilopho-close-btn" class="ej-btn-header ej-btn-header-danger" title="Cerrar"><span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span></button>
                 </div>
             </div>
 
@@ -599,70 +938,111 @@
 
                 <div id="dilopho-alert-banner"></div>
 
+                <!-- Botón táctil flotante de linterna para celulares -->
+                <button id="dilopho-mobile-torch" class="dilopho-floating-torch-btn">
+                    <span class="dilopho-torch-ico">🔦</span>
+                    <span class="dilopho-torch-txt">APAGAR LINTERNA</span>
+                </button>
+
                 <!-- Pantalla inicio -->
                 <div class="dilopho-screen show" id="dilopho-start-screen">
-                    <div class="dilopho-screen-title" style="color:#2ecc71;">🏥 ACOSO EN LA CLÍNICA</div>
-                    <div class="dilopho-screen-sub">
-                        Samuel se encuentra dentro de la clínica abandonada de Nublar. Explora con tu linterna para encontrar los 5 suministros clasificados en 2 minutos, pero apaga la luz inmediatamente cuando escuches la advertencia del Dilophosaurus acechando.<br><br>
-                        ⚠️ <strong>ATENCIÓN:</strong> Cuando escuches el audio de <strong>Advertencia</strong>, el Dilophosaurus te está acechando. ¡Apaga la linterna con la <strong>Barra Espaciadora</strong> o el botón táctil antes de que ataque!
+                    <div class="dilopho-screen-card">
+                        <div class="dilopho-screen-title" style="color:#2ecc71;">🏥 ACOSO EN LA CLÍNICA</div>
+                        <div class="dilopho-screen-sub">
+                            Samuel se encuentra dentro de la clínica abandonada de Nublar. Explora con tu linterna para encontrar los 5 suministros clasificados en 2 minutos, pero apaga la luz inmediatamente cuando escuches la advertencia del Dilophosaurus acechando.
+                        </div>
+
+                        <!-- Acciones Principales y Pantalla Completa Visibles de Inmediato -->
+                        <div class="dilopho-start-actions">
+                            <button class="dilopho-btn dilopho-btn-fullscreen" id="dilopho-start-fullscreen-btn">
+                                <span style="font-size:1.15rem;">⛶</span> JUGAR EN PANTALLA COMPLETA
+                            </button>
+                            <button class="dilopho-btn dilopho-btn-primary" id="dilopho-start-btn">
+                                <span>▶</span> COMENZAR BÚSQUEDA
+                            </button>
+                        </div>
+
+                        <!-- Opción destacada de Pantalla Completa -->
+                        <div class="dilopho-mobile-fs-banner">
+                            <div class="dilopho-fs-banner-info">
+                                <span class="dilopho-fs-icon">📱⛶</span>
+                                <div class="dilopho-fs-text">
+                                    <strong>MODO PANTALLA COMPLETA RECOMENDADO</strong>
+                                    <span>Para celulares: mayor precisión al iluminar con el dedo y sin barras molestas.</span>
+                                </div>
+                            </div>
+                            <button type="button" class="dilopho-btn-fs-toggle" id="dilopho-start-fs-toggle-btn">
+                                <span class="ej-ic">⛶</span> ACTIVAR
+                            </button>
+                        </div>
+
+                        <div class="dilopho-instruct">
+                            <div class="dilopho-inst-item">
+                                <div class="dilopho-inst-icon">🔦</div>
+                                <div>Arrastra dedo/mouse<br><strong>ILUMINA Y BUSCA</strong></div>
+                            </div>
+                            <div class="dilopho-inst-item">
+                                <div class="dilopho-inst-icon">👂</div>
+                                <div>Audio Alerta =<br><strong>¡APAGA LINTERNA!</strong></div>
+                            </div>
+                            <div class="dilopho-inst-item">
+                                <div class="dilopho-inst-icon">⏳</div>
+                                <div>Espera a que<br><strong>SE MARCHE (0s)</strong></div>
+                            </div>
+                            <div class="dilopho-inst-item">
+                                <div class="dilopho-inst-icon">🎒</div>
+                                <div>Toca para rescatar<br><strong>5 SUMINISTROS</strong></div>
+                            </div>
+                        </div>
+
+                        <div style="font-size:0.7rem;color:#888;margin-top:0.4rem;letter-spacing:0.5px;">
+                            💡 En celular, puedes girar la pantalla a horizontal para mayor visión panorámica.
+                        </div>
                     </div>
-                    <div class="dilopho-instruct">
-                        <div class="dilopho-inst-item">
-                            <div class="dilopho-inst-icon">🔦</div>
-                            <div>Luz del Mouse<br><strong>EXPLORA</strong></div>
-                        </div>
-                        <div class="dilopho-inst-item">
-                            <div class="dilopho-inst-icon">👂</div>
-                            <div>Audio Alerta =<br><strong>¡APAGA LUZ!</strong></div>
-                        </div>
-                        <div class="dilopho-inst-item">
-                            <div class="dilopho-inst-icon">⏳</div>
-                            <div>Espera a que<br><strong>SE MARCHE</strong></div>
-                        </div>
-                        <div class="dilopho-inst-item">
-                            <div class="dilopho-inst-icon">🎒</div>
-                            <div>Encuentra los<br><strong>5 OBJETOS</strong></div>
-                        </div>
-                    </div>
-                    <button class="dilopho-btn dilopho-btn-primary" id="dilopho-start-btn">▶ COMENZAR BÚSQUEDA</button>
                 </div>
 
                 <!-- Pantalla derrota (Dilophosaurus ataca) -->
                 <div class="dilopho-screen" id="dilopho-lose-attack-screen">
-                    <div class="dilopho-screen-title" style="color:#e74c3c;">💀 ¡EL DILOPHOSAURUS TE CEGÓ Y DEVORÓ!</div>
-                    <div class="dilopho-screen-sub">
-                        No apagaste la linterna a tiempo o encendiste la luz mientras el dinosaurio aún estaba en la sala.<br>
-                        Su veneno corrosivo impactó directamente en tus ojos.
-                    </div>
-                    <div class="ej-modal-actions">
-                        <button class="ej-btn-replay" id="dilopho-retry-btn">↺ Volver a jugar</button>
-                        <button class="ej-btn-return" id="dilopho-lose-close">✕ Regresar al sitio</button>
+                    <div class="dilopho-screen-card">
+                        <div class="dilopho-screen-title" style="color:#e74c3c;">💀 ¡EL DILOPHOSAURUS TE CEGÓ Y DEVORÓ!</div>
+                        <div class="dilopho-screen-sub">
+                            No apagaste la linterna a tiempo o encendiste la luz mientras el dinosaurio aún estaba en la sala.<br>
+                            Su veneno corrosivo impactó directamente en tus ojos.
+                        </div>
+                        <div class="ej-modal-actions">
+                            <button class="ej-btn-replay" id="dilopho-retry-btn">↺ Volver a jugar</button>
+                            <button class="ej-btn-return" id="dilopho-lose-close">✕ Regresar al sitio</button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Pantalla derrota (Tiempo agotado) -->
                 <div class="dilopho-screen" id="dilopho-lose-time-screen">
-                    <div class="dilopho-screen-title" style="color:#e67e22;">⏳ ¡TIEMPO AGOTADO!</div>
-                    <div class="dilopho-screen-sub">
-                        Pasaron los 2 minutos sin recuperar todos los suministros.<br>
-                        Los sistemas de seguridad se bloquearon por completo y la clínica quedó sellada.
-                    </div>
-                    <div class="ej-modal-actions">
-                        <button class="ej-btn-replay" id="dilopho-retry-time-btn">↺ Volver a jugar</button>
-                        <button class="ej-btn-return" id="dilopho-lose-time-close">✕ Regresar al sitio</button>
+                    <div class="dilopho-screen-card">
+                        <div class="dilopho-screen-title" style="color:#e67e22;">⏳ ¡TIEMPO AGOTADO!</div>
+                        <div class="dilopho-screen-sub">
+                            Pasaron los 2 minutos sin recuperar todos los suministros.<br>
+                            Los sistemas de seguridad se bloquearon por completo y la clínica quedó sellada.
+                        </div>
+                        <div class="ej-modal-actions">
+                            <button class="ej-btn-replay" id="dilopho-retry-time-btn">↺ Volver a jugar</button>
+                            <button class="ej-btn-return" id="dilopho-lose-time-close">✕ Regresar al sitio</button>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Pantalla victoria -->
                 <div class="dilopho-screen" id="dilopho-win-screen">
-                    <div class="dilopho-screen-title" style="color:#2ecc71;">🏆 ¡ESCAPASTE DE LA CLÍNICA!</div>
-                    <div class="dilopho-screen-sub">
-                        ¡Has recuperado los 5 objetos clasificados burlando al Dilophosaurus en la oscuridad total!<br>
-                        El laboratorio de la Dra. Sorkin y los embriones Barbasol están asegurados.
-                    </div>
-                    <div class="ej-modal-actions">
-                        <button class="ej-btn-replay" id="dilopho-win-replay">↺ Volver a jugar</button>
-                        <button class="ej-btn-return" id="dilopho-win-close">✕ Regresar al sitio</button>
+                    <div class="dilopho-screen-card">
+                        <div class="dilopho-screen-title" style="color:#2ecc71;">🏆 ¡ESCAPASTE DE LA CLÍNICA!</div>
+                        <div class="dilopho-screen-sub">
+                            ¡Has recuperado los 5 objetos clasificados burlando al Dilophosaurus en la oscuridad total!<br>
+                            El laboratorio de la Dra. Sorkin y los embriones Barbasol están asegurados.
+                        </div>
+                        <div class="ej-modal-actions">
+                            <button class="ej-btn-replay" id="dilopho-win-replay">↺ Volver a jugar</button>
+                            <button class="ej-btn-return" id="dilopho-win-close">✕ Regresar al sitio</button>
+                        </div>
                     </div>
                 </div>
             
@@ -684,7 +1064,6 @@
         `;
         document.body.appendChild(ov);
     }
-
     // ============================================================
     //  FAB BUTTON
     // ============================================================
@@ -741,23 +1120,51 @@
 
     function updateTorchButtonUI() {
         var btn = document.getElementById('dilopho-torch-btn');
-        if (!btn) return;
+        var mobBtn = document.getElementById('dilopho-mobile-torch');
 
-        if (flashlightOn) {
-            btn.classList.remove('off');
-            btn.textContent = '🔦 APAGAR LINTERNA (ESPACIO)';
-        } else {
-            btn.classList.add('off');
-            btn.textContent = '💡 ENCENDER LINTERNA (ESPACIO)';
+        // Botón de cabecera
+        if (btn) {
+            if (flashlightOn) {
+                btn.classList.remove('off');
+                btn.textContent = '🔦 APAGAR LINTERNA (ESPACIO)';
+            } else {
+                btn.classList.add('off');
+                btn.textContent = '💡 ENCENDER LINTERNA (ESPACIO)';
+            }
+            if (state === 'warning' && flashlightOn) {
+                btn.classList.add('danger-pulse');
+            } else {
+                btn.classList.remove('danger-pulse');
+            }
         }
 
-        if (state === 'warning' && flashlightOn) {
-            btn.classList.add('danger-pulse');
-        } else {
-            btn.classList.remove('danger-pulse');
+        // Botón táctil flotante en celular
+        if (mobBtn) {
+            if (state !== 'searching' && state !== 'warning' && state !== 'prowling') {
+                mobBtn.style.display = 'none';
+                return;
+            } else {
+                mobBtn.style.display = '';
+            }
+            mobBtn.className = 'dilopho-floating-torch-btn';
+            if (flashlightOn) {
+                mobBtn.innerHTML = '<span class="dilopho-torch-ico">🔦</span><span class="dilopho-torch-txt">APAGAR LINTERNA</span>';
+            } else {
+                mobBtn.classList.add('off');
+                mobBtn.innerHTML = '<span class="dilopho-torch-ico">💡</span><span class="dilopho-torch-txt">ENCENDER LINTERNA</span>';
+            }
+
+            if (state === 'warning') {
+                if (flashlightOn) {
+                    mobBtn.classList.add('danger-pulse');
+                    mobBtn.innerHTML = '<span class="dilopho-torch-ico">🚨</span><span class="dilopho-torch-txt">¡APAGA LA LINTERNA!</span>';
+                }
+            } else if (state === 'prowling') {
+                mobBtn.classList.add('prowling-locked');
+                mobBtn.innerHTML = '<span class="dilopho-torch-ico">👁️</span><span class="dilopho-torch-txt">ACECHANDO... NO ENCENDER</span>';
+            }
         }
     }
-
     function updateAlertBanner() {
         var banner = document.getElementById('dilopho-alert-banner');
         var tracker = document.getElementById('dilopho-header-tracker');
@@ -882,9 +1289,12 @@
         var lx = (clientX - rect.left) / scale;
         var ly = (clientY - rect.top) / scale;
 
-        // La interacción solo funciona dentro del cono/radio de luz de la linterna
+        // La interacción funciona dentro del cono/radio de luz de la linterna
         var distToTorch = Math.hypot(lx - mouseX, ly - mouseY);
         if (distToTorch > FLASHLIGHT_RADIUS) return;
+
+        var isMobile = (window.innerWidth <= 800) || ('ontouchstart' in window);
+        var hitPadding = isMobile ? 18 : 12;
 
         // 1. Comprobar si golpeó un objetivo legítimo
         for (var i = 0; i < TARGET_ITEMS.length; i++) {
@@ -894,8 +1304,8 @@
             var img = imgs[item.id];
             var aspect = (img && img.naturalWidth && img.naturalHeight) ? (img.naturalWidth / img.naturalHeight) : 1;
             var itemW = item.h * aspect;
-            var halfW = Math.max(18, (itemW / 2) + 12);
-            var halfH = Math.max(18, (item.h / 2) + 12);
+            var halfW = Math.max(22, (itemW / 2) + hitPadding);
+            var halfH = Math.max(22, (item.h / 2) + hitPadding);
 
             if (lx >= item.x - halfW && lx <= item.x + halfW &&
                 ly >= item.y - halfH && ly <= item.y + halfH) {
@@ -945,7 +1355,6 @@
             }
         }
     }
-
     function checkVictory() {
         var allFound = TARGET_ITEMS.every(function (t) { return t.collected; });
         if (allFound) {
@@ -1229,6 +1638,82 @@
         }
     }
 
+    function toggleMute() {
+        isMuted = !isMuted;
+        var btnMute = document.getElementById('dilopho-mute-btn');
+        if (isMuted) {
+            stopAllAudio();
+            if (btnMute) {
+                var ic = btnMute.querySelector('.ej-ic');
+                var lbl = btnMute.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '🔇';
+                if (lbl) lbl.textContent = ' MUTE';
+            }
+        } else {
+            if (btnMute) {
+                var ic = btnMute.querySelector('.ej-ic');
+                var lbl = btnMute.querySelector('.ej-btn-lbl');
+                if (ic) ic.textContent = '🔊';
+                if (lbl) lbl.textContent = ' SONIDO';
+            }
+            if ((state === 'searching' || state === 'warning' || state === 'prowling') && !isPaused) {
+                playAudio(sndTension);
+            }
+        }
+    }
+
+    function updateFullscreenButtons(isFs) {
+        var fullBtn = document.getElementById('dilopho-fullscreen-btn');
+        var startFsToggle = document.getElementById('dilopho-start-fs-toggle-btn');
+        var startFsPrimary = document.getElementById('dilopho-start-fullscreen-btn');
+
+        if (fullBtn) {
+            fullBtn.innerHTML = isFs 
+                ? '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>' 
+                : '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+        }
+        if (startFsToggle) {
+            startFsToggle.innerHTML = isFs 
+                ? '<span class="ej-ic">🗗</span> SALIR DE PANTALLA COMPLETA' 
+                : '<span class="ej-ic">⛶</span> ACTIVAR PANTALLA COMPLETA';
+        }
+        if (startFsPrimary) {
+            startFsPrimary.innerHTML = isFs 
+                ? '<span style="font-size:1.15rem;">▶</span> JUGAR AHORA (PANTALLA COMPLETA)' 
+                : '<span style="font-size:1.15rem;">⛶</span> JUGAR EN PANTALLA COMPLETA';
+        }
+    }
+
+    function toggleFullscreen() {
+        var target = document.getElementById('dilopho-overlay') || document.documentElement;
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+
+        if (!isFs) {
+            var p = null;
+            if (target.requestFullscreen) {
+                p = target.requestFullscreen();
+            } else if (target.webkitRequestFullscreen) {
+                p = target.webkitRequestFullscreen();
+            } else if (document.documentElement.requestFullscreen) {
+                p = document.documentElement.requestFullscreen();
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                p = document.documentElement.webkitRequestFullscreen();
+            }
+            if (p && p.catch) p.catch(function () {});
+            updateFullscreenButtons(true);
+        } else {
+            var ep = null;
+            if (document.exitFullscreen) {
+                ep = document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                ep = document.webkitExitFullscreen();
+            } else if (document.mozCancelFullScreen) {
+                ep = document.mozCancelFullScreen();
+            }
+            if (ep && ep.catch) ep.catch(function () {});
+            updateFullscreenButtons(false);
+        }
+    }
     function gameLoop(now) {
         if (isPaused) {
             lastTime = now;
@@ -1343,7 +1828,15 @@
         stopAllAudio();
         if (aniFrame) { cancelAnimationFrame(aniFrame); aniFrame = null; }
         state = 'idle';
-        document.getElementById('dilopho-overlay').classList.remove('open');
+        var ov = document.getElementById('dilopho-overlay');
+        if (ov) ov.classList.remove('open');
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        if (isFs) {
+            try {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            } catch(e) {}
+        }
     }
 
     // ============================================================
@@ -1354,7 +1847,15 @@
         var fab = document.getElementById('dilopho-fab');
         var closeBtn = document.getElementById('dilopho-close-btn');
         var torchBtn = document.getElementById('dilopho-torch-btn');
+        var mobileTorchBtn = document.getElementById('dilopho-mobile-torch');
         var startBtn = document.getElementById('dilopho-start-btn');
+        var startFsPrimary = document.getElementById('dilopho-start-fullscreen-btn');
+        var startFsToggle = document.getElementById('dilopho-start-fs-toggle-btn');
+        var muteBtn = document.getElementById('dilopho-mute-btn');
+        var pauseBtn = document.getElementById('dilopho-pause-btn');
+        var resumeBtn = document.getElementById('dilopho-btn-resume');
+        var fullBtn = document.getElementById('dilopho-fullscreen-btn');
+
         var retryBtn = document.getElementById('dilopho-retry-btn');
         var retryTimeBtn = document.getElementById('dilopho-retry-time-btn');
         var loseClose = document.getElementById('dilopho-lose-close');
@@ -1364,39 +1865,59 @@
 
         function openGame() {
             ov.classList.add('open');
-            resizeCanvas();
+            setTimeout(resizeCanvas, 60);
             hideScreens();
+            var mobTorch = document.getElementById('dilopho-mobile-torch');
+            if (mobTorch) mobTorch.style.display = 'none';
             document.getElementById('dilopho-start-screen').classList.add('show');
             state = 'idle';
+            var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            updateFullscreenButtons(isFs);
         }
         window.openDilophoGame = openGame;
-        fab.addEventListener('click', openGame);
+        if (fab) fab.addEventListener('click', openGame);
 
-        closeBtn.addEventListener('click', closeGame);
-        var fullBtn = document.getElementById('dilopho-fullscreen-btn');
-        if (fullBtn) {
-            fullBtn.addEventListener('click', function () {
-                var target = document.getElementById('dilopho-overlay') || document.documentElement;
-                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (closeBtn) closeBtn.addEventListener('click', closeGame);
+
+        // Pantalla completa
+        if (fullBtn) fullBtn.addEventListener('click', toggleFullscreen);
+        if (startFsToggle) startFsToggle.addEventListener('click', toggleFullscreen);
+        if (startFsPrimary) {
+            startFsPrimary.addEventListener('click', function () {
+                if (window.registerMinigameAttempt) window.registerMinigameAttempt('dilopho');
+                var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+                if (!isFs) {
+                    var target = document.getElementById('dilopho-overlay') || document.documentElement;
                     if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                     else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                    fullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
-                } else {
-                    if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
-                    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                    fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+                    else if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(function(){});
                 }
-            });
-            document.addEventListener('fullscreenchange', function() {
-                if (!document.fullscreenElement) fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
-                else fullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
+                startGame();
             });
         }
+
+        ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'msfullscreenchange'].forEach(function(evt) {
+            document.addEventListener(evt, function() {
+                var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+                updateFullscreenButtons(isFs);
+                setTimeout(resizeCanvas, 150);
+            });
+        });
+
+        // Controles de audio y pausa
+        if (muteBtn) muteBtn.addEventListener('click', toggleMute);
+        if (pauseBtn) pauseBtn.addEventListener('click', togglePause);
+        if (resumeBtn) resumeBtn.addEventListener('click', togglePause);
+
+        // Cierre y reintentos en modales de fin de partida
         if (loseClose) loseClose.addEventListener('click', closeGame);
         if (loseTimeClose) loseTimeClose.addEventListener('click', closeGame);
         if (winClose) winClose.addEventListener('click', closeGame);
 
-        startBtn.addEventListener('click', startGame);
+        if (startBtn) startBtn.addEventListener('click', function () {
+            if (window.registerMinigameAttempt) window.registerMinigameAttempt('dilopho');
+            startGame();
+        });
         if (retryBtn) retryBtn.addEventListener('click', function () {
             if (window.registerMinigameAttempt) window.registerMinigameAttempt('dilopho');
             startGame();
@@ -1410,20 +1931,32 @@
             startGame();
         });
 
-        torchBtn.addEventListener('click', toggleFlashlight);
+        // Botones linterna
+        if (torchBtn) torchBtn.addEventListener('click', toggleFlashlight);
+        if (mobileTorchBtn) mobileTorchBtn.addEventListener('click', toggleFlashlight);
 
-        // Tecla Espacio o F para conmutar linterna rápidamente
+        // Teclas rápidas
         window.addEventListener('keydown', function (e) {
             if (!ov.classList.contains('open')) return;
             if (e.code === 'Space' || e.key === ' ' || e.code === 'KeyF' || e.key === 'f') {
                 e.preventDefault();
                 toggleFlashlight();
+            } else if (e.code === 'KeyP' || e.key === 'p' || e.key === 'P') {
+                e.preventDefault();
+                togglePause();
+            } else if (e.code === 'KeyM' || e.key === 'm' || e.key === 'M') {
+                e.preventDefault();
+                toggleMute();
             } else if (e.key === 'Escape') {
-                closeGame();
+                if (isPaused) {
+                    togglePause();
+                } else {
+                    closeGame();
+                }
             }
         });
 
-        // Seguimiento del mouse para la linterna
+        // Seguimiento del mouse para linterna en PC
         canvas.addEventListener('mousemove', function (e) {
             var rect = canvas.getBoundingClientRect();
             mouseX = (e.clientX - rect.left) / scale;
@@ -1439,29 +1972,53 @@
             onCanvasClick(e.clientX, e.clientY);
         });
 
-        // Soporte táctil móvil
-        canvas.addEventListener('touchmove', function (e) {
-            if (e.touches && e.touches[0]) {
-                var rect = canvas.getBoundingClientRect();
-                mouseX = (e.touches[0].clientX - rect.left) / scale;
-                mouseY = (e.touches[0].clientY - rect.top) / scale;
-                isMouseInside = true;
-            }
-        }, { passive: true });
+        // Soporte táctil optimizado para celulares: arrastrar ilumina, toque rápido selecciona
+        var touchStartX = 0, touchStartY = 0, touchStartTime = 0;
+        var touchMoved = false;
+
+        function updateTouchPos(touch) {
+            var rect = canvas.getBoundingClientRect();
+            mouseX = (touch.clientX - rect.left) / scale;
+            mouseY = (touch.clientY - rect.top) / scale;
+            isMouseInside = true;
+        }
 
         canvas.addEventListener('touchstart', function (e) {
             if (e.touches && e.touches[0]) {
-                var rect = canvas.getBoundingClientRect();
-                mouseX = (e.touches[0].clientX - rect.left) / scale;
-                mouseY = (e.touches[0].clientY - rect.top) / scale;
-                isMouseInside = true;
-                onCanvasClick(e.touches[0].clientX, e.touches[0].clientY);
+                var t = e.touches[0];
+                touchStartX = t.clientX;
+                touchStartY = t.clientY;
+                touchStartTime = Date.now();
+                touchMoved = false;
+                updateTouchPos(t);
             }
-        }, { passive: true });
+            if (e.cancelable) e.preventDefault();
+        }, { passive: false });
+
+        canvas.addEventListener('touchmove', function (e) {
+            if (e.touches && e.touches[0]) {
+                var t = e.touches[0];
+                var dx = t.clientX - touchStartX;
+                var dy = t.clientY - touchStartY;
+                if (Math.hypot(dx, dy) > 8) {
+                    touchMoved = true;
+                }
+                updateTouchPos(t);
+            }
+            if (e.cancelable) e.preventDefault();
+        }, { passive: false });
+
+        canvas.addEventListener('touchend', function (e) {
+            var duration = Date.now() - touchStartTime;
+            if (!touchMoved && duration < 500) {
+                // Toque intencional (tap): interactuar o recoger objeto
+                onCanvasClick(touchStartX, touchStartY);
+            }
+            if (e.cancelable) e.preventDefault();
+        }, { passive: false });
 
         window.addEventListener('resize', resizeCanvas);
     }
-
     // ============================================================
     //  INICIO DE LA APLICACIÓN
     // ============================================================
