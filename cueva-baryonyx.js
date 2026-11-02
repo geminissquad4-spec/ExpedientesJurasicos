@@ -74,6 +74,10 @@
         var style = document.createElement('style');
         style.id = 'cueva-baryonyx-styles';
         style.textContent = [
+            '.ej-btn-header { background: rgba(0, 20, 20, 0.85) !important; border: 1.5px solid #00f5ff !important; color: #00f5ff !important; font-family: "Share Tech Mono", monospace !important; font-size: 0.75rem !important; font-weight: 700 !important; padding: 0.35rem 0.75rem !important; border-radius: 4px !important; cursor: pointer !important; letter-spacing: 1px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 5px !important; text-transform: uppercase !important; transition: all 0.2s ease !important; height: 32px !important; box-sizing: border-box !important; touch-action: manipulation !important; }',
+            '.ej-btn-header:hover { background: rgba(0, 245, 255, 0.25) !important; color: #fff !important; }',
+            '.ej-btn-header-danger { background: rgba(255, 71, 87, 0.12) !important; border-color: #ff4757 !important; color: #ff4757 !important; }',
+            '.ej-btn-header-danger:hover { background: #ff4757 !important; color: #fff !important; }',
             '#cb-overlay {',
             '    position: fixed; inset: 0; z-index: 99995;',
             '    background: rgba(2, 6, 4, 0.98); backdrop-filter: blur(8px);',
@@ -87,12 +91,13 @@
             '/* Header de control */',
             '#cb-header {',
             '    flex-shrink: 0; display: flex; align-items: center; justify-content: space-between;',
-            '    padding: 0.55rem 1.4rem; background: rgba(4, 16, 10, 0.96);',
-            '    border-bottom: 2px solid rgba(0, 210, 211, 0.4);',
+            '    padding: 0 0.8rem; height: 40px; min-height: 40px; max-height: 40px;',
+            '    background: rgba(4, 16, 10, 0.96); border-bottom: 2px solid rgba(0, 210, 211, 0.4);',
             '    box-shadow: 0 4px 20px rgba(0,0,0,0.85); z-index: 10;',
-            '    gap: 1rem; flex-wrap: wrap;',
+            '    gap: 0.5rem; flex-wrap: nowrap; overflow: hidden; white-space: nowrap;',
             '}',
-            '#cb-header-left { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }',
+            '#cb-header-left { display: flex; align-items: center; gap: 0.6rem; flex-wrap: nowrap; overflow: hidden; }',
+            '#cb-header-right { display: flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap; flex-shrink: 0; }',
             '#cb-header-title {',
             '    font-family: "Orbitron", monospace; font-size: 0.95rem; font-weight: 900;',
             '    color: #00d2d3; letter-spacing: 1.5px; text-transform: uppercase;',
@@ -194,7 +199,207 @@
             '.cb-btn-green { background: #2ecc71; color: #02140a; box-shadow: 0 0 20px rgba(46, 204, 113, 0.5); }',
             '.cb-btn-green:hover { background: #55efc4; box-shadow: 0 0 35px rgba(85, 239, 196, 0.8); transform: translateY(-2px); }',
             '.cb-btn-red { background: #e74c3c; color: #fff; box-shadow: 0 0 20px rgba(231, 76, 60, 0.5); }',
-            '.cb-btn-red:hover { background: #ff4757; box-shadow: 0 0 35px rgba(255, 71, 87, 0.8); transform: translateY(-2px); }'
+            '.cb-btn-red:hover { background: #ff4757; box-shadow: 0 0 35px rgba(255, 71, 87, 0.8); transform: translateY(-2px); }',
+            '',
+            '/* Card y banner del modal de inicio */',
+            '.cb-modal-card {',
+            '    background: linear-gradient(135deg, rgba(4, 24, 20, 0.96), rgba(2, 12, 10, 0.98));',
+            '    border: 2px solid rgba(0, 210, 211, 0.55);',
+            '    border-radius: 8px;',
+            '    padding: 1.6rem 2rem;',
+            '    max-width: 620px;',
+            '    width: 92%;',
+            '    box-shadow: 0 0 45px rgba(0, 210, 211, 0.35);',
+            '    margin: auto;',
+            '    max-height: 88dvh;',
+            '    overflow-y: auto;',
+            '    -webkit-overflow-scrolling: touch;',
+            '    box-sizing: border-box;',
+            '    text-align: center;',
+            '}',
+            '.cb-modal-sub {',
+            '    font-family: "Share Tech Mono", monospace;',
+            '    font-size: 0.86rem;',
+            '    color: #ddd;',
+            '    line-height: 1.5;',
+            '    margin-bottom: 1rem;',
+            '}',
+            '.cb-rules-box {',
+            '    background: rgba(0, 0, 0, 0.65);',
+            '    border-left: 3px solid #00d2d3;',
+            '    padding: 0.65rem 0.9rem;',
+            '    text-align: left;',
+            '    font-family: "Share Tech Mono", monospace;',
+            '    font-size: 0.76rem;',
+            '    color: #eee;',
+            '    margin-bottom: 1.1rem;',
+            '    line-height: 1.45;',
+            '}',
+            '.cb-fs-banner {',
+            '    display: flex;',
+            '    align-items: center;',
+            '    justify-content: space-between;',
+            '    gap: 0.8rem;',
+            '    background: rgba(0, 210, 211, 0.12);',
+            '    border: 1.5px solid #00d2d3;',
+            '    border-radius: 6px;',
+            '    padding: 0.6rem 0.9rem;',
+            '    margin-bottom: 1.2rem;',
+            '    box-shadow: 0 0 16px rgba(0, 210, 211, 0.25);',
+            '    text-align: left;',
+            '    box-sizing: border-box;',
+            '    width: 100%;',
+            '}',
+            '.cb-fs-text {',
+            '    display: flex;',
+            '    align-items: center;',
+            '    gap: 0.5rem;',
+            '    font-family: "Share Tech Mono", monospace;',
+            '    font-size: 0.76rem;',
+            '    color: #48dbfb;',
+            '    line-height: 1.35;',
+            '}',
+            '.cb-fs-icon { font-size: 1.25rem; flex-shrink: 0; }',
+            '.cb-fs-toggle-btn {',
+            '    background: #00d2d3;',
+            '    color: #02120e;',
+            '    border: none;',
+            '    padding: 0.4rem 0.85rem;',
+            '    border-radius: 4px;',
+            '    font-family: "Orbitron", monospace;',
+            '    font-size: 0.74rem;',
+            '    font-weight: 900;',
+            '    letter-spacing: 1px;',
+            '    cursor: pointer;',
+            '    transition: all 0.2s ease;',
+            '    white-space: nowrap;',
+            '    flex-shrink: 0;',
+            '    touch-action: manipulation;',
+            '}',
+            '.cb-fs-toggle-btn:hover { background: #48dbfb; box-shadow: 0 0 14px rgba(0, 210, 211, 0.8); }',
+            '.cb-start-actions {',
+            '    display: flex;',
+            '    gap: 0.75rem;',
+            '    flex-wrap: wrap;',
+            '    justify-content: center;',
+            '    align-items: center;',
+            '    width: 100%;',
+            '}',
+            '.cb-start-fullscreen-btn {',
+            '    background: linear-gradient(135deg, #00d2d3, #0984e3) !important;',
+            '    color: #02120e !important;',
+            '    border: none !important;',
+            '    padding: 0.75rem 1.6rem !important;',
+            '    border-radius: 4px !important;',
+            '    font-family: "Orbitron", monospace !important;',
+            '    font-size: 0.85rem !important;',
+            '    font-weight: 900 !important;',
+            '    letter-spacing: 1.5px !important;',
+            '    cursor: pointer !important;',
+            '    box-shadow: 0 0 20px rgba(0, 210, 211, 0.55) !important;',
+            '    transition: all 0.25s ease !important;',
+            '    touch-action: manipulation !important;',
+            '    text-transform: uppercase !important;',
+            '    display: inline-flex !important;',
+            '    align-items: center !important;',
+            '    gap: 6px !important;',
+            '}',
+            '.cb-start-fullscreen-btn:hover {',
+            '    background: linear-gradient(135deg, #48dbfb, #00cec9) !important;',
+            '    box-shadow: 0 0 32px rgba(0, 210, 211, 0.9) !important;',
+            '    transform: translateY(-2px);',
+            '}',
+            '.cb-start-btn {',
+            '    background: rgba(255, 255, 255, 0.12) !important;',
+            '    color: #fff !important;',
+            '    border: 1.5px solid rgba(255, 255, 255, 0.3) !important;',
+            '    padding: 0.75rem 1.5rem !important;',
+            '    border-radius: 4px !important;',
+            '    font-family: "Orbitron", monospace !important;',
+            '    font-size: 0.85rem !important;',
+            '    font-weight: 700 !important;',
+            '    letter-spacing: 1.5px !important;',
+            '    cursor: pointer !important;',
+            '    transition: all 0.25s ease !important;',
+            '    touch-action: manipulation !important;',
+            '    text-transform: uppercase !important;',
+            '}',
+            '.cb-start-btn:hover {',
+            '    background: rgba(255, 255, 255, 0.25) !important;',
+            '    border-color: #fff !important;',
+            '}',
+            '',
+            '.cb-title-short, .cb-danger-short { display: none; }',
+            '/* Responsivo Celulares */',
+            '@media (max-width: 900px), (max-height: 520px) {',
+            '    .cb-title-full { display: none !important; }',
+            '    .cb-title-short { display: inline !important; }',
+            '    #cb-header-title { font-size: 0.85rem !important; }',
+            '}',
+            '@media (max-width: 768px), (max-height: 520px) {',
+            '    #cb-header {',
+            '        height: 38px !important;',
+            '        min-height: 38px !important;',
+            '        max-height: 38px !important;',
+            '        padding: 0 0.5rem !important;',
+            '        gap: 0.35rem !important;',
+            '    }',
+            '    .ej-btn-lbl { display: none !important; }',
+            '    .ej-btn-header {',
+            '        height: 28px !important;',
+            '        min-width: 28px !important;',
+            '        padding: 0 0.45rem !important;',
+            '        font-size: 0.75rem !important;',
+            '    }',
+            '    #cb-climb-pill, #cb-danger-box {',
+            '        padding: 0.15rem 0.4rem !important;',
+            '        font-size: 0.72rem !important;',
+            '    }',
+            '}',
+            '@media (max-width: 580px) {',
+            '    #cb-header-title { display: none !important; }',
+            '    .cb-danger-long { display: none !important; }',
+            '    .cb-danger-short { display: inline !important; }',
+            '    #cb-progress-bar-wrap { width: 88% !important; max-width: 360px !important; }',
+            '    #cb-progress-text { font-size: 0.66rem !important; }',
+            '    #cb-space-hint { display: none !important; }',
+            '    #cb-touch-climb-btn {',
+            '        bottom: 20px !important;',
+            '        right: 50% !important;',
+            '        transform: translateX(50%) !important;',
+            '        min-width: 180px !important;',
+            '        justify-content: center !important;',
+            '    }',
+            '    .cb-modal-title { font-size: 1.15rem !important; margin-bottom: 0.35rem !important; }',
+            '    .cb-modal-card { padding: 0.85rem 0.95rem !important; width: 94% !important; max-height: 94dvh !important; }',
+            '    .cb-modal-sub { font-size: 0.74rem !important; line-height: 1.3 !important; margin-bottom: 0.5rem !important; }',
+            '    .cb-rules-box { font-size: 0.70rem !important; padding: 0.45rem 0.65rem !important; margin-bottom: 0.55rem !important; line-height: 1.35 !important; }',
+            '    .cb-fs-banner { padding: 0.4rem 0.6rem !important; margin-bottom: 0.55rem !important; }',
+            '    .cb-fs-text { font-size: 0.70rem !important; }',
+            '    .cb-start-actions { flex-direction: column !important; gap: 0.4rem !important; }',
+            '    .cb-start-fullscreen-btn, .cb-start-btn { width: 100% !important; justify-content: center !important; padding: 0.55rem 1rem !important; font-size: 0.78rem !important; }',
+            '}',
+            '@media (max-height: 520px) {',
+            '    .cb-modal-card {',
+            '        padding: 0.6rem 1rem !important;',
+            '        max-height: 94dvh !important;',
+            '        max-width: 92vw !important;',
+            '    }',
+            '    .cb-modal-title { font-size: 1.05rem !important; margin-bottom: 0.25rem !important; }',
+            '    .cb-modal-sub { font-size: 0.72rem !important; line-height: 1.3 !important; margin-bottom: 0.35rem !important; }',
+            '    .cb-rules-box { display: none !important; }',
+            '    .cb-fs-banner { padding: 0.3rem 0.55rem !important; margin-bottom: 0.4rem !important; }',
+            '    .cb-fs-text { font-size: 0.68rem !important; }',
+            '    .cb-fs-toggle-btn { padding: 0.25rem 0.55rem !important; font-size: 0.68rem !important; }',
+            '    .cb-start-fullscreen-btn, .cb-start-btn { padding: 0.4rem 1rem !important; font-size: 0.76rem !important; }',
+            '    #cb-space-hint { display: none !important; }',
+            '    #cb-touch-climb-btn {',
+            '        bottom: 14px !important;',
+            '        right: 20px !important;',
+            '        font-size: 0.88rem !important;',
+            '        padding: 0.55rem 1.2rem !important;',
+            '    }',
+            '}'
         ].join('\n');
         document.head.appendChild(style);
     }
@@ -327,6 +532,37 @@ function playBaryonyxGrowl() {
     // ============================================================
     //  CONSTRUCCIÓN DEL DOM
     // ============================================================
+    function toggleCbFullscreen() {
+        var target = document.getElementById('cb-overlay') || document.documentElement;
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        if (!isFs) {
+            if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+            else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+        } else {
+            if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        }
+    }
+
+    function updateCbFullscreenUI() {
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        var fsBtn = document.getElementById('cb-fullscreen-btn');
+        if (fsBtn) {
+            fsBtn.innerHTML = isFs
+                ? '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR PANTALLA COMPLETA</span>'
+                : '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+        }
+        var bannerBtn = document.getElementById('cb-start-fs-toggle-btn');
+        if (bannerBtn) {
+            bannerBtn.innerHTML = isFs
+                ? '<span class="ej-ic">🗗</span> DESACTIVAR'
+                : '<span class="ej-ic">⛶</span> ACTIVAR';
+        }
+    }
+
+    document.addEventListener('fullscreenchange', updateCbFullscreenUI);
+    document.addEventListener('webkitfullscreenchange', updateCbFullscreenUI);
+
     function buildOverlay() {
         var ov = document.createElement('div');
         ov.id = 'cb-overlay';
@@ -340,7 +576,7 @@ function playBaryonyxGrowl() {
 
         var title = document.createElement('div');
         title.id = 'cb-header-title';
-        title.innerHTML = '🐊 LA CUEVA DEL BARYONYX — SOBREVIVIR EN LA ISLA';
+        title.innerHTML = '<span class="cb-title-full">🐊 LA CUEVA DEL BARYONYX — SOBREVIVIR EN LA ISLA</span><span class="cb-title-short">🐊 CUEVA DEL BARYONYX</span>';
 
         var climbPill = document.createElement('div');
         climbPill.id = 'cb-climb-pill';
@@ -348,7 +584,7 @@ function playBaryonyxGrowl() {
 
         var dangerBox = document.createElement('div');
         dangerBox.id = 'cb-danger-box';
-        dangerBox.textContent = '⚠️ BARYONYX ACECHANDO';
+        dangerBox.innerHTML = '⚠️ <span class="cb-danger-short">BARYONYX</span><span class="cb-danger-long">BARYONYX ACECHANDO</span>';
 
         hLeft.appendChild(title);
         hLeft.appendChild(climbPill);
@@ -385,16 +621,7 @@ function playBaryonyxGrowl() {
         fullBtn.id = 'cb-fullscreen-btn';
         fullBtn.className = 'ej-btn-header';
         fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
-        fullBtn.addEventListener('click', function () {
-            var target = document.getElementById('cb-overlay') || document.documentElement;
-            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
-                else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-            } else {
-                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
-                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-            }
-        });
+        fullBtn.addEventListener('click', toggleCbFullscreen);
 
         var closeBtn = document.createElement('button');
         closeBtn.id = 'cb-close-btn';
@@ -433,13 +660,13 @@ function playBaryonyxGrowl() {
             '    <span>SUPERFICIE (SALIDA)</span>',
             '</div>'
         ].join('');
-        stage.appendChild(progWrap);
+        wrap.appendChild(progWrap);
 
         // Indicador central de tecla ESPACIO
         var spaceHint = document.createElement('div');
         spaceHint.id = 'cb-space-hint';
         spaceHint.textContent = '⌨️ PULSA [ESPACIO] RÁPIDAMENTE PARA SUBIR';
-        stage.appendChild(spaceHint);
+        wrap.appendChild(spaceHint);
 
         // Botón táctil para móviles
         var touchBtn = document.createElement('button');
@@ -450,26 +677,44 @@ function playBaryonyxGrowl() {
             handleClimb();
         }, { passive: false });
         touchBtn.addEventListener('click', handleClimb);
-        stage.appendChild(touchBtn);
+        wrap.appendChild(touchBtn);
 
         // Pantalla de Inicio / Briefing
         var briefScreen = document.createElement('div');
         briefScreen.id = 'cb-brief-screen';
         briefScreen.className = 'cb-modal-screen show';
         briefScreen.innerHTML = [
-            '<div class="cb-modal-title" style="color:#00d2d3;">🧗 MISIÓN: LA CUEVA DEL BARYONYX</div>',
-            '<div class="cb-modal-desc">',
-            'El soldado <strong>Antony Benton</strong> ha caído en la caverna subterránea del Baryonyx. Una cuerda cuelga desde la abertura superior iluminada por el sol.<br><br>',
-            '• Pulsa repetidamente la tecla <strong>ESPACIO</strong> (o toca la pantalla / botón <strong>⬆️ TREPAR</strong>) para escalar.<br>',
-            '• A medida que subas, la cuerda se agitará con más fuerza y el Baryonyx acelerará el paso para cazarte.<br>',
-            '• ¡Escala hasta la superficie antes de que el carnívoro alcance tus pies!',
-            '</div>',
-            '<div class="cb-modal-tip">',
-            '🎮 <strong>CONTROLES:</strong> Pulsa la <strong>BARRA ESPACIADORA</strong> de forma continua y veloz. En móviles, pulsa el botón verde o cualquier parte de la pantalla.',
-            '</div>',
-            '<button class="cb-btn cb-btn-cyan" id="cb-btn-start">INICIAR ESCALADA ▶</button>'
+            '<div class="cb-modal-card">',
+            '    <div class="cb-modal-title" style="color:#00d2d3;">🧗 LA CUEVA DEL BARYONYX</div>',
+            '    <div class="cb-modal-sub">',
+            '        El soldado <strong>Antony Benton</strong> ha caído en la caverna subterránea del letal Baryonyx. Una cuerda cuelga desde la abertura superior iluminada por el sol.',
+            '    </div>',
+            '    <div class="cb-rules-box">',
+            '        ⚠️ <strong>DIRECTRICES DE ESCAPADA:</strong><br>',
+            '        • <strong>TREPADA CONTINUA:</strong> Pulsa repetidamente la tecla ESPACIO o pulsa el botón ⬆️ TREPAR en tu celular.<br>',
+            '        • <strong>PRESIÓN DEL DEPREDADOR:</strong> A mayor altura, la cuerda oscilará con más fuerza y el Baryonyx acelerará su embestida.<br>',
+            '        • <strong>OBJETIVO:</strong> Alcanza el 100% de la altura para trepar a la superficie y salvarte.',
+            '    </div>',
+            '    <div class="cb-fs-banner" id="cb-fs-banner">',
+            '        <div class="cb-fs-text">',
+            '            <span class="cb-fs-icon">💡</span>',
+            '            <span>RECOMENDADO EN CELULARES: Jugar en pantalla completa para trepar y reaccionar con máxima velocidad.</span>',
+            '        </div>',
+            '        <button type="button" class="cb-fs-toggle-btn" id="cb-start-fs-toggle-btn">',
+            '            <span class="ej-ic">⛶</span> ACTIVAR',
+            '        </button>',
+            '    </div>',
+            '    <div class="cb-start-actions">',
+            '        <button type="button" class="cb-start-fullscreen-btn" id="cb-start-fullscreen-btn">',
+            '            <span class="ej-ic">⛶</span> JUGAR EN PANTALLA COMPLETA',
+            '        </button>',
+            '        <button type="button" class="cb-start-btn" id="cb-btn-start">',
+            '            ▶ INICIAR ESCALADA',
+            '        </button>',
+            '    </div>',
+            '</div>'
         ].join('');
-        stage.appendChild(briefScreen);
+        wrap.appendChild(briefScreen);
 
         // Pantalla de Victoria
         var winScreen = document.createElement('div');
@@ -486,7 +731,7 @@ function playBaryonyxGrowl() {
             '  <button class="ej-btn-return" id="cb-btn-win-return">✕ Regresar al sitio</button>',
             '</div>'
         ].join('');
-        stage.appendChild(winScreen);
+        wrap.appendChild(winScreen);
 
         // Pantalla de Derrota
         var loseScreen = document.createElement('div');
@@ -503,7 +748,7 @@ function playBaryonyxGrowl() {
             '  <button class="ej-btn-return" id="cb-btn-lose-return">✕ Regresar al sitio</button>',
             '</div>'
         ].join('');
-        stage.appendChild(loseScreen);
+        wrap.appendChild(loseScreen);
 
         var pauseModal = document.createElement('div');
         pauseModal.className = 'ej-pause-overlay';
@@ -516,7 +761,7 @@ function playBaryonyxGrowl() {
             '  <button class="ej-btn-resume" id="cb-btn-resume">▶ REANUDAR</button>',
             '</div>'
         ].join('');
-        stage.appendChild(pauseModal);
+        wrap.appendChild(pauseModal);
 
 
         wrap.appendChild(stage);
@@ -524,6 +769,23 @@ function playBaryonyxGrowl() {
         document.body.appendChild(ov);
 
         // Eventos
+        var startFsBtn = document.getElementById('cb-start-fullscreen-btn');
+        if (startFsBtn) {
+            startFsBtn.addEventListener('click', function () {
+                var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+                if (!isFs) {
+                    var target = document.getElementById('cb-overlay') || document.documentElement;
+                    if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                    else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+                }
+                startGame();
+            });
+        }
+        var startFsToggle = document.getElementById('cb-start-fs-toggle-btn');
+        if (startFsToggle) {
+            startFsToggle.addEventListener('click', toggleCbFullscreen);
+        }
+
         document.getElementById('cb-btn-start').addEventListener('click', startGame);
         document.getElementById('cb-btn-win-replay').addEventListener('click', function () {
             if (window.registerMinigameAttempt) window.registerMinigameAttempt('cueva-baryonyx');
@@ -655,10 +917,10 @@ function playBaryonyxGrowl() {
         var distToRope = Math.max(0, Math.round((bary.targetX - bary.x) / 18));
         if (dangerBox) {
             if (distToRope <= 8) {
-                dangerBox.textContent = '🚨 ¡BARYONYX AL ACECHO: ' + distToRope + ' M!';
+                dangerBox.innerHTML = '🚨 <span class="cb-danger-short">' + distToRope + 'M</span><span class="cb-danger-long">¡BARYONYX: ' + distToRope + ' M!</span>';
                 dangerBox.className = 'danger';
             } else {
-                dangerBox.textContent = '⚠️ BARYONYX ACERCÁNDOSE: ' + distToRope + ' M';
+                dangerBox.innerHTML = '⚠️ <span class="cb-danger-short">' + distToRope + 'M</span><span class="cb-danger-long">BARYONYX: ' + distToRope + ' M</span>';
                 dangerBox.className = '';
             }
         }
@@ -931,6 +1193,7 @@ function playBaryonyxGrowl() {
 
         state = 'briefing';
         showModal('cb-brief-screen');
+        updateCbFullscreenUI();
 
         if (sndMusic) {
             sndMusic.currentTime = 0;
@@ -939,12 +1202,26 @@ function playBaryonyxGrowl() {
     }
 
     function closeGame() {
+        if (isPaused) togglePause();
+        var pScreen = document.getElementById('cb-pause-screen');
+        if (pScreen) {
+            pScreen.style.display = 'none';
+            pScreen.classList.remove('active');
+        }
         var ov = document.getElementById('cb-overlay');
         if (ov) ov.classList.remove('open');
         stopAllAudio();
         state = 'idle';
         if (aniFrame) cancelAnimationFrame(aniFrame);
         showModal(null);
+
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        if (isFs) {
+            try {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            } catch(e) {}
+        }
 
         if (typeof window.releaseBgMusic === 'function') {
             window.releaseBgMusic();
