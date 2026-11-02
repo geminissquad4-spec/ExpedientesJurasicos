@@ -722,3 +722,19 @@ button,
     display: inline-flex !important;
   }
 }
+
+/* Soporte específico para Cura al Triceratops en móviles */
+#st-start-screen,
+#st-win-screen,
+#st-lose-screen,
+.st-screen {
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+@media (max-width: 768px) {
+  #st-header .ej-header-actions .ej-btn-lbl {
+    display: none !important;
+  }
+}
