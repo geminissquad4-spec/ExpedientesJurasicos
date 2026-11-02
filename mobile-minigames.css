@@ -400,7 +400,24 @@ button,
   z-index: 100 !important;
 }
 
-.ej-btn-header {
+.ej-btn-header,
+button.ej-btn-header,
+#ps-fullscreen-btn, #ps-mute-btn, #ps-pause-btn,
+#cb-fullscreen-btn, #cb-mute-btn, #cb-pause-btn,
+#cs-fullscreen-btn, #cs-mute-btn, #cs-pause-btn,
+#eds-fullscreen-btn, #eds-mute-btn, #eds-pause-btn,
+#ide-fullscreen-btn, #ide-mute-btn, #ide-pause-btn,
+#ss-fullscreen-btn, #ss-mute-btn, #ss-pause-btn,
+#compy-fullscreen-btn, #compy-mute-btn, #compy-pause-btn,
+#cg-btn-full, #cg-btn-mute, #cg-btn-pause,
+#eq-btn-full, #eq-btn-mute, #eq-btn-pause,
+#btn-cryo-fs, #btn-cryo-mute, #btn-cryo-pause,
+#ha-btn-full, #ha-btn-mute, #ha-btn-pause,
+#ao-btn-fs, #ao-btn-mute, #ao-btn-pause,
+#ntm-fullscreen-btn, #ntm-mute-btn, #ntm-pause-btn,
+#raptor-fullscreen-btn, #raptor-mute-btn, #raptor-pause-btn,
+#dilopho-fullscreen-btn, #dilopho-mute-btn, #dilopho-pause-btn,
+#st-fullscreen-btn, #st-mute-btn, #st-pause-btn {
   background: rgba(0, 20, 20, 0.75) !important;
   border: 1.5px solid #00f5ff !important;
   color: #00f5ff !important;
@@ -423,19 +440,45 @@ button,
   touch-action: manipulation !important;
 }
 
-.ej-btn-header:hover {
+.ej-btn-header:hover,
+#ps-fullscreen-btn:hover, #ps-mute-btn:hover, #ps-pause-btn:hover,
+#cb-fullscreen-btn:hover, #cb-mute-btn:hover, #cb-pause-btn:hover,
+#cs-fullscreen-btn:hover, #cs-mute-btn:hover, #cs-pause-btn:hover,
+#eds-fullscreen-btn:hover, #eds-mute-btn:hover, #eds-pause-btn:hover,
+#ide-fullscreen-btn:hover, #ide-mute-btn:hover, #ide-pause-btn:hover,
+#ss-fullscreen-btn:hover, #ss-mute-btn:hover, #ss-pause-btn:hover,
+#compy-fullscreen-btn:hover, #compy-mute-btn:hover, #compy-pause-btn:hover,
+#cg-btn-full:hover, #cg-btn-mute:hover, #cg-btn-pause:hover,
+#eq-btn-full:hover, #eq-btn-mute:hover, #eq-btn-pause:hover,
+#btn-cryo-fs:hover, #btn-cryo-mute:hover, #btn-cryo-pause:hover,
+#ha-btn-full:hover, #ha-btn-mute:hover, #ha-btn-pause:hover,
+#ao-btn-fs:hover, #ao-btn-mute:hover, #ao-btn-pause:hover,
+#ntm-fullscreen-btn:hover, #ntm-mute-btn:hover, #ntm-pause-btn:hover,
+#raptor-fullscreen-btn:hover, #raptor-mute-btn:hover, #raptor-pause-btn:hover,
+#dilopho-fullscreen-btn:hover, #dilopho-mute-btn:hover, #dilopho-pause-btn:hover,
+#st-fullscreen-btn:hover, #st-mute-btn:hover, #st-pause-btn:hover {
   background: rgba(0, 245, 255, 0.22) !important;
   box-shadow: 0 0 10px rgba(0, 245, 255, 0.5) !important;
   color: #ffffff !important;
 }
 
-.ej-btn-header.ej-btn-header-danger {
+.ej-btn-header.ej-btn-header-danger,
+.ej-btn-header-danger,
+#ps-close-btn, #cb-close-btn, #cs-close-btn, #eds-close-btn, #ide-close-btn,
+#cg-btn-close, #eq-btn-close, #btn-cryo-close, #ha-btn-close, #ao-btn-close,
+#ntm-close-btn, #raptor-close-btn, #dilopho-close-btn, #st-close-btn, #ss-close-btn,
+#compy-overlay-close {
   border-color: #ff4757 !important;
   color: #ff4757 !important;
   background: rgba(255, 71, 87, 0.1) !important;
 }
 
-.ej-btn-header.ej-btn-header-danger:hover {
+.ej-btn-header.ej-btn-header-danger:hover,
+.ej-btn-header-danger:hover,
+#ps-close-btn:hover, #cb-close-btn:hover, #cs-close-btn:hover, #eds-close-btn:hover, #ide-close-btn:hover,
+#cg-btn-close:hover, #eq-btn-close:hover, #btn-cryo-close:hover, #ha-btn-close:hover, #ao-btn-close:hover,
+#ntm-close-btn:hover, #raptor-close-btn:hover, #dilopho-close-btn:hover, #st-close-btn:hover, #ss-close-btn:hover,
+#compy-overlay-close:hover {
   background: #ff4757 !important;
   color: #ffffff !important;
   box-shadow: 0 0 12px rgba(255, 71, 87, 0.6) !important;

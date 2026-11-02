@@ -433,15 +433,86 @@
             '    color:#f1c40f; background:rgba(241,196,15,.12); padding:.25rem .75rem;',
             '    border:1px solid rgba(241,196,15,.4); border-radius:4px;',
             '}',
-            '#ps-close-btn {',
-            '    background:transparent; border:1px solid rgba(0,210,211,.4); color:#00d2d3;',
-            "    font-family:'Share Tech Mono',monospace; font-size:.75rem;",
-            '    padding:.35rem .9rem; border-radius:3px; cursor:pointer;',
-            '    letter-spacing:1px; transition:all .2s;',
+            '/* --- MENÚ SUPERIOR DE ACCIONES Y BOTONES ESTANDARIZADOS --- */',
+            '.ej-header-actions {',
+            '    display: flex !important; align-items: center !important; gap: 6px !important;',
+            '    margin-left: auto !important; flex-shrink: 0 !important; z-index: 100 !important;',
             '}',
-            '#ps-close-btn:hover { background:rgba(0,210,211,.2); color:#fff; border-color:#00d2d3; }',
-            '#ps-fullscreen-btn { background:rgba(0,210,211,.15); border:1px solid rgba(0,210,211,.4); color:#00d2d3; font-family:\'Share Tech Mono\',monospace; font-size:.75rem; padding:.35rem .85rem; border-radius:3px; cursor:pointer; letter-spacing:1px; transition:all .2s; }',
-            '#ps-fullscreen-btn:hover { background:#00d2d3; color:#011422; }',
+            '.ej-btn-header {',
+            '    background: rgba(0, 20, 28, 0.85) !important;',
+            '    border: 1.5px solid #00d2d3 !important;',
+            '    color: #00d2d3 !important;',
+            '    font-family: "Share Tech Mono", monospace !important;',
+            '    font-size: 0.75rem !important; font-weight: 700 !important;',
+            '    padding: 0.35rem 0.75rem !important; border-radius: 4px !important;',
+            '    cursor: pointer !important; letter-spacing: 1px !important;',
+            '    display: inline-flex !important; align-items: center !important; justify-content: center !important;',
+            '    gap: 5px !important; text-transform: uppercase !important;',
+            '    transition: all 0.2s ease !important; line-height: 1 !important;',
+            '    height: 32px !important; box-sizing: border-box !important;',
+            '    touch-action: manipulation !important;',
+            '    box-shadow: 0 0 10px rgba(0, 210, 211, 0.25) !important;',
+            '}',
+            '.ej-btn-header:hover {',
+            '    background: rgba(0, 210, 211, 0.28) !important;',
+            '    border-color: #55efc4 !important; color: #ffffff !important;',
+            '    box-shadow: 0 0 16px rgba(85, 239, 196, 0.6) !important;',
+            '}',
+            '.ej-btn-header-danger, #ps-close-btn {',
+            '    background: rgba(255, 71, 87, 0.12) !important;',
+            '    border-color: #ff4757 !important; color: #ff4757 !important;',
+            '    box-shadow: 0 0 8px rgba(255, 71, 87, 0.3) !important;',
+            '}',
+            '.ej-btn-header-danger:hover, #ps-close-btn:hover {',
+            '    background: #ff4757 !important; color: #ffffff !important;',
+            '    border-color: #ff4757 !important; box-shadow: 0 0 16px rgba(255, 71, 87, 0.7) !important;',
+            '}',
+            '#ps-fullscreen-btn, #ps-mute-btn, #ps-pause-btn {',
+            '    background: rgba(0, 20, 28, 0.85) !important;',
+            '    border: 1.5px solid #00d2d3 !important; color: #00d2d3 !important;',
+            '}',
+            '#ps-fullscreen-btn:hover, #ps-mute-btn:hover, #ps-pause-btn:hover {',
+            '    background: rgba(0, 210, 211, 0.28) !important; color: #fff !important;',
+            '}',
+            '',
+            '/* --- BANNER PANTALLA COMPLETA EN INICIO --- */',
+            '.ps-fs-banner {',
+            '    display: flex; align-items: center; justify-content: space-between;',
+            '    gap: 0.8rem; background: rgba(0, 210, 211, 0.12);',
+            '    border: 1.5px solid #00d2d3; border-radius: 6px;',
+            '    padding: 0.6rem 0.9rem; margin-bottom: 1.1rem;',
+            '    box-shadow: 0 0 16px rgba(0, 210, 211, 0.25);',
+            '    text-align: left; box-sizing: border-box; max-width: 620px; width: 100%;',
+            '}',
+            '.ps-fs-text {',
+            '    display: flex; align-items: center; gap: 0.5rem;',
+            '    font-family: "Share Tech Mono", monospace; font-size: 0.76rem;',
+            '    color: #00d2d3; line-height: 1.35;',
+            '}',
+            '.ps-fs-icon { font-size: 1.25rem; flex-shrink: 0; }',
+            '.ps-fs-toggle-btn {',
+            '    background: #00d2d3; color: #011422; border: none;',
+            '    padding: 0.4rem 0.85rem; border-radius: 4px;',
+            '    font-family: "Orbitron", monospace; font-size: 0.74rem;',
+            '    font-weight: 900; letter-spacing: 1px; cursor: pointer;',
+            '    transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;',
+            '    touch-action: manipulation;',
+            '}',
+            '.ps-fs-toggle-btn:hover { background: #55efc4; box-shadow: 0 0 14px rgba(85, 239, 196, 0.8); }',
+            '.ps-start-actions {',
+            '    display: flex; gap: 0.75rem; flex-wrap: wrap;',
+            '    justify-content: center; align-items: center; width: 100%;',
+            '}',
+            '.ps-start-fullscreen-btn {',
+            '    background: linear-gradient(135deg, #00d2d3, #0984e3) !important;',
+            '    color: #011422 !important; box-shadow: 0 0 20px rgba(0, 210, 211, 0.55) !important;',
+            '    font-weight: 900 !important;',
+            '}',
+            '.ps-start-fullscreen-btn:hover {',
+            '    background: linear-gradient(135deg, #55efc4, #00cec9) !important;',
+            '    box-shadow: 0 0 32px rgba(85, 239, 196, 0.9) !important;',
+            '    transform: translateY(-2px);',
+            '}',
             '',
             '/* Canvas wrap y stage */',
             '#ps-canvas-wrap {',
@@ -571,21 +642,76 @@
             '    background: #55efc4; box-shadow: 0 0 25px rgba(85, 239, 196, 0.95);',
             '}',
             '',
-            '/* Responsive */',
-            '@media (max-width: 600px) {',
-            '    #plesio-swim-fab { bottom: 232px; right: 16px; padding: .5rem .9rem .5rem .65rem; }',
-            '    #plesio-swim-fab img { width: 36px; max-height: 26px; }',
-            '    .ps-fab-title { font-size:.65rem; }',
-            '    .ps-fab-sub   { display:none; }',
-            '    #ps-status-bar { font-size:.68rem; padding:.35rem .6rem; }',
-            '    #ps-header { padding:.35rem .6rem; }',
-            '    #ps-header-title { font-size:.72rem; }',
-            '    #ps-oxygen-bar-bg { width: 75px; }',
-            '    .ps-touch-btn { width: 44px; height: 44px; font-size: 1rem; }',
-            '    .ps-touch-btn.action { height: 46px; font-size: 0.72rem; padding: 0 12px; }',
+            '/* Responsive y Adaptación Móvil */',
+            '#plesio-swim-fab { bottom: 232px; right: 16px; padding: .5rem .9rem .5rem .65rem; }',
+            '#plesio-swim-fab img { width: 36px; max-height: 26px; }',
+            '.ps-fab-title { font-size:.65rem; }',
+            '.ps-fab-sub   { display:none; }',
+            '@media (max-width: 768px), (max-height: 520px) {',
+            '    #ps-header {',
+            '        height: 38px !important; min-height: 38px !important; max-height: 38px !important;',
+            '        padding: 0 0.45rem !important; gap: 0.35rem !important;',
+            '    }',
+            '    #ps-header-title { font-size: 0.72rem !important; }',
+            '    .ej-header-actions { gap: 4px !important; }',
+            '    .ej-btn-header { height: 28px !important; min-width: 28px !important; padding: 0 5px !important; font-size: 0.72rem !important; }',
+            '    .ej-btn-header .ej-btn-lbl { display: none !important; }',
+            '    #ps-status-bar { display: none !important; }',
+            '    #ps-oxygen-bar-bg { width: 75px !important; }',
+            '    #ps-touch-controls { bottom: 6px !important; padding: 0 10px !important; }',
+            '}',
+            '@media (max-height: 520px) {',
+            '    .ps-screen { padding: 0.4rem !important; }',
+            '    .ps-screen-title { font-size: 1rem !important; margin-bottom: 0.2rem !important; }',
+            '    .ps-screen-sub { font-size: 0.72rem !important; line-height: 1.3 !important; margin-bottom: 0.35rem !important; }',
+            '    .ps-instruct { display: none !important; }',
+            '    .ps-fs-banner { padding: 0.3rem 0.55rem !important; margin-bottom: 0.4rem !important; }',
+            '    .ps-fs-text { font-size: 0.68rem !important; }',
+            '    .ps-fs-toggle-btn { padding: 0.25rem 0.55rem !important; font-size: 0.68rem !important; }',
+            '    .ps-btn { padding: 0.4rem 1rem !important; font-size: 0.78rem !important; }',
+            '}',
+            '@media (max-width: 540px) {',
+            '    #ps-header-title { display: none !important; }',
+            '    .ps-instruct { gap: 0.4rem !important; margin: 0.3rem 0 0.8rem !important; }',
+            '    .ps-inst-item { min-width: 75px !important; padding: 0.35rem 0.45rem !important; font-size: 0.68rem !important; }',
+            '    .ps-inst-icon { font-size: 1.25rem !important; }',
             '}'
         ].join('\n');
         document.head.appendChild(s);
+    }
+
+
+    function togglePsFullscreen() {
+        var target = document.getElementById('plesio-swim-overlay') || document.documentElement;
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+            if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+            else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+        } else {
+            if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        }
+    }
+
+    function updatePsFullscreenUI() {
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        var fullBtn = document.getElementById('ps-fullscreen-btn');
+        var bannerToggle = document.getElementById('ps-start-fs-toggle-btn');
+        var startFsBtn = document.getElementById('ps-start-fullscreen-btn');
+        if (fullBtn) {
+            fullBtn.innerHTML = isFs
+                ? '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>'
+                : '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+        }
+        if (bannerToggle) {
+            bannerToggle.innerHTML = isFs
+                ? '<span class="ej-ic">🗗</span> DESACTIVAR'
+                : '<span class="ej-ic">⛶</span> ACTIVAR';
+        }
+        if (startFsBtn) {
+            startFsBtn.innerHTML = isFs
+                ? '<span class="ej-ic">▶</span> JUGAR AHORA'
+                : '<span class="ej-ic">⛶</span> JUGAR EN PANTALLA COMPLETA';
+        }
     }
 
     // ============================================================
@@ -648,17 +774,9 @@
         var fullBtn = document.createElement('button');
         fullBtn.id  = 'ps-fullscreen-btn';
         fullBtn.className = 'ej-btn-header';
+        fullBtn.title = 'Pantalla Completa';
         fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
-        fullBtn.addEventListener('click', function () {
-            var target = document.getElementById('plesio-swim-overlay') || document.documentElement;
-            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
-                else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-            } else {
-                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
-                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-            }
-        });
+        fullBtn.addEventListener('click', togglePsFullscreen);
 
         var closeBtn = document.createElement('button');
         closeBtn.id  = 'ps-close-btn';
@@ -749,16 +867,52 @@
             instruct.appendChild(card);
         }
 
+        // Banner de recomendación pantalla completa
+        var fsBanner = document.createElement('div');
+        fsBanner.className = 'ps-fs-banner';
+        fsBanner.id = 'ps-fs-banner';
+        fsBanner.innerHTML = [
+            '<div class="ps-fs-text">',
+            '    <span class="ps-fs-icon">💡</span>',
+            '    <span>RECOMENDADO EN CELULARES: Jugar en pantalla completa para mejor visión submarina y control ágil.</span>',
+            '</div>',
+            '<button type="button" class="ps-fs-toggle-btn" id="ps-start-fs-toggle-btn">',
+            '    <span class="ej-ic">⛶</span> ACTIVAR',
+            '</button>'
+        ].join('');
+
+        // Acciones de inicio: Pantalla Completa primaria + Comenzar secundaria
+        var startActions = document.createElement('div');
+        startActions.className = 'ps-start-actions';
+
+        var startFsPrimary = document.createElement('button');
+        startFsPrimary.className = 'ps-btn ps-btn-primary ps-start-fullscreen-btn';
+        startFsPrimary.id = 'ps-start-fullscreen-btn';
+        startFsPrimary.innerHTML = '<span class="ej-ic">⛶</span> JUGAR EN PANTALLA COMPLETA';
+        startFsPrimary.addEventListener('click', function () {
+            var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            if (!isFs) {
+                var target = document.getElementById('plesio-swim-overlay') || document.documentElement;
+                if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+            }
+            startGame();
+        });
+
         var startBtn = document.createElement('button');
-        startBtn.className = 'ps-btn ps-btn-primary';
+        startBtn.className = 'ps-btn ps-btn-secondary';
         startBtn.id = 'ps-start-btn';
-        startBtn.textContent = '▶ COMENZAR INMERSIÓN';
+        startBtn.innerHTML = '<span class="ej-ic">▶</span> COMENZAR INMERSIÓN';
         startBtn.addEventListener('click', startGame);
+
+        startActions.appendChild(startFsPrimary);
+        startActions.appendChild(startBtn);
 
         startScreen.appendChild(sTitle);
         startScreen.appendChild(sSub);
         startScreen.appendChild(instruct);
-        startScreen.appendChild(startBtn);
+        startScreen.appendChild(fsBanner);
+        startScreen.appendChild(startActions);
         stage.appendChild(startScreen);
 
         // ---- PANTALLA VICTORIA ----
@@ -890,6 +1044,12 @@
         statusBar.appendChild(mission);
         statusBar.appendChild(tip);
         ov.appendChild(statusBar);
+
+        var bannerBtn = startScreen.querySelector('#ps-start-fs-toggle-btn');
+        if (bannerBtn) bannerBtn.addEventListener('click', togglePsFullscreen);
+
+        document.addEventListener('fullscreenchange', updatePsFullscreenUI);
+        document.addEventListener('webkitfullscreenchange', updatePsFullscreenUI);
 
         document.body.appendChild(ov);
         ctx = canvas.getContext('2d');
@@ -1675,6 +1835,14 @@
         stopAllAudio();
         state = 'idle';
         showScreen(null);
+
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        if (isFs) {
+            try {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            } catch (e) {}
+        }
     }
 
     // ============================================================
