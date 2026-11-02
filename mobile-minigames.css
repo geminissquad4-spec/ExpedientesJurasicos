@@ -633,10 +633,22 @@ button,
 
 .ej-header-actions button,
 .ej-header-actions .ej-btn-header,
+button.ej-btn-header,
+.ej-btn-header,
 #ntm-mute-btn, #ntm-pause-btn, #ntm-fullscreen-btn,
 #dilopho-mute-btn, #dilopho-pause-btn, #dilopho-fullscreen-btn,
 #raptor-mute-btn, #raptor-pause-btn, #raptor-fullscreen-btn,
-#ao-btn-mute, #ao-btn-pause, #ao-btn-fs {
+#ao-btn-mute, #ao-btn-pause, #ao-btn-fs,
+#cs-mute-btn, #cs-pause-btn, #cs-fullscreen-btn,
+#cb-mute-btn, #cb-pause-btn, #cb-fullscreen-btn,
+#ss-mute-btn, #ss-pause-btn, #ss-fullscreen-btn,
+#eds-mute-btn, #eds-pause-btn, #eds-fullscreen-btn,
+#ps-mute-btn, #ps-pause-btn, #ps-fullscreen-btn,
+#btn-cryo-mute, #btn-cryo-pause, #btn-cryo-fs,
+#cg-btn-mute, #cg-btn-pause, #cg-btn-full,
+#ha-btn-mute, #ha-btn-pause, #ha-btn-full,
+#eq-btn-mute, #eq-btn-pause, #eq-btn-full,
+#compy-mute-btn, #compy-pause-btn, #compy-fullscreen-btn {
   background: rgba(0, 20, 20, 0.85) !important;
   border: 1.5px solid #00f5ff !important;
   color: #00f5ff !important;
@@ -662,20 +674,44 @@ button,
 
 .ej-header-actions button:hover,
 .ej-header-actions .ej-btn-header:hover,
+button.ej-btn-header:hover,
+.ej-btn-header:hover,
 #ntm-mute-btn:hover, #ntm-pause-btn:hover, #ntm-fullscreen-btn:hover,
 #dilopho-mute-btn:hover, #dilopho-pause-btn:hover, #dilopho-fullscreen-btn:hover,
 #raptor-mute-btn:hover, #raptor-pause-btn:hover, #raptor-fullscreen-btn:hover,
-#ao-btn-mute:hover, #ao-btn-pause:hover, #ao-btn-fs:hover {
+#ao-btn-mute:hover, #ao-btn-pause:hover, #ao-btn-fs:hover,
+#cs-mute-btn:hover, #cs-pause-btn:hover, #cs-fullscreen-btn:hover,
+#cb-mute-btn:hover, #cb-pause-btn:hover, #cb-fullscreen-btn:hover,
+#ss-mute-btn:hover, #ss-pause-btn:hover, #ss-fullscreen-btn:hover,
+#eds-mute-btn:hover, #eds-pause-btn:hover, #eds-fullscreen-btn:hover,
+#ps-mute-btn:hover, #ps-pause-btn:hover, #ps-fullscreen-btn:hover,
+#btn-cryo-mute:hover, #btn-cryo-pause:hover, #btn-cryo-fs:hover,
+#cg-btn-mute:hover, #cg-btn-pause:hover, #cg-btn-full:hover,
+#ha-btn-mute:hover, #ha-btn-pause:hover, #ha-btn-full:hover,
+#eq-btn-mute:hover, #eq-btn-pause:hover, #eq-btn-full:hover,
+#compy-mute-btn:hover, #compy-pause-btn:hover, #compy-fullscreen-btn:hover {
   background: rgba(0, 245, 255, 0.25) !important;
   box-shadow: 0 0 14px rgba(0, 245, 255, 0.6) !important;
   color: #ffffff !important;
 }
 
 .ej-header-actions button.ej-btn-header-danger,
-.ej-header-actions #ntm-close-btn,
-.ej-header-actions #dilopho-close-btn,
-.ej-header-actions #raptor-close-btn,
-.ej-header-actions #ao-btn-close {
+button.ej-btn-header-danger,
+.ej-btn-header-danger,
+#ntm-close-btn,
+#dilopho-close-btn,
+#raptor-close-btn,
+#ao-btn-close,
+#cs-close-btn,
+#cb-close-btn,
+#ss-close-btn,
+#eds-close-btn,
+#ps-close-btn,
+#btn-cryo-close,
+#cg-btn-close,
+#ha-btn-close,
+#eq-btn-close,
+#compy-overlay-close {
   border-color: #ff4757 !important;
   color: #ff4757 !important;
   background: rgba(255, 71, 87, 0.12) !important;
@@ -683,10 +719,22 @@ button,
 }
 
 .ej-header-actions button.ej-btn-header-danger:hover,
-.ej-header-actions #ntm-close-btn:hover,
-.ej-header-actions #dilopho-close-btn:hover,
-.ej-header-actions #raptor-close-btn:hover,
-.ej-header-actions #ao-btn-close:hover {
+button.ej-btn-header-danger:hover,
+.ej-btn-header-danger:hover,
+#ntm-close-btn:hover,
+#dilopho-close-btn:hover,
+#raptor-close-btn:hover,
+#ao-btn-close:hover,
+#cs-close-btn:hover,
+#cb-close-btn:hover,
+#ss-close-btn:hover,
+#eds-close-btn:hover,
+#ps-close-btn:hover,
+#btn-cryo-close:hover,
+#cg-btn-close:hover,
+#ha-btn-close:hover,
+#eq-btn-close:hover,
+#compy-overlay-close:hover {
   background: #ff4757 !important;
   color: #ffffff !important;
   box-shadow: 0 0 16px rgba(255, 71, 87, 0.7) !important;

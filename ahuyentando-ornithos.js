@@ -554,33 +554,44 @@
             '  gap: 0.35rem;',
             '  flex-shrink: 0;',
             '}',
-            '.ao-ctrl-btn {',
-            '  background: rgba(0, 0, 0, 0.65);',
-            '  border: 1px solid rgba(255, 255, 255, 0.2);',
-            '  color: #ddd;',
-            '  height: 28px;',
-            '  padding: 0 0.6rem;',
-            '  border-radius: 4px;',
-            '  font-family: "Orbitron", sans-serif;',
-            '  font-size: 0.72rem;',
-            '  cursor: pointer;',
-            '  transition: all 0.2s ease;',
-            '  display: inline-flex;',
-            '  align-items: center;',
-            '  justify-content: center;',
-            '  gap: 0.3rem;',
-            '  white-space: nowrap;',
-            '  box-sizing: border-box;',
-            '  flex-shrink: 0;',
+            '.ao-ctrl-btn, .ej-btn-header {',
+            '  background: rgba(0, 20, 20, 0.85) !important;',
+            '  border: 1.5px solid #00f5ff !important;',
+            '  color: #00f5ff !important;',
+            '  height: 30px !important;',
+            '  padding: 0 0.65rem !important;',
+            '  border-radius: 4px !important;',
+            '  font-family: "Share Tech Mono", monospace !important;',
+            '  font-size: 0.74rem !important;',
+            '  font-weight: 700 !important;',
+            '  cursor: pointer !important;',
+            '  transition: all 0.2s ease !important;',
+            '  display: inline-flex !important;',
+            '  align-items: center !important;',
+            '  justify-content: center !important;',
+            '  gap: 0.35rem !important;',
+            '  white-space: nowrap !important;',
+            '  box-sizing: border-box !important;',
+            '  flex-shrink: 0 !important;',
+            '  box-shadow: 0 0 8px rgba(0, 245, 255, 0.25) !important;',
             '}',
-            '.ao-ctrl-btn:hover {',
-            '  border-color: #ff6b6b;',
-            '  color: #ff6b6b;',
+            '.ao-ctrl-btn:hover, .ej-btn-header:hover {',
+            '  background: rgba(0, 245, 255, 0.25) !important;',
+            '  border-color: #00f5ff !important;',
+            '  color: #ffffff !important;',
+            '  box-shadow: 0 0 14px rgba(0, 245, 255, 0.6) !important;',
             '}',
-            '#ao-btn-close:hover {',
-            '  background: #e74c3c;',
-            '  color: #fff;',
-            '  border-color: #e74c3c;',
+            '.ej-btn-header-danger, #ao-btn-close {',
+            '  background: rgba(255, 71, 87, 0.12) !important;',
+            '  border-color: #ff4757 !important;',
+            '  color: #ff4757 !important;',
+            '  box-shadow: 0 0 8px rgba(255, 71, 87, 0.3) !important;',
+            '}',
+            '.ej-btn-header-danger:hover, #ao-btn-close:hover {',
+            '  background: #ff4757 !important;',
+            '  color: #ffffff !important;',
+            '  border-color: #ff4757 !important;',
+            '  box-shadow: 0 0 16px rgba(255, 71, 87, 0.7) !important;',
             '}',
             '',
             '/* Contenedor del Canvas (Ocupa todo el espacio vertical disponible) */',
@@ -685,7 +696,80 @@
             '.ao-btn-green:hover {',
             '  background: linear-gradient(135deg, #a8ff3e, #2ecc71);',
             '  box-shadow: 0 0 35px rgba(168, 255, 62, 0.8);',
+            '},',
+            '',
+            '/* Banner Pantalla Completa */',
+            '.ao-fs-banner {',
+            '  display: flex;',
+            '  align-items: center;',
+            '  justify-content: space-between;',
+            '  gap: 0.8rem;',
+            '  background: rgba(0, 245, 255, 0.1);',
+            '  border: 1.5px solid #00f5ff;',
+            '  border-radius: 6px;',
+            '  padding: 0.6rem 0.9rem;',
+            '  margin-bottom: 1rem;',
+            '  box-shadow: 0 0 16px rgba(0, 245, 255, 0.22);',
+            '  text-align: left;',
+            '  box-sizing: border-box;',
             '}',
+            '.ao-fs-text {',
+            '  display: flex;',
+            '  align-items: center;',
+            '  gap: 0.5rem;',
+            '  font-family: "Share Tech Mono", monospace;',
+            '  font-size: 0.76rem;',
+            '  color: #00f5ff;',
+            '  line-height: 1.35;',
+            '}',
+            '.ao-fs-icon { font-size: 1.2rem; flex-shrink: 0; }',
+            '.ao-fs-toggle-btn {',
+            '  background: #00f5ff;',
+            '  color: #020b06;',
+            '  border: none;',
+            '  padding: 0.4rem 0.85rem;',
+            '  border-radius: 4px;',
+            '  font-family: "Orbitron", sans-serif;',
+            '  font-size: 0.74rem;',
+            '  font-weight: 900;',
+            '  letter-spacing: 1px;',
+            '  cursor: pointer;',
+            '  transition: all 0.2s ease;',
+            '  white-space: nowrap;',
+            '  flex-shrink: 0;',
+            '  touch-action: manipulation;',
+            '}',
+            '.ao-fs-toggle-btn:hover { background: #55ffff; box-shadow: 0 0 14px rgba(0, 245, 255, 0.8); }',
+            '.ao-start-actions {',
+            '  display: flex;',
+            '  gap: 0.75rem;',
+            '  flex-wrap: wrap;',
+            '  justify-content: center;',
+            '  align-items: center;',
+            '  width: 100%;',
+            '}',
+            '.ao-start-fullscreen-btn {',
+            '  background: linear-gradient(135deg, #00f5ff, #0099bb) !important;',
+            '  color: #020b06 !important;',
+            '  box-shadow: 0 0 20px rgba(0, 245, 255, 0.55) !important;',
+            '  font-weight: 900 !important;',
+            '}',
+            '.ao-start-fullscreen-btn:hover {',
+            '  background: linear-gradient(135deg, #55ffff, #00d4ff) !important;',
+            '  box-shadow: 0 0 32px rgba(0, 245, 255, 0.9) !important;',
+            '  transform: translateY(-2px);',
+            '}',
+            '.ao-btn-secondary {',
+            '  background: transparent !important;',
+            '  border: 1.5px solid #ff6b6b !important;',
+            '  color: #ff6b6b !important;',
+            '  box-shadow: none !important;',
+            '}',
+            '.ao-btn-secondary:hover {',
+            '  background: rgba(231, 76, 60, 0.15) !important;',
+            '  border-color: #ff4757 !important;',
+            '  color: #fff !important;',
+            '},',
             '',
             '/* Barra Inferior */',
             '#ao-footer {',
@@ -826,7 +910,21 @@
             '      • <strong>CHILLIDO DE ALERTA:</strong> Escucharás su rugido de ataque cuando inicien la picada.<br>',
             '      • <strong>OBJETIVO:</strong> Logra <strong>15 impactos certeros</strong> para ahuyentar definitivamente a la bandada.',
             '    </div>',
-            '    <button class="ao-primary-btn" id="ao-btn-start">▶ INICIAR JUEGO</button>',
+            '    <div class="ao-fs-banner" id="ao-fs-banner">',
+            '      <div class="ao-fs-text">',
+            '        <span class="ao-fs-icon">💡</span>',
+            '        <span>RECOMENDADO EN CELULARES: Jugar en pantalla completa para apuntar y disparar con precisión.</span>',
+            '      </div>',
+            '      <button type="button" class="ao-fs-toggle-btn" id="ao-start-fs-toggle-btn">',
+            '        <span class="ej-ic">⛶</span> ACTIVAR',
+            '      </button>',
+            '    </div>',
+            '    <div class="ao-start-actions">',
+            '      <button class="ao-primary-btn ao-start-fullscreen-btn" id="ao-start-fullscreen-btn">',
+            '        <span class="ej-ic">⛶</span> JUGAR EN PANTALLA COMPLETA',
+            '      </button>',
+            '      <button class="ao-primary-btn ao-btn-secondary" id="ao-btn-start">▶ INICIAR JUEGO</button>',
+            '    </div>',
             '  </div>',
             '</div>',
             '<!-- Modal Victoria -->',
@@ -926,15 +1024,54 @@
             }
         });
 
-        bindTouchBtn('ao-btn-fs', function () {
-            var el = document.getElementById('ao-overlay');
-            if (!document.fullscreenElement) {
-                if (el.requestFullscreen) el.requestFullscreen();
+        function toggleAoFullscreen() {
+            var el = document.getElementById('ao-overlay') || document.documentElement;
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (el.requestFullscreen) el.requestFullscreen().catch(function(){});
                 else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
             } else {
-                if (document.exitFullscreen) document.exitFullscreen();
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
             }
+        }
+
+        function updateAoFullscreenUI() {
+            var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            var fsBtn = document.getElementById('ao-btn-fs');
+            var bannerBtn = document.getElementById('ao-start-fs-toggle-btn');
+            var startFsBtn = document.getElementById('ao-start-fullscreen-btn');
+            if (fsBtn) {
+                fsBtn.innerHTML = isFs 
+                    ? '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>' 
+                    : '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+            }
+            if (bannerBtn) {
+                bannerBtn.innerHTML = isFs 
+                    ? '<span class="ej-ic">🗗</span> DESACTIVAR' 
+                    : '<span class="ej-ic">⛶</span> ACTIVAR';
+            }
+            if (startFsBtn) {
+                startFsBtn.innerHTML = isFs 
+                    ? '<span class="ej-ic">▶</span> JUGAR AHORA' 
+                    : '<span class="ej-ic">⛶</span> JUGAR EN PANTALLA COMPLETA';
+            }
+        }
+
+        bindTouchBtn('ao-btn-fs', toggleAoFullscreen);
+        bindTouchBtn('ao-start-fs-toggle-btn', toggleAoFullscreen);
+
+        bindTouchBtn('ao-start-fullscreen-btn', function () {
+            var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            if (!isFs) {
+                var el = document.getElementById('ao-overlay') || document.documentElement;
+                if (el.requestFullscreen) el.requestFullscreen().catch(function(){});
+                else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+            }
+            startGame();
         });
+
+        document.addEventListener('fullscreenchange', updateAoFullscreenUI);
+        document.addEventListener('webkitfullscreenchange', updateAoFullscreenUI);
 
         bindTouchBtn('ao-btn-close', closeGame);
 
@@ -1775,6 +1912,14 @@
         state = 'idle';
         if (aniFrame) cancelAnimationFrame(aniFrame);
         showModal(null);
+
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        if (isFs) {
+            try {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            } catch(e) {}
+        }
 
         // Reanudar música de fondo del sitio
         if (typeof window.releaseBgMusic === 'function') {

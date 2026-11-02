@@ -64,6 +64,128 @@
     function injectStyles() {
         var s = document.createElement('style');
         s.textContent = `
+            /* --- BOTONES DE CABECERA ESTANDARIZADOS (.ej-btn-header) --- */
+            .ej-header-actions {
+                display: flex !important;
+                align-items: center !important;
+                gap: 6px !important;
+                margin-left: auto !important;
+                flex-shrink: 0 !important;
+                z-index: 100 !important;
+            }
+            .ej-btn-header {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 5px !important;
+                background: rgba(0, 20, 20, 0.85) !important;
+                border: 1.5px solid #00f5ff !important;
+                color: #00f5ff !important;
+                font-family: 'Share Tech Mono', 'Courier New', monospace !important;
+                font-size: 0.75rem !important;
+                font-weight: 700 !important;
+                padding: 0.35rem 0.75rem !important;
+                border-radius: 4px !important;
+                cursor: pointer !important;
+                letter-spacing: 1px !important;
+                text-transform: uppercase !important;
+                transition: all 0.2s ease !important;
+                line-height: 1 !important;
+                height: 32px !important;
+                box-sizing: border-box !important;
+                touch-action: manipulation !important;
+                box-shadow: 0 0 8px rgba(0, 245, 255, 0.25) !important;
+                white-space: nowrap !important;
+            }
+            .ej-btn-header:hover {
+                background: rgba(0, 245, 255, 0.25) !important;
+                box-shadow: 0 0 14px rgba(0, 245, 255, 0.6) !important;
+                color: #ffffff !important;
+            }
+            .ej-btn-header.ej-btn-header-danger {
+                border-color: #ff4757 !important;
+                color: #ff4757 !important;
+                background: rgba(255, 71, 87, 0.12) !important;
+                box-shadow: 0 0 8px rgba(255, 71, 87, 0.3) !important;
+            }
+            .ej-btn-header.ej-btn-header-danger:hover {
+                background: #ff4757 !important;
+                color: #ffffff !important;
+                box-shadow: 0 0 16px rgba(255, 71, 87, 0.7) !important;
+            }
+
+            /* --- BANNER PANTALLA COMPLETA EN INICIO --- */
+            .ntm-fs-banner {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.8rem;
+                background: rgba(0, 245, 255, 0.1);
+                border: 1.5px solid #00f5ff;
+                border-radius: 8px;
+                padding: 0.65rem 1rem;
+                margin-bottom: 1.1rem;
+                box-shadow: 0 0 18px rgba(0, 245, 255, 0.25);
+                max-width: 580px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .ntm-fs-text {
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+                font-family: 'Share Tech Mono', monospace;
+                font-size: 0.78rem;
+                color: #00f5ff;
+                text-align: left;
+                line-height: 1.35;
+            }
+            .ntm-fs-icon {
+                font-size: 1.25rem;
+                flex-shrink: 0;
+            }
+            .ntm-fs-toggle-btn {
+                background: #00f5ff;
+                color: #020b06;
+                border: none;
+                padding: 0.45rem 0.95rem;
+                border-radius: 4px;
+                font-family: 'Orbitron', monospace;
+                font-size: 0.75rem;
+                font-weight: 900;
+                letter-spacing: 1px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+                flex-shrink: 0;
+                touch-action: manipulation;
+            }
+            .ntm-fs-toggle-btn:hover {
+                background: #55ffff;
+                box-shadow: 0 0 16px rgba(0, 245, 255, 0.8);
+                transform: scale(1.04);
+            }
+            .ntm-start-actions {
+                display: flex;
+                gap: 0.75rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                margin-top: 0.4rem;
+            }
+            .ntm-start-fullscreen-btn {
+                background: linear-gradient(135deg, #00f5ff, #0099bb) !important;
+                color: #020b06 !important;
+                box-shadow: 0 0 20px rgba(0, 245, 255, 0.55) !important;
+                font-weight: 900 !important;
+            }
+            .ntm-start-fullscreen-btn:hover {
+                background: linear-gradient(135deg, #55ffff, #00d4ff) !important;
+                box-shadow: 0 0 32px rgba(0, 245, 255, 0.9) !important;
+                transform: translateY(-2px);
+            }
+
             /* --- FAB button --- */
             #ntm-fab {
                 position: fixed;
@@ -212,18 +334,34 @@
             .ntm-btn-secondary:hover { background:rgba(231,76,60,.15); }
 
             /* ---- Responsive móvil ---- */
-            @media (max-width:600px) {
+            @media (max-width: 768px), (max-height: 520px) {
                 #ntm-fab { bottom:74px; right:16px; left:auto; padding:.5rem .9rem .5rem .65rem; }
                 #ntm-fab img { width:38px; height:auto; max-height:26px; }
                 .ntm-fab-title { font-size:.65rem; }
                 .ntm-fab-sub   { display:none; }
                 #ntm-status-bar { font-size:.68rem; padding:.35rem .6rem; gap:.5rem; }
                 #ntm-rex-status { font-size:.65rem; min-width:160px; letter-spacing:.5px; }
-                #ntm-header { padding:.35rem .7rem; }
-                #ntm-header-title { font-size:.76rem; }
-                .ntm-instruct { gap:1rem; }
+                #ntm-header { padding:.35rem .6rem; height: 38px; min-height: 38px; }
+                #ntm-header-title { font-size:.74rem; }
+                .ej-btn-header { height: 28px !important; padding: 0.25rem 0.5rem !important; font-size: 0.7rem !important; }
+                .ej-btn-header .ej-btn-lbl { display: none !important; }
+                .ntm-instruct { gap:0.8rem; margin: 0.4rem 0 1rem; }
+                .ntm-inst-item { font-size: 0.7rem; }
+                .ntm-inst-icon { font-size: 1.3rem; }
+                .ntm-screen-title { font-size: 1.25rem; margin-bottom: 0.3rem; }
+                .ntm-screen-sub { font-size: 0.74rem; margin-bottom: 0.8rem; line-height: 1.4; }
+                .ntm-fs-banner { padding: 0.45rem 0.75rem; margin-bottom: 0.7rem; }
+                .ntm-fs-text { font-size: 0.7rem; }
+                .ntm-fs-toggle-btn { padding: 0.35rem 0.65rem; font-size: 0.68rem; }
+                .ntm-btn { font-size: 0.75rem; padding: 0.55rem 1.2rem; }
             }
-            @media (max-width:600px) and (orientation:portrait) {
+            @media (max-height: 520px) {
+                .ntm-instruct { display: none !important; }
+                .ntm-screen-sub { margin-bottom: 0.4rem; font-size: 0.72rem; }
+                .ntm-fs-banner { margin-bottom: 0.4rem; padding: 0.35rem 0.6rem; }
+                .ntm-btn { padding: 0.45rem 1rem; font-size: 0.72rem; }
+            }
+            @media (max-width: 600px) and (orientation:portrait) {
                 #ntm-status-bar { flex-direction:column; align-items:flex-start; gap:.25rem; }
                 .ntm-prog-wrap { width:100%; }
             }
@@ -259,6 +397,16 @@
                         <strong style="color:#2ecc71;">Arrastra a Jackson</strong> con sigilo hacia la derecha mientras el Rex come.<br>
                         En partes clave del camino y cuando levante la cabeza, <strong style="color:#e74c3c;">¡SUELTA EL CURSOR Y QUÉDATE COMPLETAMENTE QUIETO!</strong>
                     </div>
+                    <!-- Banner de recomendación pantalla completa -->
+                    <div class="ntm-fs-banner" id="ntm-fs-banner">
+                        <div class="ntm-fs-text">
+                            <span class="ntm-fs-icon">💡</span>
+                            <span>RECOMENDADO EN CELULARES: Jugar en pantalla completa para mejor visibilidad y control táctil.</span>
+                        </div>
+                        <button type="button" class="ntm-fs-toggle-btn" id="ntm-start-fs-toggle-btn">
+                            <span class="ej-ic">⛶</span> ACTIVAR
+                        </button>
+                    </div>
                     <div class="ntm-instruct">
                         <div class="ntm-inst-item">
                             <div class="ntm-inst-icon">👣</div>
@@ -277,7 +425,12 @@
                             <div>Cruza el recinto<br>para sobrevivir</div>
                         </div>
                     </div>
-                    <button class="ntm-btn ntm-btn-primary" id="ntm-start-btn">▶ COMENZAR</button>
+                    <div class="ntm-start-actions">
+                        <button class="ntm-btn ntm-btn-primary ntm-start-fullscreen-btn" id="ntm-start-fullscreen-btn">
+                            <span class="ej-ic">⛶</span> JUGAR EN PANTALLA COMPLETA
+                        </button>
+                        <button class="ntm-btn ntm-btn-secondary" id="ntm-start-btn">▶ COMENZAR</button>
+                    </div>
                 </div>
 
                 <!-- Pantalla de derrota -->
@@ -641,8 +794,9 @@
     function onDown(clientX) {
         if (state !== 'eating' && state !== 'looking') return;
         var lx = logicalX(clientX);
-        // Área táctil amplia alrededor de Jackson
-        if (Math.abs(lx - jacksonX) < HUMAN_W * 1.25) {
+        // Área táctil extra amplia para dedos en pantallas móviles
+        var hitTol = Math.max(HUMAN_W * 1.35, 95);
+        if (Math.abs(lx - jacksonX) < hitTol) {
             isDragging  = true;
             dragOffsetX = lx - jacksonX;
             lastPtrX    = lx;
@@ -713,12 +867,22 @@
         window.addEventListener('mouseup', onUp);
 
         canvas.addEventListener('touchstart', function(e) {
-            e.preventDefault(); onDown(e.touches[0].clientX);
+            if (e.touches && e.touches[0]) {
+                if (e.cancelable) e.preventDefault();
+                onDown(e.touches[0].clientX);
+            }
         }, { passive: false });
         window.addEventListener('touchmove', function(e) {
-            if (isDragging) { e.preventDefault(); onMove(e.touches[0].clientX); }
+            if (isDragging && e.touches && e.touches[0]) {
+                if (e.cancelable) e.preventDefault();
+                onMove(e.touches[0].clientX);
+            }
         }, { passive: false });
-        window.addEventListener('touchend', onUp);
+        window.addEventListener('touchend', function(e) {
+            if (e.cancelable) e.preventDefault();
+            onUp();
+        }, { passive: false });
+        window.addEventListener('touchcancel', onUp);
     }
 
     // ============================================================
@@ -768,7 +932,15 @@
         stopAll();
         if (aniFrame) { cancelAnimationFrame(aniFrame); aniFrame = null; }
         state = 'idle'; isPaused = false;
-        document.getElementById('ntm-overlay').classList.remove('open');
+        var ov = document.getElementById('ntm-overlay');
+        if (ov) ov.classList.remove('open');
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        if (isFs) {
+            try {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            } catch(e) {}
+        }
     }
 
     // ============================================================
@@ -816,24 +988,58 @@
         if (resumeBtn) resumeBtn.addEventListener('click', togglePause);
 
         var ntmFullBtn = document.getElementById('ntm-fullscreen-btn');
-        if (ntmFullBtn) {
-            ntmFullBtn.addEventListener('click', function () {
-                var target = document.getElementById('ntm-overlay') || document.documentElement;
-                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        var startFsBtn = document.getElementById('ntm-start-fullscreen-btn');
+        var bannerToggleBtn = document.getElementById('ntm-start-fs-toggle-btn');
+
+        function toggleFullscreen() {
+            var target = document.getElementById('ntm-overlay') || document.documentElement;
+            var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            if (!isFs) {
+                if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            }
+        }
+
+        function updateFullscreenUI() {
+            var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            if (ntmFullBtn) {
+                ntmFullBtn.innerHTML = isFs 
+                    ? '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>' 
+                    : '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+            }
+            if (bannerToggleBtn) {
+                bannerToggleBtn.innerHTML = isFs 
+                    ? '<span class="ej-ic">🗗</span> DESACTIVAR' 
+                    : '<span class="ej-ic">⛶</span> ACTIVAR';
+            }
+            if (startFsBtn) {
+                startFsBtn.innerHTML = isFs 
+                    ? '<span class="ej-ic">▶</span> JUGAR AHORA' 
+                    : '<span class="ej-ic">⛶</span> JUGAR EN PANTALLA COMPLETA';
+            }
+        }
+
+        if (ntmFullBtn) ntmFullBtn.addEventListener('click', toggleFullscreen);
+        if (bannerToggleBtn) bannerToggleBtn.addEventListener('click', toggleFullscreen);
+        
+        if (startFsBtn) {
+            startFsBtn.addEventListener('click', function () {
+                var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+                if (!isFs) {
+                    var target = document.getElementById('ntm-overlay') || document.documentElement;
                     if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                     else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                    ntmFullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
-                } else {
-                    if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
-                    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                    ntmFullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
                 }
-            });
-            document.addEventListener('fullscreenchange', function() {
-                if (!document.fullscreenElement) ntmFullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
-                else ntmFullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
+                startGame();
             });
         }
+
+        document.addEventListener('fullscreenchange', updateFullscreenUI);
+        document.addEventListener('webkitfullscreenchange', updateFullscreenUI);
+
         document.getElementById('ntm-start-btn').addEventListener('click', startGame);
 
         document.getElementById('ntm-retry-btn').addEventListener('click', function () {

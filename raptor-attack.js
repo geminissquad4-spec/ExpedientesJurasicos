@@ -242,6 +242,53 @@
                 font-family:'Orbitron',monospace; font-size:.95rem; font-weight:900;
                 color:#f1c40f; letter-spacing:2px; text-transform:uppercase;
             }
+            .ej-header-actions {
+                display: flex !important;
+                align-items: center !important;
+                gap: 6px !important;
+                margin-left: auto !important;
+                flex-shrink: 0 !important;
+            }
+            .ej-btn-header {
+                display: inline-flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 5px !important;
+                background: rgba(0, 20, 20, 0.85) !important;
+                border: 1.5px solid #00f5ff !important;
+                color: #00f5ff !important;
+                font-family: 'Share Tech Mono', 'Courier New', monospace !important;
+                font-size: 0.75rem !important;
+                font-weight: 700 !important;
+                padding: 0.35rem 0.75rem !important;
+                border-radius: 4px !important;
+                cursor: pointer !important;
+                letter-spacing: 1px !important;
+                text-transform: uppercase !important;
+                transition: all 0.2s ease !important;
+                line-height: 1 !important;
+                height: 32px !important;
+                box-sizing: border-box !important;
+                touch-action: manipulation !important;
+                box-shadow: 0 0 8px rgba(0, 245, 255, 0.25) !important;
+                white-space: nowrap !important;
+            }
+            .ej-btn-header:hover {
+                background: rgba(0, 245, 255, 0.25) !important;
+                box-shadow: 0 0 14px rgba(0, 245, 255, 0.6) !important;
+                color: #ffffff !important;
+            }
+            .ej-btn-header.ej-btn-header-danger {
+                border-color: #ff4757 !important;
+                color: #ff4757 !important;
+                background: rgba(255, 71, 87, 0.12) !important;
+                box-shadow: 0 0 8px rgba(255, 71, 87, 0.3) !important;
+            }
+            .ej-btn-header.ej-btn-header-danger:hover {
+                background: #ff4757 !important;
+                color: #ffffff !important;
+                box-shadow: 0 0 16px rgba(255, 71, 87, 0.7) !important;
+            }
             
             
 
@@ -329,7 +376,105 @@
             .raptor-btn-secondary { background:transparent; border:1px solid #f39c12; color:#f1c40f; }
             .raptor-btn-secondary:hover { background:rgba(243,156,18,.15); }
 
+            /* --- BANNER PANTALLA COMPLETA EN INICIO --- */
+            .raptor-fs-banner {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.8rem;
+                background: rgba(243, 156, 18, 0.12);
+                border: 1.5px solid #f39c12;
+                border-radius: 8px;
+                padding: 0.65rem 1rem;
+                margin-bottom: 1.1rem;
+                box-shadow: 0 0 18px rgba(243, 156, 18, 0.25);
+                max-width: 580px;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .raptor-fs-text {
+                display: flex;
+                align-items: center;
+                gap: 0.6rem;
+                font-family: 'Share Tech Mono', monospace;
+                font-size: 0.78rem;
+                color: #f1c40f;
+                text-align: left;
+                line-height: 1.35;
+            }
+            .raptor-fs-icon {
+                font-size: 1.25rem;
+                flex-shrink: 0;
+            }
+            .raptor-fs-toggle-btn {
+                background: #f39c12;
+                color: #1a1103;
+                border: none;
+                padding: 0.45rem 0.95rem;
+                border-radius: 4px;
+                font-family: 'Orbitron', monospace;
+                font-size: 0.75rem;
+                font-weight: 900;
+                letter-spacing: 1px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                white-space: nowrap;
+                flex-shrink: 0;
+                touch-action: manipulation;
+            }
+            .raptor-fs-toggle-btn:hover {
+                background: #f1c40f;
+                box-shadow: 0 0 16px rgba(241, 196, 15, 0.8);
+                transform: scale(1.04);
+            }
+            .raptor-start-actions {
+                display: flex;
+                gap: 0.75rem;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                margin-top: 0.4rem;
+            }
+            .raptor-start-fullscreen-btn {
+                background: linear-gradient(135deg, #f39c12, #d35400) !important;
+                color: #fff !important;
+                box-shadow: 0 0 20px rgba(243, 156, 18, 0.55) !important;
+                font-weight: 900 !important;
+            }
+            .raptor-start-fullscreen-btn:hover {
+                background: linear-gradient(135deg, #f1c40f, #e67e22) !important;
+                box-shadow: 0 0 32px rgba(241, 196, 15, 0.9) !important;
+                transform: translateY(-2px);
+            }
+
             /* --- RESPONSIVE MÓVIL --- */
+            @media (max-width: 768px), (max-height: 520px) {
+                #raptor-fab { bottom: 74px; right: 16px; left: auto; padding: .5rem .9rem .5rem .65rem; }
+                #raptor-fab img { width: 36px; height: auto; max-height: 26px; }
+                .raptor-fab-title { font-size: .65rem; }
+                .raptor-fab-sub   { display: none; }
+                #raptor-status-bar { font-size: .68rem; padding: .35rem .6rem; }
+                #raptor-header { padding: .35rem .6rem; height: 38px; min-height: 38px; }
+                #raptor-header-title { font-size: .74rem; }
+                .ej-btn-header { height: 28px !important; padding: 0.25rem 0.5rem !important; font-size: 0.7rem !important; }
+                .ej-btn-header .ej-btn-lbl { display: none !important; }
+                .raptor-instruct { gap: 0.8rem; margin: 0.4rem 0 1rem; }
+                .raptor-inst-item { font-size: 0.7rem; }
+                .raptor-inst-icon { font-size: 1.3rem; }
+                .raptor-screen-title { font-size: 1.25rem; margin-bottom: 0.3rem; }
+                .raptor-screen-sub { font-size: 0.74rem; margin-bottom: 0.8rem; line-height: 1.4; }
+                .raptor-fs-banner { padding: 0.45rem 0.75rem; margin-bottom: 0.7rem; }
+                .raptor-fs-text { font-size: 0.7rem; }
+                .raptor-fs-toggle-btn { padding: 0.35rem 0.65rem; font-size: 0.68rem; }
+                .raptor-btn { font-size: 0.75rem; padding: 0.55rem 1.2rem; }
+            }
+            @media (max-height: 520px) {
+                .raptor-instruct { display: none !important; }
+                .raptor-screen-sub { margin-bottom: 0.4rem; font-size: 0.72rem; }
+                .raptor-fs-banner { margin-bottom: 0.4rem; padding: 0.35rem 0.6rem; }
+                .raptor-btn { padding: 0.45rem 1rem; font-size: 0.72rem; }
+            }
             @media (max-width: 600px) {
                 #raptor-fab { bottom: 128px; right: 16px; left: auto; padding: .5rem .9rem .5rem .65rem; }
                 #raptor-fab img { width: 36px; height: auto; max-height: 26px; }
@@ -372,6 +517,16 @@
                         <strong style="color:#f1c40f;">Cuando salte, apunta con la mirilla y dispárale antes de que te alcance.</strong><br>
                         ¡Neutraliza a los 5 Velociraptores para sobrevivir!
                     </div>
+                    <!-- Banner de recomendación pantalla completa -->
+                    <div class="raptor-fs-banner" id="raptor-fs-banner">
+                        <div class="raptor-fs-text">
+                            <span class="raptor-fs-icon">💡</span>
+                            <span>RECOMENDADO EN CELULARES: Jugar en pantalla completa para mejor visibilidad y control de mira.</span>
+                        </div>
+                        <button type="button" class="raptor-fs-toggle-btn" id="raptor-start-fs-toggle-btn">
+                            <span class="ej-ic">⛶</span> ACTIVAR
+                        </button>
+                    </div>
                     <div class="raptor-instruct">
                         <div class="raptor-inst-item">
                             <div class="raptor-inst-icon">👂</div>
@@ -390,7 +545,12 @@
                             <div>Si falla =<br><strong>TE DEVORA</strong></div>
                         </div>
                     </div>
-                    <button class="raptor-btn raptor-btn-primary" id="raptor-start-btn">▶ COMENZAR CACERÍA</button>
+                    <div class="raptor-start-actions">
+                        <button class="raptor-btn raptor-btn-primary raptor-start-fullscreen-btn" id="raptor-start-fullscreen-btn">
+                            <span class="ej-ic">⛶</span> JUGAR EN PANTALLA COMPLETA
+                        </button>
+                        <button class="raptor-btn raptor-btn-secondary" id="raptor-start-btn">▶ COMENZAR CACERÍA</button>
+                    </div>
                 </div>
 
                 <!-- Pantalla derrota -->
@@ -800,8 +960,16 @@
     function closeGame() {
         stopAllAudio();
         if (aniFrame) { cancelAnimationFrame(aniFrame); aniFrame = null; }
-        state = 'idle';
-        document.getElementById('raptor-overlay').classList.remove('open');
+        state = 'idle'; isPaused = false;
+        var ov = document.getElementById('raptor-overlay');
+        if (ov) ov.classList.remove('open');
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        if (isFs) {
+            try {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            } catch(e) {}
+        }
     }
 
     // ============================================================
@@ -889,24 +1057,58 @@
         if (resumeBtn) resumeBtn.addEventListener('click', togglePause);
 
         var raFullBtn = document.getElementById('raptor-fullscreen-btn');
-        if (raFullBtn) {
-            raFullBtn.addEventListener('click', function () {
-                var target = document.getElementById('raptor-overlay') || document.documentElement;
-                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        var startFsBtn = document.getElementById('raptor-start-fullscreen-btn');
+        var bannerToggleBtn = document.getElementById('raptor-start-fs-toggle-btn');
+
+        function toggleFullscreen() {
+            var target = document.getElementById('raptor-overlay') || document.documentElement;
+            var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            if (!isFs) {
+                if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            }
+        }
+
+        function updateFullscreenUI() {
+            var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            if (raFullBtn) {
+                raFullBtn.innerHTML = isFs 
+                    ? '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>' 
+                    : '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+            }
+            if (bannerToggleBtn) {
+                bannerToggleBtn.innerHTML = isFs 
+                    ? '<span class="ej-ic">🗗</span> DESACTIVAR' 
+                    : '<span class="ej-ic">⛶</span> ACTIVAR';
+            }
+            if (startFsBtn) {
+                startFsBtn.innerHTML = isFs 
+                    ? '<span class="ej-ic">▶</span> JUGAR AHORA' 
+                    : '<span class="ej-ic">⛶</span> JUGAR EN PANTALLA COMPLETA';
+            }
+        }
+
+        if (raFullBtn) raFullBtn.addEventListener('click', toggleFullscreen);
+        if (bannerToggleBtn) bannerToggleBtn.addEventListener('click', toggleFullscreen);
+
+        if (startFsBtn) {
+            startFsBtn.addEventListener('click', function () {
+                var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+                if (!isFs) {
+                    var target = document.getElementById('raptor-overlay') || document.documentElement;
                     if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
                     else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-                    raFullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
-                } else {
-                    if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
-                    else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-                    raFullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
                 }
-            });
-            document.addEventListener('fullscreenchange', function() {
-                if (!document.fullscreenElement) raFullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
-                else raFullBtn.innerHTML = '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>';
+                startGame();
             });
         }
+
+        document.addEventListener('fullscreenchange', updateFullscreenUI);
+        document.addEventListener('webkitfullscreenchange', updateFullscreenUI);
+
         document.getElementById('raptor-start-btn').addEventListener('click', startGame);
 
         document.getElementById('raptor-retry-btn').addEventListener('click', function () {
