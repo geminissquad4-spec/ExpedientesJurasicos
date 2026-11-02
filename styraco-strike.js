@@ -213,6 +213,10 @@
         var s = document.createElement('style');
         s.id = 'styraco-strike-style';
         s.textContent = [
+            '.ej-btn-header { background: rgba(0, 20, 20, 0.85) !important; border: 1.5px solid #00f5ff !important; color: #00f5ff !important; font-family: "Share Tech Mono", monospace !important; font-size: 0.75rem !important; font-weight: 700 !important; padding: 0.35rem 0.75rem !important; border-radius: 4px !important; cursor: pointer !important; letter-spacing: 1px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 5px !important; text-transform: uppercase !important; transition: all 0.2s ease !important; height: 32px !important; box-sizing: border-box !important; touch-action: manipulation !important; }',
+            '.ej-btn-header:hover { background: rgba(0, 245, 255, 0.25) !important; color: #fff !important; }',
+            '.ej-btn-header-danger { background: rgba(255, 71, 87, 0.12) !important; border-color: #ff4757 !important; color: #ff4757 !important; }',
+            '.ej-btn-header-danger:hover { background: #ff4757 !important; color: #fff !important; }',
             '/* --- BOTÓN FLOTANTE FAB (ROJO FUEGO / DEMON) --- */',
             '#styraco-strike-fab {',
             '    position: fixed;',
@@ -305,15 +309,86 @@
             "    font-family:'Orbitron',monospace; font-size:1.1rem; font-weight:900;",
             '    color:#f1c40f; text-shadow:0 0 10px #e67e22; padding: 0 .4rem;',
             '}',
-            '#ss-close-btn {',
-            '    background:transparent; border:1px solid rgba(231,76,60,.4); color:#ff6b6b;',
-            "    font-family:'Share Tech Mono',monospace; font-size:.75rem;",
-            '    padding:.35rem .9rem; border-radius:3px; cursor:pointer;',
-            '    letter-spacing:1px; transition:all .2s;',
+            '/* --- MENÚ SUPERIOR DE ACCIONES Y BOTONES ESTANDARIZADOS --- */',
+            '.ej-header-actions {',
+            '    display: flex !important; align-items: center !important; gap: 6px !important;',
+            '    margin-left: auto !important; flex-shrink: 0 !important; z-index: 100 !important;',
             '}',
-            '#ss-close-btn:hover { background:rgba(231,76,60,.2); color:#fff; border-color:#e74c3c; }',
-            '#ss-fullscreen-btn { background:rgba(46,204,113,.15); border:1px solid rgba(46,204,113,.4); color:#2ecc71; font-family:\'Share Tech Mono\',monospace; font-size:.75rem; padding:.35rem .9rem; border-radius:3px; cursor:pointer; letter-spacing:1px; transition:all .2s; }',
-            '#ss-fullscreen-btn:hover { background:#2ecc71; color:#020b06; }',
+            '.ej-btn-header {',
+            '    background: rgba(20, 6, 6, 0.85) !important;',
+            '    border: 1.5px solid #00f5ff !important;',
+            '    color: #00f5ff !important;',
+            '    font-family: "Share Tech Mono", monospace !important;',
+            '    font-size: 0.75rem !important; font-weight: 700 !important;',
+            '    padding: 0.35rem 0.75rem !important; border-radius: 4px !important;',
+            '    cursor: pointer !important; letter-spacing: 1px !important;',
+            '    display: inline-flex !important; align-items: center !important; justify-content: center !important;',
+            '    gap: 5px !important; text-transform: uppercase !important;',
+            '    transition: all 0.2s ease !important; line-height: 1 !important;',
+            '    height: 32px !important; box-sizing: border-box !important;',
+            '    touch-action: manipulation !important;',
+            '    box-shadow: 0 0 10px rgba(0, 245, 255, 0.25) !important;',
+            '}',
+            '.ej-btn-header:hover {',
+            '    background: rgba(0, 245, 255, 0.28) !important;',
+            '    border-color: #55ffff !important; color: #ffffff !important;',
+            '    box-shadow: 0 0 16px rgba(0, 245, 255, 0.6) !important;',
+            '}',
+            '.ej-btn-header-danger, #ss-close-btn {',
+            '    background: rgba(255, 71, 87, 0.12) !important;',
+            '    border-color: #ff4757 !important; color: #ff4757 !important;',
+            '    box-shadow: 0 0 8px rgba(255, 71, 87, 0.3) !important;',
+            '}',
+            '.ej-btn-header-danger:hover, #ss-close-btn:hover {',
+            '    background: #ff4757 !important; color: #ffffff !important;',
+            '    border-color: #ff4757 !important; box-shadow: 0 0 16px rgba(255, 71, 87, 0.7) !important;',
+            '}',
+            '#ss-fullscreen-btn, #ss-mute-btn, #ss-pause-btn {',
+            '    background: rgba(20, 6, 6, 0.85) !important;',
+            '    border: 1.5px solid #00f5ff !important; color: #00f5ff !important;',
+            '}',
+            '#ss-fullscreen-btn:hover, #ss-mute-btn:hover, #ss-pause-btn:hover {',
+            '    background: rgba(0, 245, 255, 0.28) !important; color: #fff !important;',
+            '}',
+            '',
+            '/* --- BANNER PANTALLA COMPLETA EN INICIO --- */',
+            '.ss-fs-banner {',
+            '    display: flex; align-items: center; justify-content: space-between;',
+            '    gap: 0.8rem; background: rgba(0, 245, 255, 0.12);',
+            '    border: 1.5px solid #00f5ff; border-radius: 6px;',
+            '    padding: 0.6rem 0.9rem; margin-bottom: 1.1rem;',
+            '    box-shadow: 0 0 16px rgba(0, 245, 255, 0.25);',
+            '    text-align: left; box-sizing: border-box; max-width: 620px; width: 100%;',
+            '}',
+            '.ss-fs-text {',
+            '    display: flex; align-items: center; gap: 0.5rem;',
+            '    font-family: "Share Tech Mono", monospace; font-size: 0.76rem;',
+            '    color: #00f5ff; line-height: 1.35;',
+            '}',
+            '.ss-fs-icon { font-size: 1.25rem; flex-shrink: 0; }',
+            '.ss-fs-toggle-btn {',
+            '    background: #00f5ff; color: #020b06; border: none;',
+            '    padding: 0.4rem 0.85rem; border-radius: 4px;',
+            '    font-family: "Orbitron", monospace; font-size: 0.74rem;',
+            '    font-weight: 900; letter-spacing: 1px; cursor: pointer;',
+            '    transition: all 0.2s ease; white-space: nowrap; flex-shrink: 0;',
+            '    touch-action: manipulation;',
+            '}',
+            '.ss-fs-toggle-btn:hover { background: #55ffff; box-shadow: 0 0 14px rgba(0, 245, 255, 0.8); }',
+            '.ss-start-actions {',
+            '    display: flex; gap: 0.75rem; flex-wrap: wrap;',
+            '    justify-content: center; align-items: center; width: 100%;',
+            '}',
+            '.ss-start-fullscreen-btn {',
+            '    background: linear-gradient(135deg, #00f5ff, #0984e3) !important;',
+            '    color: #020b06 !important; box-shadow: 0 0 20px rgba(0, 245, 255, 0.55) !important;',
+            '    font-weight: 900 !important;',
+            '}',
+            '.ss-start-fullscreen-btn:hover {',
+            '    background: linear-gradient(135deg, #55ffff, #00d2d3) !important;',
+            '    box-shadow: 0 0 32px rgba(0, 245, 255, 0.9) !important;',
+            '    transform: translateY(-2px);',
+            '}',
             '',
             '/* Canvas wrap y stage */',
             '#ss-canvas-wrap {',
@@ -445,21 +520,76 @@
             '    background: rgba(46, 204, 113, 0.9); box-shadow: 0 0 20px rgba(46, 204, 113, 0.95);',
             '}',
             '',
-            '/* Responsive */',
-            '@media (max-width: 600px) {',
-            '    #styraco-strike-fab { bottom: 284px; right: 16px; padding: .5rem .9rem .5rem .65rem; }',
-            '    #styraco-strike-fab img { width: 36px; max-height: 26px; }',
-            '    .ss-fab-title { font-size:.65rem; }',
-            '    .ss-fab-sub   { display:none; }',
-            '    #ss-status-bar { font-size:.68rem; padding:.35rem .6rem; }',
-            '    #ss-header { padding:.35rem .6rem; }',
-            '    .ss-fighter-name { font-size:.7rem; }',
-            '    .ss-health-bg { height: 12px; }',
-            '    .ss-touch-btn { width: 50px; height: 50px; font-size: 1rem; }',
-            '    .ss-touch-btn.attack { width: 60px; height: 60px; font-size: 0.78rem; }',
+            '/* Responsive y Adaptación Móvil */',
+            '#styraco-strike-fab { bottom: 284px; right: 16px; padding: .5rem .9rem .5rem .65rem; }',
+            '#styraco-strike-fab img { width: 36px; max-height: 26px; }',
+            '.ss-fab-title { font-size:.65rem; }',
+            '.ss-fab-sub   { display:none; }',
+            '@media (max-width: 768px), (max-height: 520px) {',
+            '    #ss-header {',
+            '        height: 38px !important; min-height: 38px !important; max-height: 38px !important;',
+            '        padding: 0 0.45rem !important; gap: 0.35rem !important;',
+            '    }',
+            '    .ss-fighter-name { font-size: 0.68rem !important; }',
+            '    .ss-health-bg { height: 12px !important; }',
+            '    #ss-vs-badge { font-size: 0.8rem !important; padding: 0 2px !important; }',
+            '    .ej-header-actions { gap: 4px !important; }',
+            '    .ej-btn-header { height: 28px !important; min-width: 28px !important; padding: 0 5px !important; font-size: 0.72rem !important; }',
+            '    .ej-btn-header .ej-btn-lbl { display: none !important; }',
+            '    #ss-status-bar { display: none !important; }',
+            '    #ss-touch-controls { bottom: 6px !important; padding: 0 10px !important; }',
+            '}',
+            '@media (max-height: 520px) {',
+            '    .ss-screen { padding: 0.4rem !important; }',
+            '    .ss-screen-title { font-size: 1rem !important; margin-bottom: 0.2rem !important; }',
+            '    .ss-screen-sub { font-size: 0.72rem !important; line-height: 1.3 !important; margin-bottom: 0.35rem !important; }',
+            '    .ss-instruct { display: none !important; }',
+            '    .ss-fs-banner { padding: 0.3rem 0.55rem !important; margin-bottom: 0.4rem !important; }',
+            '    .ss-fs-text { font-size: 0.68rem !important; }',
+            '    .ss-fs-toggle-btn { padding: 0.25rem 0.55rem !important; font-size: 0.68rem !important; }',
+            '    .ss-btn { padding: 0.4rem 1rem !important; font-size: 0.78rem !important; }',
+            '}',
+            '@media (max-width: 540px) {',
+            '    .ss-instruct { gap: 0.4rem !important; margin: 0.3rem 0 0.8rem !important; }',
+            '    .ss-inst-item { min-width: 75px !important; padding: 0.35rem 0.45rem !important; font-size: 0.68rem !important; }',
+            '    .ss-inst-icon { font-size: 1.25rem !important; }',
             '}'
         ].join('\n');
         document.head.appendChild(s);
+    }
+
+
+    function toggleSsFullscreen() {
+        var target = document.getElementById('styraco-strike-overlay') || document.documentElement;
+        if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+            if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+            else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+        } else {
+            if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        }
+    }
+
+    function updateSsFullscreenUI() {
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        var fullBtn = document.getElementById('ss-fullscreen-btn');
+        var bannerToggle = document.getElementById('ss-start-fs-toggle-btn');
+        var startFsBtn = document.getElementById('ss-start-fullscreen-btn');
+        if (fullBtn) {
+            fullBtn.innerHTML = isFs
+                ? '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR</span>'
+                : '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+        }
+        if (bannerToggle) {
+            bannerToggle.innerHTML = isFs
+                ? '<span class="ej-ic">🗗</span> DESACTIVAR'
+                : '<span class="ej-ic">⛶</span> ACTIVAR';
+        }
+        if (startFsBtn) {
+            startFsBtn.innerHTML = isFs
+                ? '<span class="ej-ic">⚔️</span> JUGAR AHORA'
+                : '<span class="ej-ic">⛶</span> JUGAR EN PANTALLA COMPLETA';
+        }
     }
 
     // ============================================================
@@ -521,6 +651,7 @@
         var muteBtn = document.createElement('button');
         muteBtn.id = 'ss-mute-btn';
         muteBtn.className = 'ej-btn-header';
+        muteBtn.title = 'Silenciar / Activar Sonido';
         muteBtn.innerHTML = '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
         muteBtn.addEventListener('click', function () {
             isMuted = !isMuted;
@@ -533,27 +664,21 @@
         var pauseBtn = document.createElement('button');
         pauseBtn.id = 'ss-pause-btn';
         pauseBtn.className = 'ej-btn-header';
+        pauseBtn.title = 'Pausar / Reanudar';
         pauseBtn.innerHTML = '<span class="ej-ic">⏸️</span><span class="ej-btn-lbl"> PAUSA</span>';
         pauseBtn.addEventListener('click', togglePause);
 
         var fullBtn = document.createElement('button');
         fullBtn.id = 'ss-fullscreen-btn';
         fullBtn.className = 'ej-btn-header';
+        fullBtn.title = 'Pantalla Completa';
         fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
-        fullBtn.addEventListener('click', function () {
-            var target = document.getElementById('styraco-strike-overlay') || document.documentElement;
-            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
-                else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-            } else {
-                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
-                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-            }
-        });
+        fullBtn.addEventListener('click', toggleSsFullscreen);
 
         var closeBtn = document.createElement('button');
         closeBtn.id  = 'ss-close-btn';
         closeBtn.className = 'ej-btn-header ej-btn-header-danger';
+        closeBtn.title = 'Cerrar';
         closeBtn.innerHTML = '<span class="ej-ic">✕</span><span class="ej-btn-lbl"> CERRAR</span>';
         closeBtn.addEventListener('click', closeGame);
 
@@ -638,16 +763,52 @@
             instruct.appendChild(card);
         }
 
+        // Banner de recomendación pantalla completa
+        var fsBanner = document.createElement('div');
+        fsBanner.className = 'ss-fs-banner';
+        fsBanner.id = 'ss-fs-banner';
+        fsBanner.innerHTML = [
+            '<div class="ss-fs-text">',
+            '    <span class="ss-fs-icon">💡</span>',
+            '    <span>RECOMENDADO EN CELULARES: Jugar en pantalla completa para dominar los combos y esquivar con precisión.</span>',
+            '</div>',
+            '<button type="button" class="ss-fs-toggle-btn" id="ss-start-fs-toggle-btn">',
+            '    <span class="ej-ic">⛶</span> ACTIVAR',
+            '</button>'
+        ].join('');
+
+        // Acciones de inicio: Pantalla Completa primaria + Comenzar secundaria
+        var startActions = document.createElement('div');
+        startActions.className = 'ss-start-actions';
+
+        var startFsPrimary = document.createElement('button');
+        startFsPrimary.className = 'ss-btn ss-btn-primary ss-start-fullscreen-btn';
+        startFsPrimary.id = 'ss-start-fullscreen-btn';
+        startFsPrimary.innerHTML = '<span class="ej-ic">⛶</span> JUGAR EN PANTALLA COMPLETA';
+        startFsPrimary.addEventListener('click', function () {
+            var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+            if (!isFs) {
+                var target = document.getElementById('styraco-strike-overlay') || document.documentElement;
+                if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+            }
+            startGame();
+        });
+
         var startBtn = document.createElement('button');
-        startBtn.className = 'ss-btn ss-btn-primary';
+        startBtn.className = 'ss-btn ss-btn-secondary';
         startBtn.id = 'ss-start-btn';
-        startBtn.textContent = '⚔️ ¡INICIAR COMBATE!';
+        startBtn.innerHTML = '<span class="ej-ic">⚔️</span> ¡INICIAR COMBATE!';
         startBtn.addEventListener('click', startGame);
+
+        startActions.appendChild(startFsPrimary);
+        startActions.appendChild(startBtn);
 
         startScreen.appendChild(sTitle);
         startScreen.appendChild(sSub);
         startScreen.appendChild(instruct);
-        startScreen.appendChild(startBtn);
+        startScreen.appendChild(fsBanner);
+        startScreen.appendChild(startActions);
         stage.appendChild(startScreen);
 
         // ---- PANTALLA VICTORIA ----
@@ -746,6 +907,12 @@
         statusBar.appendChild(mission);
         statusBar.appendChild(hints);
         ov.appendChild(statusBar);
+
+        var bannerBtn = startScreen.querySelector('#ss-start-fs-toggle-btn');
+        if (bannerBtn) bannerBtn.addEventListener('click', toggleSsFullscreen);
+
+        document.addEventListener('fullscreenchange', updateSsFullscreenUI);
+        document.addEventListener('webkitfullscreenchange', updateSsFullscreenUI);
 
         document.body.appendChild(ov);
         ctx = canvas.getContext('2d');
@@ -1468,6 +1635,14 @@
         stopAllAudio();
         state = 'idle';
         showScreen(null);
+
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        if (isFs) {
+            try {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            } catch (e) {}
+        }
     }
 
     // Exponer función para abrir desde la sección de minijuegos del sitio
