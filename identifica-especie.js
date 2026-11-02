@@ -96,9 +96,13 @@
         var style = document.createElement('style');
         style.id = 'identifica-especie-styles';
         style.textContent = [
+            '.ej-btn-header { background: rgba(0, 20, 20, 0.85) !important; border: 1.5px solid #00f5ff !important; color: #00f5ff !important; font-family: "Share Tech Mono", monospace !important; font-size: 0.75rem !important; font-weight: 700 !important; padding: 0.35rem 0.75rem !important; border-radius: 4px !important; cursor: pointer !important; letter-spacing: 1px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 5px !important; text-transform: uppercase !important; transition: all 0.2s ease !important; height: 32px !important; box-sizing: border-box !important; touch-action: manipulation !important; }',
+            '.ej-btn-header:hover { background: rgba(0, 245, 255, 0.25) !important; color: #fff !important; }',
+            '.ej-btn-header-danger { background: rgba(255, 71, 87, 0.12) !important; border-color: #ff4757 !important; color: #ff4757 !important; }',
+            '.ej-btn-header-danger:hover { background: #ff4757 !important; color: #fff !important; }',
             '#ide-overlay {',
-            '    position: fixed; inset: 0; z-index: 99995;',
-            '    background: rgba(2, 6, 4, 0.98); backdrop-filter: blur(8px);',
+            '    position: fixed; inset: 0; z-index: 100000;',
+            '    background: #020805; backdrop-filter: blur(12px);',
             '    display: none; flex-direction: column;',
             '    font-family: "Share Tech Mono", monospace; color: #fff;',
             '    user-select: none;',
@@ -236,7 +240,7 @@
             '.ide-modal-screen {',
             '    position: absolute; inset: 0; z-index: 40; display: none;',
             '    flex-direction: column; align-items: center; justify-content: center;',
-            '    text-align: center; background: rgba(2, 6, 4, 0.94); backdrop-filter: blur(8px);',
+            '    text-align: center; background: #020805; backdrop-filter: blur(12px);',
             '    padding: 1.5rem; box-sizing: border-box;',
             '}',
             '.ide-modal-screen.show { display: flex; animation: ide-fade-in 0.25s ease-out; }',
@@ -250,7 +254,211 @@
             '.ide-btn-green { background: #2ecc71; color: #02140a; box-shadow: 0 0 20px rgba(46, 204, 113, 0.5); }',
             '.ide-btn-green:hover { background: #55efc4; box-shadow: 0 0 35px rgba(85, 239, 196, 0.8); transform: translateY(-2px); }',
             '.ide-btn-red   { background: #e74c3c; color: #fff; box-shadow: 0 0 20px rgba(231, 76, 60, 0.5); }',
-            '.ide-btn-red:hover   { background: #ff4757; box-shadow: 0 0 35px rgba(255, 71, 87, 0.8); transform: translateY(-2px); }'
+            '.ide-btn-red:hover   { background: #ff4757; box-shadow: 0 0 35px rgba(255, 71, 87, 0.8); transform: translateY(-2px); }',
+            '',
+            '/* Card y banner del modal de inicio */',
+            '.ide-modal-card {',
+            '    background: linear-gradient(135deg, rgba(8, 26, 16, 0.96), rgba(3, 14, 8, 0.98));',
+            '    border: 2px solid rgba(46, 204, 113, 0.5);',
+            '    border-radius: 8px;',
+            '    padding: 1.6rem 2rem;',
+            '    max-width: 620px;',
+            '    width: 92%;',
+            '    box-shadow: 0 0 45px rgba(46, 204, 113, 0.35);',
+            '    margin: auto;',
+            '    max-height: 88dvh;',
+            '    overflow-y: auto;',
+            '    -webkit-overflow-scrolling: touch;',
+            '    box-sizing: border-box;',
+            '    text-align: center;',
+            '}',
+            '.ide-modal-sub {',
+            '    font-family: "Share Tech Mono", monospace;',
+            '    font-size: 0.86rem;',
+            '    color: #bbb;',
+            '    line-height: 1.5;',
+            '    margin-bottom: 1rem;',
+            '}',
+            '.ide-rules-box {',
+            '    background: rgba(0, 0, 0, 0.65);',
+            '    border-left: 3px solid #2ecc71;',
+            '    padding: 0.65rem 0.9rem;',
+            '    text-align: left;',
+            '    font-family: "Share Tech Mono", monospace;',
+            '    font-size: 0.76rem;',
+            '    color: #ddd;',
+            '    margin-bottom: 1.1rem;',
+            '    line-height: 1.45;',
+            '}',
+            '.ide-fs-banner {',
+            '    display: flex;',
+            '    align-items: center;',
+            '    justify-content: space-between;',
+            '    gap: 0.8rem;',
+            '    background: rgba(46, 204, 113, 0.12);',
+            '    border: 1.5px solid #2ecc71;',
+            '    border-radius: 6px;',
+            '    padding: 0.6rem 0.9rem;',
+            '    margin-bottom: 1.2rem;',
+            '    box-shadow: 0 0 16px rgba(46, 204, 113, 0.25);',
+            '    text-align: left;',
+            '    box-sizing: border-box;',
+            '    width: 100%;',
+            '}',
+            '.ide-fs-text {',
+            '    display: flex;',
+            '    align-items: center;',
+            '    gap: 0.5rem;',
+            '    font-family: "Share Tech Mono", monospace;',
+            '    font-size: 0.76rem;',
+            '    color: #55efc4;',
+            '    line-height: 1.35;',
+            '}',
+            '.ide-fs-icon { font-size: 1.25rem; flex-shrink: 0; }',
+            '.ide-fs-toggle-btn {',
+            '    background: #2ecc71;',
+            '    color: #020b06;',
+            '    border: none;',
+            '    padding: 0.4rem 0.85rem;',
+            '    border-radius: 4px;',
+            '    font-family: "Orbitron", monospace;',
+            '    font-size: 0.74rem;',
+            '    font-weight: 900;',
+            '    letter-spacing: 1px;',
+            '    cursor: pointer;',
+            '    transition: all 0.2s ease;',
+            '    white-space: nowrap;',
+            '    flex-shrink: 0;',
+            '    touch-action: manipulation;',
+            '}',
+            '.ide-fs-toggle-btn:hover { background: #55efc4; box-shadow: 0 0 14px rgba(46, 204, 113, 0.8); }',
+            '.ide-start-actions {',
+            '    display: flex;',
+            '    gap: 0.75rem;',
+            '    flex-wrap: wrap;',
+            '    justify-content: center;',
+            '    align-items: center;',
+            '    width: 100%;',
+            '}',
+            '.ide-start-fullscreen-btn {',
+            '    background: linear-gradient(135deg, #2ecc71, #27ae60) !important;',
+            '    color: #02140a !important;',
+            '    border: none !important;',
+            '    padding: 0.75rem 1.6rem !important;',
+            '    border-radius: 4px !important;',
+            '    font-family: "Orbitron", monospace !important;',
+            '    font-size: 0.85rem !important;',
+            '    font-weight: 900 !important;',
+            '    letter-spacing: 1.5px !important;',
+            '    cursor: pointer !important;',
+            '    box-shadow: 0 0 20px rgba(46, 204, 113, 0.55) !important;',
+            '    transition: all 0.25s ease !important;',
+            '    touch-action: manipulation !important;',
+            '    text-transform: uppercase !important;',
+            '    display: inline-flex !important;',
+            '    align-items: center !important;',
+            '    gap: 6px !important;',
+            '}',
+            '.ide-start-fullscreen-btn:hover {',
+            '    background: linear-gradient(135deg, #55efc4, #2ecc71) !important;',
+            '    box-shadow: 0 0 32px rgba(46, 204, 113, 0.9) !important;',
+            '    transform: translateY(-2px);',
+            '}',
+            '.ide-start-btn {',
+            '    background: rgba(255, 255, 255, 0.12) !important;',
+            '    color: #fff !important;',
+            '    border: 1.5px solid rgba(255, 255, 255, 0.3) !important;',
+            '    padding: 0.75rem 1.5rem !important;',
+            '    border-radius: 4px !important;',
+            '    font-family: "Orbitron", monospace !important;',
+            '    font-size: 0.85rem !important;',
+            '    font-weight: 700 !important;',
+            '    letter-spacing: 1.5px !important;',
+            '    cursor: pointer !important;',
+            '    transition: all 0.25s ease !important;',
+            '    touch-action: manipulation !important;',
+            '    text-transform: uppercase !important;',
+            '}',
+            '.ide-start-btn:hover {',
+            '    background: rgba(255, 255, 255, 0.25) !important;',
+            '    border-color: #fff !important;',
+            '}',
+            '',
+            '/* Responsivo Celulares */',
+            '@media (max-width: 768px), (max-height: 520px) {',
+            '    #ide-header {',
+            '        height: 38px !important;',
+            '        min-height: 38px !important;',
+            '        max-height: 38px !important;',
+            '        padding: 0 0.5rem !important;',
+            '        gap: 0.35rem !important;',
+            '    }',
+            '    .ej-btn-lbl { display: none !important; }',
+            '    .ej-btn-header {',
+            '        height: 28px !important;',
+            '        min-width: 28px !important;',
+            '        padding: 0 0.45rem !important;',
+            '        font-size: 0.75rem !important;',
+            '    }',
+            '    #ide-round-pill, #ide-strikes-box {',
+            '        padding: 0.15rem 0.4rem !important;',
+            '        font-size: 0.7rem !important;',
+            '    }',
+            '}',
+            '@media (max-width: 580px) {',
+            '    #ide-header-title { display: none !important; }',
+            '    .ide-modal-title { font-size: 1.15rem !important; margin-bottom: 0.35rem !important; }',
+            '    .ide-modal-card { padding: 0.85rem 0.95rem !important; width: 94% !important; max-height: 94dvh !important; }',
+            '    .ide-modal-sub { font-size: 0.74rem !important; line-height: 1.3 !important; margin-bottom: 0.5rem !important; }',
+            '    .ide-rules-box { font-size: 0.70rem !important; padding: 0.45rem 0.65rem !important; margin-bottom: 0.55rem !important; line-height: 1.35 !important; }',
+            '    .ide-fs-banner { padding: 0.4rem 0.6rem !important; margin-bottom: 0.55rem !important; }',
+            '    .ide-fs-text { font-size: 0.70rem !important; }',
+            '    .ide-start-actions { flex-direction: column !important; gap: 0.4rem !important; }',
+            '    .ide-start-fullscreen-btn, .ide-start-btn { width: 100% !important; justify-content: center !important; padding: 0.55rem 1rem !important; font-size: 0.78rem !important; }',
+            '    #ide-choices-wrap {',
+            '        grid-template-columns: 1fr !important;',
+            '        gap: 6px !important;',
+            '        bottom: 12px !important;',
+            '        width: 92% !important;',
+            '    }',
+            '    .ide-choice-btn {',
+            '        font-size: 0.84rem !important;',
+            '        padding: 0.65rem 0.6rem !important;',
+            '        min-height: 44px !important;',
+            '    }',
+            '}',
+            '@media (max-height: 520px) {',
+            '    .ide-modal-card {',
+            '        padding: 0.6rem 1rem !important;',
+            '        max-height: 94dvh !important;',
+            '        max-width: 92vw !important;',
+            '    }',
+            '    .ide-modal-title { font-size: 1.05rem !important; margin-bottom: 0.25rem !important; }',
+            '    .ide-modal-sub { font-size: 0.72rem !important; line-height: 1.3 !important; margin-bottom: 0.35rem !important; }',
+            '    .ide-rules-box { display: none !important; }',
+            '    .ide-fs-banner { padding: 0.3rem 0.55rem !important; margin-bottom: 0.4rem !important; }',
+            '    .ide-fs-text { font-size: 0.68rem !important; }',
+            '    .ide-fs-toggle-btn { padding: 0.25rem 0.55rem !important; font-size: 0.68rem !important; }',
+            '    .ide-start-fullscreen-btn, .ide-start-btn { padding: 0.4rem 1rem !important; font-size: 0.76rem !important; }',
+            '    #ide-dialogue-console {',
+            '        padding: 0.5rem 0.8rem !important;',
+            '        bottom: 6px !important;',
+            '        gap: 0.35rem !important;',
+            '        max-height: 45vh !important;',
+            '    }',
+            '    #ide-dialogue-text { font-size: 0.82rem !important; line-height: 1.25 !important; min-height: auto !important; }',
+            '    .ide-diag-btn { padding: 0.35rem 0.8rem !important; font-size: 0.72rem !important; }',
+            '    #ide-choices-wrap {',
+            '        grid-template-columns: repeat(2, 1fr) !important;',
+            '        gap: 6px !important;',
+            '        bottom: 6px !important;',
+            '    }',
+            '    .ide-choice-btn {',
+            '        font-size: 0.76rem !important;',
+            '        padding: 0.45rem 0.5rem !important;',
+            '        min-height: 38px !important;',
+            '    }',
+            '}'
         ].join('\n');
         document.head.appendChild(style);
     }
@@ -327,6 +535,37 @@
     // ============================================================
     //  CONSTRUCCIÓN DEL DOM
     // ============================================================
+    function toggleIdeFullscreen() {
+        var target = document.getElementById('ide-overlay') || document.documentElement;
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        if (!isFs) {
+            if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+            else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+        } else {
+            if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        }
+    }
+
+    function updateIdeFullscreenUI() {
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        var fsBtn = document.getElementById('ide-fullscreen-btn');
+        if (fsBtn) {
+            fsBtn.innerHTML = isFs
+                ? '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR PANTALLA COMPLETA</span>'
+                : '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+        }
+        var bannerBtn = document.getElementById('ide-start-fs-toggle-btn');
+        if (bannerBtn) {
+            bannerBtn.innerHTML = isFs
+                ? '<span class="ej-ic">🗗</span> DESACTIVAR'
+                : '<span class="ej-ic">⛶</span> ACTIVAR';
+        }
+    }
+
+    document.addEventListener('fullscreenchange', updateIdeFullscreenUI);
+    document.addEventListener('webkitfullscreenchange', updateIdeFullscreenUI);
+
     function buildOverlay() {
         var ov = document.createElement('div');
         ov.id = 'ide-overlay';
@@ -403,16 +642,7 @@
         fullBtn.id = 'ide-fullscreen-btn';
         fullBtn.className = 'ej-btn-header';
         fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
-        fullBtn.addEventListener('click', function () {
-            var target = document.getElementById('ide-overlay') || document.documentElement;
-            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
-                else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-            } else {
-                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
-                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-            }
-        });
+        fullBtn.addEventListener('click', toggleIdeFullscreen);
 
         var closeBtn = document.createElement('button');
         closeBtn.id = 'ide-close-btn';
@@ -443,7 +673,7 @@
         // Feedback Banner
         var banner = document.createElement('div');
         banner.id = 'ide-feedback-banner';
-        stage.appendChild(banner);
+        wrap.appendChild(banner);
 
         // Consola de Diálogo (Intro)
         var diag = document.createElement('div');
@@ -456,12 +686,49 @@
             '    <button class="ide-diag-btn ide-diag-btn-primary" id="ide-btn-next">SIGUIENTE ▶</button>',
             '</div>'
         ].join('');
-        stage.appendChild(diag);
+        wrap.appendChild(diag);
 
         // Opciones de Respuesta
         var choicesWrap = document.createElement('div');
         choicesWrap.id = 'ide-choices-wrap';
-        stage.appendChild(choicesWrap);
+        wrap.appendChild(choicesWrap);
+
+        // Pantalla de Inicio / Briefing
+        var startScreen = document.createElement('div');
+        startScreen.id = 'ide-start-screen';
+        startScreen.className = 'ide-modal-screen show';
+        startScreen.innerHTML = [
+            '<div class="ide-modal-card">',
+            '    <div class="ide-modal-title" style="color:#2ecc71;">🧬 EVALUACIÓN TAXONÓMICA</div>',
+            '    <div class="ide-modal-sub">',
+            '        La Dra. Kate Vanegas aspira a ser aceptada como pasante en el laboratorio genético de Isla Sorna por el Dr. Boris Wong. Identifica visualmente a cada dinosaurio a través de los barrotes de contención.',
+            '    </div>',
+            '    <div class="ide-rules-box">',
+            '        ⚠️ <strong>DIRECTRICES DE SEGURIDAD Y EVALUACIÓN:</strong><br>',
+            '        • <strong>12 ESPECÍMENES:</strong> Observa la fisonomía y rasgos biológicos de cada animal en su celda.<br>',
+            '        • <strong>DESBLOQUEO DE CONTENCIÓN:</strong> Al seleccionar la especie correcta, la jaula se abrirá y escucharás su rugido.<br>',
+            '        • <strong>TOLERANCIA MÍNIMA:</strong> Un máximo de <strong>3 fallos</strong> permitidos antes de reprobar la pasantía.',
+            '    </div>',
+            '    <div class="ide-fs-banner" id="ide-fs-banner">',
+            '        <div class="ide-fs-text">',
+            '            <span class="ide-fs-icon">💡</span>',
+            '            <span>RECOMENDADO EN CELULARES: Jugar en pantalla completa para una visualización óptima de las especies.</span>',
+            '        </div>',
+            '        <button type="button" class="ide-fs-toggle-btn" id="ide-start-fs-toggle-btn">',
+            '            <span class="ej-ic">⛶</span> ACTIVAR',
+            '        </button>',
+            '    </div>',
+            '    <div class="ide-start-actions">',
+            '        <button type="button" class="ide-start-fullscreen-btn" id="ide-start-fullscreen-btn">',
+            '            <span class="ej-ic">⛶</span> JUGAR EN PANTALLA COMPLETA',
+            '        </button>',
+            '        <button type="button" class="ide-start-btn" id="ide-start-btn">',
+            '            ▶ INICIAR EVALUACIÓN',
+            '        </button>',
+            '    </div>',
+            '</div>'
+        ].join('');
+        wrap.appendChild(startScreen);
 
         // Pantalla Victoria (Kate gana)
         var winScreen = document.createElement('div');
@@ -478,7 +745,7 @@
             '  <button class="ej-btn-return" id="ide-btn-win-return">✕ Regresar al sitio</button>',
             '</div>'
         ].join('');
-        stage.appendChild(winScreen);
+        wrap.appendChild(winScreen);
 
         // Pantalla Derrota (Kate decepcionada)
         var loseScreen = document.createElement('div');
@@ -495,7 +762,7 @@
             '  <button class="ej-btn-return" id="ide-btn-lose-return">✕ Regresar al sitio</button>',
             '</div>'
         ].join('');
-        stage.appendChild(loseScreen);
+        wrap.appendChild(loseScreen);
 
         var pauseModal = document.createElement('div');
         pauseModal.className = 'ej-pause-overlay';
@@ -508,14 +775,37 @@
             '  <button class="ej-btn-resume" id="ide-btn-resume">▶ REANUDAR</button>',
             '</div>'
         ].join('');
-        stage.appendChild(pauseModal);
+        wrap.appendChild(pauseModal);
 
 
         wrap.appendChild(stage);
         ov.appendChild(wrap);
         document.body.appendChild(ov);
 
-        // Eventos de diálogo y pantallas finales
+        // Eventos de inicio, diálogo y pantallas finales
+        var startFsBtn = document.getElementById('ide-start-fullscreen-btn');
+        if (startFsBtn) {
+            startFsBtn.addEventListener('click', function () {
+                var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+                if (!isFs) {
+                    var target = document.getElementById('ide-overlay') || document.documentElement;
+                    if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                    else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+                }
+                startIntro();
+            });
+        }
+        var startRegBtn = document.getElementById('ide-start-btn');
+        if (startRegBtn) {
+            startRegBtn.addEventListener('click', function () {
+                startIntro();
+            });
+        }
+        var startFsToggle = document.getElementById('ide-start-fs-toggle-btn');
+        if (startFsToggle) {
+            startFsToggle.addEventListener('click', toggleIdeFullscreen);
+        }
+
         document.getElementById('ide-btn-next').addEventListener('click', advanceDialogue);
         document.getElementById('ide-btn-skip').addEventListener('click', skipDialogue);
         document.getElementById('ide-btn-win-replay').addEventListener('click', function () {
@@ -555,7 +845,7 @@
     }
 
     function showModal(id) {
-        ['ide-win-screen', 'ide-lose-screen'].forEach(function(s) {
+        ['ide-start-screen', 'ide-win-screen', 'ide-lose-screen'].forEach(function(s) {
             var el = document.getElementById(s);
             if (el) el.classList.remove('show');
         });
@@ -959,7 +1249,9 @@
 
         if (!ctx) ctx = canvas.getContext('2d');
         resize();
-        startIntro();
+        state = 'start';
+        showModal('ide-start-screen');
+        updateIdeFullscreenUI();
     }
 
     function closeGame() {
@@ -974,6 +1266,14 @@
         stopAllAudio();
         state = 'idle';
         showModal(null);
+
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        if (isFs) {
+            try {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            } catch(e) {}
+        }
 
         if (typeof window.releaseBgMusic === 'function') {
             window.releaseBgMusic();

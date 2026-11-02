@@ -102,6 +102,10 @@
         var style = document.createElement('style');
         style.id = 'carno-search-styles';
         style.textContent = [
+            '.ej-btn-header { background: rgba(0, 20, 20, 0.85) !important; border: 1.5px solid #00f5ff !important; color: #00f5ff !important; font-family: "Share Tech Mono", monospace !important; font-size: 0.75rem !important; font-weight: 700 !important; padding: 0.35rem 0.75rem !important; border-radius: 4px !important; cursor: pointer !important; letter-spacing: 1px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 5px !important; text-transform: uppercase !important; transition: all 0.2s ease !important; height: 32px !important; box-sizing: border-box !important; touch-action: manipulation !important; }',
+            '.ej-btn-header:hover { background: rgba(0, 245, 255, 0.25) !important; color: #fff !important; }',
+            '.ej-btn-header-danger { background: rgba(255, 71, 87, 0.12) !important; border-color: #ff4757 !important; color: #ff4757 !important; }',
+            '.ej-btn-header-danger:hover { background: #ff4757 !important; color: #fff !important; }',
             '#carno-search-overlay {',
             '    position: fixed; inset: 0; z-index: 99995;',
             '    background: rgba(1, 4, 3, 0.98); backdrop-filter: blur(8px);',
@@ -115,12 +119,13 @@
             '/* Header de control */',
             '#cs-header {',
             '    flex-shrink: 0; display: flex; align-items: center; justify-content: space-between;',
-            '    padding: 0.6rem 1.4rem; background: rgba(5, 14, 10, 0.95);',
-            '    border-bottom: 2px solid rgba(243, 156, 18, 0.4);',
+            '    padding: 0 0.8rem; height: 40px; min-height: 40px; max-height: 40px;',
+            '    background: rgba(5, 14, 10, 0.95); border-bottom: 2px solid rgba(243, 156, 18, 0.4);',
             '    box-shadow: 0 4px 20px rgba(0,0,0,0.8); z-index: 10;',
-            '    gap: 1rem; flex-wrap: wrap;',
+            '    gap: 0.5rem; flex-wrap: nowrap; overflow: hidden; white-space: nowrap;',
             '}',
-            '#cs-header-left { display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }',
+            '#cs-header-left { display: flex; align-items: center; gap: 0.6rem; flex-wrap: nowrap; overflow: hidden; }',
+            '#cs-header-right { display: flex; align-items: center; gap: 0.35rem; flex-wrap: nowrap; flex-shrink: 0; }',
             '#cs-header-title {',
             '    font-family: "Orbitron", monospace; font-size: 1rem; font-weight: 900;',
             '    color: #f39c12; letter-spacing: 1.5px; text-transform: uppercase;',
@@ -192,7 +197,192 @@
             '.cs-btn-danger { background: #e74c3c; color: #fff; box-shadow: 0 0 20px rgba(231, 76, 60, 0.5); }',
             '.cs-btn-danger:hover { background: #ff4757; box-shadow: 0 0 35px rgba(255, 71, 87, 0.8); transform: translateY(-2px); }',
             '.cs-btn-green { background: #2ecc71; color: #02140a; box-shadow: 0 0 20px rgba(46, 204, 113, 0.5); }',
-            '.cs-btn-green:hover { background: #55efc4; box-shadow: 0 0 35px rgba(85, 239, 196, 0.8); transform: translateY(-2px); }'
+            '.cs-btn-green:hover { background: #55efc4; box-shadow: 0 0 35px rgba(85, 239, 196, 0.8); transform: translateY(-2px); }',
+            '',
+            '/* Card y banner del modal de inicio */',
+            '.cs-modal-card {',
+            '    background: linear-gradient(135deg, rgba(26, 16, 5, 0.96), rgba(14, 8, 2, 0.98));',
+            '    border: 2px solid rgba(243, 156, 18, 0.55);',
+            '    border-radius: 8px;',
+            '    padding: 1.6rem 2rem;',
+            '    max-width: 620px;',
+            '    width: 92%;',
+            '    box-shadow: 0 0 45px rgba(243, 156, 18, 0.35);',
+            '    margin: auto;',
+            '    max-height: 88dvh;',
+            '    overflow-y: auto;',
+            '    -webkit-overflow-scrolling: touch;',
+            '    box-sizing: border-box;',
+            '    text-align: center;',
+            '}',
+            '.cs-modal-sub {',
+            '    font-family: "Share Tech Mono", monospace;',
+            '    font-size: 0.86rem;',
+            '    color: #ddd;',
+            '    line-height: 1.5;',
+            '    margin-bottom: 1rem;',
+            '}',
+            '.cs-rules-box {',
+            '    background: rgba(0, 0, 0, 0.65);',
+            '    border-left: 3px solid #f39c12;',
+            '    padding: 0.65rem 0.9rem;',
+            '    text-align: left;',
+            '    font-family: "Share Tech Mono", monospace;',
+            '    font-size: 0.76rem;',
+            '    color: #eee;',
+            '    margin-bottom: 1.1rem;',
+            '    line-height: 1.45;',
+            '}',
+            '.cs-fs-banner {',
+            '    display: flex;',
+            '    align-items: center;',
+            '    justify-content: space-between;',
+            '    gap: 0.8rem;',
+            '    background: rgba(243, 156, 18, 0.12);',
+            '    border: 1.5px solid #f39c12;',
+            '    border-radius: 6px;',
+            '    padding: 0.6rem 0.9rem;',
+            '    margin-bottom: 1.2rem;',
+            '    box-shadow: 0 0 16px rgba(243, 156, 18, 0.25);',
+            '    text-align: left;',
+            '    box-sizing: border-box;',
+            '    width: 100%;',
+            '}',
+            '.cs-fs-text {',
+            '    display: flex;',
+            '    align-items: center;',
+            '    gap: 0.5rem;',
+            '    font-family: "Share Tech Mono", monospace;',
+            '    font-size: 0.76rem;',
+            '    color: #f1c40f;',
+            '    line-height: 1.35;',
+            '}',
+            '.cs-fs-icon { font-size: 1.25rem; flex-shrink: 0; }',
+            '.cs-fs-toggle-btn {',
+            '    background: #f39c12;',
+            '    color: #110c03;',
+            '    border: none;',
+            '    padding: 0.4rem 0.85rem;',
+            '    border-radius: 4px;',
+            '    font-family: "Orbitron", monospace;',
+            '    font-size: 0.74rem;',
+            '    font-weight: 900;',
+            '    letter-spacing: 1px;',
+            '    cursor: pointer;',
+            '    transition: all 0.2s ease;',
+            '    white-space: nowrap;',
+            '    flex-shrink: 0;',
+            '    touch-action: manipulation;',
+            '}',
+            '.cs-fs-toggle-btn:hover { background: #f1c40f; box-shadow: 0 0 14px rgba(241, 196, 15, 0.8); }',
+            '.cs-start-actions {',
+            '    display: flex;',
+            '    gap: 0.75rem;',
+            '    flex-wrap: wrap;',
+            '    justify-content: center;',
+            '    align-items: center;',
+            '    width: 100%;',
+            '}',
+            '.cs-start-fullscreen-btn {',
+            '    background: linear-gradient(135deg, #f39c12, #d35400) !important;',
+            '    color: #110c03 !important;',
+            '    border: none !important;',
+            '    padding: 0.75rem 1.6rem !important;',
+            '    border-radius: 4px !important;',
+            '    font-family: "Orbitron", monospace !important;',
+            '    font-size: 0.85rem !important;',
+            '    font-weight: 900 !important;',
+            '    letter-spacing: 1.5px !important;',
+            '    cursor: pointer !important;',
+            '    box-shadow: 0 0 20px rgba(243, 156, 18, 0.55) !important;',
+            '    transition: all 0.25s ease !important;',
+            '    touch-action: manipulation !important;',
+            '    text-transform: uppercase !important;',
+            '    display: inline-flex !important;',
+            '    align-items: center !important;',
+            '    gap: 6px !important;',
+            '}',
+            '.cs-start-fullscreen-btn:hover {',
+            '    background: linear-gradient(135deg, #f1c40f, #e67e22) !important;',
+            '    box-shadow: 0 0 32px rgba(241, 196, 15, 0.9) !important;',
+            '    transform: translateY(-2px);',
+            '}',
+            '.cs-start-btn {',
+            '    background: rgba(255, 255, 255, 0.12) !important;',
+            '    color: #fff !important;',
+            '    border: 1.5px solid rgba(255, 255, 255, 0.3) !important;',
+            '    padding: 0.75rem 1.5rem !important;',
+            '    border-radius: 4px !important;',
+            '    font-family: "Orbitron", monospace !important;',
+            '    font-size: 0.85rem !important;',
+            '    font-weight: 700 !important;',
+            '    letter-spacing: 1.5px !important;',
+            '    cursor: pointer !important;',
+            '    transition: all 0.25s ease !important;',
+            '    touch-action: manipulation !important;',
+            '    text-transform: uppercase !important;',
+            '}',
+            '.cs-start-btn:hover {',
+            '    background: rgba(255, 255, 255, 0.25) !important;',
+            '    border-color: #fff !important;',
+            '}',
+            '',
+            '/* Responsivo Celulares */',
+            '@media (max-width: 900px), (max-height: 520px) {',
+            '    .cs-lvl-name { display: none !important; }',
+            '    #cs-header-title { font-size: 0.85rem !important; }',
+            '}',
+            '@media (max-width: 768px), (max-height: 520px) {',
+            '    #cs-header {',
+            '        height: 38px !important;',
+            '        min-height: 38px !important;',
+            '        max-height: 38px !important;',
+            '        padding: 0 0.5rem !important;',
+            '        gap: 0.35rem !important;',
+            '    }',
+            '    .ej-btn-lbl { display: none !important; }',
+            '    .ej-btn-header {',
+            '        height: 28px !important;',
+            '        min-width: 28px !important;',
+            '        padding: 0 0.45rem !important;',
+            '        font-size: 0.75rem !important;',
+            '    }',
+            '    #cs-level-pill, #cs-timer-box {',
+            '        padding: 0.15rem 0.4rem !important;',
+            '        font-size: 0.72rem !important;',
+            '    }',
+            '    #cs-status-bar {',
+            '        padding: 0.3rem 0.8rem !important;',
+            '        font-size: 0.72rem !important;',
+            '    }',
+            '}',
+            '@media (max-width: 580px) {',
+            '    #cs-header-title { display: none !important; }',
+            '    #cs-status-bar { display: none !important; }',
+            '    .cs-screen-title { font-size: 1.15rem !important; margin-bottom: 0.35rem !important; }',
+            '    .cs-modal-card { padding: 0.85rem 0.95rem !important; width: 94% !important; max-height: 94dvh !important; }',
+            '    .cs-modal-sub { font-size: 0.74rem !important; line-height: 1.3 !important; margin-bottom: 0.5rem !important; }',
+            '    .cs-rules-box { font-size: 0.70rem !important; padding: 0.45rem 0.65rem !important; margin-bottom: 0.55rem !important; line-height: 1.35 !important; }',
+            '    .cs-fs-banner { padding: 0.4rem 0.6rem !important; margin-bottom: 0.55rem !important; }',
+            '    .cs-fs-text { font-size: 0.70rem !important; }',
+            '    .cs-start-actions { flex-direction: column !important; gap: 0.4rem !important; }',
+            '    .cs-start-fullscreen-btn, .cs-start-btn { width: 100% !important; justify-content: center !important; padding: 0.55rem 1rem !important; font-size: 0.78rem !important; }',
+            '}',
+            '@media (max-height: 520px) {',
+            '    .cs-modal-card {',
+            '        padding: 0.6rem 1rem !important;',
+            '        max-height: 94dvh !important;',
+            '        max-width: 92vw !important;',
+            '    }',
+            '    .cs-screen-title { font-size: 1.05rem !important; margin-bottom: 0.25rem !important; }',
+            '    .cs-modal-sub { font-size: 0.72rem !important; line-height: 1.3 !important; margin-bottom: 0.35rem !important; }',
+            '    .cs-rules-box { display: none !important; }',
+            '    .cs-fs-banner { padding: 0.3rem 0.55rem !important; margin-bottom: 0.4rem !important; }',
+            '    .cs-fs-text { font-size: 0.68rem !important; }',
+            '    .cs-fs-toggle-btn { padding: 0.25rem 0.55rem !important; font-size: 0.68rem !important; }',
+            '    .cs-start-fullscreen-btn, .cs-start-btn { padding: 0.4rem 1rem !important; font-size: 0.76rem !important; }',
+            '    #cs-status-bar { display: none !important; }',
+            '}'
         ].join('\n');
         document.head.appendChild(style);
     }
@@ -273,6 +463,37 @@
     // ============================================================
     //  CONSTRUCCIÓN DEL DOM
     // ============================================================
+    function toggleCsFullscreen() {
+        var target = document.getElementById('carno-search-overlay') || document.documentElement;
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        if (!isFs) {
+            if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+            else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+        } else {
+            if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+            else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+        }
+    }
+
+    function updateCsFullscreenUI() {
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        var fsBtn = document.getElementById('cs-fullscreen-btn');
+        if (fsBtn) {
+            fsBtn.innerHTML = isFs
+                ? '<span class="ej-ic">🗗</span><span class="ej-btn-lbl"> SALIR PANTALLA COMPLETA</span>'
+                : '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
+        }
+        var bannerBtn = document.getElementById('cs-start-fs-toggle-btn');
+        if (bannerBtn) {
+            bannerBtn.innerHTML = isFs
+                ? '<span class="ej-ic">🗗</span> DESACTIVAR'
+                : '<span class="ej-ic">⛶</span> ACTIVAR';
+        }
+    }
+
+    document.addEventListener('fullscreenchange', updateCsFullscreenUI);
+    document.addEventListener('webkitfullscreenchange', updateCsFullscreenUI);
+
     function buildOverlay() {
         var ov = document.createElement('div');
         ov.id = 'carno-search-overlay';
@@ -311,9 +532,9 @@
         muteBtn.addEventListener('click', function () {
             isMuted = !isMuted;
             muteBtn.innerHTML = isMuted ? '<span class="ej-ic">🔇</span><span class="ej-btn-lbl"> SILENCIADO</span>' : '<span class="ej-ic">🔊</span><span class="ej-btn-lbl"> SONIDO</span>';
-            if (sndAmbience) sndAmbience.muted = isMuted;
-            if (sndJumpscare) sndJumpscare.muted = isMuted;
-            if (sndRoar) sndRoar.muted = isMuted;
+            if (sndSearch) sndSearch.muted = isMuted;
+            if (sndFind) sndFind.muted = isMuted;
+            if (sndAttack) sndAttack.muted = isMuted;
         });
 
         var pauseBtn = document.createElement('button');
@@ -326,16 +547,7 @@
         fullBtn.id = 'cs-fullscreen-btn';
         fullBtn.className = 'ej-btn-header';
         fullBtn.innerHTML = '<span class="ej-ic">⛶</span><span class="ej-btn-lbl"> PANTALLA COMPLETA</span>';
-        fullBtn.addEventListener('click', function () {
-            var target = document.getElementById('carno-search-overlay') || document.documentElement;
-            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
-                else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
-            } else {
-                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
-                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-            }
-        });
+        fullBtn.addEventListener('click', toggleCsFullscreen);
 
         var closeBtn = document.createElement('button');
         closeBtn.id = 'cs-close-btn';
@@ -368,19 +580,38 @@
         startScreen.id = 'cs-start-screen';
         startScreen.className = 'cs-screen show';
         startScreen.innerHTML = [
-            '<div class="cs-screen-title" style="color:#f39c12;">🔦 BUSCANDO AL CARNOTAURUS</div>',
-            '<div class="cs-screen-sub">',
-            'Los sigilosos Carnotaurus Camaleónicos poseen la capacidad genética de camuflarse en la oscuridad de la selva.<br>',
-            'Deberás inspeccionar <strong>7 sectores clasificados</strong> con tu linterna táctica y dispararle antes de que se agote el tiempo.<br><br>',
-            '⚡ <strong>REGLAS DE SUPERVIVENCIA:</strong><br>',
-            '• Usa el ratón o desliza el dedo en tu celular para mover el foco de luz de la linterna.<br>',
-            '• Haz clic o pulsa sobre el Carnotaurus para disparar y revelar su camuflaje.<br>',
-            '• Empiezas con <strong>20 segundos</strong>, pero el tiempo se reducirá en cada nivel.<br>',
-            '• <em>Si el tiempo expira sin encontrarlo, ¡el Carnotaurus Camaleónico saltará a atacarte!</em>',
-            '</div>',
-            '<button class="cs-btn cs-btn-primary" id="cs-btn-start">INICIAR BÚSQUEDA</button>'
+            '<div class="cs-modal-card">',
+            '    <div class="cs-screen-title" style="color:#f39c12;">🔦 BUSCANDO AL CARNOTAURUS</div>',
+            '    <div class="cs-modal-sub">',
+            '        Los sigilosos Carnotaurus Camaleónicos poseen la capacidad genética de camuflarse en la oscuridad de la selva. Inspecciona <strong>7 sectores clasificados</strong> con tu linterna táctica y neutralízalo antes de que el tiempo expire.',
+            '    </div>',
+            '    <div class="cs-rules-box">',
+            '        ⚡ <strong>DIRECTRICES DE SUPERVIVENCIA:</strong><br>',
+            '        • <strong>RASTREO TÁCTICO:</strong> Mueve el ratón o desliza tu dedo para iluminar con la linterna.<br>',
+            '        • <strong>DISPARO RÁPIDO:</strong> Pulsa sobre el Carnotaurus para disparar y neutralizar su camuflaje.<br>',
+            '        • <strong>TIEMPO CRÍTICO:</strong> Empiezas con 20 segundos y se reduce en cada nivel.<br>',
+            '        • <strong>ALERTA DE EMBESTIDA:</strong> Si el cronómetro llega a 0, ¡el depredador saltará sobre ti!',
+            '    </div>',
+            '    <div class="cs-fs-banner" id="cs-fs-banner">',
+            '        <div class="cs-fs-text">',
+            '            <span class="cs-fs-icon">💡</span>',
+            '            <span>RECOMENDADO EN CELULARES: Jugar en pantalla completa para apuntar y disparar con precisión táctica.</span>',
+            '        </div>',
+            '        <button type="button" class="cs-fs-toggle-btn" id="cs-start-fs-toggle-btn">',
+            '            <span class="ej-ic">⛶</span> ACTIVAR',
+            '        </button>',
+            '    </div>',
+            '    <div class="cs-start-actions">',
+            '        <button type="button" class="cs-start-fullscreen-btn" id="cs-start-fullscreen-btn">',
+            '            <span class="ej-ic">⛶</span> JUGAR EN PANTALLA COMPLETA',
+            '        </button>',
+            '        <button type="button" class="cs-start-btn" id="cs-btn-start">',
+            '            ▶ INICIAR BÚSQUEDA',
+            '        </button>',
+            '    </div>',
+            '</div>'
         ].join('');
-        stage.appendChild(startScreen);
+        wrap.appendChild(startScreen);
 
         // Pantalla Victoria
         var winScreen = document.createElement('div');
@@ -397,7 +628,7 @@
             '  <button class="ej-btn-return" id="cs-btn-win-return">✕ Regresar al sitio</button>',
             '</div>'
         ].join('');
-        stage.appendChild(winScreen);
+        wrap.appendChild(winScreen);
 
         // Pantalla Derrota
         var loseScreen = document.createElement('div');
@@ -414,7 +645,7 @@
             '  <button class="ej-btn-return" id="cs-btn-lose-return">✕ Regresar al sitio</button>',
             '</div>'
         ].join('');
-        stage.appendChild(loseScreen);
+        wrap.appendChild(loseScreen);
 
         var pauseModal = document.createElement('div');
         pauseModal.className = 'ej-pause-overlay';
@@ -427,7 +658,7 @@
             '  <button class="ej-btn-resume" id="cs-btn-resume">▶ REANUDAR</button>',
             '</div>'
         ].join('');
-        stage.appendChild(pauseModal);
+        wrap.appendChild(pauseModal);
 
 
         wrap.appendChild(stage);
@@ -445,6 +676,23 @@
         document.body.appendChild(ov);
 
         // Eventos de botones
+        var startFsBtn = document.getElementById('cs-start-fullscreen-btn');
+        if (startFsBtn) {
+            startFsBtn.addEventListener('click', function () {
+                var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+                if (!isFs) {
+                    var target = document.getElementById('carno-search-overlay') || document.documentElement;
+                    if (target.requestFullscreen) target.requestFullscreen().catch(function(){});
+                    else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen();
+                }
+                startSearch();
+            });
+        }
+        var startFsToggle = document.getElementById('cs-start-fs-toggle-btn');
+        if (startFsToggle) {
+            startFsToggle.addEventListener('click', toggleCsFullscreen);
+        }
+
         document.getElementById('cs-btn-start').addEventListener('click', startSearch);
         document.getElementById('cs-btn-win-replay').addEventListener('click', function () {
             if (window.registerMinigameAttempt) window.registerMinigameAttempt('carno-search');
@@ -582,7 +830,7 @@
         state = 'playing'; isPaused = false;
 
         var lvlPill = document.getElementById('cs-level-pill');
-        if (lvlPill) lvlPill.textContent = 'SECTOR ' + (currentLevelIdx + 1) + '/7: ' + lvl.name;
+        if (lvlPill) lvlPill.innerHTML = 'SECTOR ' + (currentLevelIdx + 1) + '/7<span class="cs-lvl-name">: ' + lvl.name + '</span>';
 
         var hint = document.getElementById('cs-status-hint');
         if (hint) hint.innerHTML = '🔦 SECTOR ' + (currentLevelIdx + 1) + ' — ¡Busca al Carnotaurus en las sombras antes de que se agote el tiempo!';
@@ -873,14 +1121,26 @@
         var ov = document.getElementById('carno-search-overlay');
         if (!ov) return;
         ov.classList.add('open');
+
+        if (typeof window.interruptBgMusic === 'function') {
+            window.interruptBgMusic();
+        }
+
         showScreen('cs-start-screen');
         state = 'idle';
 
         if (!ctx) ctx = canvas.getContext('2d');
         resize();
+        updateCsFullscreenUI();
     }
 
     function closeGame() {
+        if (isPaused) togglePause();
+        var pScreen = document.getElementById('cs-pause-screen');
+        if (pScreen) {
+            pScreen.style.display = 'none';
+            pScreen.classList.remove('active');
+        }
         var ov = document.getElementById('carno-search-overlay');
         if (ov) ov.classList.remove('open');
         if (aniFrame) cancelAnimationFrame(aniFrame);
@@ -888,6 +1148,18 @@
         stopAllAudio();
         state = 'idle';
         showScreen(null);
+
+        var isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+        if (isFs) {
+            try {
+                if (document.exitFullscreen) document.exitFullscreen().catch(function(){});
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+            } catch(e) {}
+        }
+
+        if (typeof window.releaseBgMusic === 'function') {
+            window.releaseBgMusic();
+        }
     }
 
     // Exponer globalmente
