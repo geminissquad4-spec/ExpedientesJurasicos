@@ -12,8 +12,9 @@
 
 <meta name="description" content="Archivos clasificados sobre las actividades ilegales de InGen Corporation.">
 
-<!-- Tipografías locales sin dependencias de internet -->
-<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="maintenance.css">
@@ -22,15 +23,6 @@
 <script src="maintenance-system.js"></script>
 
 <link rel="icon" type="image/jpeg" href="Expedientes%20Jurásicos%20logo.jpg">
-<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#06090d">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Exp. Jurásicos">
 
 <style>
 
@@ -2231,7 +2223,26 @@ if (typeof window.toggleTimeline !== 'function') {
 <script src="hibridacion-adn.js"></script>
 <script src="captura-giganotosaurus.js"></script>
 <script src="encontrando-quetzalcoatlus.js"></script>
-<script src="pwa-manager.js"></script>
+
+<script>
+// Limpieza segura de Service Worker y cachés para liberar memoria
+if (window.location.protocol.indexOf('http') === 0) {
+    if ('serviceWorker' in navigator) {
+        try {
+            navigator.serviceWorker.getRegistrations().then(function(regs) {
+                for (var i = 0; i < regs.length; i++) { regs[i].unregister(); }
+            }).catch(function() {});
+        } catch(e) {}
+    }
+    if ('caches' in window) {
+        try {
+            caches.keys().then(function(names) {
+                for (var i = 0; i < names.length; i++) { caches.delete(names[i]); }
+            }).catch(function() {});
+        } catch(e) {}
+    }
+}
+</script>
 </body>
 
 </html>
