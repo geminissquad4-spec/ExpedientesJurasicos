@@ -8,7 +8,7 @@
   'use strict';
 
   var deferredInstallPrompt = null;
-  var isInstalled = false;
+  var isInstalled = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 
   // 1. REGISTRO DEL SERVICE WORKER
   function registerServiceWorker() {
@@ -19,7 +19,7 @@
                          window.location.hostname === '127.0.0.1';
 
     if (!isSecureOrigin) {
-      console.info('[PWA] El protocolo actual (' + window.location.protocol + ') no soporta Service Workers directamente. Para probar offline, utiliza un servidor local (http://localhost) o HTTPS.');
+      console.info('[PWA] Protocolo local (' + window.location.protocol + '). Service Worker activo en localhost o HTTPS.');
       return;
     }
 
@@ -33,7 +33,7 @@
 
           newWorker.addEventListener('statechange', function () {
             if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              showToast('NUEVA ACTUALIZACIÓN INGEN DISPONIBLE. REINICIANDO...', 'info');
+              showToast('NUEVA ACTUALIZACIÓN INGEN DISPONIBLE.', 'info');
             }
           });
         });
@@ -50,17 +50,17 @@
     window.addEventListener('load', registerServiceWorker);
   }
 
-  // 2. DETECCIÓN DEL PROMPT DE INSTALACIÓN (beforeinstallprompt)
+  // 2. DETECCIÓN DEL PROMPT DE INSTALACIÓN NATIVO
   window.addEventListener('beforeinstallprompt', function (e) {
     e.preventDefault();
     deferredInstallPrompt = e;
-    mostrarBotonInstalar();
+    actualizarBotonesInstalacion();
   });
 
   window.addEventListener('appinstalled', function () {
     isInstalled = true;
     deferredInstallPrompt = null;
-    ocultarBotonInstalar();
+    ocultarUIInstalacion();
     showToast('✓ APLICACIÓN INSTALADA. LISTA PARA FUNCIONAR SIN INTERNET.', 'success');
   });
 
@@ -73,77 +73,261 @@
     showToast('🔴 MODO SIN CONEXIÓN — NAVEGANDO BASE DE DATOS LOCAL', 'warning');
   });
 
-  // 4. UI: BOTÓN FLOTANTE / NOTIFICACIÓN DE INSTALACIÓN
-  function crearUIInstalacion() {
-    if (document.getElementById('ej-pwa-install-container')) return;
-    if (!document.body) return;
+  // 4. UI: INSERCIÓN DE BOTONES Y MODAL DE INSTALACIÓN
+  function injectPWAStyles() {
+    if (document.getElementById('ej-pwa-custom-styles')) return;
 
-    var container = document.createElement('div');
-    container.id = 'ej-pwa-install-container';
-    container.style.cssText = [
-      'position: fixed',
-      'bottom: 1.2rem',
-      'right: 1.2rem',
-      'z-index: 99998',
-      'display: none',
-      'background: rgba(6, 12, 16, 0.95)',
-      'border: 1px solid #00e5b0',
-      'box-shadow: 0 4px 20px rgba(0, 229, 176, 0.25)',
-      'padding: 0.8rem 1.1rem',
-      'border-radius: 6px',
-      'font-family: "Share Tech Mono", monospace',
-      'color: #00e5b0',
-      'backdrop-filter: blur(8px)',
-      'animation: pwaFadeIn 0.3s ease-out'
-    ].join(';');
+    var style = document.createElement('style');
+    style.id = 'ej-pwa-custom-styles';
+    style.textContent = [
+      '/* BOTÓN TOPBAR TELEMETRÍA */',
+      '.ingen-install-badge {',
+      '  display: inline-flex;',
+      '  align-items: center;',
+      '  gap: 0.4rem;',
+      '  background: rgba(0, 229, 176, 0.12);',
+      '  border: 1px solid #00e5b0;',
+      '  border-radius: 20px;',
+      '  padding: 0.32rem 0.85rem;',
+      '  font-family: "Orbitron", sans-serif;',
+      '  font-size: 0.72rem;',
+      '  font-weight: 700;',
+      '  color: #00e5b0;',
+      '  letter-spacing: 1px;',
+      '  cursor: pointer;',
+      '  box-shadow: 0 0 10px rgba(0, 229, 176, 0.2);',
+      '  transition: all 0.2s ease;',
+      '  white-space: nowrap;',
+      '}',
+      '.ingen-install-badge:hover {',
+      '  background: #00e5b0;',
+      '  color: #06090d;',
+      '  box-shadow: 0 0 18px rgba(0, 229, 176, 0.6);',
+      '  transform: translateY(-1px);',
+      '}',
 
-    container.innerHTML = [
-      '<div style="display:flex;align-items:center;gap:0.75rem;">',
-      '  <span style="font-size:1.3rem;">📲</span>',
-      '  <div>',
-      '    <div style="font-family:\'Orbitron\',sans-serif;font-weight:700;font-size:0.8rem;letter-spacing:1px;color:#ffffff;">INSTALAR EXPEDIENTES JURÁSICOS</div>',
-      '    <div style="font-size:0.68rem;color:#607868;margin-top:2px;">Funciona 100% sin conexión a internet</div>',
+      '/* CARD FLOTANTE INFERIOR DERECHA */',
+      '#ej-pwa-floating-btn {',
+      '  position: fixed;',
+      '  bottom: 1.2rem;',
+      '  right: 1.2rem;',
+      '  z-index: 99998;',
+      '  display: flex;',
+      '  align-items: center;',
+      '  gap: 0.65rem;',
+      '  background: rgba(6, 14, 18, 0.94);',
+      '  border: 1px solid #00e5b0;',
+      '  border-radius: 8px;',
+      '  padding: 0.65rem 1rem;',
+      '  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8), 0 0 12px rgba(0, 229, 176, 0.25);',
+      '  backdrop-filter: blur(8px);',
+      '  cursor: pointer;',
+      '  transition: all 0.25s ease;',
+      '  font-family: "Share Tech Mono", monospace;',
+      '}',
+      '#ej-pwa-floating-btn:hover {',
+      '  border-color: #5dff6a;',
+      '  box-shadow: 0 6px 30px rgba(0, 229, 176, 0.45);',
+      '  transform: translateY(-2px);',
+      '}',
+      '#ej-pwa-floating-btn .pwa-icon {',
+      '  font-size: 1.35rem;',
+      '  line-height: 1;',
+      '}',
+      '#ej-pwa-floating-btn .pwa-texts {',
+      '  text-align: left;',
+      '}',
+      '#ej-pwa-floating-btn .pwa-title {',
+      '  font-family: "Orbitron", sans-serif;',
+      '  font-size: 0.74rem;',
+      '  font-weight: 700;',
+      '  color: #00e5b0;',
+      '  letter-spacing: 1px;',
+      '}',
+      '#ej-pwa-floating-btn .pwa-sub {',
+      '  font-size: 0.65rem;',
+      '  color: #7fa490;',
+      '}',
+      '#ej-pwa-floating-btn .pwa-close-x {',
+      '  color: #4b6655;',
+      '  font-size: 1rem;',
+      '  margin-left: 0.4rem;',
+      '  padding: 0 0.2rem;',
+      '  line-height: 1;',
+      '}',
+      '#ej-pwa-floating-btn .pwa-close-x:hover {',
+      '  color: #ff3030;',
+      '}',
+
+      '/* MODAL DE INSTRUCCIONES INGEN */',
+      '#ej-pwa-modal-overlay {',
+      '  position: fixed;',
+      '  top: 0;',
+      '  left: 0;',
+      '  width: 100vw;',
+      '  height: 100vh;',
+      '  background: rgba(3, 7, 10, 0.88);',
+      '  backdrop-filter: blur(8px);',
+      '  z-index: 999999;',
+      '  display: flex;',
+      '  align-items: center;',
+      '  justify-content: center;',
+      '  padding: 1rem;',
+      '  box-sizing: border-box;',
+      '  animation: pwaFadeIn 0.25s ease-out;',
+      '}',
+      '#ej-pwa-modal-card {',
+      '  background: #070d12;',
+      '  border: 1px solid #00e5b0;',
+      '  box-shadow: 0 0 35px rgba(0, 229, 176, 0.25);',
+      '  max-width: 560px;',
+      '  width: 100%;',
+      '  border-radius: 8px;',
+      '  padding: 1.5rem;',
+      '  color: #d1eae0;',
+      '  font-family: "Share Tech Mono", monospace;',
+      '  position: relative;',
+      '}',
+      '@keyframes pwaFadeIn {',
+      '  from { opacity: 0; transform: scale(0.96); }',
+      '  to { opacity: 1; transform: scale(1); }',
+      '}'
+    ].join('\n');
+
+    document.head.appendChild(style);
+  }
+
+  function crearElementosUI() {
+    if (isInstalled) return;
+    injectPWAStyles();
+
+    // 1. Inyectar botón en la barra superior de telemetría (al lado de Visitantes)
+    var telemetryWrap = document.getElementById('ingen-telemetry-wrap');
+    if (telemetryWrap && !document.getElementById('ej-topbar-install-btn')) {
+      var topBtn = document.createElement('button');
+      topBtn.id = 'ej-topbar-install-btn';
+      topBtn.className = 'ingen-install-badge';
+      topBtn.innerHTML = '📲 MODO APP';
+      topBtn.title = 'Abrir o instalar como aplicación independiente sin internet';
+      topBtn.addEventListener('click', handleInstallClick);
+      telemetryWrap.appendChild(topBtn);
+    }
+
+    // 2. Inyectar tarjeta flotante en la esquina inferior derecha
+    if (!document.getElementById('ej-pwa-floating-btn') && document.body) {
+      var floatCard = document.createElement('div');
+      floatCard.id = 'ej-pwa-floating-btn';
+      floatCard.innerHTML = [
+        '<span class="pwa-icon">📲</span>',
+        '<div class="pwa-texts">',
+        '  <div class="pwa-title">MODO APLICACIÓN OFFLINE</div>',
+        '  <div class="pwa-sub">Usar sin conexión / Pantalla completa</div>',
+        '</div>',
+        '<span class="pwa-close-x" title="Cerrar aviso">✕</span>'
+      ].join('');
+
+      floatCard.addEventListener('click', function (e) {
+        if (e.target.classList.contains('pwa-close-x')) {
+          e.stopPropagation();
+          floatCard.style.display = 'none';
+        } else {
+          handleInstallClick();
+        }
+      });
+
+      document.body.appendChild(floatCard);
+    }
+  }
+
+  function handleInstallClick() {
+    // Si el navegador tiene el prompt nativo listo (en HTTPS o localhost)
+    if (deferredInstallPrompt) {
+      deferredInstallPrompt.prompt();
+      deferredInstallPrompt.userChoice.then(function (choice) {
+        if (choice.outcome === 'accepted') {
+          console.log('[PWA] Instalación aceptada.');
+          ocultarUIInstalacion();
+        }
+        deferredInstallPrompt = null;
+      });
+      return;
+    }
+
+    // Si está ejecutándose desde archivo local o navegador sin prompt automático
+    abrirModalInstrucciones();
+  }
+
+  function abrirModalInstrucciones() {
+    if (document.getElementById('ej-pwa-modal-overlay')) return;
+
+    var overlay = document.createElement('div');
+    overlay.id = 'ej-pwa-modal-overlay';
+    overlay.innerHTML = [
+      '<div id="ej-pwa-modal-card">',
+      '  <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(0,229,176,0.3);padding-bottom:0.75rem;margin-bottom:1.1rem;">',
+      '    <div style="font-family:\'Orbitron\',sans-serif;font-weight:700;font-size:0.92rem;color:#00e5b0;letter-spacing:1px;">',
+      '      📲 EXPEDIENTES JURÁSICOS // MODO APLICACIÓN',
+      '    </div>',
+      '    <button id="ej-modal-close-x" style="background:transparent;border:none;color:#ff3030;font-size:1.2rem;cursor:pointer;line-height:1;">✕</button>',
       '  </div>',
-      '  <button id="ej-btn-pwa-install" style="background:#00e5b0;color:#06090d;border:none;padding:0.45rem 0.8rem;font-family:\'Orbitron\',sans-serif;font-weight:700;font-size:0.72rem;letter-spacing:1px;border-radius:4px;cursor:pointer;margin-left:0.5rem;transition:all 0.2s;">INSTALAR</button>',
-      '  <button id="ej-btn-pwa-dismiss" style="background:transparent;color:#607868;border:none;font-size:1rem;cursor:pointer;padding:0 0.2rem;line-height:1;" title="Cerrar">✕</button>',
+      '  <p style="font-size:0.82rem;line-height:1.45;color:#c8dac0;margin-bottom:1.2rem;">',
+      '    Puedes ejecutar <strong>Expedientes Jurásicos</strong> como una aplicación nativa en tu computadora o dispositivo móvil para jugar y consultar archivos <strong>100% sin conexión a internet</strong>:',
+      '  </p>',
+      '  <div style="display:flex;flex-direction:column;gap:0.85rem;margin-bottom:1.4rem;">',
+      '    <div style="background:rgba(0,229,176,0.06);border:1px solid rgba(0,229,176,0.3);border-radius:6px;padding:0.75rem 0.9rem;">',
+      '      <div style="font-family:\'Orbitron\',sans-serif;font-size:0.78rem;font-weight:700;color:#00e5b0;margin-bottom:0.25rem;">💻 EN PC / WINDOWS (MÉTODO RECOMENDADO)</div>',
+      '      <div style="font-size:0.75rem;color:#a8c4b4;line-height:1.4;">',
+      '        Ve a la carpeta de tu juego y haz doble clic en:<br>',
+      '        <code style="background:#03080b;border:1px solid #00e5b0;color:#5dff6a;padding:0.2rem 0.5rem;border-radius:4px;display:inline-block;margin-top:0.35rem;font-weight:bold;">Iniciar_App_Offline.bat</code><br>',
+      '        <span style="font-size:0.68rem;color:#607868;">Se abrirá en su propia ventana de aplicación de escritorio, sin barras de navegación y con máxima velocidad.</span>',
+      '      </div>',
+      '    </div>',
+      '    <div style="background:rgba(0,229,176,0.06);border:1px solid rgba(0,229,176,0.3);border-radius:6px;padding:0.75rem 0.9rem;">',
+      '      <div style="font-family:\'Orbitron\',sans-serif;font-size:0.78rem;font-weight:700;color:#00e5b0;margin-bottom:0.25rem;">🌐 DESDE TU NAVEGADOR (EDGE O CHROME)</div>',
+      '      <div style="font-size:0.75rem;color:#a8c4b4;line-height:1.4;">',
+      '        1. Haz clic en el menú <strong>(•••)</strong> de tu navegador arriba a la derecha.<br>',
+      '        2. Selecciona <strong>"Aplicaciones"</strong>.<br>',
+      '        3. Pulsa <strong>"Instalar este sitio como aplicación"</strong>.',
+      '      </div>',
+      '    </div>',
+      '    <div style="background:rgba(0,229,176,0.06);border:1px solid rgba(0,229,176,0.3);border-radius:6px;padding:0.75rem 0.9rem;">',
+      '      <div style="font-family:\'Orbitron\',sans-serif;font-size:0.78rem;font-weight:700;color:#00e5b0;margin-bottom:0.25rem;">📱 EN CELULARES (ANDROID O IPHONE)</div>',
+      '      <div style="font-size:0.75rem;color:#a8c4b4;line-height:1.4;">',
+      '        Abre el menú del navegador en tu móvil y elige <strong>"Agregar a pantalla principal"</strong> o <strong>"Instalar aplicación"</strong>.',
+      '      </div>',
+      '    </div>',
+      '  </div>',
+      '  <div style="text-align:right;">',
+      '    <button id="ej-modal-btn-ok" style="background:#00e5b0;color:#06090d;border:none;font-family:\'Orbitron\',sans-serif;font-weight:700;font-size:0.78rem;letter-spacing:1px;padding:0.6rem 1.4rem;border-radius:4px;cursor:pointer;transition:all 0.2s;">ENTENDIDO</button>',
+      '  </div>',
       '</div>'
-    ].join('');
+    ].join('\n');
 
-    document.body.appendChild(container);
+    document.body.appendChild(overlay);
 
-    var installBtn = document.getElementById('ej-btn-pwa-install');
-    var dismissBtn = document.getElementById('ej-btn-pwa-dismiss');
+    var close = function () {
+      if (overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    };
 
-    if (installBtn) {
-      installBtn.addEventListener('click', function () {
-        if (!deferredInstallPrompt) return;
-        deferredInstallPrompt.prompt();
-        deferredInstallPrompt.userChoice.then(function (choice) {
-          if (choice.outcome === 'accepted') {
-            console.log('[PWA] Instalación aceptada por el usuario');
-          }
-          deferredInstallPrompt = null;
-          ocultarBotonInstalar();
-        });
-      });
-    }
+    document.getElementById('ej-modal-close-x').addEventListener('click', close);
+    document.getElementById('ej-modal-btn-ok').addEventListener('click', close);
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) close();
+    });
+  }
 
-    if (dismissBtn) {
-      dismissBtn.addEventListener('click', function () {
-        ocultarBotonInstalar();
-      });
+  function actualizarBotonesInstalacion() {
+    var floatCard = document.getElementById('ej-pwa-floating-btn');
+    if (floatCard && !isInstalled) {
+      floatCard.style.display = 'flex';
     }
   }
 
-  function mostrarBotonInstalar() {
-    crearUIInstalacion();
-    var c = document.getElementById('ej-pwa-install-container');
-    if (c) c.style.display = 'block';
-  }
-
-  function ocultarBotonInstalar() {
-    var c = document.getElementById('ej-pwa-install-container');
-    if (c) c.style.display = 'none';
+  function ocultarUIInstalacion() {
+    var floatCard = document.getElementById('ej-pwa-floating-btn');
+    if (floatCard) floatCard.style.display = 'none';
+    var topBtn = document.getElementById('ej-topbar-install-btn');
+    if (topBtn) topBtn.style.display = 'none';
   }
 
   // 5. SISTEMA DE TOASTS INGEN (AVISOS EN PANTALLA)
@@ -202,25 +386,24 @@
   window.EJ_PWA = {
     showToast: showToast,
     register: registerServiceWorker,
-    promptInstall: function () {
-      if (deferredInstallPrompt) {
-        deferredInstallPrompt.prompt();
-      } else {
-        alert('Para instalar en tu navegador, usa el menú del navegador y selecciona "Instalar aplicación" o "Agregar a pantalla de inicio".');
-      }
-    },
+    showModal: abrirModalInstrucciones,
+    promptInstall: handleInstallClick,
     isInstalled: function () {
-      return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
-    },
-    showStatus: function () {
-      var status = navigator.onLine ? 'ONLINE' : 'OFFLINE';
-      showToast('[ ESTADO DE RED: ' + status + ' ]', navigator.onLine ? 'success' : 'warning');
+      return isInstalled;
     }
   };
 
+  // Inicializar UI al cargar
+  function initUI() {
+    crearElementosUI();
+    // Reintentar vincular al topbar si site-access-system.js tardó en crearlo
+    setTimeout(crearElementosUI, 600);
+    setTimeout(crearElementosUI, 1500);
+  }
+
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', crearUIInstalacion);
+    document.addEventListener('DOMContentLoaded', initUI);
   } else {
-    crearUIInstalacion();
+    initUI();
   }
 })();
