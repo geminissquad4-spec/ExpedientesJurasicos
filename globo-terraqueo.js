@@ -56,6 +56,38 @@
     if (statEspecies) statEspecies.textContent = HUELLAS.species.length;
     if (statAvist) statAvist.textContent = totalSightings;
 
+    // ==========================================================================
+    //  SISTEMA RESILIENTE DE RUTAS DE MEDIOS (huellas_img/ vs Raíz GitHub)
+    // ==========================================================================
+    let useRootAssetsFallback = false;
+
+    // Sondeo de compatibilidad al iniciar
+    const probeImg = new Image();
+    probeImg.onerror = function () {
+      console.warn('[DinoTracker] Modo compatibilidad activado: recursos cargados desde la raíz.');
+      useRootAssetsFallback = true;
+    };
+    probeImg.src = 'huellas_img/01_portrait.png';
+
+    function resolveMediaPath(url) {
+      if (!url) return '';
+      if (useRootAssetsFallback) {
+        return url.substring(url.lastIndexOf('/') + 1);
+      }
+      return url;
+    }
+
+    window.__globoImgFallback = function (img) {
+      if (!img || img.dataset.fallbackTried) return;
+      img.dataset.fallbackTried = '1';
+      useRootAssetsFallback = true;
+      const originalSrc = img.getAttribute('src') || img.src || '';
+      const filename = originalSrc.split('/').pop().split('?')[0];
+      if (filename) {
+        img.src = filename;
+      }
+    };
+
     // Estado del Render y Cámara
     const state = {
       mode: '3d', // '3d' o '2d'
@@ -1189,9 +1221,10 @@
           const badgeText = sightingPhotoUrls.length > 1
             ? '📸 EVIDENCIA DE AVISTAMIENTO (' + (idx + 1) + '/' + sightingPhotoUrls.length + ')'
             : '📸 EVIDENCIA FOTOGRÁFICA DE AVISTAMIENTO';
+          const resolvedPUrl = resolveMediaPath(pUrl);
           sightingCardHtml +=
             '    <div class="globo-sighting-card" data-full-src="' +
-            pUrl +
+            resolvedPUrl +
             '" data-caption="Avistamiento de ' +
             sp.name +
             ' // ' +
@@ -1199,12 +1232,12 @@
             '" title="Click para ver en grande">' +
             '      <div class="globo-sighting-badge">' + badgeText + '</div>' +
             '      <img class="globo-sighting-img" src="' +
-            pUrl +
+            resolvedPUrl +
             '" alt="Avistamiento de ' +
             sp.name +
             ' en ' +
             locationLabel +
-            '">' +
+            '" onerror="window.__globoImgFallback(this)">' +
             '      <div class="globo-media-caption">Registro de campo // ' +
             locationLabel +
             '</div>' +
@@ -1220,18 +1253,18 @@
         sightingCardHtml +
         '    <div class="globo-portrait-card">' +
         '      <img class="globo-portrait-img" src="' +
-        sp.portrait_img +
+        resolveMediaPath(sp.portrait_img) +
         '" alt="' +
         sp.name +
-        ' - Ficha oficial">' +
+        ' - Ficha oficial" onerror="window.__globoImgFallback(this)">' +
         '      <div class="globo-media-caption">Imagen proporcionada por la DPW</div>' +
         '    </div>' +
         '    <div class="globo-render-card">' +
         '      <img class="globo-render-img" src="' +
-        sp.render_img +
+        resolveMediaPath(sp.render_img) +
         '" alt="' +
         sp.name +
-        ' - Render anatómico">' +
+        ' - Render anatómico" onerror="window.__globoImgFallback(this)">' +
         '      <div class="globo-media-caption">Registro de Tamaño // DPW Scale</div>' +
         '    </div>' +
         '  </div>' +
@@ -1308,7 +1341,8 @@
       sightingCards.forEach(function (card) {
         card.addEventListener('click', function (e) {
           e.stopPropagation();
-          const fullSrc = this.getAttribute('data-full-src');
+          const imgEl = card.querySelector('img');
+          const fullSrc = (imgEl && imgEl.currentSrc) ? imgEl.currentSrc : (imgEl ? imgEl.src : resolveMediaPath(this.getAttribute('data-full-src')));
           const caption = this.getAttribute('data-caption');
           if (fullSrc) openLightbox(fullSrc, caption);
         });
@@ -1320,7 +1354,9 @@
         portraitCard.setAttribute('title', 'Click para ver en grande');
         portraitCard.addEventListener('click', function (e) {
           e.stopPropagation();
-          openLightbox(sp.portrait_img, sp.name + ' // Imagen oficial proporcionada por la DPW');
+          const imgEl = portraitCard.querySelector('img');
+          const src = (imgEl && imgEl.currentSrc) ? imgEl.currentSrc : (imgEl ? imgEl.src : resolveMediaPath(sp.portrait_img));
+          openLightbox(src, sp.name + ' // Imagen oficial proporcionada por la DPW');
         });
       }
 
@@ -1330,7 +1366,9 @@
         renderCard.setAttribute('title', 'Click para ver en grande');
         renderCard.addEventListener('click', function (e) {
           e.stopPropagation();
-          openLightbox(sp.render_img, sp.name + ' // Registro Anatómico y Escala de Tamaño DPW');
+          const imgEl = renderCard.querySelector('img');
+          const src = (imgEl && imgEl.currentSrc) ? imgEl.currentSrc : (imgEl ? imgEl.src : resolveMediaPath(sp.render_img));
+          openLightbox(src, sp.name + ' // Registro Anatómico y Escala de Tamaño DPW');
         });
       }
     }
@@ -1358,7 +1396,11 @@
 
     function openLightbox(src, caption) {
       if (!lightbox || !lightboxImg) return;
-      lightboxImg.src = src;
+      lightboxImg.dataset.fallbackTried = '';
+      lightboxImg.onerror = function () {
+        if (window.__globoImgFallback) window.__globoImgFallback(this);
+      };
+      lightboxImg.src = resolveMediaPath(src);
       if (lightboxTitle) lightboxTitle.textContent = caption || 'Evidencia de Campo';
       lightbox.classList.add('open');
       lightbox.setAttribute('aria-hidden', 'false');
