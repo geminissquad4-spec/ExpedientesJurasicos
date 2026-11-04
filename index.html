@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="maintenance.css">
 <link rel="stylesheet" href="mobile-minigames.css">
+<link rel="stylesheet" href="globo-terraqueo.css">
 <script src="maintenance-config.js"></script>
 <script src="maintenance-system.js"></script>
 
@@ -1655,6 +1656,105 @@
 
 </div>
 
+
+<!-- SISTEMA DE RASTREO SATELITAL GLOBAL // HUELLAS MUNDIALES (DINO TRACKERS) -->
+<div class="globo-trackers-wrapper" style="margin-top: 2.5rem;">
+  <div class="globo-telemetry-bar">
+    <div class="globo-status-indicator">
+      <span class="globo-pulse-dot"></span>
+      <span>RED DE RASTREO SATELITAL DINO TRACKERS // SAT-LINK OMEGA</span>
+    </div>
+    <div class="globo-stats-chips">
+      <div class="globo-stat-chip">PUNTOS DE AVISTAMIENTO: <strong id="globo-stat-paises">15</strong></div>
+      <div class="globo-stat-chip">ESPECIES DETECTADAS: <strong id="globo-stat-especies">29</strong></div>
+      <div class="globo-stat-chip">AVISTAMIENTOS: <strong id="globo-stat-avistamientos">73</strong></div>
+    </div>
+    <div class="globo-view-controls">
+      <button class="globo-btn-ctrl active" id="globo-btn-3d" title="Modo Esférico 3D">🌐 GLOBO 3D</button>
+      <button class="globo-btn-ctrl" id="globo-btn-2d" title="Modo Planisferio">🗺️ PLANISFERIO</button>
+      <button class="globo-btn-ctrl" id="globo-btn-autorotate" title="Pausar / Reanudar Rotación">⏸️ PAUSA</button>
+      <button class="globo-btn-ctrl" id="globo-btn-reset" title="Restablecer vista">↺ RESET</button>
+    </div>
+  </div>
+
+  <div class="globo-main-stage">
+    <div class="globo-canvas-container" id="globo-container">
+      <canvas id="globo-3d-canvas"></canvas>
+      <div class="globo-corner-hud top-left"></div>
+      <div class="globo-corner-hud top-right"></div>
+      <div class="globo-corner-hud bottom-left"></div>
+      <div class="globo-corner-hud bottom-right"></div>
+      <div class="globo-scanlines"></div>
+      <div id="globo-hover-tooltip">
+        <div class="tt-country">País</div>
+        <div class="tt-count">0 avistamientos</div>
+        <div style="font-size:0.65rem;color:#8daea0;margin-top:2px;">Click para ver avistamiento</div>
+      </div>
+      <div class="globo-canvas-hint">
+        <span>🖱️ Arrastra para rotar &bull; Rueda para zoom &bull; Click en un radar para ver el avistamiento</span>
+      </div>
+    </div>
+
+    <!-- PANEL LATERAL DE MONITOREO Y FILTROS -->
+    <div class="globo-side-panel">
+      <div class="globo-panel-header">
+        <div class="globo-panel-title">SECTORES DE AVISTAMIENTOS GLOBALES</div>
+        <div class="globo-panel-subtitle">SELECCIONA UN PUNTO DE AVISTAMIENTO PARA VER DETALLES</div>
+      </div>
+      <div class="globo-search-box">
+        <span class="globo-search-icon">🔍</span>
+        <input type="text" id="globo-search-input" class="globo-search-input" placeholder="Buscar país o dinosaurio...">
+      </div>
+      <div class="globo-countries-list" id="globo-countries-list">
+        <!-- Generado dinámicamente -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DE EXPEDIENTE DINO TRACKERS -->
+<div id="globo-dossier-modal">
+  <div class="globo-modal-window">
+    <div class="globo-modal-header">
+      <div class="globo-modal-title-wrap">
+        <span class="globo-modal-flag" id="globo-modal-flag">🇺🇸</span>
+        <div>
+          <div class="globo-modal-title" id="globo-modal-country">ESTADOS UNIDOS</div>
+          <div class="globo-modal-subtitle" id="globo-modal-sector">SECTOR NORTEAMÉRICA &bull; <span id="globo-modal-count">10</span> ESPECIES DETECTADAS</div>
+        </div>
+      </div>
+      <button class="globo-modal-close-btn" id="globo-modal-close">✕ CERRAR</button>
+    </div>
+    <div class="globo-species-tabs-strip" id="globo-modal-tabs">
+      <!-- Pestañas de dinosaurios del país -->
+    </div>
+    <div class="globo-modal-body" id="globo-modal-body">
+      <!-- Ficha completa del dinosaurio -->
+    </div>
+  </div>
+</div>
+
+<!-- VISOR EN ALTA RESOLUCIÓN / LIGHTBOX PARA IMÁGENES DE AVISTAMIENTO -->
+<div id="globo-lightbox" class="globo-lightbox" aria-hidden="true">
+  <div class="globo-lightbox-backdrop" id="globo-lightbox-backdrop"></div>
+  <div class="globo-lightbox-dialog" role="dialog" aria-modal="true">
+    <div class="globo-lightbox-header">
+      <div class="globo-lightbox-info">
+        <span class="globo-lightbox-badge">📸 REGISTRO FOTOGRÁFICO DE AVISTAMIENTO DPW</span>
+        <div class="globo-lightbox-title" id="globo-lightbox-title">Evidencia de Campo</div>
+      </div>
+      <button class="globo-lightbox-close-btn" id="globo-lightbox-close" type="button" title="Cerrar visor">✕ CERRAR</button>
+    </div>
+    <div class="globo-lightbox-content">
+      <img id="globo-lightbox-img" class="globo-lightbox-img" src="" alt="Avistamiento ampliado">
+    </div>
+    <div class="globo-lightbox-footer">
+      <span class="globo-lightbox-hint">PRESIONA [ ESC ] O HAZ CLICK FUERA DE LA IMAGEN PARA REGRESAR AL EXPEDIENTE</span>
+    </div>
+  </div>
+</div>
+
+
 </section>
 
 
@@ -2223,6 +2323,10 @@ if (typeof window.toggleTimeline !== 'function') {
 <script src="hibridacion-adn.js"></script>
 <script src="captura-giganotosaurus.js"></script>
 <script src="encontrando-quetzalcoatlus.js"></script>
+<script src="world_continents_data.js"></script>
+<script src="huellas-data.js"></script>
+<script src="globo-terraqueo.js"></script>
+
 
 <script>
 // Limpieza segura de Service Worker y cachés para liberar memoria

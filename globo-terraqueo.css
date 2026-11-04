@@ -1,0 +1,927 @@
+/* ==========================================================================
+   EXPEDIENTES JURÁSICOS - GLOBO TERRÁQUEO & DINO TRACKERS HUELLAS MUNDIALES
+   Estilos del Globo Terráqueo 3D Interactivo, Mapa Táctico y Fichas de Especies
+   ========================================================================== */
+
+#huellas-mundiales {
+  position: relative;
+  background: radial-gradient(circle at 50% 20%, rgba(0, 40, 30, 0.4) 0%, rgba(6, 12, 16, 0.98) 75%);
+  border-top: 1px solid rgba(0, 229, 176, 0.25);
+  border-bottom: 1px solid rgba(0, 229, 176, 0.25);
+  padding: 3rem 1.5rem;
+  overflow: hidden;
+}
+
+/* CONTENEDOR PRINCIPAL DINO TRACKERS */
+.globo-trackers-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* BARRA SUPERIOR DE TELEMETRÍA Y CONTROLES */
+.globo-telemetry-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(3, 10, 14, 0.85);
+  border: 1px solid rgba(0, 229, 176, 0.3);
+  border-radius: 6px;
+  padding: 0.65rem 1.2rem;
+  backdrop-filter: blur(8px);
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.globo-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  color: #00e5b0;
+  letter-spacing: 1px;
+}
+
+.globo-pulse-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #00e5b0;
+  box-shadow: 0 0 10px #00e5b0;
+  animation: globoPulse 1.6s infinite ease-in-out;
+}
+
+@keyframes globoPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.4); }
+}
+
+.globo-stats-chips {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.75rem;
+  color: #8daea0;
+}
+
+.globo-stat-chip strong {
+  color: #00f5ff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.85rem;
+}
+
+.globo-view-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.globo-btn-ctrl {
+  background: rgba(0, 229, 176, 0.08);
+  border: 1px solid rgba(0, 229, 176, 0.4);
+  color: #00e5b0;
+  padding: 0.35rem 0.7rem;
+  border-radius: 4px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.globo-btn-ctrl:hover,
+.globo-btn-ctrl.active {
+  background: #00e5b0;
+  color: #06090d;
+  box-shadow: 0 0 14px rgba(0, 229, 176, 0.4);
+}
+
+/* ÁREA CENTRAL: GLOBO 3D + PANEL LATERAL */
+.globo-main-stage {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 1.5rem;
+  min-height: 580px;
+}
+
+@media (max-width: 1050px) {
+  .globo-main-stage {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* LIENZO DEL GLOBO */
+.globo-canvas-container {
+  position: relative;
+  background: radial-gradient(circle at 50% 50%, #06151c 0%, #03080c 85%);
+  border: 1px solid rgba(0, 229, 176, 0.35);
+  border-radius: 8px;
+  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8), 0 8px 30px rgba(0, 0, 0, 0.6);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+  cursor: grab;
+}
+
+.globo-canvas-container:active {
+  cursor: grabbing;
+}
+
+#globo-3d-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ESQUINAS TÁCTICAS DEL RADAR */
+.globo-corner-hud {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: #00e5b0;
+  border-style: solid;
+  pointer-events: none;
+}
+.globo-corner-hud.top-left { top: 8px; left: 8px; border-width: 2px 0 0 2px; }
+.globo-corner-hud.top-right { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+.globo-corner-hud.bottom-left { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; }
+.globo-corner-hud.bottom-right { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+
+/* OVERLAY DE SCANLINES */
+.globo-scanlines {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(to bottom, transparent, transparent 2px, rgba(0, 229, 176, 0.02) 3px);
+  pointer-events: none;
+}
+
+/* TOOLTIP FLOTANTE SOBRE EL GLOBO */
+#globo-hover-tooltip {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  background: rgba(5, 12, 16, 0.94);
+  border: 1px solid #00e5b0;
+  border-radius: 4px;
+  padding: 0.5rem 0.8rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.74rem;
+  color: #d1eae0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 0 10px rgba(0, 229, 176, 0.3);
+  transform: translate(-50%, -125%);
+  z-index: 10;
+  white-space: nowrap;
+}
+#globo-hover-tooltip .tt-country {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  color: #00e5b0;
+  font-size: 0.8rem;
+}
+#globo-hover-tooltip .tt-count {
+  color: #00f5ff;
+  font-weight: 700;
+}
+
+/* PANEL LATERAL DE MONITOREO Y FILTROS */
+.globo-side-panel {
+  display: flex;
+  flex-direction: column;
+  background: rgba(4, 11, 15, 0.92);
+  border: 1px solid rgba(0, 229, 176, 0.25);
+  border-radius: 8px;
+  padding: 1rem;
+  gap: 1rem;
+  max-height: 580px;
+  overflow: hidden;
+}
+
+.globo-search-box {
+  position: relative;
+}
+
+.globo-search-input {
+  width: 100%;
+  background: rgba(2, 6, 8, 0.9);
+  border: 1px solid rgba(0, 229, 176, 0.35);
+  border-radius: 4px;
+  padding: 0.55rem 0.8rem 0.55rem 2rem;
+  color: #d1eae0;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.78rem;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.globo-search-input:focus {
+  border-color: #00e5b0;
+  box-shadow: 0 0 10px rgba(0, 229, 176, 0.25);
+}
+
+.globo-search-icon {
+  position: absolute;
+  left: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #00e5b0;
+  font-size: 0.85rem;
+  pointer-events: none;
+}
+
+/* LISTA DE PAÍSES MONITOREADOS */
+.globo-countries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  overflow-y: auto;
+  padding-right: 0.3rem;
+  flex: 1;
+}
+
+.globo-countries-list::-webkit-scrollbar {
+  width: 5px;
+}
+.globo-countries-list::-webkit-scrollbar-thumb {
+  background: rgba(0, 229, 176, 0.3);
+  border-radius: 3px;
+}
+
+.globo-country-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(6, 16, 22, 0.65);
+  border: 1px solid rgba(0, 229, 176, 0.15);
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.globo-country-card:hover,
+.globo-country-card.active {
+  background: rgba(0, 229, 176, 0.12);
+  border-color: #00e5b0;
+  transform: translateX(4px);
+}
+
+.globo-country-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.globo-country-flag {
+  font-size: 1.15rem;
+}
+
+.globo-country-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #e0f2eb;
+  letter-spacing: 0.5px;
+}
+
+.globo-country-badge {
+  background: rgba(0, 229, 176, 0.2);
+  color: #00e5b0;
+  border-radius: 12px;
+  padding: 0.15rem 0.55rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+/* MODAL DE EXPEDIENTE DE ESPECIE // DINO TRACKERS */
+#globo-dossier-modal {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(2, 6, 8, 0.88);
+  backdrop-filter: blur(10px);
+  z-index: 999999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+#globo-dossier-modal.open {
+  display: flex;
+  animation: modalZoomIn 0.25s ease-out;
+}
+
+@keyframes modalZoomIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.globo-modal-window {
+  background: #060e13;
+  border: 1px solid #00e5b0;
+  border-radius: 8px;
+  box-shadow: 0 0 40px rgba(0, 229, 176, 0.3), 0 10px 40px rgba(0, 0, 0, 0.9);
+  max-width: 960px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* CABECERA DEL MODAL */
+.globo-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.4rem;
+  background: rgba(0, 229, 176, 0.08);
+  border-bottom: 1px solid rgba(0, 229, 176, 0.35);
+}
+
+.globo-modal-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.globo-modal-flag {
+  font-size: 1.6rem;
+}
+
+.globo-modal-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #00e5b0;
+  letter-spacing: 1px;
+}
+
+.globo-modal-subtitle {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  color: #7fa490;
+}
+
+.globo-modal-close-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 48, 48, 0.5);
+  color: #ff3030;
+  border-radius: 4px;
+  padding: 0.3rem 0.65rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.globo-modal-close-btn:hover {
+  background: #ff3030;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 48, 48, 0.5);
+}
+
+/* STRIP DE PESTAÑAS DE ESPECIES */
+.globo-species-tabs-strip {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  background: rgba(3, 8, 12, 0.95);
+  border-bottom: 1px solid rgba(0, 229, 176, 0.2);
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.globo-species-tabs-strip::-webkit-scrollbar {
+  height: 4px;
+}
+.globo-species-tabs-strip::-webkit-scrollbar-thumb {
+  background: #00e5b0;
+}
+
+.globo-species-tab {
+  background: rgba(0, 229, 176, 0.06);
+  border: 1px solid rgba(0, 229, 176, 0.25);
+  color: #9ab4a5;
+  border-radius: 4px;
+  padding: 0.35rem 0.8rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.globo-species-tab:hover,
+.globo-species-tab.active {
+  background: #00e5b0;
+  color: #06090d;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(0, 229, 176, 0.4);
+}
+
+/* CUERPO DEL EXPEDIENTE */
+.globo-modal-body {
+  padding: 1.4rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.3rem;
+  flex: 1;
+}
+
+.globo-dossier-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 1.4rem;
+}
+
+@media (max-width: 800px) {
+  .globo-dossier-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* FOTOS DEL ESPECIMEN */
+.globo-dossier-media {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.globo-sighting-card {
+  position: relative;
+  background: #060502;
+  border: 1px solid rgba(255, 170, 0, 0.45);
+  box-shadow: 0 0 16px rgba(255, 170, 0, 0.12) inset, 0 4px 12px rgba(0, 0, 0, 0.6);
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.globo-sighting-card:hover {
+  border-color: #ffaa00;
+  box-shadow: 0 0 22px rgba(255, 170, 0, 0.25) inset, 0 6px 18px rgba(0, 0, 0, 0.85);
+}
+
+.globo-sighting-zoom-hint {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.64rem;
+  color: #ffaa00;
+  margin-top: 0.35rem;
+  letter-spacing: 0.8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, text-shadow 0.2s ease;
+}
+
+.globo-sighting-card:hover .globo-sighting-zoom-hint {
+  opacity: 1;
+  text-shadow: 0 0 8px rgba(255, 170, 0, 0.7);
+}
+
+.globo-sighting-badge {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #ffaa00;
+  letter-spacing: 1px;
+  padding: 0.35rem 0.5rem;
+  text-transform: uppercase;
+  background: rgba(255, 170, 0, 0.12);
+  border-bottom: 1px solid rgba(255, 170, 0, 0.35);
+  margin: -0.5rem -0.5rem 0.5rem -0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.globo-sighting-img {
+  width: 100%;
+  max-height: 240px;
+  object-fit: contain;
+  background: #020304;
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 170, 0, 0.25);
+  cursor: zoom-in;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.globo-sighting-card:hover .globo-sighting-img {
+  transform: scale(1.025);
+  filter: brightness(1.08);
+}
+
+.globo-portrait-card {
+  position: relative;
+  background: #03080c;
+  border: 1px solid rgba(0, 229, 176, 0.35);
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 0.4rem;
+  text-align: center;
+}
+
+.globo-portrait-img {
+  width: 100%;
+  max-height: 250px;
+  object-fit: contain;
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+  background: #020508;
+}
+
+.globo-render-card {
+  background: #020907;
+  border: 1px solid rgba(0, 229, 176, 0.35);
+  box-shadow: 0 0 12px rgba(0, 229, 176, 0.1) inset;
+  border-radius: 6px;
+  padding: 0.6rem;
+  text-align: center;
+}
+
+.globo-render-img {
+  width: 100%;
+  max-height: 140px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  filter: hue-rotate(285deg) saturate(2.2) brightness(1.05);
+  border-radius: 4px;
+}
+
+.globo-media-caption {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  color: #607868;
+  margin-top: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* DATOS TÉCNICOS Y PROTOCOLO */
+.globo-dossier-details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.globo-spec-header {
+  border-bottom: 1px solid rgba(0, 229, 176, 0.25);
+  padding-bottom: 0.5rem;
+}
+
+.globo-spec-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 1.5px;
+}
+
+.globo-spec-empresa-tag {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-top: 0.35rem;
+  letter-spacing: 1px;
+}
+
+.empresa-ingen { background: rgba(0, 229, 176, 0.15); border: 1px solid #00e5b0; color: #00e5b0; }
+.empresa-masrani { background: rgba(0, 188, 212, 0.15); border: 1px solid #00bcd4; color: #00bcd4; }
+.empresa-biosyn { background: rgba(255, 179, 0, 0.15); border: 1px solid #ffb300; color: #ffb300; }
+.empresa-mantah { background: rgba(179, 136, 255, 0.15); border: 1px solid #b388ff; color: #b388ff; }
+.empresa-ilegal { background: rgba(255, 48, 48, 0.15); border: 1px solid #ff3030; color: #ff3030; }
+
+/* CUADRO DE MÉTRICAS */
+.globo-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.65rem;
+}
+
+.globo-metric-cell {
+  background: rgba(3, 12, 16, 0.7);
+  border: 1px solid rgba(0, 229, 176, 0.2);
+  border-radius: 4px;
+  padding: 0.5rem 0.7rem;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.globo-metric-label {
+  font-size: 0.66rem;
+  color: #607868;
+  text-transform: uppercase;
+}
+
+.globo-metric-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #00f5ff;
+  margin-top: 2px;
+}
+
+/* CAJA DE PROTOCOLO */
+.globo-protocol-box {
+  background: rgba(20, 10, 4, 0.75);
+  border: 1px solid rgba(255, 107, 0, 0.45);
+  border-radius: 6px;
+  padding: 0.85rem 1rem;
+}
+
+.globo-protocol-title {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ff8c00;
+  letter-spacing: 1px;
+  margin-bottom: 0.45rem;
+}
+
+.globo-protocol-desc {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: #e6dfd5;
+}
+
+/* OTROS PAÍSES CON AVISTAMIENTOS */
+.globo-other-countries-box {
+  background: rgba(4, 12, 18, 0.65);
+  border: 1px solid rgba(0, 229, 176, 0.2);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+}
+
+.globo-other-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #00e5b0;
+  letter-spacing: 1px;
+  margin-bottom: 0.45rem;
+}
+
+.globo-other-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.globo-other-tag {
+  background: rgba(0, 229, 176, 0.1);
+  border: 1px solid rgba(0, 229, 176, 0.35);
+  color: #a8dfc8;
+  border-radius: 14px;
+  padding: 0.2rem 0.65rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.72rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.globo-other-tag:hover {
+  background: #00e5b0;
+  color: #06090d;
+}
+
+.globo-panel-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-bottom: 1px solid rgba(0, 229, 176, 0.2);
+  padding-bottom: 0.5rem;
+}
+
+.globo-panel-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #00e5b0;
+  letter-spacing: 1px;
+}
+
+.globo-panel-subtitle {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.65rem;
+  color: #7fa490;
+  letter-spacing: 0.5px;
+}
+
+.globo-canvas-hint {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+  background: rgba(3, 8, 12, 0.85);
+  border: 1px solid rgba(0, 229, 176, 0.25);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem;
+  color: #8daea0;
+  z-index: 5;
+  white-space: nowrap;
+}
+
+/* INSIGNIA DE UBICACIÓN ESPECÍFICA */
+.globo-location-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(0, 229, 176, 0.08);
+  border: 1px solid rgba(0, 229, 176, 0.35);
+  border-radius: 4px;
+  padding: 0.45rem 0.85rem;
+  margin-top: 0.55rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.76rem;
+  color: #a0d8c0;
+}
+
+.globo-location-badge .globo-loc-pin {
+  font-size: 0.95rem;
+  color: #00e5b0;
+}
+
+.globo-location-badge strong {
+  color: #00f5ff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  margin-left: 0.3rem;
+}
+
+
+/* ============================================================
+   LIGHTBOX / VISOR EN ALTA RESOLUCIÓN DE AVISTAMIENTOS
+   ============================================================ */
+.globo-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.globo-lightbox.open {
+  display: flex;
+  opacity: 1;
+}
+
+.globo-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(1, 4, 6, 0.93);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.globo-lightbox-dialog {
+  position: relative;
+  z-index: 2;
+  max-width: 95vw;
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  background: #03080c;
+  border: 1px solid rgba(255, 170, 0, 0.55);
+  box-shadow: 0 0 45px rgba(255, 170, 0, 0.22), 0 25px 70px rgba(0, 0, 0, 0.95);
+  border-radius: 8px;
+  overflow: hidden;
+  transform: scale(0.95);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.globo-lightbox.open .globo-lightbox-dialog {
+  transform: scale(1);
+}
+
+.globo-lightbox-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem 1.2rem;
+  background: rgba(12, 9, 3, 0.96);
+  border-bottom: 1px solid rgba(255, 170, 0, 0.35);
+}
+
+.globo-lightbox-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.globo-lightbox-badge {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 0.72rem;
+  color: #ffaa00;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.globo-lightbox-title {
+  font-family: 'Orbitron', 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #e6f7ff;
+  letter-spacing: 0.8px;
+}
+
+.globo-lightbox-close-btn {
+  background: rgba(255, 60, 60, 0.15);
+  border: 1px solid rgba(255, 80, 80, 0.5);
+  color: #ff5555;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.45rem 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.2s ease;
+}
+
+.globo-lightbox-close-btn:hover {
+  background: #ff3333;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(255, 50, 50, 0.6);
+  transform: translateY(-1px);
+}
+
+.globo-lightbox-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #010406;
+  padding: 0.8rem;
+  overflow: hidden;
+  max-height: calc(94vh - 120px);
+}
+
+.globo-lightbox-img {
+  max-width: 90vw;
+  max-height: calc(90vh - 130px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 170, 0, 0.35);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.85);
+  display: block;
+}
+
+.globo-lightbox-footer {
+  padding: 0.45rem 1rem;
+  background: #020508;
+  border-top: 1px solid rgba(255, 170, 0, 0.2);
+  text-align: center;
+}
+
+.globo-lightbox-hint {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.68rem;
+  color: #889988;
+  letter-spacing: 1px;
+}

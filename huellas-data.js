@@ -1,0 +1,1857 @@
+// BASE DE DATOS MUNDIAL DE AVISTAMIENTOS DPW // DINOTRACKER & HUELLAS MUNDIALES
+// Generado automáticamente a partir de los registros desclasificados de InGen / BioSyn / Masrani
+(function () {
+  window.HUELLAS_DATA = {
+  "countries": {
+    "Río de Janeiro (Brasil)": {
+      "lat": -22.9068,
+      "lon": -43.1729,
+      "flag": "🇧🇷",
+      "shortLabel": "RIO",
+      "countryGroup": "Brasil",
+      "locationName": "Río de Janeiro, Brasil",
+      "sector": "SECTOR RÍO DE JANEIRO // BRASIL"
+    },
+    "California (Estados Unidos)": {
+      "lat": 36.7783,
+      "lon": -119.4179,
+      "flag": "🇺🇸",
+      "shortLabel": "CAL",
+      "countryGroup": "Estados Unidos",
+      "locationName": "California, Estados Unidos",
+      "sector": "SECTOR COSTA OESTE // CALIFORNIA"
+    },
+    "Seattle (Estados Unidos)": {
+      "lat": 47.6062,
+      "lon": -122.3321,
+      "flag": "🇺🇸",
+      "shortLabel": "SEA",
+      "countryGroup": "Estados Unidos",
+      "locationName": "Seattle, Estados Unidos",
+      "sector": "SECTOR PACÍFICO NOROESTE // SEATTLE"
+    },
+    "Texas (Estados Unidos)": {
+      "lat": 31.0,
+      "lon": -99.0,
+      "flag": "🇺🇸",
+      "shortLabel": "TEX",
+      "countryGroup": "Estados Unidos",
+      "locationName": "Texas, Estados Unidos",
+      "sector": "SECTOR SUR // TEXAS"
+    },
+    "Nevada (Estados Unidos)": {
+      "lat": 39.0,
+      "lon": -116.5,
+      "flag": "🇺🇸",
+      "shortLabel": "NV",
+      "countryGroup": "Estados Unidos",
+      "locationName": "Nevada, Estados Unidos",
+      "sector": "SECTOR DESIERTO // NEVADA"
+    },
+    "Washington (Estados Unidos)": {
+      "lat": 47.5,
+      "lon": -120.5,
+      "flag": "🇺🇸",
+      "shortLabel": "WA",
+      "countryGroup": "Estados Unidos",
+      "locationName": "Washington, Estados Unidos",
+      "sector": "SECTOR ESTADO DE WASHINGTON"
+    },
+    "Hawaii (Estados Unidos)": {
+      "lat": 21.3069,
+      "lon": -157.8583,
+      "flag": "🇺🇸",
+      "shortLabel": "HI",
+      "countryGroup": "Estados Unidos",
+      "locationName": "Hawaii, Estados Unidos",
+      "sector": "SECTOR ARCHIPIÉLAGO DEL PACÍFICO // HAWAII"
+    },
+    "Estados Unidos": {
+      "lat": 38.5,
+      "lon": -98.0,
+      "flag": "🇺🇸",
+      "shortLabel": "USA",
+      "countryGroup": "Estados Unidos",
+      "locationName": "Estados Unidos (Sector Central)",
+      "sector": "SECTOR NORTEAMÉRICA // CONTINENTAL"
+    },
+    "La Valeta (Malta)": {
+      "lat": 35.8989,
+      "lon": 14.5146,
+      "flag": "🇲🇹",
+      "shortLabel": "VAL",
+      "countryGroup": "Malta",
+      "locationName": "La Valeta, Malta",
+      "sector": "SECTOR LA VALETA // ISLA DE MALTA"
+    },
+    "Queensland (Australia)": {
+      "lat": -20.9176,
+      "lon": 142.7028,
+      "flag": "🇦🇺",
+      "shortLabel": "QLD",
+      "countryGroup": "Australia",
+      "locationName": "Queensland, Australia",
+      "sector": "SECTOR QUEENSLAND // OCEANÍA"
+    },
+    "Iguazú (Argentina)": {
+      "lat": -25.5991,
+      "lon": -54.5735,
+      "flag": "🇦🇷",
+      "shortLabel": "IGU",
+      "countryGroup": "Argentina",
+      "locationName": "Iguazú, Argentina",
+      "sector": "SECTOR SELVA PARANAENSE // IGUAZÚ (ARGENTINA)"
+    },
+    "Las Dolomitas (Italia)": {
+      "lat": 46.5102,
+      "lon": 12.3407,
+      "flag": "🇮🇹",
+      "shortLabel": "DOL",
+      "countryGroup": "Italia",
+      "locationName": "Las Dolomitas, Italia",
+      "sector": "SECTOR ALPES // LAS DOLOMITAS (46°30'36.7\"N, 12°20'26.6\"E)"
+    },
+    "París (Francia)": {
+      "lat": 48.8566,
+      "lon": 2.3522,
+      "flag": "🇫🇷",
+      "shortLabel": "PAR",
+      "countryGroup": "Francia",
+      "locationName": "París, Francia",
+      "sector": "SECTOR PARÍS // ISLA DE FRANCIA"
+    },
+    "Francia": {
+      "lat": 46.5,
+      "lon": 2.5,
+      "flag": "🇫🇷",
+      "shortLabel": "FRA",
+      "countryGroup": "Francia",
+      "locationName": "Francia",
+      "sector": "SECTOR EUROPA CENTRAL // FRANCIA"
+    },
+    "Ciudad de México (México)": {
+      "lat": 19.4326,
+      "lon": -99.1332,
+      "flag": "🇲🇽",
+      "shortLabel": "CDMX",
+      "countryGroup": "México",
+      "locationName": "Ciudad de México, México",
+      "sector": "SECTOR VALLE DE MÉXICO // ZONA METROPOLITANA"
+    },
+    "Guerrero (México)": {
+      "lat": 17.55,
+      "lon": -99.5,
+      "flag": "🇲🇽",
+      "shortLabel": "GRO",
+      "countryGroup": "México",
+      "locationName": "Guerrero, México",
+      "sector": "SECTOR SIERRA MADRE DEL SUR // GUERRERO"
+    },
+    "Canadá": {
+      "lat": 54.0,
+      "lon": -115.0,
+      "flag": "🇨🇦",
+      "shortLabel": "CAN",
+      "countryGroup": "Canadá",
+      "locationName": "Canadá",
+      "sector": "SECTOR BOREAL // CANADÁ"
+    },
+    "España": {
+      "lat": 40.4,
+      "lon": -3.7,
+      "flag": "🇪🇸",
+      "shortLabel": "ESP",
+      "countryGroup": "España",
+      "locationName": "España",
+      "sector": "SECTOR IBÉRICO // ESPAÑA"
+    },
+    "Barcelona (España)": {
+      "lat": 41.3879,
+      "lon": 2.1699,
+      "flag": "🇪🇸",
+      "shortLabel": "BCN",
+      "countryGroup": "España",
+      "locationName": "Barcelona, España",
+      "sector": "SECTOR CATALUÑA // BARCELONA"
+    },
+    "Las Islas Canarias (España)": {
+      "lat": 28.2916,
+      "lon": -16.6291,
+      "flag": "🇪🇸",
+      "shortLabel": "CAN",
+      "countryGroup": "España",
+      "locationName": "Las Islas Canarias, España",
+      "sector": "SECTOR ATLÁNTICO // ISLAS CANARIAS"
+    },
+    "Escocia": {
+      "lat": 56.8,
+      "lon": -4.2,
+      "flag": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+      "shortLabel": "SCO",
+      "countryGroup": "Escocia",
+      "locationName": "Escocia",
+      "sector": "SECTOR CALEDONIA // ESCOCIA"
+    },
+    "República del Congo": {
+      "lat": -1.0,
+      "lon": 15.5,
+      "flag": "🇨🇬",
+      "shortLabel": "COG",
+      "countryGroup": "República del Congo",
+      "locationName": "República del Congo",
+      "sector": "SECTOR CONGO CENTRAL // ÁFRICA"
+    },
+    "Hong Kong (China)": {
+      "lat": 22.3193,
+      "lon": 114.1694,
+      "flag": "🇭🇰",
+      "shortLabel": "HKG",
+      "countryGroup": "China",
+      "locationName": "Hong Kong, China",
+      "sector": "SECTOR ASIA ORIENTAL // HONG KONG"
+    },
+    "Irlanda": {
+      "lat": 53.3498,
+      "lon": -6.2603,
+      "flag": "🇮🇪",
+      "shortLabel": "IRL",
+      "countryGroup": "Irlanda",
+      "locationName": "Irlanda",
+      "sector": "SECTOR GAÉLICO // IRLANDA"
+    },
+    "Isla Saint Hubert (Barbados)": {
+      "lat": 5.1132,
+      "lon": -49.0792,
+      "flag": "🏝️",
+      "shortLabel": "SHB",
+      "countryGroup": "Barbados",
+      "locationName": "Isla Saint Hubert, Barbados (5°06'47.5\"N, 49°04'45.1\"W)",
+      "sector": "SECTOR ATLÁNTICO TROPICAL // ISLA SAINT HUBERT"
+    },
+    "Mayo (Irlanda)": {
+      "lat": 53.9,
+      "lon": -9.3,
+      "flag": "🇮🇪",
+      "shortLabel": "MAY",
+      "countryGroup": "Irlanda",
+      "locationName": "Mayo, Irlanda",
+      "sector": "SECTOR IRLANDA OCCIDENTAL // MAYO"
+    },
+    "Beccles (Reino Unido)": {
+      "lat": 52.455,
+      "lon": 1.562,
+      "flag": "🇬🇧",
+      "shortLabel": "BEC",
+      "countryGroup": "Reino Unido",
+      "locationName": "Beccles, Reino Unido",
+      "sector": "SECTOR SUFFOLK // REINO UNIDO"
+    },
+    "Rovaniemi (Finlandia)": {
+      "lat": 66.5039,
+      "lon": 25.7294,
+      "flag": "🇫🇮",
+      "shortLabel": "ROV",
+      "countryGroup": "Finlandia",
+      "locationName": "Rovaniemi, Finlandia",
+      "sector": "SECTOR CÍRCULO POLAR // LAPONIA"
+    },
+    "Calgary (Canadá)": {
+      "lat": 51.0447,
+      "lon": -114.0719,
+      "flag": "🇨🇦",
+      "shortLabel": "CGY",
+      "countryGroup": "Canadá",
+      "locationName": "Calgary, Canadá",
+      "sector": "SECTOR ALBERTA // CALGARY"
+    },
+    "Málaga (España)": {
+      "lat": 36.7213,
+      "lon": -4.4214,
+      "flag": "🇪🇸",
+      "shortLabel": "AGP",
+      "countryGroup": "España",
+      "locationName": "Málaga, España",
+      "sector": "SECTOR ANDALUCÍA // COSTA DEL SOL"
+    },
+    "Oregón (Estados Unidos)": {
+      "lat": 44.0,
+      "lon": -120.5,
+      "flag": "🇺🇸",
+      "shortLabel": "ORE",
+      "countryGroup": "Estados Unidos",
+      "locationName": "Oregón, Estados Unidos",
+      "sector": "SECTOR PACÍFICO NOROESTE // OREGÓN"
+    },
+    "Miyajima (Japón)": {
+      "lat": 34.2974,
+      "lon": 132.3198,
+      "flag": "🇯🇵",
+      "shortLabel": "MIY",
+      "countryGroup": "Japón",
+      "locationName": "Miyajima, Japón",
+      "sector": "SECTOR MAR INTERIOR // JAPÓN"
+    },
+    "Océano Pacífico (Aguas Internacionales)": {
+      "lat": 18.5,
+      "lon": -135.0,
+      "flag": "🌊",
+      "shortLabel": "PAC",
+      "countryGroup": "Océano Pacífico",
+      "locationName": "Océano Pacífico (Aguas Internacionales)",
+      "sector": "SECTOR PELÁGICO // OCÉANO PACÍFICO"
+    },
+    "Chavenay (Francia)": {
+      "lat": 48.8542,
+      "lon": 1.9839,
+      "flag": "🇫🇷",
+      "shortLabel": "CHV",
+      "countryGroup": "Francia",
+      "locationName": "Chavenay, Francia",
+      "sector": "SECTOR ÎLE-DE-FRANCE // CHAVENAY"
+    },
+    "Cañahuas (Perú)": {
+      "lat": -16.0333,
+      "lon": -71.3833,
+      "flag": "🇵🇪",
+      "shortLabel": "CAÑ",
+      "countryGroup": "Perú",
+      "locationName": "Cañahuas, Perú",
+      "sector": "SECTOR RESERVA AGUADA BLANCA // PERÚ"
+    },
+    "Roma (Italia)": {
+      "lat": 41.9028,
+      "lon": 12.4964,
+      "flag": "🇮🇹",
+      "shortLabel": "ROM",
+      "countryGroup": "Italia",
+      "locationName": "Roma, Italia",
+      "sector": "SECTOR PENÍNSULA ITÁLICA // ROMA"
+    },
+    "Maine (Estados Unidos)": {
+      "lat": 45.2538,
+      "lon": -69.4455,
+      "flag": "🇺🇸",
+      "shortLabel": "ME",
+      "countryGroup": "Estados Unidos",
+      "locationName": "Maine, Estados Unidos",
+      "sector": "SECTOR NUEVA INGLATERRA // MAINE"
+    },
+    "Wyoming (Estados Unidos)": {
+      "lat": 43.0759,
+      "lon": -107.2903,
+      "flag": "🇺🇸",
+      "shortLabel": "WYO",
+      "countryGroup": "Estados Unidos",
+      "locationName": "Wyoming, Estados Unidos",
+      "sector": "SECTOR MONTAÑAS ROCOSAS // WYOMING"
+    },
+    "Capulálpam de Méndez (México)": {
+      "lat": 17.3047,
+      "lon": -96.4461,
+      "flag": "🇲🇽",
+      "shortLabel": "CAP",
+      "countryGroup": "México",
+      "locationName": "Capulálpam de Méndez, México",
+      "sector": "SECTOR SIERRA JUÁREZ // OAXACA"
+    },
+    "Ontario (Canadá)": {
+      "lat": 44.5,
+      "lon": -80.0,
+      "flag": "🇨🇦",
+      "shortLabel": "ONT",
+      "countryGroup": "Canadá",
+      "locationName": "Ontario, Canadá",
+      "sector": "SECTOR GRANDES LAGOS // ONTARIO"
+    },
+    "Oklahoma (Estados Unidos)": {
+      "lat": 35.4676,
+      "lon": -97.5164,
+      "flag": "🇺🇸",
+      "shortLabel": "OK",
+      "countryGroup": "Estados Unidos",
+      "locationName": "Oklahoma, Estados Unidos",
+      "sector": "SECTOR GRANDES LLANURAS // OKLAHOMA"
+    },
+    "Vancouver (Canadá)": {
+      "lat": 49.2827,
+      "lon": -123.1207,
+      "flag": "🇨🇦",
+      "shortLabel": "YVR",
+      "countryGroup": "Canadá",
+      "locationName": "Vancouver, Canadá",
+      "sector": "SECTOR PACÍFICO NORTE // VANCOUVER"
+    }
+  },
+  "species": [
+    {
+      "id": "huella_01",
+      "slide": 1,
+      "name": "Albertosaurus",
+      "peso": "2,000 kg",
+      "altura": "3.5 m",
+      "longitud": "9 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "Manténgase inmóvil si es detectado, ya que su visión binocular es efectiva para detectar movimiento. Busque refugio en bosques densos o rocas donde no pueda maniobrar fácilmente. Evite áreas abiertas. Si ataca, diríjase a terreno irregular o agua profunda. No intente confrontación directa.",
+      "portrait_img": "huellas_img/01_portrait.png",
+      "render_img": "huellas_img/01_render.png",
+      "countries": [
+        "Río de Janeiro (Brasil)"
+      ],
+      "sighting_photos": {
+        "Río de Janeiro (Brasil)": "huellas_img/avistamientos/38_rio_brasil_all.png"
+      }
+    },
+    {
+      "id": "huella_02",
+      "slide": 2,
+      "name": "Allosaurus",
+      "peso": "2,500 kg",
+      "altura": "3.8 m",
+      "longitud": "9.5 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "Evite confrontación. Su agilidad y garras lo hacen peligroso. Si porta un arma, es recomendable apuntar a los ojos.",
+      "portrait_img": "huellas_img/02_portrait.png",
+      "render_img": "huellas_img/02_render.png",
+      "countries": [
+        "California (Estados Unidos)",
+        "La Valeta (Malta)",
+        "España",
+        "Las Dolomitas (Italia)",
+        "Wyoming (Estados Unidos)",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Wyoming (Estados Unidos)": "huellas_img/avistamientos/16_allosaurus_wyoming.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/24_allosaurus_malta.png",
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_03",
+      "slide": 3,
+      "name": "Ankylosaurus",
+      "peso": "6,000 kg",
+      "altura": "2 m",
+      "longitud": "8 m",
+      "dieta": "Herbívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Generalmente pacífico si no es provocado. Mantenga distancia respetuosa; evite acercarse a su cola con mazo. No lo acorrale, ya que puede defenderse agresivamente.",
+      "portrait_img": "huellas_img/03_portrait.png",
+      "render_img": "huellas_img/03_render.png",
+      "countries": [
+        "Queensland (Australia)",
+        "California (Estados Unidos)",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "California (Estados Unidos)": "huellas_img/avistamientos/11_ankylosaurus_california.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_04",
+      "slide": 4,
+      "name": "Apatosaurus",
+      "peso": "6,000 kg",
+      "altura": "6 m",
+      "longitud": "27 m",
+      "dieta": "Herbívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Evite completamente su camino, especialmente durante movimiento o estampidas. Manténgase lejos de sus patas y cola. No representen amenaza directa si no los molesta. Se le puede atraer con uso de bengalas.",
+      "portrait_img": "huellas_img/04_portrait.png",
+      "render_img": "huellas_img/04_render.png",
+      "countries": [
+        "Las Dolomitas (Italia)",
+        "Canadá",
+        "Oregón (Estados Unidos)",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Oregón (Estados Unidos)": "huellas_img/avistamientos/19_apatosaurus_oregon.png",
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_05",
+      "slide": 5,
+      "name": "Argentinosaurus",
+      "peso": "86,000 kg",
+      "altura": "21 m",
+      "longitud": "32 m",
+      "dieta": "Herbívora",
+      "empresa": "Ilegal",
+      "protocolo": "Mantenga distancia extrema debido a su masa. Evite áreas de movimiento; su cola y patas pueden causar daños accidentales. No representa amenaza intencional si no se siente amenazado.",
+      "portrait_img": "huellas_img/05_portrait.png",
+      "render_img": "huellas_img/05_render.png",
+      "countries": [
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_06",
+      "slide": 6,
+      "name": "Atrociraptor",
+      "peso": "229 kg",
+      "altura": "1.9 m",
+      "longitud": "4 m",
+      "dieta": "Carnívora",
+      "empresa": "BioSyn",
+      "protocolo": "Peligroso en grupo por inteligencia y garras. Evite confrontación; use refugios elevados o vehículos. No los subestime por su tamaño.",
+      "portrait_img": "huellas_img/06_portrait.png",
+      "render_img": "huellas_img/06_render.png",
+      "countries": [
+        "La Valeta (Malta)",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "La Valeta (Malta)": "huellas_img/avistamientos/25_atrociraptor_malta.png",
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+      }
+    },
+    {
+      "id": "huella_07",
+      "slide": 7,
+      "name": "Bajadasaurus",
+      "peso": "6,000 kg",
+      "altura": "5 m",
+      "longitud": "8 m",
+      "dieta": "Herbívora",
+      "empresa": "Ilegal",
+      "protocolo": "Similar a otros saurópodos: mantenga distancia. Sus espinas neurales lo hacen imponente; evite acercarse al cuello. Pacífico si no provocado.",
+      "portrait_img": "huellas_img/07_portrait.png",
+      "render_img": "huellas_img/07_render.png",
+      "countries": [
+        "República del Congo",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "República del Congo": "huellas_img/avistamientos/34_bajadasaurus_congo.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_08",
+      "slide": 8,
+      "name": "Baryonyx",
+      "peso": "1,200 kg",
+      "altura": "3 m",
+      "longitud": "7 m",
+      "dieta": "Piscívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Cerca de agua es más activo. Mantenga distancia; sus garras y mandíbulas son potentes. Evite zonas ribereñas si es posible. En ocasiones suele cazar en grupos de tres.",
+      "portrait_img": "huellas_img/08_portrait.png",
+      "render_img": "huellas_img/08_render.png",
+      "countries": [
+        "Estados Unidos",
+        "Las Dolomitas (Italia)",
+        "Beccles (Reino Unido)",
+        "Capulálpam de Méndez (México)",
+        "La Valeta (Malta)"
+      ],
+      "sighting_photos": {
+        "Beccles (Reino Unido)": "huellas_img/avistamientos/03_baryonyx_beccles.png",
+        "Capulálpam de Méndez (México)": "huellas_img/avistamientos/17_baryonyx_capulalpam.png",
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/50_baryonyx_malta.png"
+      }
+    },
+    {
+      "id": "huella_09",
+      "slide": 9,
+      "name": "Brachiosaurus",
+      "peso": "30,000 kg",
+      "altura": "12.4 m",
+      "longitud": "21 m",
+      "dieta": "Herbívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Su tamaño es la mayor amenaza (accidental). Mantenga distancia segura; no se coloque debajo del cuello o cuerpo. Pacífico.",
+      "portrait_img": "huellas_img/09_portrait.png",
+      "render_img": "huellas_img/09_render.png",
+      "countries": [
+        "Estados Unidos",
+        "Las Dolomitas (Italia)",
+        "Rovaniemi (Finlandia)",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Rovaniemi (Finlandia)": "huellas_img/avistamientos/04_brachiosaurus_rovaniemi.png",
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_10",
+      "slide": 10,
+      "name": "Camarasaurus",
+      "peso": "20,000 kg",
+      "altura": "8 m",
+      "longitud": "17 m",
+      "dieta": "Herbívora",
+      "empresa": "Ilegal",
+      "protocolo": "Como saurópodo de tamaño mediano, mantenga una distancia extrema. Su mayor peligro radica en movimientos accidentales: evite colocarse cerca de sus patas, debajo del cuello o del cuerpo, ya que una pisada o golpe de cola puede ser fatal. Busque refugio en estructuras sólidas, bosques densos o terrenos elevados donde su gran masa sea una desventaja. Generalmente pacífico si no se siente amenazado, pero retírese lentamente sin correr ni hacer movimientos bruscos.",
+      "portrait_img": "huellas_img/10_portrait.png",
+      "render_img": "huellas_img/10_render.png",
+      "countries": [
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+      }
+    },
+    {
+      "id": "huella_11",
+      "slide": 11,
+      "name": "Carnotaurus",
+      "peso": "1,500 kg",
+      "altura": "3 m",
+      "longitud": "10.5 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "Rápido y ágil. Evite áreas abiertas; busque cobertura. Sus cuernos y velocidad lo hacen formidable. Evite estrictamente el uso de cláxones o cualquier ruido mecánico fuerte, ya que puede interpretarse como desafío territorial o atraerlos desde lejos.",
+      "portrait_img": "huellas_img/11_portrait.png",
+      "render_img": "huellas_img/11_render.png",
+      "countries": [
+        "Estados Unidos",
+        "La Valeta (Malta)",
+        "Cañahuas (Perú)",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Cañahuas (Perú)": "huellas_img/avistamientos/13_carnotaurus_canahuas.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/23_carnotaurus_malta.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_12",
+      "slide": 12,
+      "name": "Ceratosaurus",
+      "peso": "1,500 kg",
+      "altura": "3 m",
+      "longitud": "10.5 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "Depredador versátil. Mantenga distancia y use barreras. Menos masivo que otros terópodos grandes. Puedes usar excremento de un depredador ápex como repelente.",
+      "portrait_img": "huellas_img/12_portrait.png",
+      "render_img": "huellas_img/12_render.png",
+      "countries": [
+        "Estados Unidos",
+        "La Valeta (Malta)",
+        "Las Dolomitas (Italia)",
+        "España"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/54_ceratosaurus_malta.png"
+      }
+    },
+    {
+      "id": "huella_13",
+      "slide": 13,
+      "name": "Compsognathus",
+      "peso": "6 kg",
+      "altura": "30 cm",
+      "longitud": "1 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "Pequeño y curioso, pero potencialmente en manada, además, de un potente veneno paralizante en mordida. Mantenga distancia; proteja áreas expuestas. Generalmente no amenaza directa a humanos adultos, mantenga precaución con infantes.",
+      "portrait_img": "huellas_img/13_portrait.png",
+      "render_img": "huellas_img/13_render.png",
+      "countries": [
+        "La Valeta (Malta)",
+        "Oregón (Estados Unidos)",
+        "Roma (Italia)",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Oregón (Estados Unidos)": "huellas_img/avistamientos/07_compsognathus_oregon.png",
+        "Roma (Italia)": "huellas_img/avistamientos/14_compsognathus_roma.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/47_compsognathus_malta.png"
+      }
+    },
+    {
+      "id": "huella_14",
+      "slide": 14,
+      "name": "Concavenator",
+      "peso": "3,000 kg",
+      "altura": "2.5 m",
+      "longitud": "6 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "Similar a otros terópodos medianos: evite confrontación y busque refugio. Evite estrictamente el uso de cláxones o cualquier ruido mecánico fuerte, ya que puede interpretarse como desafío territorial o atraerlos desde lejos.",
+      "portrait_img": "huellas_img/14_portrait.png",
+      "render_img": "huellas_img/14_render.png",
+      "countries": [
+        "Guerrero (México)",
+        "España"
+      ],
+      "location_details": {
+        "Guerrero (México)": "Guerrero, México"
+      },
+      "sighting_photos": {}
+    },
+    {
+      "id": "huella_15",
+      "slide": 15,
+      "name": "Corythosaurus",
+      "peso": "4,000 kg",
+      "altura": "3.5 m",
+      "longitud": "9 m",
+      "dieta": "Herbívora",
+      "empresa": "InGen",
+      "protocolo": "Herbívoro gregario. Mantenga distancia respetuosa; evite separarlo de su manada. Evite ruidos que imiten o interfieran con sus vocalizaciones, ya que pueden alertar al rebaño. Sonidos moderados podrían dispersarlos pacíficamente.",
+      "portrait_img": "huellas_img/15_portrait.png",
+      "render_img": "huellas_img/15_render.png",
+      "countries": [
+        "Estados Unidos",
+        "España",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+      }
+    },
+    {
+      "id": "huella_16",
+      "slide": 16,
+      "name": "Deinosuchus",
+      "peso": "4,500 kg",
+      "altura": "1.5 m",
+      "longitud": "12 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "Extremadamente peligroso en o cerca del agua. Evite riberas; nunca entre al agua. Mantenga distancia terrestre significativa.",
+      "portrait_img": "huellas_img/16_portrait.png",
+      "render_img": "huellas_img/16_render.png",
+      "countries": [
+        "Estados Unidos"
+      ],
+      "sighting_photos": {}
+    },
+    {
+      "id": "huella_17",
+      "slide": 17,
+      "name": "Dilophosaurus",
+      "peso": "400 kg",
+      "altura": "2 m",
+      "longitud": "6 m",
+      "dieta": "Carnívora",
+      "empresa": "BioSyn",
+      "protocolo": "Mantenga distancia extrema. Evite el frente debido a su capacidad para escupir veneno y el collarín de membrana que puede expandir para intimidar. No corra en línea recta; busque refugio en espacios cerrados o elevados. Su agilidad lo hace peligroso en terreno abierto. No intente arrojarle varas como distracción.",
+      "portrait_img": "huellas_img/17_portrait.png",
+      "render_img": "huellas_img/17_render.png",
+      "countries": [
+        "Ciudad de México (México)",
+        "Estados Unidos",
+        "La Valeta (Malta)"
+      ],
+      "location_details": {
+        "Ciudad de México (México)": "Ciudad de México, México"
+      },
+      "sighting_photos": {
+        "Ciudad de México (México)": "huellas_img/avistamientos/30_dilophosaurus_cdmx.png"
+      }
+    },
+    {
+      "id": "huella_18",
+      "slide": 18,
+      "name": "Dimetrodon",
+      "peso": "226 kg",
+      "altura": "1.8 m",
+      "longitud": "4.5 m",
+      "dieta": "Carnívora",
+      "empresa": "BioSyn",
+      "protocolo": "Mantenga distancia. Es un depredador terrestre cuadrúpedo con mandíbulas potentes. Evite áreas acuáticas o pantanosas donde es más activo. Busque terreno elevado o barreras.",
+      "portrait_img": "huellas_img/18_portrait.png",
+      "render_img": "huellas_img/18_render.png",
+      "countries": [
+        "Las Dolomitas (Italia)",
+        "España"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+      }
+    },
+    {
+      "id": "huella_19",
+      "slide": 19,
+      "name": "Dimorphodon",
+      "peso": "4 kg",
+      "altura": "1 m",
+      "longitud": "2 m",
+      "dieta": "Carnívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Generalmente no representa amenaza mayor a adultos, pero puede atacar en grupo o si se siente amenazado. Proteja cabeza y ojos; busque cobertura. Evite zonas costeras o abiertas. Evite ruidos en zonas de anidación, ya que pueden volverse agresivos. Objetos brillantes o movimientos amplios podrían disuadirlos.",
+      "portrait_img": "huellas_img/19_portrait.png",
+      "render_img": "huellas_img/19_render.png",
+      "countries": [
+        "Estados Unidos",
+        "La Valeta (Malta)",
+        "Miyajima (Japón)"
+      ],
+      "sighting_photos": {
+        "Miyajima (Japón)": "huellas_img/avistamientos/08_dimorphodon_miyajima.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/51_dimorphodon_malta.png"
+      }
+    },
+    {
+      "id": "huella_20",
+      "slide": 20,
+      "name": "Dreadnoughtus",
+      "peso": "49,000 kg",
+      "altura": "18 m",
+      "longitud": "32 m",
+      "dieta": "Herbívora",
+      "empresa": "BioSyn",
+      "protocolo": "Mantenga distancia extrema por su enorme masa. Evite colocarse cerca de sus patas o cola. Generalmente pacífico, pero movimientos accidentales pueden ser letales.",
+      "portrait_img": "huellas_img/20_portrait.png",
+      "render_img": "huellas_img/20_render.png",
+      "countries": [
+        "París (Francia)",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+      }
+    },
+    {
+      "id": "huella_21",
+      "slide": 21,
+      "name": "Elasmosaurus",
+      "peso": "3,000 kg",
+      "altura": "2 m",
+      "longitud": "14 m",
+      "dieta": "Piscívora",
+      "empresa": "InGen",
+      "protocolo": "Extremadamente peligroso en el agua. Nunca entre a cuerpos de agua donde pueda estar presente. En tierra o cerca de la orilla, mantenga distancia significativa.",
+      "portrait_img": "huellas_img/21_portrait.png",
+      "render_img": "huellas_img/21_render.png",
+      "countries": [
+        "Escocia"
+      ],
+      "sighting_photos": {}
+    },
+    {
+      "id": "huella_22",
+      "slide": 22,
+      "name": "Euoplocephalus",
+      "peso": "2,500 kg",
+      "altura": "1.8 m",
+      "longitud": "6 m",
+      "dieta": "Herbívora",
+      "empresa": "InGen",
+      "protocolo": "Generalmente pacífico. Mantenga distancia y evite acercarse a su cola con mazo. No lo acorrale, ya que puede defenderse con su armadura y cola.",
+      "portrait_img": "huellas_img/22_portrait.png",
+      "render_img": "huellas_img/22_render.png",
+      "countries": [
+        "España",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+      }
+    },
+    {
+      "id": "huella_23",
+      "slide": 23,
+      "name": "Gallimimus",
+      "peso": "450 kg",
+      "altura": "3 m",
+      "longitud": "4.7 m",
+      "dieta": "Omnívora",
+      "empresa": "InGen",
+      "protocolo": "Rápido y gregario. Generalmente no agresivo, pero puede embestir si se siente amenazado o en manada. Evite quedar en medio de una estampida.",
+      "portrait_img": "huellas_img/23_portrait.png",
+      "render_img": "huellas_img/23_render.png",
+      "countries": [
+        "Seattle (Estados Unidos)",
+        "La Valeta (Malta)",
+        "Chavenay (Francia)",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Chavenay (Francia)": "huellas_img/avistamientos/12_gallimimus_chavenay.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "Seattle (Estados Unidos)": "huellas_img/avistamientos/44_gallimimus_seattle.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/56_gallimimus_malta.png"
+      }
+    },
+    {
+      "id": "huella_24",
+      "slide": 24,
+      "name": "Geosternbergia",
+      "peso": "22 kg",
+      "altura": "1.8 m",
+      "longitud": "7.5 m",
+      "dieta": "Piscívora",
+      "empresa": "InGen",
+      "protocolo": "Similar a otros pterosaurios grandes. Evite confrontación aérea; proteja áreas expuestas y busque cobertura.",
+      "portrait_img": "huellas_img/24_portrait.png",
+      "render_img": "huellas_img/24_render.png",
+      "countries": [
+        "Río de Janeiro (Brasil)"
+      ],
+      "sighting_photos": {
+        "Río de Janeiro (Brasil)": "huellas_img/avistamientos/37_geosternbergia_brasil.png"
+      }
+    },
+    {
+      "id": "huella_25",
+      "slide": 25,
+      "name": "Homalocephale",
+      "peso": "300 kg",
+      "altura": "1.5 m",
+      "longitud": "4 m",
+      "dieta": "Herbívora",
+      "empresa": "Ilegal",
+      "protocolo": "Puede usar su cabeza reforzada para embestir. Mantenga distancia y evite confrontaciones directas.",
+      "portrait_img": "huellas_img/25_portrait.png",
+      "render_img": "huellas_img/25_render.png",
+      "countries": [
+        "España",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_26",
+      "slide": 26,
+      "name": "Iguanodon",
+      "peso": "300 kg",
+      "altura": "3 m",
+      "longitud": "9 m",
+      "dieta": "Herbívora",
+      "empresa": "Ilegal",
+      "protocolo": "Este ornitópodo grande y robusto puede alternar entre caminar en dos o cuatro patas. Mantenga una distancia segura. Evite acercarse a sus manos, ya que posee espolones afilados en los pulgares que puede usar como arma defensiva para apuñalar o golpear. No lo acorrale ni separe de posibles manadas, ya que puede volverse agresivo y embestir o usar sus espolones en defensa.",
+      "portrait_img": "huellas_img/26_portrait.png",
+      "render_img": "huellas_img/26_render.png",
+      "countries": [
+        "República del Congo",
+        "Las Dolomitas (Italia)",
+        "España",
+        "Francia",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_27",
+      "slide": 27,
+      "name": "Kentrosaurus",
+      "peso": "1,600 kg",
+      "altura": "2 m",
+      "longitud": "5 m",
+      "dieta": "Herbívora",
+      "empresa": "Mantah Corp",
+      "protocolo": "Evite acercarse debido a sus espinas y placas defensivas. No lo acorrale; mantenga distancia respetuosa. Puede usar la cola con púas como arma. No resiste temperaturas bajas.",
+      "portrait_img": "huellas_img/27_portrait.png",
+      "render_img": "huellas_img/27_render.png",
+      "countries": [
+        "España",
+        "Las Dolomitas (Italia)",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_28",
+      "slide": 28,
+      "name": "Labocania",
+      "peso": "2,000 kg",
+      "altura": "3 m",
+      "longitud": "8 m",
+      "dieta": "Carnívora",
+      "empresa": "Ilegal",
+      "protocolo": "Depredador potente. Mantenga distancia extrema, busque refugio y evite terreno abierto. Le atrae el olor de la carne al pastor.",
+      "portrait_img": "huellas_img/28_portrait.png",
+      "render_img": "huellas_img/28_render.png",
+      "countries": [
+        "Guerrero (México)"
+      ],
+      "location_details": {
+        "Guerrero (México)": "Guerrero, México"
+      },
+      "sighting_photos": {
+        "Guerrero (México)": "huellas_img/avistamientos/40_labocania_guerrero.png"
+      }
+    },
+    {
+      "id": "huella_29",
+      "slide": 29,
+      "name": "Lystrosaurus",
+      "peso": "200 kg",
+      "altura": "0.5 m",
+      "longitud": "1.5 m",
+      "dieta": "Omnívora",
+      "empresa": "BioSyn",
+      "protocolo": "Generalmente inofensivo. Mantenga distancia cortés; puede tener defensas con sus colmillos si se siente amenazado.",
+      "portrait_img": "huellas_img/29_portrait.png",
+      "render_img": "huellas_img/29_render.png",
+      "countries": [
+        "España",
+        "La Valeta (Malta)",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/52_lystrosaurus_malta.png"
+      }
+    },
+    {
+      "id": "huella_30",
+      "slide": 30,
+      "name": "Maiasaura",
+      "peso": "3,000 kg",
+      "altura": "2.4 m",
+      "longitud": "9 m",
+      "dieta": "Herbívora",
+      "empresa": "InGen",
+      "protocolo": "Gregaria y protectora con crías. Mantenga distancia de manadas, especialmente cerca de nidos. Evite separarla de sus jóvenes.",
+      "portrait_img": "huellas_img/30_portrait.png",
+      "render_img": "huellas_img/30_render.png",
+      "countries": [
+        "República del Congo",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_31",
+      "slide": 31,
+      "name": "Metriacanthosaurus",
+      "peso": "1,000 kg",
+      "altura": "3 m",
+      "longitud": "8 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "Mantenga sigilo absoluto y evite movimiento repentino, ya que es un depredador oportunista. Busque cobertura densa en bosques para limitar su visibilidad y maniobrabilidad. Mantenga el campamento libre de olores y residuos que atraigan carroñeros.",
+      "portrait_img": "huellas_img/31_portrait.png",
+      "render_img": "huellas_img/31_render.png",
+      "countries": [
+        "California (Estados Unidos)",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "California (Estados Unidos)": "huellas_img/avistamientos/31_metriacanthosaurus_california.png",
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+      }
+    },
+    {
+      "id": "huella_32",
+      "slide": 32,
+      "name": "Microceratus",
+      "peso": "15 kg",
+      "altura": "0.6 m",
+      "longitud": "1 m",
+      "dieta": "Herbívora",
+      "empresa": "InGen",
+      "protocolo": "Generalmente inofensivo para humanos, pero puede morder si se siente acorralado. Mantenga distancia respetuosa y evite bloquear sus rutas de escape. Ruidos moderados o pisadas fuertes suelen dispersarlos sin provocar pánico. No representan una amenaza directa, pero su presencia indica posible actividad de carnívoros cercanos.",
+      "portrait_img": "huellas_img/32_portrait.png",
+      "render_img": "huellas_img/32_render.png",
+      "countries": [
+        "Río de Janeiro (Brasil)",
+        "Las Dolomitas (Italia)",
+        "Iguazú (Argentina)",
+        "La Valeta (Malta)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "Río de Janeiro (Brasil)": "huellas_img/avistamientos/38_rio_brasil_all.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/49_microceratus_malta.png"
+      }
+    },
+    {
+      "id": "huella_33",
+      "slide": 33,
+      "name": "Monolophosaurus",
+      "peso": "475 kg",
+      "altura": "1.8 m",
+      "longitud": "5 m",
+      "dieta": "Carnívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Su cresta sugiere posible uso vocal; sonidos imitando llamadas podrían atraerlo. Para disuadir, use fuego controlado o luces intensas combinadas con movimiento impredecible.",
+      "portrait_img": "huellas_img/33_portrait.png",
+      "render_img": "huellas_img/33_render.png",
+      "countries": [
+        "Hong Kong (China)",
+        "Las Dolomitas (Italia)",
+        "La Valeta (Malta)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/60_monolophosaurus_malta.png"
+      }
+    },
+    {
+      "id": "huella_34",
+      "slide": 34,
+      "name": "Moros Intrepidus",
+      "peso": "78 kg",
+      "altura": "0.4 m",
+      "longitud": "1 m",
+      "dieta": "Carnívora",
+      "empresa": "BioSyn",
+      "protocolo": "Aunque pequeño, puede ser agresivo y rápido. Proteja extremidades inferiores y mantenga vigilancia baja al suelo. No subestime su capacidad de morder. Ruidos fuertes y repentinos suelen dispersarlo, efectivo con objetos arrojados o sonidos metálicos.",
+      "portrait_img": "huellas_img/34_portrait.png",
+      "render_img": "huellas_img/34_render.png",
+      "countries": [
+        "República del Congo",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+      }
+    },
+    {
+      "id": "huella_35",
+      "slide": 35,
+      "name": "Mosasaurus",
+      "peso": "25,000 kg",
+      "altura": "3.8 m",
+      "longitud": "18 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "Evite completamente cuerpos de agua grandes o costeros donde pueda habitar. Nunca nade, vadee o pesque en zonas desconocidas. Manténgase en terreno elevado alejado de la orilla. Cualquier vibración o ruido en el agua aumenta dramáticamente el riesgo de ataque emboscado. Asustarlo es prácticamente imposible una vez en el agua; priorice prevención total. En tierra, no representa amenaza, aunque puede saltar sobre alturas impresionantes, relación simbiótica con otras especies acuáticas.",
+      "portrait_img": "huellas_img/35_portrait.png",
+      "render_img": "huellas_img/35_render.png",
+      "countries": [
+        "Isla Saint Hubert (Barbados)"
+      ],
+      "sighting_photos": {}
+    },
+    {
+      "id": "huella_36",
+      "slide": 36,
+      "name": "Muttaburrasaurus",
+      "peso": "3,000 kg",
+      "altura": "3 m",
+      "longitud": "7.5 m",
+      "dieta": "Herbívora",
+      "empresa": "Ilegal",
+      "protocolo": "Herbívoro grande y potencialmente gregario. Mantenga distancia respetuosa, especialmente si ve crías o manada. Evite bloquear su camino; su masa y posible embestida pueden causar daños accidentales.",
+      "portrait_img": "huellas_img/36_portrait.png",
+      "render_img": "huellas_img/36_render.png",
+      "countries": [
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_37",
+      "slide": 37,
+      "name": "Nasutoceratops",
+      "peso": "1,700 kg",
+      "altura": "2 m",
+      "longitud": "5.7 m",
+      "dieta": "Herbívora",
+      "empresa": "Ilegal",
+      "protocolo": "Trátelo como otros ceratópsidos: mantenga distancia amplia y evite acorralarlo o aproximarse frontalmente. Sus cuernos lo hacen peligroso en cargas defensivas. Ruidos fuertes pueden provocarlo a cargar; evite cláxones por completo.",
+      "portrait_img": "huellas_img/37_portrait.png",
+      "render_img": "huellas_img/37_render.png",
+      "countries": [
+        "California (Estados Unidos)",
+        "Las Dolomitas (Italia)",
+        "Iguazú (Argentina)",
+        "Calgary (Canadá)",
+        "La Valeta (Malta)"
+      ],
+      "sighting_photos": {
+        "Calgary (Canadá)": "huellas_img/avistamientos/05_nasutoceratops_calgary.png",
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/58_nasutoceratops_malta.png"
+      }
+    },
+    {
+      "id": "huella_38",
+      "slide": 38,
+      "name": "Ouranosaurus",
+      "peso": "22 kg",
+      "altura": "1.8 m",
+      "longitud": "7.5 m",
+      "dieta": "Herbívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Mantenga distancia, especialmente cerca de cuerpos de agua donde podría alimentarse o refrescarse. Su vela lo hace más visible pero no reduce su capacidad de carga. Consejos adicionales: Evite ruidos fuertes cerca de rebaños para prevenir estampidas. Un método efectivo para ahuyentarlo es con distracciones visuales o fuego controlado a distancia segura.",
+      "portrait_img": "huellas_img/38_portrait.png",
+      "render_img": "huellas_img/38_render.png",
+      "countries": [
+        "República del Congo",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+      }
+    },
+    {
+      "id": "huella_39",
+      "slide": 39,
+      "name": "Oviraptor",
+      "peso": "22 kg",
+      "altura": "0.8 m",
+      "longitud": "1.5 m",
+      "dieta": "Omnívora",
+      "empresa": "BioSyn",
+      "protocolo": "Generalmente no representa gran amenaza para adultos, pero puede volverse agresivo cerca de nidos. Proteja provisiones y evite áreas de anidación. Su pico fuerte puede causar mordidas dolorosas. Su curiosidad por huevos o alimentos pequeños lo hace oportunista.",
+      "portrait_img": "huellas_img/39_portrait.png",
+      "render_img": "huellas_img/39_render.png",
+      "countries": [
+        "La Valeta (Malta)",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/53_oviraptor_malta.png"
+      }
+    },
+    {
+      "id": "huella_40",
+      "slide": 40,
+      "name": "Pachycephalosaurus",
+      "peso": "450 kg",
+      "altura": "2 m",
+      "longitud": "4.5 m",
+      "dieta": "Herbívora",
+      "empresa": "InGen",
+      "protocolo": "Evite confrontaciones directas, ya que puede cargar usando su cabeza como ariete. Mantenga distancia y no lo provoque. Ruidos repentinos pueden activar respuestas defensivas o territoriales. Vigile durante temporadas de reproducción, cuando el comportamiento agresivo aumenta.",
+      "portrait_img": "huellas_img/40_portrait.png",
+      "render_img": "huellas_img/40_render.png",
+      "countries": [
+        "Iguazú (Argentina)",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_41",
+      "slide": 41,
+      "name": "Pachyrhinosaurus",
+      "peso": "4,000 kg",
+      "altura": "2.5 m",
+      "longitud": "6 m",
+      "dieta": "Herbívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Respete su espacio en rebaños. Sus estructuras óseas lo hacen peligroso en cargas defensivas o durante interacciones sociales. Evite ruidos intensos que simulen amenazas, ya que pueden provocar estampidas o respuestas grupales. Sonidos graves y distantes podrían mover al grupo sin confrontación directa. Identifique rutas de migración mediante huellas y excrementos. Manténgase fuera de valles o pasos estrechos durante movimientos masivos.",
+      "portrait_img": "huellas_img/41_portrait.png",
+      "render_img": "huellas_img/41_render.png",
+      "countries": [
+        "California (Estados Unidos)",
+        "La Valeta (Malta)",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/59_pachyrhinosaurus_malta.png"
+      }
+    },
+    {
+      "id": "huella_42",
+      "slide": 42,
+      "name": "Parasaurolophus",
+      "peso": "2,500 kg",
+      "altura": "3 m",
+      "longitud": "7.5 m",
+      "dieta": "Herbívora",
+      "empresa": "InGen",
+      "protocolo": "Evite rebaños en movimiento y no interfiera con sus comunicaciones. Mantenga distancia para prevenir pánico colectivo. Evite cláxones o ruidos que interfieran con sus llamadas, ya que pueden alertar o agitar al grupo.",
+      "portrait_img": "huellas_img/42_portrait.png",
+      "render_img": "huellas_img/42_render.png",
+      "countries": [
+        "California (Estados Unidos)",
+        "La Valeta (Malta)"
+      ],
+      "sighting_photos": {
+        "California (Estados Unidos)": "huellas_img/avistamientos/43_parasaurolophus_california.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/62_parasaurolophus_malta.png"
+      }
+    },
+    {
+      "id": "huella_43",
+      "slide": 43,
+      "name": "Parasaurolophus V3",
+      "peso": "1,800 kg",
+      "altura": "2 m",
+      "longitud": "5.5 m",
+      "dieta": "Herbívora",
+      "empresa": "BioSyn",
+      "protocolo": "Evite rebaños en movimiento y no interfiera con sus comunicaciones. Mantenga distancia para prevenir pánico colectivo. Evite cláxones o ruidos que interfieran con sus llamadas, ya que pueden alertar o agitar al grupo.",
+      "portrait_img": "huellas_img/43_portrait.png",
+      "render_img": "huellas_img/43_render.png",
+      "countries": [
+        "Las Dolomitas (Italia)",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_44",
+      "slide": 44,
+      "name": "Peloroplites",
+      "peso": "3,000 kg",
+      "altura": "2 m",
+      "longitud": "7 m",
+      "dieta": "Herbívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Mantenga distancia respetuosa, ya que su armadura lo hace defensivo y un golpe con espinas o cuerpo puede ser peligroso. Evite acorralarlo o aproximarse por los flancos. Evite ruidos fuertes o cláxones cerca de él, pues pueden provocar una respuesta defensiva agresiva.",
+      "portrait_img": "huellas_img/44_portrait.png",
+      "render_img": "huellas_img/44_render.png",
+      "countries": [
+        "República del Congo",
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_45",
+      "slide": 45,
+      "name": "Plateosaurus",
+      "peso": "1,000 kg",
+      "altura": "2 m",
+      "longitud": "7.5 m",
+      "dieta": "Herbívora",
+      "empresa": "InGen",
+      "protocolo": "Evite rebaños en movimiento, ya que un pisotón o coletazo es letal. Mantenga distancia y no bloquee rutas de migración o alimentación. Sus garras y tamaño lo hacen capaz de defensa activa si se siente amenazado.",
+      "portrait_img": "huellas_img/45_portrait.png",
+      "render_img": "huellas_img/45_render.png",
+      "countries": [
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_46",
+      "slide": 46,
+      "name": "Protoceratops",
+      "peso": "220 kg",
+      "altura": "1 m",
+      "longitud": "2.5 m",
+      "dieta": "Herbívora",
+      "empresa": "Ilegal",
+      "protocolo": "Generalmente inofensivo para humanos, pero puede morder o embestir si se siente acorralado, especialmente cerca de nidos. Mantenga distancia respetuosa. Ruidos moderados o pisadas suelen dispersar grupos pequeños.",
+      "portrait_img": "huellas_img/46_portrait.png",
+      "render_img": "huellas_img/46_render.png",
+      "countries": [
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_47",
+      "slide": 47,
+      "name": "Psittacosaurus",
+      "peso": "50 kg",
+      "altura": "1 m",
+      "longitud": "1.8 m",
+      "dieta": "Herbívora",
+      "empresa": "Ilegal",
+      "protocolo": "Trátelo como un herbívoro pequeño; evite aproximarse a crías o adultos protectores. Consejos adicionales: Sonidos fuertes los dispersan rápidamente.",
+      "portrait_img": "huellas_img/47_portrait.png",
+      "render_img": "huellas_img/47_render.png",
+      "countries": [
+        "Iguazú (Argentina)"
+      ],
+      "sighting_photos": {
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+      }
+    },
+    {
+      "id": "huella_48",
+      "slide": 48,
+      "name": "Pyroraptor",
+      "peso": "Desconocido",
+      "altura": "Desconocido",
+      "longitud": "Desconocido",
+      "dieta": "Carnívora",
+      "empresa": "BioSyn",
+      "protocolo": "Desconocido",
+      "portrait_img": "huellas_img/48_portrait.png",
+      "render_img": "huellas_img/48_render.png",
+      "countries": [
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+      }
+    },
+    {
+      "id": "huella_49",
+      "slide": 49,
+      "name": "Quetzalcoatlus",
+      "peso": "350 kg",
+      "altura": "10 m",
+      "longitud": "Envergadura: 23 m",
+      "dieta": "Carnívora",
+      "empresa": "BioSyn",
+      "protocolo": "Si se detecta un Quetzalcoatlus volando en la zona, evite estrictamente vuelos comerciales o en aeronaves pequeñas, ya que su tamaño y presencia representan un grave riesgo de colisión y daño estructural.",
+      "portrait_img": "huellas_img/49_portrait.png",
+      "render_img": "huellas_img/49_render.png",
+      "countries": [
+        "Washington (Estados Unidos)",
+        "Hawaii (Estados Unidos)"
+      ],
+      "sighting_photos": {
+        "Hawaii (Estados Unidos)": "huellas_img/avistamientos/45_quetzalcoatlus_hawaii.png",
+        "Washington (Estados Unidos)": "huellas_img/avistamientos/46_quetzalcoatlus_washington.png"
+      }
+    },
+    {
+      "id": "huella_50",
+      "slide": 50,
+      "name": "Sinoceratops",
+      "peso": "2,000 kg",
+      "altura": "2.5 m",
+      "longitud": "8 m",
+      "dieta": "Herbívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Mantenga distancia amplia, especialmente frontal, debido a su cuerno y posible comportamiento defensivo o de carga. Respete espacio en rebaños. Evite ruidos fuertes que puedan provocar cargas.",
+      "portrait_img": "huellas_img/50_portrait.png",
+      "render_img": "huellas_img/50_render.png",
+      "countries": [
+        "Hong Kong (China)",
+        "La Valeta (Malta)",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "Hong Kong (China)": "huellas_img/avistamientos/41_hong_kong_sinoceratops_tarbosaurus.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/61_sinoceratops_malta.png"
+      }
+    },
+    {
+      "id": "huella_51",
+      "slide": 51,
+      "name": "Spinosaurus",
+      "peso": "8,000 kg",
+      "altura": "4.2 m",
+      "longitud": "11 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "Evite riberas, lagos y zonas pantanosas. Nunca nade ni pesque en aguas donde pueda habitar. Manténgase en terreno elevado. Cualquier ruido o vibración en el agua alerta su presencia. Observe perturbaciones en el agua. Prepare rutas terrestres seguras y evite vadear ríos.",
+      "portrait_img": "huellas_img/51_portrait.png",
+      "render_img": "huellas_img/51_render.png",
+      "countries": [
+        "República del Congo"
+      ],
+      "sighting_photos": {
+        "República del Congo": "huellas_img/avistamientos/35_spinosaurus_congo.png"
+      }
+    },
+    {
+      "id": "huella_52",
+      "slide": 52,
+      "name": "Stegosaurus",
+      "peso": "2,500 kg",
+      "altura": "4 m",
+      "longitud": "9 m",
+      "dieta": "Herbívora",
+      "empresa": "InGen",
+      "protocolo": "Mantenga distancia, especialmente por detrás o laterales, debido a sus espinas caudales. Evite acorralarlo. Consejos adicionales: Ruidos fuertes pueden provocarlo a defenderse con la cola. No se acerque a sus crías, es muy protector. Evite tomar fotos con Flash.",
+      "portrait_img": "huellas_img/52_portrait.png",
+      "render_img": "huellas_img/52_render.png",
+      "countries": [
+        "República del Congo",
+        "Irlanda",
+        "La Valeta (Malta)",
+        "Las Dolomitas (Italia)",
+        "Queensland (Australia)",
+        "Maine (Estados Unidos)"
+      ],
+      "sighting_photos": {
+        "Maine (Estados Unidos)": "huellas_img/avistamientos/15_stegosaurus_maine.png",
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/55_stegosaurus_malta.png"
+      }
+    },
+    {
+      "id": "huella_53",
+      "slide": 53,
+      "name": "Stygimoloch",
+      "peso": "450 kg",
+      "altura": "1.5 m",
+      "longitud": "3 m",
+      "dieta": "Herbívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Mantenga distancia y evite provocarlo, especialmente durante temporadas de reproducción o cerca de recursos alimenticios. Sus cargas con la cabeza pueden causar lesiones graves.",
+      "portrait_img": "huellas_img/53_portrait.png",
+      "render_img": "huellas_img/53_render.png",
+      "countries": [
+        "California (Estados Unidos)",
+        "Queensland (Australia)",
+        "La Valeta (Malta)"
+      ],
+      "sighting_photos": {
+        "Queensland (Australia)": "huellas_img/avistamientos/02_stygimoloch_queensland.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/48_stygimoloch_malta.png"
+      }
+    },
+    {
+      "id": "huella_54",
+      "slide": 54,
+      "name": "Styracosaurus",
+      "peso": "3,000 kg",
+      "altura": "1.8 m",
+      "longitud": "5.5 m",
+      "dieta": "Herbívora",
+      "empresa": "InGen",
+      "protocolo": "Mantenga distancia amplia de rebaños, especialmente frontal, debido a su cuerno y posible comportamiento de carga. Evite acorralar individuos. Cláxones o ruidos intensos pueden provocar estampidas o respuestas defensivas grupales; evítelos.",
+      "portrait_img": "huellas_img/54_portrait.png",
+      "render_img": "huellas_img/54_render.png",
+      "countries": [
+        "República del Congo"
+      ],
+      "sighting_photos": {}
+    },
+    {
+      "id": "huella_55",
+      "slide": 55,
+      "name": "Tarbosaurus",
+      "peso": "4,000 kg",
+      "altura": "3 m",
+      "longitud": "8 m",
+      "dieta": "Carnívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Priorice evasión total. Manténgase inmóvil si es detectado (su visión de movimiento es excelente) y busque refugio en bosques densos o estructuras donde no pueda acceder.",
+      "portrait_img": "huellas_img/55_portrait.png",
+      "render_img": "huellas_img/55_render.png",
+      "countries": [
+        "Hong Kong (China)",
+        "República del Congo"
+      ],
+      "sighting_photos": {
+        "Hong Kong (China)": "huellas_img/avistamientos/41_hong_kong_sinoceratops_tarbosaurus.png"
+      }
+    },
+    {
+      "id": "huella_56",
+      "slide": 56,
+      "name": "Teratophoneus",
+      "peso": "2,200 kg",
+      "altura": "1.8 m",
+      "longitud": "7.5 m",
+      "dieta": "Carnívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Trátelo como un depredador ápex de tamaño significativo. Mantenga sigilo absoluto y busque cobertura densa o terreno irregular.",
+      "portrait_img": "huellas_img/56_portrait.png",
+      "render_img": "huellas_img/56_render.png",
+      "countries": [
+        "Texas (Estados Unidos)"
+      ],
+      "sighting_photos": {
+        "Texas (Estados Unidos)": "huellas_img/avistamientos/33_teratophoneus_texas.png"
+      }
+    },
+    {
+      "id": "huella_57",
+      "slide": 57,
+      "name": "Torosaurus",
+      "peso": "5,000 kg",
+      "altura": "3 m",
+      "longitud": "7.5 m",
+      "dieta": "Herbívora",
+      "empresa": "InGen",
+      "protocolo": "Mantenga distancia respetuosa de individuos o grupos. Sus cuernos y tamaño lo hacen peligroso en cargas defensivas. Consejos adicionales: Evite ruidos intensos que puedan provocar agitación o estampidas.",
+      "portrait_img": "huellas_img/57_portrait.png",
+      "render_img": "huellas_img/57_render.png",
+      "countries": [
+        "Barcelona (España)"
+      ],
+      "sighting_photos": {}
+    },
+    {
+      "id": "huella_58",
+      "slide": 58,
+      "name": "Triceratops",
+      "peso": "6,000 kg",
+      "altura": "3.6 m",
+      "longitud": "9 m",
+      "dieta": "Herbívora",
+      "empresa": "InGen",
+      "protocolo": "Sus cargas pueden volcar vehículos o causar lesiones fatales. Cláxones pueden interpretarse como desafío; evítelos cerca de ellos. Para ahuyentarlo o reducir el riesgo de carga contra vehículos, pinte una franja roja horizontal en los laterales de los automóviles o estructuras móviles; esto puede disuadir su comportamiento de embestida. Además, la Lila de Persia actúa como repelente natural, ya que sus frutos y hojas causan intoxicación en esta especie; plante estos arbustos alrededor de perímetros de campamento o use extractos diluidos con precaución como barrera olfativa.",
+      "portrait_img": "huellas_img/58_portrait.png",
+      "render_img": "huellas_img/58_render.png",
+      "countries": [
+        "Irlanda",
+        "Las Islas Canarias (España)"
+      ],
+      "sighting_photos": {
+        "Las Islas Canarias (España)": "huellas_img/avistamientos/42_canarias_tyrannosaurus_triceratops.png"
+      }
+    },
+    {
+      "id": "huella_59",
+      "slide": 59,
+      "name": "Tyrannosaurus Rex",
+      "peso": "7,000 kg",
+      "altura": "5.2 m",
+      "longitud": "13.5 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "Si es detectado, manténgase inmóvil y busque refugio inmediato en estructuras estrechas, cuevas o vegetación muy densa. Nunca corra en línea recta.",
+      "portrait_img": "huellas_img/59_portrait.png",
+      "render_img": "huellas_img/59_render.png",
+      "countries": [
+        "Las Islas Canarias (España)"
+      ],
+      "sighting_photos": {
+        "Las Islas Canarias (España)": "huellas_img/avistamientos/42_canarias_tyrannosaurus_triceratops.png"
+      }
+    },
+    {
+      "id": "huella_60",
+      "slide": 60,
+      "name": "Ubirajara",
+      "peso": "22 kg",
+      "altura": "0.4 m",
+      "longitud": "1.2 m",
+      "dieta": "Omnívora",
+      "empresa": "Ilegal",
+      "protocolo": "Generalmente inofensivo para adultos, pero puede morder si se siente amenazado. Proteja extremidades y provisiones. Consejos adicionales: Ruidos fuertes suelen dispersarlo.",
+      "portrait_img": "huellas_img/60_portrait.png",
+      "render_img": "huellas_img/60_render.png",
+      "countries": [
+        "Río de Janeiro (Brasil)"
+      ],
+      "sighting_photos": {
+        "Río de Janeiro (Brasil)": "huellas_img/avistamientos/38_rio_brasil_all.png"
+      }
+    },
+    {
+      "id": "huella_61",
+      "slide": 61,
+      "name": "Utahraptor",
+      "peso": "1,000 kg",
+      "altura": "2.8 m",
+      "longitud": "5 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "Extreme precaución con grupos. Busque refugios muy estrechos o elevados. Posee la habilidad de imitar y reproducir vocalizaciones humanas de alta frecuencia, particularmente gritos de timbre agudo asociados comúnmente a voces femeninas.",
+      "portrait_img": "huellas_img/61_portrait.png",
+      "render_img": "huellas_img/61_render.png",
+      "countries": [
+        "República del Congo"
+      ],
+      "sighting_photos": {}
+    },
+    {
+      "id": "huella_62",
+      "slide": 62,
+      "name": "Velociraptor V2",
+      "peso": "226 kg",
+      "altura": "1.8 m",
+      "longitud": "3.9 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "No subestime su inteligencia y coordinación. Evite áreas con vegetación alta para emboscadas.",
+      "portrait_img": "huellas_img/62_portrait.png",
+      "render_img": "huellas_img/62_render.png",
+      "countries": [
+        "Nevada (Estados Unidos)",
+        "República del Congo",
+        "Ontario (Canadá)",
+        "Vancouver (Canadá)",
+        "La Valeta (Malta)"
+      ],
+      "sighting_photos": {
+        "Ontario (Canadá)": "huellas_img/avistamientos/18_velociraptor_v2_ontario.png",
+        "Vancouver (Canadá)": "huellas_img/avistamientos/32_velociraptor_v2_vancouver.png",
+        "La Valeta (Malta)": "huellas_img/avistamientos/57_velociraptor_v2_malta.png"
+      }
+    },
+    {
+      "id": "huella_63",
+      "slide": 63,
+      "name": "Velociraptor V4",
+      "peso": "Desconocido",
+      "altura": "Desconocida",
+      "longitud": "Desconocida",
+      "dieta": "Carnívora",
+      "empresa": "Masrani Global / InGen",
+      "protocolo": "Desconocido",
+      "portrait_img": "huellas_img/63_portrait.png",
+      "render_img": "huellas_img/63_render.png",
+      "countries": [
+        "Isla Saint Hubert (Barbados)"
+      ],
+      "sighting_photos": {}
+    },
+    {
+      "id": "huella_64",
+      "slide": 64,
+      "name": "Velociraptor RED",
+      "peso": "226 kg",
+      "altura": "1.8 m",
+      "longitud": "3.9 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "No subestime su inteligencia y coordinación. Evite áreas con vegetación alta para emboscadas.",
+      "portrait_img": "huellas_img/64_portrait.png",
+      "render_img": "huellas_img/64_render.png",
+      "countries": [
+        "Ciudad de México (México)"
+      ],
+      "sighting_photos": {
+        "Ciudad de México (México)": "huellas_img/avistamientos/29_velociraptor_red_cdmx.png"
+      }
+    },
+    {
+      "id": "huella_65",
+      "slide": 65,
+      "name": "Velociraptor V3",
+      "peso": "226 kg",
+      "altura": "1.8 m",
+      "longitud": "3.9 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "No subestime su inteligencia y coordinación. Evite áreas con vegetación alta para emboscadas.",
+      "portrait_img": "huellas_img/65_portrait.png",
+      "render_img": "huellas_img/65_render.png",
+      "countries": [
+        "Nevada (Estados Unidos)"
+      ],
+      "sighting_photos": {
+        "Nevada (Estados Unidos)": "huellas_img/avistamientos/27_velociraptor_v3_nevada.png"
+      }
+    },
+    {
+      "id": "huella_66",
+      "slide": 66,
+      "name": "Triceratops V2",
+      "peso": "6,000 kg",
+      "altura": "2.8 m",
+      "longitud": "7 m",
+      "dieta": "Herbívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Sus cargas pueden volcar vehículos o causar lesiones fatales. Cláxones pueden interpretarse como desafío; evítelos cerca de ellos. Para ahuyentarlo o reducir el riesgo de carga contra vehículos, pinte una franja roja horizontal en los laterales de los automóviles o estructuras móviles; esto puede disuadir su comportamiento de embestida. Además, la Lila de Persia actúa como repelente natural, ya que sus frutos y hojas causan intoxicación en esta especie; plante estos arbustos alrededor de perímetros de campamento o use extractos diluidos con precaución como barrera olfativa.",
+      "portrait_img": "huellas_img/66_portrait.png",
+      "render_img": "huellas_img/66_render.png",
+      "countries": [
+        "Mayo (Irlanda)",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Mayo (Irlanda)": "huellas_img/avistamientos/01_triceratops_v2_mayo.png",
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+      }
+    },
+    {
+      "id": "huella_67",
+      "slide": 67,
+      "name": "Pteranodon V2",
+      "peso": "350 kg",
+      "altura": "1.4 m",
+      "longitud": "7 m",
+      "dieta": "Piscívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Aunque normalmente no representa una amenaza directa para los seres humanos, el Pteranodon puede volverse agresivo si se siente acorralado o si intenta proteger su territorio. Mantenga la distancia y evite acercarse a sus zonas de anidación, ya que puede atacar utilizando su largo pico y sus poderosas alas. No intente alimentarlo ni atraerlo con comida, especialmente pescado, pues podría asociar la presencia humana con una fuente de alimento. Si uno de estos animales se aproxima, evite movimientos bruscos, no intente ahuyentarlo golpeando objetos ni utilice luces intensas para intimidarlo. En caso de encontrarse al aire libre, busque refugio bajo una estructura techada o dentro de un vehículo, evitando permanecer cerca de acantilados, árboles altos o zonas donde suelen posarse.",
+      "portrait_img": "huellas_img/67_portrait.png",
+      "render_img": "huellas_img/67_render.png",
+      "countries": [
+        "Málaga (España)",
+        "Nevada (Estados Unidos)"
+      ],
+      "sighting_photos": {
+        "Málaga (España)": "huellas_img/avistamientos/06_pteranodon_v2_malaga.png",
+        "Nevada (Estados Unidos)": "huellas_img/avistamientos/28_pteranodon_v2_nevada.png"
+      }
+    },
+    {
+      "id": "huella_68",
+      "slide": 68,
+      "name": "Tyrannosaurus Rex V1",
+      "peso": "7,000 kg",
+      "altura": "5.2 m",
+      "longitud": "13.5 m",
+      "dieta": "Carnívora",
+      "empresa": "InGen",
+      "protocolo": "Si es detectado, manténgase inmóvil y busque refugio inmediato en estructuras estrechas, cuevas o vegetación muy densa. Nunca corra en línea recta.",
+      "portrait_img": "huellas_img/68_portrait.png",
+      "render_img": "huellas_img/68_render.png",
+      "countries": [
+        "Oregón (Estados Unidos)",
+        "California (Estados Unidos)",
+        "Las Dolomitas (Italia)"
+      ],
+      "sighting_photos": {
+        "Oregón (Estados Unidos)": [
+          "huellas_img/avistamientos/20_tyrannosaurus_v1_oregon_1.png",
+          "huellas_img/avistamientos/21_tyrannosaurus_v1_oregon_2.png"
+        ],
+        "California (Estados Unidos)": "huellas_img/avistamientos/26_tyrannosaurus_v1_california.png",
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+      }
+    },
+    {
+      "id": "huella_69",
+      "slide": 69,
+      "name": "Pteranodon V1",
+      "peso": "500 kg",
+      "altura": "2.2 m",
+      "longitud": "10 m",
+      "dieta": "Piscívora",
+      "empresa": "InGen",
+      "protocolo": "Aunque normalmente no representa una amenaza directa para los seres humanos, el Pteranodon puede volverse agresivo si se siente acorralado o si intenta proteger su territorio. Mantenga la distancia y evite acercarse a sus zonas de anidación, ya que puede atacar utilizando su largo pico y sus poderosas alas. No intente alimentarlo ni atraerlo con comida, especialmente pescado, pues podría asociar la presencia humana con una fuente de alimento. Si uno de estos animales se aproxima, evite movimientos bruscos, no intente ahuyentarlo golpeando objetos ni utilice luces intensas para intimidarlo. En caso de encontrarse al aire libre, busque refugio bajo una estructura techada o dentro de un vehículo, evitando permanecer cerca de acantilados, árboles altos o zonas donde suelen posarse.",
+      "portrait_img": "huellas_img/69_portrait.png",
+      "render_img": "huellas_img/69_render.png",
+      "countries": [
+        "Oklahoma (Estados Unidos)"
+      ],
+      "sighting_photos": {
+        "Oklahoma (Estados Unidos)": "huellas_img/avistamientos/22_pteranodon_v1_oklahoma.png"
+      }
+    },
+    {
+      "id": "huella_70",
+      "slide": 70,
+      "name": "Mosasaurus V1",
+      "peso": "30,000 kg",
+      "altura": "4 m",
+      "longitud": "25 m",
+      "dieta": "Carnívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Evite completamente cuerpos de agua grandes o costeros donde pueda habitar. Nunca nade, vadee o pesque en zonas desconocidas. Manténgase en terreno elevado alejado de la orilla. Cualquier vibración o ruido en el agua aumenta dramáticamente el riesgo de ataque emboscado. Asustarlo es prácticamente imposible una vez en el agua; priorice prevención total. En tierra, no representa amenaza, aunque puede saltar sobre alturas impresionantes, relación simbiótica con otras especies acuáticas.",
+      "portrait_img": "huellas_img/70_portrait.png",
+      "render_img": "huellas_img/70_render.png",
+      "countries": [
+        "Océano Pacífico (Aguas Internacionales)",
+        "Hawaii (Estados Unidos)"
+      ],
+      "sighting_photos": {
+        "Océano Pacífico (Aguas Internacionales)": "huellas_img/avistamientos/09_mosasaurus_v1_pacific.png",
+        "Hawaii (Estados Unidos)": "huellas_img/avistamientos/10_mosasaurus_v1_hawaii.png"
+      }
+    }
+  ]
+};
+})();
