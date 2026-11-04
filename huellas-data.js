@@ -380,6 +380,15 @@
       "countryGroup": "Canadá",
       "locationName": "Vancouver, Canadá",
       "sector": "SECTOR PACÍFICO NORTE // VANCOUVER"
+    },
+    "Berlín (Alemania)": {
+      "lat": 52.52,
+      "lon": 13.405,
+      "flag": "🇩🇪",
+      "sector": "SECTOR EUROPA CENTRAL // BERLÍN",
+      "countryGroup": "Alemania",
+      "locationName": "Berlín, Alemania",
+      "shortLabel": "DE"
     }
   },
   "species": [
@@ -426,7 +435,13 @@
         "Wyoming (Estados Unidos)": "huellas_img/avistamientos/16_allosaurus_wyoming.png",
         "La Valeta (Malta)": "huellas_img/avistamientos/24_allosaurus_malta.png",
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "California (Estados Unidos)": "huellas_img/avistamientos/72_allosaurus_california.png",
+        "España": "huellas_img/avistamientos/75_espana_general.png"
+      },
+      "location_details": {
+        "California (Estados Unidos)": "California, Estados Unidos",
+        "España": "España (Sector Peninsular)"
       }
     },
     {
@@ -448,7 +463,11 @@
       ],
       "sighting_photos": {
         "California (Estados Unidos)": "huellas_img/avistamientos/11_ankylosaurus_california.png",
-        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "Queensland (Australia)": "huellas_img/avistamientos/67_ankylosaurus_australia.png"
+      },
+      "location_details": {
+        "Queensland (Australia)": "Queensland, Australia"
       }
     },
     {
@@ -559,7 +578,11 @@
         "Beccles (Reino Unido)": "huellas_img/avistamientos/03_baryonyx_beccles.png",
         "Capulálpam de Méndez (México)": "huellas_img/avistamientos/17_baryonyx_capulalpam.png",
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/50_baryonyx_malta.png"
+        "La Valeta (Malta)": "huellas_img/avistamientos/50_baryonyx_malta.png",
+        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png"
+      },
+      "location_details": {
+        "Estados Unidos": "Estados Unidos (Sector General)"
       }
     },
     {
@@ -583,7 +606,11 @@
       "sighting_photos": {
         "Rovaniemi (Finlandia)": "huellas_img/avistamientos/04_brachiosaurus_rovaniemi.png",
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png"
+      },
+      "location_details": {
+        "Estados Unidos": "Estados Unidos (Sector General)"
       }
     },
     {
@@ -626,7 +653,11 @@
       "sighting_photos": {
         "Cañahuas (Perú)": "huellas_img/avistamientos/13_carnotaurus_canahuas.png",
         "La Valeta (Malta)": "huellas_img/avistamientos/23_carnotaurus_malta.png",
-        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png"
+      },
+      "location_details": {
+        "Estados Unidos": "Estados Unidos (Sector General)"
       }
     },
     {
@@ -649,7 +680,13 @@
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/54_ceratosaurus_malta.png"
+        "La Valeta (Malta)": "huellas_img/avistamientos/54_ceratosaurus_malta.png",
+        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png",
+        "España": "huellas_img/avistamientos/75_espana_general.png"
+      },
+      "location_details": {
+        "Estados Unidos": "Estados Unidos (Sector General)",
+        "España": "España (Sector Peninsular)"
       }
     },
     {
@@ -691,12 +728,19 @@
       "render_img": "huellas_img/14_render.png",
       "countries": [
         "Guerrero (México)",
-        "España"
+        "España",
+        "Ciudad de México (México)"
       ],
       "location_details": {
-        "Guerrero (México)": "Guerrero, México"
+        "Guerrero (México)": "Guerrero, México",
+        "Ciudad de México (México)": "Ciudad de México, México",
+        "España": "España (Sector Peninsular)"
       },
-      "sighting_photos": {}
+      "sighting_photos": {
+        "Guerrero (México)": "huellas_img/avistamientos/70_concavenator_mexico.png",
+        "Ciudad de México (México)": "huellas_img/avistamientos/70_concavenator_mexico.png",
+        "España": "huellas_img/avistamientos/75_espana_general.png"
+      }
     },
     {
       "id": "huella_15",
@@ -716,7 +760,13 @@
         "Las Dolomitas (Italia)"
       ],
       "sighting_photos": {
-        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png",
+        "España": "huellas_img/avistamientos/75_espana_general.png"
+      },
+      "location_details": {
+        "Estados Unidos": "Estados Unidos (Sector General)",
+        "España": "España (Sector Peninsular)"
       }
     },
     {
@@ -734,7 +784,12 @@
       "countries": [
         "Estados Unidos"
       ],
-      "sighting_photos": {}
+      "sighting_photos": {
+        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png"
+      },
+      "location_details": {
+        "Estados Unidos": "Estados Unidos (Sector General)"
+      }
     },
     {
       "id": "huella_17",
@@ -754,10 +809,12 @@
         "La Valeta (Malta)"
       ],
       "location_details": {
-        "Ciudad de México (México)": "Ciudad de México, México"
+        "Ciudad de México (México)": "Ciudad de México, México",
+        "Estados Unidos": "Estados Unidos (Sector General)"
       },
       "sighting_photos": {
-        "Ciudad de México (México)": "huellas_img/avistamientos/30_dilophosaurus_cdmx.png"
+        "Ciudad de México (México)": "huellas_img/avistamientos/30_dilophosaurus_cdmx.png",
+        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png"
       }
     },
     {
@@ -777,7 +834,11 @@
         "España"
       ],
       "sighting_photos": {
-        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "España": "huellas_img/avistamientos/75_espana_general.png"
+      },
+      "location_details": {
+        "España": "España (Sector Peninsular)"
       }
     },
     {
@@ -799,7 +860,11 @@
       ],
       "sighting_photos": {
         "Miyajima (Japón)": "huellas_img/avistamientos/08_dimorphodon_miyajima.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/51_dimorphodon_malta.png"
+        "La Valeta (Malta)": "huellas_img/avistamientos/51_dimorphodon_malta.png",
+        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png"
+      },
+      "location_details": {
+        "Estados Unidos": "Estados Unidos (Sector General)"
       }
     },
     {
@@ -816,10 +881,17 @@
       "render_img": "huellas_img/20_render.png",
       "countries": [
         "París (Francia)",
-        "Las Dolomitas (Italia)"
+        "Las Dolomitas (Italia)",
+        "Francia"
       ],
       "sighting_photos": {
-        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "París (Francia)": "huellas_img/avistamientos/64_dreadnoughtus_francia.png",
+        "Francia": "huellas_img/avistamientos/64_dreadnoughtus_francia.png"
+      },
+      "location_details": {
+        "París (Francia)": "París, Francia",
+        "Francia": "Francia"
       }
     },
     {
@@ -837,7 +909,12 @@
       "countries": [
         "Escocia"
       ],
-      "sighting_photos": {}
+      "sighting_photos": {
+        "Escocia": "huellas_img/avistamientos/65_elasmosaurus_escocia.png"
+      },
+      "location_details": {
+        "Escocia": "Escocia, Reino Unido"
+      }
     },
     {
       "id": "huella_22",
@@ -856,7 +933,11 @@
         "Las Dolomitas (Italia)"
       ],
       "sighting_photos": {
-        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "España": "huellas_img/avistamientos/75_espana_general.png"
+      },
+      "location_details": {
+        "España": "España (Sector Peninsular)"
       }
     },
     {
@@ -920,7 +1001,11 @@
         "Iguazú (Argentina)"
       ],
       "sighting_photos": {
-        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "España": "huellas_img/avistamientos/75_espana_general.png"
+      },
+      "location_details": {
+        "España": "España (Sector Peninsular)"
       }
     },
     {
@@ -944,7 +1029,13 @@
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "República del Congo": "huellas_img/avistamientos/69_congo_all.png",
+        "España": "huellas_img/avistamientos/75_espana_general.png"
+      },
+      "location_details": {
+        "República del Congo": "República del Congo",
+        "España": "España (Sector Peninsular)"
       }
     },
     {
@@ -966,7 +1057,11 @@
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "España": "huellas_img/avistamientos/75_espana_general.png"
+      },
+      "location_details": {
+        "España": "España (Sector Peninsular)"
       }
     },
     {
@@ -1010,7 +1105,11 @@
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/52_lystrosaurus_malta.png"
+        "La Valeta (Malta)": "huellas_img/avistamientos/52_lystrosaurus_malta.png",
+        "España": "huellas_img/avistamientos/75_espana_general.png"
+      },
+      "location_details": {
+        "España": "España (Sector Peninsular)"
       }
     },
     {
@@ -1030,7 +1129,11 @@
         "Iguazú (Argentina)"
       ],
       "sighting_photos": {
-        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "República del Congo": "huellas_img/avistamientos/69_congo_all.png"
+      },
+      "location_details": {
+        "República del Congo": "República del Congo"
       }
     },
     {
@@ -1094,11 +1197,18 @@
       "countries": [
         "Hong Kong (China)",
         "Las Dolomitas (Italia)",
-        "La Valeta (Malta)"
+        "La Valeta (Malta)",
+        "California (Estados Unidos)"
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/60_monolophosaurus_malta.png"
+        "La Valeta (Malta)": "huellas_img/avistamientos/60_monolophosaurus_malta.png",
+        "Hong Kong (China)": "huellas_img/avistamientos/79_monolophosaurus_hong_kong.png",
+        "California (Estados Unidos)": "huellas_img/avistamientos/79_monolophosaurus_hong_kong.png"
+      },
+      "location_details": {
+        "Hong Kong (China)": "Hong Kong, China",
+        "California (Estados Unidos)": "California, Estados Unidos"
       }
     },
     {
@@ -1118,7 +1228,11 @@
         "Las Dolomitas (Italia)"
       ],
       "sighting_photos": {
-        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "República del Congo": "huellas_img/avistamientos/69_congo_all.png"
+      },
+      "location_details": {
+        "República del Congo": "República del Congo"
       }
     },
     {
@@ -1180,7 +1294,11 @@
         "Calgary (Canadá)": "huellas_img/avistamientos/05_nasutoceratops_calgary.png",
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
         "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/58_nasutoceratops_malta.png"
+        "La Valeta (Malta)": "huellas_img/avistamientos/58_nasutoceratops_malta.png",
+        "California (Estados Unidos)": "huellas_img/avistamientos/71_nasutoceratops_california.png"
+      },
+      "location_details": {
+        "California (Estados Unidos)": "California, Estados Unidos"
       }
     },
     {
@@ -1200,7 +1318,11 @@
         "Las Dolomitas (Italia)"
       ],
       "sighting_photos": {
-        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "República del Congo": "huellas_img/avistamientos/69_congo_all.png"
+      },
+      "location_details": {
+        "República del Congo": "República del Congo"
       }
     },
     {
@@ -1238,11 +1360,16 @@
       "render_img": "huellas_img/40_render.png",
       "countries": [
         "Iguazú (Argentina)",
-        "Las Dolomitas (Italia)"
+        "Las Dolomitas (Italia)",
+        "Berlín (Alemania)"
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "Berlín (Alemania)": "huellas_img/avistamientos/66_pachycephalosaurus_berlin.png"
+      },
+      "location_details": {
+        "Berlín (Alemania)": "Berlín, Alemania"
       }
     },
     {
@@ -1264,7 +1391,11 @@
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/59_pachyrhinosaurus_malta.png"
+        "La Valeta (Malta)": "huellas_img/avistamientos/59_pachyrhinosaurus_malta.png",
+        "California (Estados Unidos)": "huellas_img/avistamientos/78_pachyrhinosaurus_california.png"
+      },
+      "location_details": {
+        "California (Estados Unidos)": "California, Estados Unidos"
       }
     },
     {
@@ -1281,11 +1412,16 @@
       "render_img": "huellas_img/42_render.png",
       "countries": [
         "California (Estados Unidos)",
-        "La Valeta (Malta)"
+        "La Valeta (Malta)",
+        "Nevada (Estados Unidos)"
       ],
       "sighting_photos": {
         "California (Estados Unidos)": "huellas_img/avistamientos/43_parasaurolophus_california.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/62_parasaurolophus_malta.png"
+        "La Valeta (Malta)": "huellas_img/avistamientos/62_parasaurolophus_malta.png",
+        "Nevada (Estados Unidos)": "huellas_img/avistamientos/74_parasaurolophus_v2_nevada.png"
+      },
+      "location_details": {
+        "Nevada (Estados Unidos)": "Nevada, Estados Unidos"
       }
     },
     {
@@ -1326,7 +1462,11 @@
         "Iguazú (Argentina)"
       ],
       "sighting_photos": {
-        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "República del Congo": "huellas_img/avistamientos/69_congo_all.png"
+      },
+      "location_details": {
+        "República del Congo": "República del Congo"
       }
     },
     {
@@ -1491,7 +1631,13 @@
       "sighting_photos": {
         "Maine (Estados Unidos)": "huellas_img/avistamientos/15_stegosaurus_maine.png",
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/55_stegosaurus_malta.png"
+        "La Valeta (Malta)": "huellas_img/avistamientos/55_stegosaurus_malta.png",
+        "Queensland (Australia)": "huellas_img/avistamientos/68_stegosaurus_australia.png",
+        "República del Congo": "huellas_img/avistamientos/69_congo_all.png"
+      },
+      "location_details": {
+        "Queensland (Australia)": "Queensland, Australia",
+        "República del Congo": "República del Congo"
       }
     },
     {
@@ -1513,7 +1659,11 @@
       ],
       "sighting_photos": {
         "Queensland (Australia)": "huellas_img/avistamientos/02_stygimoloch_queensland.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/48_stygimoloch_malta.png"
+        "La Valeta (Malta)": "huellas_img/avistamientos/48_stygimoloch_malta.png",
+        "California (Estados Unidos)": "huellas_img/avistamientos/77_stygimoloch_california.png"
+      },
+      "location_details": {
+        "California (Estados Unidos)": "California, Estados Unidos"
       }
     },
     {
@@ -1531,7 +1681,12 @@
       "countries": [
         "República del Congo"
       ],
-      "sighting_photos": {}
+      "sighting_photos": {
+        "República del Congo": "huellas_img/avistamientos/69_congo_all.png"
+      },
+      "location_details": {
+        "República del Congo": "República del Congo"
+      }
     },
     {
       "id": "huella_55",
@@ -1550,7 +1705,11 @@
         "República del Congo"
       ],
       "sighting_photos": {
-        "Hong Kong (China)": "huellas_img/avistamientos/41_hong_kong_sinoceratops_tarbosaurus.png"
+        "Hong Kong (China)": "huellas_img/avistamientos/41_hong_kong_sinoceratops_tarbosaurus.png",
+        "República del Congo": "huellas_img/avistamientos/69_congo_all.png"
+      },
+      "location_details": {
+        "República del Congo": "República del Congo"
       }
     },
     {
@@ -1585,9 +1744,17 @@
       "portrait_img": "huellas_img/57_portrait.png",
       "render_img": "huellas_img/57_render.png",
       "countries": [
-        "Barcelona (España)"
+        "Barcelona (España)",
+        "España"
       ],
-      "sighting_photos": {}
+      "sighting_photos": {
+        "Barcelona (España)": "huellas_img/avistamientos/63_torosaurus_espana.png",
+        "España": "huellas_img/avistamientos/63_torosaurus_espana.png"
+      },
+      "location_details": {
+        "Barcelona (España)": "Barcelona, España",
+        "España": "España (Sector Peninsular)"
+      }
     },
     {
       "id": "huella_58",
@@ -1662,7 +1829,12 @@
       "countries": [
         "República del Congo"
       ],
-      "sighting_photos": {}
+      "sighting_photos": {
+        "República del Congo": "huellas_img/avistamientos/69_congo_all.png"
+      },
+      "location_details": {
+        "República del Congo": "República del Congo"
+      }
     },
     {
       "id": "huella_62",
@@ -1677,7 +1849,6 @@
       "portrait_img": "huellas_img/62_portrait.png",
       "render_img": "huellas_img/62_render.png",
       "countries": [
-        "Nevada (Estados Unidos)",
         "República del Congo",
         "Ontario (Canadá)",
         "Vancouver (Canadá)",
@@ -1686,7 +1857,11 @@
       "sighting_photos": {
         "Ontario (Canadá)": "huellas_img/avistamientos/18_velociraptor_v2_ontario.png",
         "Vancouver (Canadá)": "huellas_img/avistamientos/32_velociraptor_v2_vancouver.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/57_velociraptor_v2_malta.png"
+        "La Valeta (Malta)": "huellas_img/avistamientos/57_velociraptor_v2_malta.png",
+        "República del Congo": "huellas_img/avistamientos/69_congo_all.png"
+      },
+      "location_details": {
+        "República del Congo": "República del Congo"
       }
     },
     {
@@ -1851,6 +2026,27 @@
         "Océano Pacífico (Aguas Internacionales)": "huellas_img/avistamientos/09_mosasaurus_v1_pacific.png",
         "Hawaii (Estados Unidos)": "huellas_img/avistamientos/10_mosasaurus_v1_hawaii.png"
       }
+    },
+    {
+      "slide": 71,
+      "name": "Becklespinax",
+      "peso": "1,000 kg",
+      "altura": "3 m",
+      "longitud": "8 m",
+      "dieta": "Carnívora",
+      "empresa": "Ilegal",
+      "protocolo": "El Becklespinax es un depredador de gran tamaño que puede representar una amenaza considerable para los seres humanos. Su potente musculatura, sus mandíbulas y sus extremidades le permiten perseguir y someter a sus presas con facilidad. Mantenga una distancia prudente y evite aproximarse a cuerpos de agua, zonas boscosas o lugares donde pueda estar alimentándose. Si se encuentra con uno, no corra ni realice movimientos bruscos; retroceda lentamente sin perderlo de vista y busque refugio dentro de una estructura resistente o un vehículo.",
+      "countries": [
+        "Wyoming (Estados Unidos)"
+      ],
+      "sighting_photos": {
+        "Wyoming (Estados Unidos)": "huellas_img/avistamientos/76_becklespinax_wyoming.png"
+      },
+      "location_details": {
+        "Wyoming (Estados Unidos)": "Wyoming, Estados Unidos"
+      },
+      "portrait_img": "huellas_img/71_portrait.png",
+      "render_img": "huellas_img/71_render.png"
     }
   ]
 };
