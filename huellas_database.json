@@ -1409,17 +1409,13 @@
       "render_img": "huellas_img/42_render.png",
       "countries": [
         "California (Estados Unidos)",
-        "La Valeta (Malta)",
-        "Nevada (Estados Unidos)"
+        "La Valeta (Malta)"
       ],
       "sighting_photos": {
         "California (Estados Unidos)": "huellas_img/avistamientos/43_parasaurolophus_california.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/62_parasaurolophus_malta.png",
-        "Nevada (Estados Unidos)": "huellas_img/avistamientos/74_parasaurolophus_v2_nevada.png"
+        "La Valeta (Malta)": "huellas_img/avistamientos/62_parasaurolophus_malta.png"
       },
-      "location_details": {
-        "Nevada (Estados Unidos)": "Nevada, Estados Unidos"
-      }
+      "location_details": {}
     },
     {
       "id": "huella_43",
@@ -1435,11 +1431,16 @@
       "render_img": "huellas_img/43_render.png",
       "countries": [
         "Las Dolomitas (Italia)",
-        "Iguazú (Argentina)"
+        "Iguazú (Argentina)",
+        "Nevada (Estados Unidos)"
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "Nevada (Estados Unidos)": "huellas_img/avistamientos/74_parasaurolophus_v3_nevada.png"
+      },
+      "location_details": {
+        "Nevada (Estados Unidos)": "Nevada, Estados Unidos"
       }
     },
     {
