@@ -1,3 +1,45 @@
+
+/* ESTILOS DE BANDERAS VECTORIALES SVG PARA PC Y MÓVIL */
+.globo-flag-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: -0.15em;
+  width: 1.25em;
+  height: 1.25em;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.globo-flag-icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 2px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+}
+
+.globo-modal-flag .globo-flag-icon {
+  width: 2.1rem;
+  height: 2.1rem;
+}
+
+.globo-country-flag .globo-flag-icon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+.globo-other-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.globo-other-tag .globo-flag-icon {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
 /* FUENTE DE BANDERAS DE PAÍSES PARA PC (WINDOWS) Y DISPOSITIVOS DE ESCRITORIO */
 @font-face {
   font-family: "Twemoji Country Flags";

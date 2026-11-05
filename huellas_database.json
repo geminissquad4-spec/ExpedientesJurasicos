@@ -117,15 +117,6 @@
       "locationName": "París, Francia",
       "sector": "SECTOR PARÍS // ISLA DE FRANCIA"
     },
-    "Francia": {
-      "lat": 46.5,
-      "lon": 2.5,
-      "flag": "🇫🇷",
-      "shortLabel": "FRA",
-      "countryGroup": "Francia",
-      "locationName": "Francia",
-      "sector": "SECTOR EUROPA CENTRAL // FRANCIA"
-    },
     "Ciudad de México (México)": {
       "lat": 19.4326,
       "lon": -99.1332,
@@ -296,15 +287,6 @@
       "countryGroup": "Océano Pacífico",
       "locationName": "Océano Pacífico (Aguas Internacionales)",
       "sector": "SECTOR PELÁGICO // OCÉANO PACÍFICO"
-    },
-    "Chavenay (Francia)": {
-      "lat": 48.8542,
-      "lon": 1.9839,
-      "flag": "🇫🇷",
-      "shortLabel": "CHV",
-      "countryGroup": "Francia",
-      "locationName": "Chavenay, Francia",
-      "sector": "SECTOR ÎLE-DE-FRANCE // CHAVENAY"
     },
     "Cañahuas (Perú)": {
       "lat": -16.0333,
@@ -802,8 +784,7 @@
       "render_img": "huellas_img/17_render.png",
       "countries": [
         "Ciudad de México (México)",
-        "Estados Unidos",
-        "La Valeta (Malta)"
+        "Estados Unidos"
       ],
       "location_details": {
         "Ciudad de México (México)": "Ciudad de México, México",
@@ -878,17 +859,14 @@
       "render_img": "huellas_img/20_render.png",
       "countries": [
         "París (Francia)",
-        "Las Dolomitas (Italia)",
-        "Francia"
+        "Las Dolomitas (Italia)"
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "París (Francia)": "huellas_img/avistamientos/64_dreadnoughtus_francia.png",
-        "Francia": "huellas_img/avistamientos/64_dreadnoughtus_francia.png"
+        "París (Francia)": "huellas_img/avistamientos/64_dreadnoughtus_francia.png"
       },
       "location_details": {
-        "París (Francia)": "París, Francia",
-        "Francia": "Francia"
+        "París (Francia)": "París, Francia"
       }
     },
     {
@@ -952,11 +930,9 @@
       "countries": [
         "Seattle (Estados Unidos)",
         "La Valeta (Malta)",
-        "Chavenay (Francia)",
         "Iguazú (Argentina)"
       ],
       "sighting_photos": {
-        "Chavenay (Francia)": "huellas_img/avistamientos/12_gallimimus_chavenay.png",
         "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
         "Seattle (Estados Unidos)": "huellas_img/avistamientos/44_gallimimus_seattle.png",
         "La Valeta (Malta)": "huellas_img/avistamientos/56_gallimimus_malta.png"
@@ -1021,7 +997,6 @@
         "República del Congo",
         "Las Dolomitas (Italia)",
         "España",
-        "Francia",
         "Iguazú (Argentina)"
       ],
       "sighting_photos": {
@@ -1194,18 +1169,15 @@
       "countries": [
         "Hong Kong (China)",
         "Las Dolomitas (Italia)",
-        "La Valeta (Malta)",
-        "California (Estados Unidos)"
+        "La Valeta (Malta)"
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
         "La Valeta (Malta)": "huellas_img/avistamientos/60_monolophosaurus_malta.png",
-        "Hong Kong (China)": "huellas_img/avistamientos/79_monolophosaurus_hong_kong.png",
-        "California (Estados Unidos)": "huellas_img/avistamientos/79_monolophosaurus_hong_kong.png"
+        "Hong Kong (China)": "huellas_img/avistamientos/79_monolophosaurus_hong_kong.png"
       },
       "location_details": {
-        "Hong Kong (China)": "Hong Kong, China",
-        "California (Estados Unidos)": "California, Estados Unidos"
+        "Hong Kong (China)": "Hong Kong, China"
       }
     },
     {
@@ -1742,16 +1714,13 @@
       "portrait_img": "huellas_img/57_portrait.png",
       "render_img": "huellas_img/57_render.png",
       "countries": [
-        "Barcelona (España)",
-        "España"
+        "Barcelona (España)"
       ],
       "sighting_photos": {
-        "Barcelona (España)": "huellas_img/avistamientos/63_torosaurus_espana.png",
-        "España": "huellas_img/avistamientos/63_torosaurus_espana.png"
+        "Barcelona (España)": "huellas_img/avistamientos/63_torosaurus_espana.png"
       },
       "location_details": {
-        "Barcelona (España)": "Barcelona, España",
-        "España": "España (Sector Peninsular)"
+        "Barcelona (España)": "Barcelona, España"
       }
     },
     {
@@ -1972,16 +1941,9 @@
       "portrait_img": "huellas_img/68_portrait.png",
       "render_img": "huellas_img/68_render.png",
       "countries": [
-        "Oregón (Estados Unidos)",
-        "California (Estados Unidos)",
         "Las Dolomitas (Italia)"
       ],
       "sighting_photos": {
-        "Oregón (Estados Unidos)": [
-          "huellas_img/avistamientos/20_tyrannosaurus_v1_oregon_1.png",
-          "huellas_img/avistamientos/21_tyrannosaurus_v1_oregon_2.png"
-        ],
-        "California (Estados Unidos)": "huellas_img/avistamientos/26_tyrannosaurus_v1_california.png",
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
       }
     },
