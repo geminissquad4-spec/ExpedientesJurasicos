@@ -368,6 +368,132 @@
       "countryGroup": "Alemania",
       "locationName": "Berlín, Alemania",
       "shortLabel": "DE"
+    },
+    "Florencia (Italia)": {
+      "lat": 43.7696,
+      "lon": 11.2558,
+      "flag": "🇮🇹",
+      "shortLabel": "FLO",
+      "countryGroup": "Italia",
+      "locationName": "Florencia, Italia",
+      "sector": "SECTOR TOSCANA // FLORENCIA"
+    },
+    "Steiermark (Austria)": {
+      "lat": 47.0707,
+      "lon": 15.4395,
+      "flag": "🇦🇹",
+      "shortLabel": "AUT",
+      "countryGroup": "Austria",
+      "locationName": "Steiermark, Austria",
+      "sector": "SECTOR ALPES ORIENTALES // ESTIRIA"
+    },
+    "Carretera de Agra (India)": {
+      "lat": 27.2,
+      "lon": 77.92,
+      "flag": "🇮🇳",
+      "shortLabel": "IND",
+      "countryGroup": "India",
+      "locationName": "Carretera hacia Agra, India",
+      "sector": "SECTOR ASIA DEL SUR // CARRETERA DE AGRA"
+    },
+    "Agra (India)": {
+      "lat": 27.1767,
+      "lon": 78.0081,
+      "flag": "🇮🇳",
+      "shortLabel": "AGR",
+      "countryGroup": "India",
+      "locationName": "Agra, India",
+      "sector": "SECTOR ASIA DEL SUR // AGRA"
+    },
+    "Carolina del Norte (Estados Unidos)": {
+      "lat": 35.7796,
+      "lon": -78.6382,
+      "flag": "🇺🇸",
+      "shortLabel": "NC",
+      "countryGroup": "Estados Unidos",
+      "locationName": "Carolina del Norte, Estados Unidos",
+      "sector": "SECTOR COSTA ESTE // CAROLINA DEL NORTE"
+    },
+    "Perth (Australia)": {
+      "lat": -31.9505,
+      "lon": 115.8605,
+      "flag": "🇦🇺",
+      "shortLabel": "PER",
+      "countryGroup": "Australia",
+      "locationName": "Perth, Australia",
+      "sector": "SECTOR AUSTRALIA OCCIDENTAL // PERTH"
+    },
+    "Bali (Indonesia)": {
+      "lat": -8.4095,
+      "lon": 115.1889,
+      "flag": "🇮🇩",
+      "shortLabel": "BAL",
+      "countryGroup": "Indonesia",
+      "locationName": "Bali, Indonesia",
+      "sector": "SECTOR SUDESTE ASIÁTICO // BALI"
+    },
+    "Colorado (Estados Unidos)": {
+      "lat": 39.5501,
+      "lon": -105.7821,
+      "flag": "🇺🇸",
+      "shortLabel": "COL",
+      "countryGroup": "Estados Unidos",
+      "locationName": "Colorado, Estados Unidos",
+      "sector": "SECTOR MONTAÑAS ROCOSAS // COLORADO"
+    },
+    "Océano Pacífico Norte (Aguas Internacionales)": {
+      "lat": 32.0,
+      "lon": -145.0,
+      "flag": "🌊",
+      "shortLabel": "PAC-N",
+      "countryGroup": "Aguas Internacionales",
+      "locationName": "Océano Pacífico Norte (Aguas Internacionales)",
+      "sector": "SECTOR PACÍFICO NORTE // AGUAS INTERNACIONALES"
+    },
+    "Pahang (Malasia)": {
+      "lat": 3.8126,
+      "lon": 103.3256,
+      "flag": "🇲🇾",
+      "shortLabel": "PAH",
+      "countryGroup": "Malasia",
+      "locationName": "Pahang, Malasia",
+      "sector": "SECTOR SUDESTE ASIÁTICO // PAHANG"
+    },
+    "Yamanashi (Japón)": {
+      "lat": 35.6642,
+      "lon": 138.5684,
+      "flag": "🇯🇵",
+      "shortLabel": "YAM",
+      "countryGroup": "Japón",
+      "locationName": "Yamanashi, Japón",
+      "sector": "SECTOR MONTE FUJI // YAMANASHI"
+    },
+    "Florida (Estados Unidos)": {
+      "lat": 27.6648,
+      "lon": -81.5158,
+      "flag": "🇺🇸",
+      "shortLabel": "FLA",
+      "countryGroup": "Estados Unidos",
+      "locationName": "Florida, Estados Unidos",
+      "sector": "SECTOR SUDESTE // FLORIDA"
+    },
+    "Nairobi (Kenia)": {
+      "lat": -1.2921,
+      "lon": 36.8219,
+      "flag": "🇰🇪",
+      "shortLabel": "NAI",
+      "countryGroup": "Kenia",
+      "locationName": "Nairobi, Kenia",
+      "sector": "SECTOR ÁFRICA ORIENTAL // NAIROBI"
+    },
+    "Dakar (Senegal)": {
+      "lat": 14.7167,
+      "lon": -17.4677,
+      "flag": "🇸🇳",
+      "shortLabel": "DAK",
+      "countryGroup": "Senegal",
+      "locationName": "Dakar, Senegal",
+      "sector": "SECTOR ÁFRICA OCCIDENTAL // DAKAR"
     }
   },
   "species": [
@@ -408,7 +534,8 @@
         "España",
         "Las Dolomitas (Italia)",
         "Wyoming (Estados Unidos)",
-        "Iguazú (Argentina)"
+        "Iguazú (Argentina)",
+        "Florencia (Italia)"
       ],
       "sighting_photos": {
         "Wyoming (Estados Unidos)": "huellas_img/avistamientos/16_allosaurus_wyoming.png",
@@ -416,7 +543,8 @@
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
         "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
         "California (Estados Unidos)": "huellas_img/avistamientos/72_allosaurus_california.png",
-        "España": "huellas_img/avistamientos/75_espana_general.png"
+        "España": "huellas_img/avistamientos/75_espana_general.png",
+        "Florencia (Italia)": "huellas_img/avistamientos/80_allosaurus_florencia.png"
       },
       "location_details": {
         "California (Estados Unidos)": "California, Estados Unidos",
@@ -438,15 +566,22 @@
       "countries": [
         "Queensland (Australia)",
         "California (Estados Unidos)",
-        "Iguazú (Argentina)"
+        "Iguazú (Argentina)",
+        "Oklahoma (Estados Unidos)",
+        "Carretera de Agra (India)",
+        "Texas (Estados Unidos)"
       ],
       "sighting_photos": {
         "California (Estados Unidos)": "huellas_img/avistamientos/11_ankylosaurus_california.png",
         "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
-        "Queensland (Australia)": "huellas_img/avistamientos/67_ankylosaurus_australia.png"
+        "Queensland (Australia)": "huellas_img/avistamientos/67_ankylosaurus_australia.png",
+        "Oklahoma (Estados Unidos)": "huellas_img/avistamientos/81_ankylosaurus_oklahoma.png",
+        "Carretera de Agra (India)": "huellas_img/avistamientos/82_ankylosaurus_india.png",
+        "Texas (Estados Unidos)": "huellas_img/avistamientos/104_ankylosaurus_texas.png"
       },
       "location_details": {
-        "Queensland (Australia)": "Queensland, Australia"
+        "Queensland (Australia)": "Queensland, Australia",
+        "Carretera de Agra (India)": "Carretera hacia Agra, India"
       }
     },
     {
@@ -465,12 +600,16 @@
         "Las Dolomitas (Italia)",
         "Canadá",
         "Oregón (Estados Unidos)",
-        "Iguazú (Argentina)"
+        "Iguazú (Argentina)",
+        "Vancouver (Canadá)",
+        "Steiermark (Austria)"
       ],
       "sighting_photos": {
         "Oregón (Estados Unidos)": "huellas_img/avistamientos/19_apatosaurus_oregon.png",
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png"
+        "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
+        "Vancouver (Canadá)": "huellas_img/avistamientos/83_apatosaurus_vancouver.png",
+        "Steiermark (Austria)": "huellas_img/avistamientos/84_apatosaurus_austria.png"
       }
     },
     {
@@ -580,16 +719,19 @@
         "Estados Unidos",
         "Las Dolomitas (Italia)",
         "Rovaniemi (Finlandia)",
-        "Iguazú (Argentina)"
+        "Iguazú (Argentina)",
+        "Dakar (Senegal)"
       ],
       "sighting_photos": {
         "Rovaniemi (Finlandia)": "huellas_img/avistamientos/04_brachiosaurus_rovaniemi.png",
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
         "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
-        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png"
+        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png",
+        "Dakar (Senegal)": "huellas_img/avistamientos/105_laboratorio_clandestino.png"
       },
       "location_details": {
-        "Estados Unidos": "Estados Unidos (Sector General)"
+        "Estados Unidos": "Estados Unidos (Sector General)",
+        "Dakar (Senegal)": "Instalación de Dakar, Senegal"
       }
     },
     {
@@ -627,13 +769,15 @@
         "Estados Unidos",
         "La Valeta (Malta)",
         "Cañahuas (Perú)",
-        "Iguazú (Argentina)"
+        "Iguazú (Argentina)",
+        "Carolina del Norte (Estados Unidos)"
       ],
       "sighting_photos": {
         "Cañahuas (Perú)": "huellas_img/avistamientos/13_carnotaurus_canahuas.png",
         "La Valeta (Malta)": "huellas_img/avistamientos/23_carnotaurus_malta.png",
         "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
-        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png"
+        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png",
+        "Carolina del Norte (Estados Unidos)": "huellas_img/avistamientos/85_carnotaurus_carolina_norte.png"
       },
       "location_details": {
         "Estados Unidos": "Estados Unidos (Sector General)"
@@ -834,15 +978,22 @@
       "countries": [
         "Estados Unidos",
         "La Valeta (Malta)",
-        "Miyajima (Japón)"
+        "Miyajima (Japón)",
+        "Perth (Australia)",
+        "Bali (Indonesia)",
+        "Dakar (Senegal)"
       ],
       "sighting_photos": {
         "Miyajima (Japón)": "huellas_img/avistamientos/08_dimorphodon_miyajima.png",
         "La Valeta (Malta)": "huellas_img/avistamientos/51_dimorphodon_malta.png",
-        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png"
+        "Estados Unidos": "huellas_img/avistamientos/73_estados_unidos_general.png",
+        "Perth (Australia)": "huellas_img/avistamientos/86_dimorphodon_perth.png",
+        "Bali (Indonesia)": "huellas_img/avistamientos/87_dimorphodon_bali.png",
+        "Dakar (Senegal)": "huellas_img/avistamientos/105_laboratorio_clandestino.png"
       },
       "location_details": {
-        "Estados Unidos": "Estados Unidos (Sector General)"
+        "Estados Unidos": "Estados Unidos (Sector General)",
+        "Dakar (Senegal)": "Instalación de Dakar, Senegal"
       }
     },
     {
@@ -930,12 +1081,19 @@
       "countries": [
         "Seattle (Estados Unidos)",
         "La Valeta (Malta)",
-        "Iguazú (Argentina)"
+        "Iguazú (Argentina)",
+        "California (Estados Unidos)",
+        "Dakar (Senegal)"
       ],
       "sighting_photos": {
         "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
         "Seattle (Estados Unidos)": "huellas_img/avistamientos/44_gallimimus_seattle.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/56_gallimimus_malta.png"
+        "La Valeta (Malta)": "huellas_img/avistamientos/56_gallimimus_malta.png",
+        "California (Estados Unidos)": "huellas_img/avistamientos/88_gallimimus_california.png",
+        "Dakar (Senegal)": "huellas_img/avistamientos/105_laboratorio_clandestino.png"
+      },
+      "location_details": {
+        "Dakar (Senegal)": "Instalación de Dakar, Senegal"
       }
     },
     {
@@ -1025,15 +1183,18 @@
       "countries": [
         "España",
         "Las Dolomitas (Italia)",
-        "Iguazú (Argentina)"
+        "Iguazú (Argentina)",
+        "Dakar (Senegal)"
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
         "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
-        "España": "huellas_img/avistamientos/75_espana_general.png"
+        "España": "huellas_img/avistamientos/75_espana_general.png",
+        "Dakar (Senegal)": "huellas_img/avistamientos/105_laboratorio_clandestino.png"
       },
       "location_details": {
-        "España": "España (Sector Peninsular)"
+        "España": "España (Sector Peninsular)",
+        "Dakar (Senegal)": "Instalación de Dakar, Senegal"
       }
     },
     {
@@ -1169,15 +1330,18 @@
       "countries": [
         "Hong Kong (China)",
         "Las Dolomitas (Italia)",
-        "La Valeta (Malta)"
+        "La Valeta (Malta)",
+        "Dakar (Senegal)"
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
         "La Valeta (Malta)": "huellas_img/avistamientos/60_monolophosaurus_malta.png",
-        "Hong Kong (China)": "huellas_img/avistamientos/79_monolophosaurus_hong_kong.png"
+        "Hong Kong (China)": "huellas_img/avistamientos/79_monolophosaurus_hong_kong.png",
+        "Dakar (Senegal)": "huellas_img/avistamientos/105_laboratorio_clandestino.png"
       },
       "location_details": {
-        "Hong Kong (China)": "Hong Kong, China"
+        "Hong Kong (China)": "Hong Kong, China",
+        "Dakar (Senegal)": "Instalación de Dakar, Senegal"
       }
     },
     {
@@ -1257,17 +1421,22 @@
         "Las Dolomitas (Italia)",
         "Iguazú (Argentina)",
         "Calgary (Canadá)",
-        "La Valeta (Malta)"
+        "La Valeta (Malta)",
+        "Colorado (Estados Unidos)",
+        "Dakar (Senegal)"
       ],
       "sighting_photos": {
         "Calgary (Canadá)": "huellas_img/avistamientos/05_nasutoceratops_calgary.png",
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
         "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
         "La Valeta (Malta)": "huellas_img/avistamientos/58_nasutoceratops_malta.png",
-        "California (Estados Unidos)": "huellas_img/avistamientos/71_nasutoceratops_california.png"
+        "California (Estados Unidos)": "huellas_img/avistamientos/71_nasutoceratops_california.png",
+        "Colorado (Estados Unidos)": "huellas_img/avistamientos/89_nasutoceratops_colorado.png",
+        "Dakar (Senegal)": "huellas_img/avistamientos/105_laboratorio_clandestino.png"
       },
       "location_details": {
-        "California (Estados Unidos)": "California, Estados Unidos"
+        "California (Estados Unidos)": "California, Estados Unidos",
+        "Dakar (Senegal)": "Instalación de Dakar, Senegal"
       }
     },
     {
@@ -1356,15 +1525,18 @@
       "countries": [
         "California (Estados Unidos)",
         "La Valeta (Malta)",
-        "Las Dolomitas (Italia)"
+        "Las Dolomitas (Italia)",
+        "Dakar (Senegal)"
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
         "La Valeta (Malta)": "huellas_img/avistamientos/59_pachyrhinosaurus_malta.png",
-        "California (Estados Unidos)": "huellas_img/avistamientos/78_pachyrhinosaurus_california.png"
+        "California (Estados Unidos)": "huellas_img/avistamientos/78_pachyrhinosaurus_california.png",
+        "Dakar (Senegal)": "huellas_img/avistamientos/105_laboratorio_clandestino.png"
       },
       "location_details": {
-        "California (Estados Unidos)": "California, Estados Unidos"
+        "California (Estados Unidos)": "California, Estados Unidos",
+        "Dakar (Senegal)": "Instalación de Dakar, Senegal"
       }
     },
     {
@@ -1381,13 +1553,21 @@
       "render_img": "huellas_img/42_render.png",
       "countries": [
         "California (Estados Unidos)",
-        "La Valeta (Malta)"
+        "La Valeta (Malta)",
+        "Dakar (Senegal)"
       ],
       "sighting_photos": {
-        "California (Estados Unidos)": "huellas_img/avistamientos/43_parasaurolophus_california.png",
-        "La Valeta (Malta)": "huellas_img/avistamientos/62_parasaurolophus_malta.png"
+        "California (Estados Unidos)": [
+          "huellas_img/avistamientos/43_parasaurolophus_california.png",
+          "huellas_img/avistamientos/91_parasaurolophus_v1_california.png",
+          "huellas_img/avistamientos/93_parasaurolophus_v1_california_2.png"
+        ],
+        "La Valeta (Malta)": "huellas_img/avistamientos/62_parasaurolophus_malta.png",
+        "Dakar (Senegal)": "huellas_img/avistamientos/105_laboratorio_clandestino.png"
       },
-      "location_details": {}
+      "location_details": {
+        "Dakar (Senegal)": "Instalación de Dakar, Senegal"
+      }
     },
     {
       "id": "huella_43",
@@ -1404,12 +1584,14 @@
       "countries": [
         "Las Dolomitas (Italia)",
         "Iguazú (Argentina)",
-        "Nevada (Estados Unidos)"
+        "Nevada (Estados Unidos)",
+        "Pahang (Malasia)"
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
         "Iguazú (Argentina)": "huellas_img/avistamientos/39_argentina_all.png",
-        "Nevada (Estados Unidos)": "huellas_img/avistamientos/74_parasaurolophus_v3_nevada.png"
+        "Nevada (Estados Unidos)": "huellas_img/avistamientos/74_parasaurolophus_v3_nevada.png",
+        "Pahang (Malasia)": "huellas_img/avistamientos/92_parasaurolophus_v2_malasia.png"
       },
       "location_details": {
         "Nevada (Estados Unidos)": "Nevada, Estados Unidos"
@@ -1596,18 +1778,23 @@
         "La Valeta (Malta)",
         "Las Dolomitas (Italia)",
         "Queensland (Australia)",
-        "Maine (Estados Unidos)"
+        "Maine (Estados Unidos)",
+        "Florida (Estados Unidos)",
+        "Dakar (Senegal)"
       ],
       "sighting_photos": {
         "Maine (Estados Unidos)": "huellas_img/avistamientos/15_stegosaurus_maine.png",
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
         "La Valeta (Malta)": "huellas_img/avistamientos/55_stegosaurus_malta.png",
         "Queensland (Australia)": "huellas_img/avistamientos/68_stegosaurus_australia.png",
-        "República del Congo": "huellas_img/avistamientos/69_congo_all.png"
+        "República del Congo": "huellas_img/avistamientos/69_congo_all.png",
+        "Florida (Estados Unidos)": "huellas_img/avistamientos/99_stegosaurus_florida.png",
+        "Dakar (Senegal)": "huellas_img/avistamientos/105_laboratorio_clandestino.png"
       },
       "location_details": {
         "Queensland (Australia)": "Queensland, Australia",
-        "República del Congo": "República del Congo"
+        "República del Congo": "República del Congo",
+        "Dakar (Senegal)": "Instalación de Dakar, Senegal"
       }
     },
     {
@@ -1625,12 +1812,16 @@
       "countries": [
         "California (Estados Unidos)",
         "Queensland (Australia)",
-        "La Valeta (Malta)"
+        "La Valeta (Malta)",
+        "Wyoming (Estados Unidos)",
+        "Nairobi (Kenia)"
       ],
       "sighting_photos": {
         "Queensland (Australia)": "huellas_img/avistamientos/02_stygimoloch_queensland.png",
         "La Valeta (Malta)": "huellas_img/avistamientos/48_stygimoloch_malta.png",
-        "California (Estados Unidos)": "huellas_img/avistamientos/77_stygimoloch_california.png"
+        "California (Estados Unidos)": "huellas_img/avistamientos/77_stygimoloch_california.png",
+        "Wyoming (Estados Unidos)": "huellas_img/avistamientos/100_stygimoloch_wyoming.png",
+        "Nairobi (Kenia)": "huellas_img/avistamientos/101_stygimoloch_nairobi.png"
       },
       "location_details": {
         "California (Estados Unidos)": "California, Estados Unidos"
@@ -1819,16 +2010,19 @@
         "República del Congo",
         "Ontario (Canadá)",
         "Vancouver (Canadá)",
-        "La Valeta (Malta)"
+        "La Valeta (Malta)",
+        "Dakar (Senegal)"
       ],
       "sighting_photos": {
         "Ontario (Canadá)": "huellas_img/avistamientos/18_velociraptor_v2_ontario.png",
         "Vancouver (Canadá)": "huellas_img/avistamientos/32_velociraptor_v2_vancouver.png",
         "La Valeta (Malta)": "huellas_img/avistamientos/57_velociraptor_v2_malta.png",
-        "República del Congo": "huellas_img/avistamientos/69_congo_all.png"
+        "República del Congo": "huellas_img/avistamientos/69_congo_all.png",
+        "Dakar (Senegal)": "huellas_img/avistamientos/105_laboratorio_clandestino.png"
       },
       "location_details": {
-        "República del Congo": "República del Congo"
+        "República del Congo": "República del Congo",
+        "Dakar (Senegal)": "Instalación de Dakar, Senegal"
       }
     },
     {
@@ -1883,7 +2077,10 @@
         "Nevada (Estados Unidos)"
       ],
       "sighting_photos": {
-        "Nevada (Estados Unidos)": "huellas_img/avistamientos/27_velociraptor_v3_nevada.png"
+        "Nevada (Estados Unidos)": [
+          "huellas_img/avistamientos/27_velociraptor_v3_nevada.png",
+          "huellas_img/avistamientos/103_velociraptor_v3_nevada.png"
+        ]
       }
     },
     {
@@ -1921,11 +2118,24 @@
       "render_img": "huellas_img/67_render.png",
       "countries": [
         "Málaga (España)",
-        "Nevada (Estados Unidos)"
+        "Nevada (Estados Unidos)",
+        "Yamanashi (Japón)",
+        "Hawaii (Estados Unidos)",
+        "Agra (India)",
+        "Vancouver (Canadá)",
+        "Dakar (Senegal)"
       ],
       "sighting_photos": {
         "Málaga (España)": "huellas_img/avistamientos/06_pteranodon_v2_malaga.png",
-        "Nevada (Estados Unidos)": "huellas_img/avistamientos/28_pteranodon_v2_nevada.png"
+        "Nevada (Estados Unidos)": "huellas_img/avistamientos/28_pteranodon_v2_nevada.png",
+        "Yamanashi (Japón)": "huellas_img/avistamientos/94_pteranodon_v2_yamanashi.png",
+        "Hawaii (Estados Unidos)": "huellas_img/avistamientos/95_pteranodon_v2_hawaii.png",
+        "Agra (India)": "huellas_img/avistamientos/97_pteranodon_v2_agra.png",
+        "Vancouver (Canadá)": "huellas_img/avistamientos/98_pteranodon_v2_vancouver.png",
+        "Dakar (Senegal)": "huellas_img/avistamientos/105_laboratorio_clandestino.png"
+      },
+      "location_details": {
+        "Dakar (Senegal)": "Instalación de Dakar, Senegal"
       }
     },
     {
@@ -1941,10 +2151,12 @@
       "portrait_img": "huellas_img/68_portrait.png",
       "render_img": "huellas_img/68_render.png",
       "countries": [
-        "Las Dolomitas (Italia)"
+        "Las Dolomitas (Italia)",
+        "California (Estados Unidos)"
       ],
       "sighting_photos": {
-        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png"
+        "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
+        "California (Estados Unidos)": "huellas_img/avistamientos/102_tyrannosaurus_v1_california.png"
       }
     },
     {
@@ -1963,7 +2175,10 @@
         "Oklahoma (Estados Unidos)"
       ],
       "sighting_photos": {
-        "Oklahoma (Estados Unidos)": "huellas_img/avistamientos/22_pteranodon_v1_oklahoma.png"
+        "Oklahoma (Estados Unidos)": [
+          "huellas_img/avistamientos/22_pteranodon_v1_oklahoma.png",
+          "huellas_img/avistamientos/96_pteranodon_v1_oklahoma.png"
+        ]
       }
     },
     {
@@ -1980,11 +2195,13 @@
       "render_img": "huellas_img/70_render.png",
       "countries": [
         "Océano Pacífico (Aguas Internacionales)",
-        "Hawaii (Estados Unidos)"
+        "Hawaii (Estados Unidos)",
+        "Océano Pacífico Norte (Aguas Internacionales)"
       ],
       "sighting_photos": {
         "Océano Pacífico (Aguas Internacionales)": "huellas_img/avistamientos/09_mosasaurus_v1_pacific.png",
-        "Hawaii (Estados Unidos)": "huellas_img/avistamientos/10_mosasaurus_v1_hawaii.png"
+        "Hawaii (Estados Unidos)": "huellas_img/avistamientos/10_mosasaurus_v1_hawaii.png",
+        "Océano Pacífico Norte (Aguas Internacionales)": "huellas_img/avistamientos/90_mosasaurus_pacifico.png"
       }
     },
     {
@@ -2007,6 +2224,50 @@
       },
       "portrait_img": "huellas_img/71_portrait.png",
       "render_img": "huellas_img/71_render.png"
+    },
+    {
+      "id": "huella_72",
+      "slide": 72,
+      "name": "Suchomimus",
+      "peso": "3,000 kg",
+      "altura": "4 m",
+      "longitud": "11 m",
+      "dieta": "Carnívora",
+      "empresa": "Masrani Global",
+      "protocolo": "Aunque su alimentación se basa principalmente en peces, el Suchomimus es un depredador oportunista capaz de atacar animales terrestres, incluidos los seres humanos, si considera que representan una presa fácil o una amenaza. Evite acercarse a ríos, lagunas y zonas pantanosas donde suele buscar alimento, especialmente durante las primeras horas del día.",
+      "portrait_img": "huellas_img/72_portrait.png",
+      "render_img": "huellas_img/72_render.png",
+      "countries": [
+        "Dakar (Senegal)"
+      ],
+      "sighting_photos": {
+        "Dakar (Senegal)": "huellas_img/avistamientos/105_laboratorio_clandestino.png"
+      },
+      "location_details": {
+        "Dakar (Senegal)": "Instalación de Dakar, Senegal"
+      }
+    },
+    {
+      "id": "huella_73",
+      "slide": 73,
+      "name": "Majungasaurus",
+      "peso": "2,500 kg",
+      "altura": "3.5 m",
+      "longitud": "10 m",
+      "dieta": "Carnívora",
+      "empresa": "Masrani Global",
+      "protocolo": "El Majungasaurus es un depredador territorial y oportunista que puede representar un peligro extremo para cualquier persona que se encuentre dentro de su área de actividad. Su constitución robusta, sus poderosas mandíbulas y su comportamiento agresivo lo convierten en un animal especialmente peligroso a corta distancia. Es caníbal.",
+      "portrait_img": "huellas_img/73_portrait.png",
+      "render_img": "huellas_img/73_render.png",
+      "countries": [
+        "Dakar (Senegal)"
+      ],
+      "sighting_photos": {
+        "Dakar (Senegal)": "huellas_img/avistamientos/105_laboratorio_clandestino.png"
+      },
+      "location_details": {
+        "Dakar (Senegal)": "Instalación de Dakar, Senegal"
+      }
     }
   ]
 }
