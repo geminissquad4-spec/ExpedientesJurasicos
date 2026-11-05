@@ -603,7 +603,7 @@
 
         // 3. Etiqueta con Bandera y Contador
         const badgeText = (node.shortLabel ? (node.flag + ' ' + node.shortLabel) : node.flag) + ' ' + node.count;
-        ctx.font = 'bold 10px "Share Tech Mono", monospace';
+        ctx.font = 'bold 10px "Twemoji Country Flags", "Share Tech Mono", monospace';
         const badgeW = ctx.measureText(badgeText).width + 10;
         const badgeH = 16;
         const badgeX = p.x + 8;
@@ -720,7 +720,7 @@
 
         // Placa InGen
         const badgeText = site.flag + ' ' + site.shortLabel + ' [' + site.badge + ']';
-        ctx.font = 'bold 10px "Share Tech Mono", monospace';
+        ctx.font = 'bold 10px "Twemoji Country Flags", "Share Tech Mono", monospace';
         const badgeW = ctx.measureText(badgeText).width + 10;
         const badgeH = 16;
         const badgeX = sp.x + 8;

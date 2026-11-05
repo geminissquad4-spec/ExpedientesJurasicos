@@ -1,3 +1,12 @@
+/* FUENTE DE BANDERAS DE PAÍSES PARA PC (WINDOWS) Y DISPOSITIVOS DE ESCRITORIO */
+@font-face {
+  font-family: "Twemoji Country Flags";
+  src: url("TwemojiCountryFlags.woff2") format("woff2"),
+       url("https://cdn.jsdelivr.net/npm/country-flag-emoji-polyfill/dist/TwemojiCountryFlags.woff2") format("woff2");
+  unicode-range: U+1F1E6-1F1FF, U+1F3F4, U+E0062-E007F;
+  font-display: swap;
+}
+
 /* ==========================================================================
    EXPEDIENTES JURÁSICOS - GLOBO TERRÁQUEO & DINO TRACKERS HUELLAS MUNDIALES
    Estilos del Globo Terráqueo 3D Interactivo, Mapa Táctico y Fichas de Especies
@@ -180,7 +189,7 @@
   white-space: nowrap;
 }
 #globo-hover-tooltip .tt-country {
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Twemoji Country Flags", 'Orbitron', sans-serif;
   font-weight: 700;
   color: #00e5b0;
   font-size: 0.8rem;
@@ -281,7 +290,12 @@
 }
 
 .globo-country-flag {
-  font-size: 1.15rem;
+  font-family: "Twemoji Country Flags", "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
+  font-size: 1.25rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .globo-country-name {
@@ -357,7 +371,12 @@
 }
 
 .globo-modal-flag {
+  font-family: "Twemoji Country Flags", "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
   font-size: 1.6rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .globo-modal-title {
@@ -703,7 +722,7 @@
   color: #a8dfc8;
   border-radius: 14px;
   padding: 0.2rem 0.65rem;
-  font-family: 'Share Tech Mono', monospace;
+  font-family: "Twemoji Country Flags", 'Share Tech Mono', monospace;
   font-size: 0.72rem;
   cursor: pointer;
   transition: all 0.2s;
