@@ -2152,11 +2152,19 @@
       "render_img": "huellas_img/68_render.png",
       "countries": [
         "Las Dolomitas (Italia)",
-        "California (Estados Unidos)"
+        "California (Estados Unidos)",
+        "Oregón (Estados Unidos)"
       ],
       "sighting_photos": {
         "Las Dolomitas (Italia)": "huellas_img/avistamientos/36_dolomitas_all.png",
-        "California (Estados Unidos)": "huellas_img/avistamientos/102_tyrannosaurus_v1_california.png"
+        "California (Estados Unidos)": "huellas_img/avistamientos/102_tyrannosaurus_v1_california.png",
+        "Oregón (Estados Unidos)": [
+          "huellas_img/avistamientos/20_tyrannosaurus_v1_oregon_1.png",
+          "huellas_img/avistamientos/21_tyrannosaurus_v1_oregon_2.png"
+        ]
+      },
+      "location_details": {
+        "Oregón (Estados Unidos)": "Oregón, Estados Unidos"
       }
     },
     {
