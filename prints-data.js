@@ -1,7 +1,7 @@
 // =============================================
 //  EXPEDIENTES JURÁSICOS — prints-data.js
-//  Colección de 289 Prints en 4K (33.87 x 19.07 cm)
-//  112 prints (Kenner/Hasbro/Warpath/JPOG/Calendario)
+//  Colección de 317 Prints en 4K (33.87 x 19.07 cm)
+//  140 prints (Kenner/Hasbro/Warpath/JPOG/Calendario)
 //  177 prints (Misterios/Sobrevivir/Caos/Huellas en el mundo)
 // =============================================
 
@@ -61,8 +61,8 @@ var PRINTS_CATEGORIES = [
         tag: "WARPATH (PS1)",
         badgeColor: "#d4a017",
         startSlide: 49,
-        endSlide: 64,
-        count: 16,
+        endSlide: 92,
+        count: 44,
         coverSlide: 49,
         prefix: "print_",
         desc: "Prints conmemorativos del legendario videojuego de combate de dinosaurios para PlayStation (1999)."
@@ -72,10 +72,10 @@ var PRINTS_CATEGORIES = [
         title: "Jurassic Park: Operation Genesis",
         tag: "OPERATION GENESIS",
         badgeColor: "#5dff6a",
-        startSlide: 65,
-        endSlide: 90,
+        startSlide: 93,
+        endSlide: 118,
         count: 26,
-        coverSlide: 65,
+        coverSlide: 93,
         prefix: "print_",
         desc: "Galería completa inspirada en el simulador de gestión y construcción de parques por excelencia (2003)."
     },
@@ -84,10 +84,10 @@ var PRINTS_CATEGORIES = [
         title: "Jurassic Park Hasbro",
         tag: "HASBRO",
         badgeColor: "#ff007f",
-        startSlide: 91,
-        endSlide: 98,
+        startSlide: 119,
+        endSlide: 126,
         count: 8,
-        coverSlide: 91,
+        coverSlide: 119,
         prefix: "print_",
         desc: "Artes y diseños de la era Hasbro para las líneas Jurassic Park 3 y conmemorativas."
     },
@@ -96,10 +96,10 @@ var PRINTS_CATEGORIES = [
         title: "Calendario 2027",
         tag: "CALENDARIO 2027",
         badgeColor: "#c0c0ff",
-        startSlide: 99,
-        endSlide: 112,
+        startSlide: 127,
+        endSlide: 140,
         count: 14,
-        coverSlide: 99,
+        coverSlide: 127,
         prefix: "print_",
         desc: "Edición especial completa del calendario temático de expedientes con los 12 meses y portadas exclusivas."
     },
