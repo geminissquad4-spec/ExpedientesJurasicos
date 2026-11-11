@@ -497,6 +497,15 @@
       "countryGroup": "Senegal",
       "locationName": "Dakar, Senegal",
       "sector": "SECTOR ÁFRICA OCCIDENTAL // DAKAR"
+    },
+    "Chihuahua (México)": {
+      "lat": 28.633,
+      "lon": -106.0691,
+      "flag": "🇲🇽",
+      "shortLabel": "CHIH",
+      "countryGroup": "México",
+      "locationName": "Chihuahua, México",
+      "sector": "SECTOR NORTE // CHIHUAHUA"
     }
   },
   "species": [
@@ -2183,13 +2192,15 @@
       "portrait_img": "huellas_img/69_portrait.png",
       "render_img": "huellas_img/69_render.png",
       "countries": [
-        "Oklahoma (Estados Unidos)"
+        "Oklahoma (Estados Unidos)",
+        "Chihuahua (México)"
       ],
       "sighting_photos": {
         "Oklahoma (Estados Unidos)": [
           "huellas_img/avistamientos/22_pteranodon_v1_oklahoma.png",
           "huellas_img/avistamientos/96_pteranodon_v1_oklahoma.png"
-        ]
+        ],
+        "Chihuahua (México)": "huellas_img/avistamientos/106_pteranodon_v1_chihuahua.png"
       }
     },
     {
