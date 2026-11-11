@@ -128,18 +128,14 @@
         dotTypes   = [];
         clickOrder = 0;
 
-        // Probabilidades según especificación:
-        // 1er intento: SIEMPRE Flor (Lila de Persia)
-        // 2do intento: Rara vez Medicamento (~7%), normalmente Flor
-        // 3er intento en adelante: 22% de probabilidad de Medicamento cada uno
-        // Dificultad reducida (mayor probabilidad de hallar la medicina):
-        // 1er intento: 40% Medicamento, 60% Flor
-        // 2do intento: 75% Medicamento, 25% Flor
-        // 3er intento en adelante: 100% Medicamento garantizado
-        dotTypes[0] = (Math.random() < 0.40) ? 'medicine' : 'flower';
-        dotTypes[1] = (Math.random() < 0.75) ? 'medicine' : 'flower';
+        // Probabilidades de dificultad aumentada:
+        // 1er intento: SIEMPRE Flor (Lila de Persia) - 100% Lila
+        // 2do intento: 75% Lila de Persia, 25% Medicamento
+        // 3er intento: 50% Medicamento, 50% Lila de Persia
+        dotTypes[0] = 'flower';
+        dotTypes[1] = (Math.random() < 0.75) ? 'flower' : 'medicine';
         for (var j = 2; j < TOTAL_DOTS; j++) {
-            dotTypes[j] = 'medicine';
+            dotTypes[j] = (Math.random() < 0.50) ? 'medicine' : 'flower';
         }
 
         // Posiciones dentro de la montaña de excremento
