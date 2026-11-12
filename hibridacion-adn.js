@@ -662,14 +662,19 @@
             '.ha-cards-grid {',
             '  flex: 1;',
             '  overflow-y: auto;',
+            '  overflow-x: hidden;',
             '  padding: 1.2rem;',
             '  display: grid;',
             '  grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));',
+            '  grid-auto-rows: max-content;',
             '  gap: 12px;',
             '  align-content: start;',
             '  box-sizing: border-box;',
             '}',
             '.ha-scan-card {',
+            '  width: 100%;',
+            '  min-width: 0;',
+            '  box-sizing: border-box;',
             '  background: rgba(5, 20, 15, 0.85);',
             '  border: 1px solid rgba(46, 204, 113, 0.3);',
             '  border-radius: 6px;',
@@ -683,8 +688,8 @@
             '  touch-action: manipulation;',
             '}',
             '.ha-scan-card:hover { border-color: #00d2d3; transform: translateY(-3px); box-shadow: 0 0 15px rgba(0, 210, 211, 0.4); }',
-            '.ha-scan-thumb { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; margin-bottom: 0.35rem; }',
-            '.ha-scan-name { font-size: 0.74rem; font-weight: 700; color: #f1f2f6; text-align: center; }',
+            '.ha-scan-thumb, .ha-scan-img { width: 100%; max-width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 4px; margin-bottom: 0.35rem; display: block; }',
+            '.ha-scan-name { font-size: 0.74rem; font-weight: 700; color: #f1f2f6; text-align: center; line-height: 1.25; word-break: break-word; }',
             '',
             '/* Modales de Inicio, Error y Victoria */',
             '.ha-modal-screen {',
@@ -1268,15 +1273,31 @@ function buildOverlayDOM() {
             var card = document.createElement('div');
             card.className = 'ha-scan-card';
             card.setAttribute('data-gene-id', sp.id);
-            card.innerHTML = [
-                '<img class="ha-scan-img" src="' + sp.file + '" onerror="if(this.src.indexOf(\'hibridaci\')===-1)this.src=\'hibridación de adn/' + sp.file + '\';" alt="' + sp.name + '" loading="lazy" />',
-                '<div class="ha-scan-name">' + sp.name + '</div>'
-            ].join('');
 
-            card.addEventListener('pointerdown', function (e) {
-                if (e.cancelable) e.preventDefault();
-                handleSpeciesSelected(sp);
-            });
+            var img = document.createElement('img');
+            img.className = 'ha-scan-thumb ha-scan-img';
+            img.alt = sp.name;
+            img.loading = 'lazy';
+            var fallbacks = [encodeURI(sp.file), encodeURI('hibridación de adn/' + sp.file)];
+            if (sp.altFile) {
+                fallbacks.push(encodeURI(sp.altFile), encodeURI('hibridación de adn/' + sp.altFile));
+            }
+            var fallbackIdx = 0;
+            img.onerror = function () {
+                fallbackIdx += 1;
+                if (fallbackIdx < fallbacks.length) {
+                    img.src = fallbacks[fallbackIdx];
+                }
+            };
+            img.src = fallbacks[0];
+
+            var label = document.createElement('div');
+            label.className = 'ha-scan-name';
+            label.textContent = sp.name;
+
+            card.appendChild(img);
+            card.appendChild(label);
+
             card.addEventListener('click', function () {
                 handleSpeciesSelected(sp);
             });
