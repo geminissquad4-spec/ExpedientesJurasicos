@@ -483,7 +483,7 @@ a{color:var(--cyan);text-decoration:none}
     flex-wrap:wrap;
     gap:.5rem;
     align-items:center;
-    margin-bottom:2rem;
+    margin-bottom:1rem;
     padding:.8rem 1rem;
     background:var(--card-bg);
     border:1px solid var(--mil-border);
@@ -519,6 +519,110 @@ a{color:var(--cyan);text-decoration:none}
 .ficha-filter-count{
     font-size:.52rem;
     opacity:.65;
+    letter-spacing:1px;
+}
+
+/* --- Buscador de Fichas --- */
+.fichas-search-bar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:1rem;
+    margin-bottom:1.8rem;
+    flex-wrap:wrap;
+    padding:.65rem 1rem;
+    background:var(--card-bg);
+    border:1px solid var(--mil-border);
+    border-left:4px solid var(--cyan);
+    border-radius:3px;
+}
+.fichas-search-box{
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    flex:1;
+    min-width:260px;
+    position:relative;
+}
+.fichas-search-icon{
+    font-size:1rem;
+    color:var(--cyan);
+    user-select:none;
+}
+.fichas-search-input{
+    flex:1;
+    background:rgba(0,0,0,0.55);
+    border:1px solid var(--mil-border);
+    border-radius:3px;
+    color:var(--text);
+    padding:.55rem 2.2rem .55rem .85rem;
+    font-family:var(--font-mono);
+    font-size:.78rem;
+    letter-spacing:1px;
+    outline:none;
+    transition:all .25s ease;
+}
+.fichas-search-input:focus{
+    border-color:var(--cyan);
+    box-shadow:0 0 12px rgba(0,210,211,0.25);
+    background:rgba(0,0,0,0.85);
+}
+.fichas-search-input::placeholder{
+    color:var(--text2);
+    font-size:.72rem;
+    letter-spacing:1px;
+}
+.fichas-search-clear{
+    position:absolute;
+    right:.6rem;
+    background:rgba(231,76,60,0.25);
+    border:1px solid rgba(231,76,60,0.6);
+    color:#ff6b6b;
+    border-radius:3px;
+    cursor:pointer;
+    font-size:.75rem;
+    padding:2px 7px;
+    line-height:1.2;
+    transition:all .2s;
+}
+.fichas-search-clear:hover{
+    background:#e74c3c;
+    color:#fff;
+}
+.fichas-search-status{
+    font-family:var(--font-mono);
+    font-size:.7rem;
+    color:var(--text2);
+    letter-spacing:1px;
+    white-space:nowrap;
+}
+.fichas-search-status strong{
+    color:var(--cyan);
+    font-weight:700;
+}
+.fichas-empty-state{
+    grid-column:1 / -1;
+    text-align:center;
+    padding:3.5rem 1rem;
+    background:rgba(0,0,0,0.4);
+    border:1px dashed var(--mil-border);
+    border-radius:6px;
+    font-family:var(--font-mono);
+    color:var(--text2);
+}
+.fichas-empty-icon{
+    font-size:2.2rem;
+    margin-bottom:.6rem;
+}
+.fichas-empty-title{
+    font-size:.95rem;
+    color:#e74c3c;
+    font-weight:700;
+    letter-spacing:1.5px;
+    margin-bottom:.4rem;
+}
+.fichas-empty-desc{
+    font-size:.75rem;
     letter-spacing:1px;
 }
 
@@ -686,6 +790,9 @@ a{color:var(--cyan);text-decoration:none}
     .ficha-wrapper{height:220px!important}
     .fichas-filter-bar{gap:.4rem!important}
     .ficha-filter-btn{font-size:.55rem!important;padding:.35rem .7rem!important}
+    .fichas-search-bar{flex-direction:column;align-items:stretch;gap:.6rem;padding:.6rem .8rem}
+    .fichas-search-box{min-width:0;width:100%}
+    .fichas-search-status{text-align:right;font-size:.65rem}
 }
 @media(max-width:480px){
     .fichas-grid{grid-template-columns:repeat(2,1fr)!important}

@@ -1516,6 +1516,9 @@ if (navToggle && navLinks) {
             wrapper.className = 'ficha-wrapper ' + f.clase;
             wrapper.setAttribute('data-cat', f.categoria);
             wrapper.setAttribute('data-num', f.id);
+            if (f.titulo) {
+                wrapper.setAttribute('title', '#' + f.num + ' - ' + f.titulo);
+            }
 
             var fNum = parseInt(f.num || f.id, 10);
             var isSoundAllowed = ((fNum >= 1 && fNum <= 103) || (fNum >= 109 && fNum <= 117));
@@ -1677,7 +1680,7 @@ if (navToggle && navLinks) {
         }
 
         if (fichaModalTitle) {
-            fichaModalTitle.textContent = 'FICHA DE HISTORIA #' + f.num + (isVar ? '  ✦ VARIANTE' : '');
+            fichaModalTitle.textContent = 'FICHA DE HISTORIA #' + f.num + (f.titulo ? (' // ' + f.titulo) : '') + (isVar ? '  ✦ VARIANTE' : '');
         }
 
         if (fichaToggleText) {
@@ -1836,24 +1839,99 @@ if (navToggle && navLinks) {
     });
 
 
-    // Aplicar filtro de categoría
+    // Estado de filtros y búsqueda
+    var currentCat = 'all';
+    var currentSearchQuery = '';
+
+    var fichasSearchInput = document.getElementById('fichas-search-input');
+    var fichasSearchClear = document.getElementById('fichas-search-clear');
+    var fichasCountVisible = document.getElementById('fichas-count-visible');
+
+    function normalizeFichaSearch(str) {
+        return (str || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+    }
+
+    // Aplicar filtro de categoría y búsqueda interactiva
     function applyFichaFilter(cat) {
-        currentCat = cat;
+        if (typeof cat !== 'undefined') currentCat = cat;
+        var query = normalizeFichaSearch(currentSearchQuery);
         var wrappers = fichasGrid.querySelectorAll('.ficha-wrapper');
-        wrappers.forEach(function(w) {
-            if (cat === 'all' || w.getAttribute('data-cat') === cat) {
+        var visibleCount = 0;
+
+        wrappers.forEach(function(w, idx) {
+            var f = FICHAS[idx];
+            if (!f) return;
+            var matchCat = (currentCat === 'all' || f.categoria === currentCat);
+            var matchQuery = true;
+            if (query) {
+                var targetText = [
+                    f.num,
+                    '#' + f.num,
+                    String(f.id),
+                    '#' + f.id,
+                    f.titulo || '',
+                    f.categoria || '',
+                    f.clase || '',
+                    f.textoNarracion || ''
+                ].join(' ');
+                matchQuery = (normalizeFichaSearch(targetText).indexOf(query) !== -1);
+            }
+            if (matchCat && matchQuery) {
                 w.classList.remove('hidden');
+                visibleCount++;
             } else {
                 w.classList.add('hidden');
             }
         });
-        updateFichaCount();
+
+        var emptyEl = document.getElementById('fichas-empty-msg');
+        if (visibleCount === 0) {
+            if (!emptyEl) {
+                emptyEl = document.createElement('div');
+                emptyEl.id = 'fichas-empty-msg';
+                emptyEl.className = 'fichas-empty-state';
+                emptyEl.innerHTML = '<div class="fichas-empty-icon">⚠️</div><div class="fichas-empty-title">NO SE ENCONTRARON FICHAS</div><div class="fichas-empty-desc">Ningún registro coincide con el criterio de búsqueda o categoría seleccionada.</div>';
+                fichasGrid.appendChild(emptyEl);
+            }
+            emptyEl.style.display = 'block';
+        } else if (emptyEl) {
+            emptyEl.style.display = 'none';
+        }
+
+        updateFichaCount(visibleCount);
     }
 
-    function updateFichaCount() {
-        var visible = fichasGrid.querySelectorAll('.ficha-wrapper:not(.hidden)').length;
+    function updateFichaCount(visibleCount) {
+        var visible = (typeof visibleCount === 'number') ? visibleCount : fichasGrid.querySelectorAll('.ficha-wrapper:not(.hidden)').length;
         var countEl = document.getElementById('fcount-all');
         if (countEl) countEl.textContent = '(' + visible + ')';
+        if (fichasCountVisible) fichasCountVisible.textContent = visible;
+        if (fichasSearchClear) fichasSearchClear.style.display = currentSearchQuery ? 'inline-block' : 'none';
+    }
+
+    if (fichasSearchInput) {
+        fichasSearchInput.addEventListener('input', function() {
+            currentSearchQuery = this.value;
+            applyFichaFilter();
+        });
+        fichasSearchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                this.value = '';
+                currentSearchQuery = '';
+                applyFichaFilter();
+            }
+        });
+    }
+
+    if (fichasSearchClear) {
+        fichasSearchClear.addEventListener('click', function() {
+            if (fichasSearchInput) {
+                fichasSearchInput.value = '';
+                fichasSearchInput.focus();
+            }
+            currentSearchQuery = '';
+            applyFichaFilter();
+        });
     }
 
     // Conectar botones de filtro
@@ -1862,7 +1940,7 @@ if (navToggle && navLinks) {
         btn.addEventListener('click', function() {
             filterBtns.forEach(function(b) { b.classList.remove('active'); });
             this.classList.add('active');
-            applyFichaFilter(this.getAttribute('data-cat'));
+            applyFichaFilter(this.getAttribute('data-cat') || 'all');
         });
     });
 
